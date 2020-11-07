@@ -1,0 +1,8 @@
+.Select-control {
+    table-layout: fixed;
+}
+
+.Select-input {
+    overflow: hidden;
+    max-width: 100%;
+}
