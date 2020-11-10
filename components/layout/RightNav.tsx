@@ -1,34 +1,13 @@
-import {
-  Accordion,
-  Box,
-  Button,
-  Divider,
-  Menu,
-  MenuButton,
-  MenuDivider,
-  MenuItem,
-  MenuList,
-  Stack,
-  Switch,
-  Text,
-  theme,
-  useColorMode,
-  useToast,
-} from '@chakra-ui/core';
+import { Accordion, Box, Button, Divider, Stack, Switch, Text, useColorMode, useToast } from '@chakra-ui/core';
 import React from 'react';
 import { useState } from 'react';
 import { useMemo } from 'react';
-import { FaCamera, FaFolderOpen, FaMoon } from 'react-icons/fa';
-import { GiTwoCoins } from 'react-icons/gi';
-import { IoIosLogOut, IoMdMore } from 'react-icons/io';
-import { MdChevronRight, MdPersonPin } from 'react-icons/md';
-import { useDispatch, useSelector } from 'react-redux';
-import { Router, useHistory } from 'react-router-dom';
+import { FaMoon, MdChevronRight, MdPersonPin, IoIosLogOut } from '../../node_modules/react-icons/all';
+import { useDispatch } from 'react-redux';
 import useAuthentication from '../../hooks/useAuthentication';
 import { deauthenticateUser } from '../../redux/area/account/userActions';
-import { IAppState } from '../../redux/store';
 import { TextSm } from '../common/Texts';
-import { MenuPage, MenuPageSingle } from './Menu';
+import { MenuPageSingle } from './Menu';
 
 export enum MenuSection {
   Main,
@@ -45,7 +24,7 @@ interface IRightNavProps {
 
 export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
   useAuthentication();
-  const history = useHistory();
+  const history = null; // useHistory();
   const [menuSection, setMenuSection] = useState<MenuSection | undefined>(MenuSection.Main);
   const dispatcher = useDispatch();
   const toast = useToast();
@@ -59,7 +38,7 @@ export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
               loggedInOnly: true,
               name: 'Dark Mode',
               icon: FaMoon,
-              onClick: (e: { preventDefault: () => void }, x: any) => {
+              onClick: () => {
                 setMenuSection(MenuSection.DarkTheme);
               },
             },
@@ -71,7 +50,7 @@ export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
               loggedInOnly: true,
               name: 'Profile',
               icon: MdPersonPin,
-              onClick: (e: { preventDefault: () => void }, x: any) => {
+              onClick: () => {
                 onClose();
                 history.push(`/u/${userName!}`);
               },
@@ -100,7 +79,7 @@ export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
               loggedInOnly: true,
               name: 'Logout',
               icon: IoIosLogOut,
-              onClick: (e: { preventDefault: () => void }, x: any) => {
+              onClick: () => {
                 onClose();
                 dispatcher(deauthenticateUser());
                 toast({

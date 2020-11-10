@@ -1,11 +1,9 @@
-//@ts-nocheck
 import React, { useState, useEffect } from 'react';
 import {
   Box,
   Flex,
   IconButton,
   useColorMode,
-  Link,
   Tooltip,
   Stack,
   Button,
@@ -17,10 +15,10 @@ import {
   DrawerBody,
   Drawer,
 } from '@chakra-ui/core';
+import Link from 'next/link';
 import { BsBarChartFill, BsFillGrid3X3GapFill, BsCalendarFill } from 'react-icons/bs';
 import { RiAdminLine, GiRun, FaHistory, FaHome, FaUserFriends, BiDumbbell, IoMdTrophy } from 'react-icons/all';
 import theme from '../../theme';
-import { NavLink as RouterLink } from 'react-router-dom';
 import { PbToolTip } from '../common/ToolTips';
 import { TextSm, TextXs } from '../common/Texts';
 import { IconType } from 'react-icons/lib';
@@ -266,7 +264,7 @@ export const OpenNavItem: React.FC<INavItemProps> = ({ name, Icon, link, tooltip
       {userMemberStatusId >= memberStatusId && (
         <Stack spacing={1} isInline w="80%" py="0.5em" justify="space-between">
           <PbToolTip label={tooltip}>
-            <Link as={RouterLink} to={link}>
+            <Link href={link}>
               <Button variant="ghost" size="sm" leftIcon={<Icon />} onClick={onClose}>
                 <TextSm minW="80px">{name}</TextSm>
               </Button>
@@ -282,16 +280,16 @@ export const ClosedNavItem: React.FC<INavItemProps> = ({ name, Icon, link, toolt
   <Box>
     {userMemberStatusId >= memberStatusId && (
       <Stack spacing={1} isInline w="80%" py="0.5em" justify="space-between">
-        <Link as={RouterLink} to={link}>
-          <PbToolTip label={tooltip}>
+        <PbToolTip label={tooltip}>
+          <Link href={link}>
             <Button variant="ghost" size="md">
               <CenterColumnFlex>
-                <Box as={Icon} size="1em" variant="ghost" mr="1" isRound />
+                <Box as={Icon} size="1em" mr="1" />
                 <TextXs pt="1">{name}</TextXs>
               </CenterColumnFlex>
             </Button>
-          </PbToolTip>
-        </Link>
+          </Link>
+        </PbToolTip>
       </Stack>
     )}
   </Box>
