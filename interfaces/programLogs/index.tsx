@@ -108,7 +108,7 @@ export interface IProgramLogRepScheme {
 }
 
 export interface IWorkoutDaySummary {
-  programLogDayId: number;
+  workoutDayId: number;
   date: Date;
   personalBestCount: number;
   workoutExerciseSummaries: Array<IWorkoutExerciseSummary>;

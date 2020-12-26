@@ -1,5 +1,4 @@
 import { API_BASE } from '../../redux/actionTypes';
-import qs from 'qs';
 
 const baseUrl = `${API_BASE}Account/WorkoutDay`;
 

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { PbModalDrawer } from '../common/ModalDrawer';
-import { useProgramLogContext } from '../programLog/ProgramLogContext';
 import { useToast } from '@chakra-ui/core';
 import Axios from 'axios';
 import { DeleteWorkoutLogUrl } from '../../api/account/workoutLog';
+import { useWorkoutContext } from '../workouts/WorkoutContext';
 
 interface IModalDrawerProps {
   isOpen: boolean;
@@ -16,7 +16,7 @@ interface IDeleteLogModalDrawerProps extends IModalDrawerProps {
 
 export const DeleteLogModalDrawer: React.FC<IDeleteLogModalDrawerProps> = ({ isOpen, onClose, workoutLogId }) => {
   const [loading, setLoading] = useState<boolean>(false);
-  const { DeleteLog } = useProgramLogContext();
+  const { DeleteDay } = useWorkoutContext();
   const toast = useToast();
 
   const deleteLog = async () => {
@@ -31,7 +31,7 @@ export const DeleteLogModalDrawer: React.FC<IDeleteLogModalDrawerProps> = ({ isO
         isClosable: true,
         position: 'top-right',
       });
-      DeleteLog();
+      //DeleteLog();
     } catch (error) {
       toast({
         title: 'Error',

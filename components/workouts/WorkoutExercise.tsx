@@ -18,6 +18,7 @@ import RepSchemeTagFactory, { RepSchemeTagEnum } from './factories/RepSchemeTagF
 import AddExerciseNoteForm from './forms/AddExerciseNoteForm';
 import QuickAddSetsForm from './forms/QuickAddSetsForm';
 import DeleteWorkoutExerciseAlert from './alerts/DeleteWorkoutExerciseAlert';
+import EditWorkoutSetForm from './forms/EditWorkoutSetForm';
 
 interface IExerciseProps {
   key?: number;
@@ -197,7 +198,7 @@ const WorkoutSet: React.FC<ISetProps> = memo(({ set, date, workoutSets = [], wor
         />
       </Stack>
       <ModalDrawerForm isOpen={isOpen} onClose={onClose} title="Edit Your Set">
-        <EditRepSchemeForm workoutDayId={workoutDayId!} workoutSet={set} onClose={onClose} />
+        <EditWorkoutSetForm workoutDayId={workoutDayId!} workoutSet={set} onClose={onClose} />
       </ModalDrawerForm>
     </Box>
   );
