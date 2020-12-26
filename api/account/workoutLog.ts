@@ -1,5 +1,4 @@
 import { API_BASE } from '../../redux/actionTypes';
-import qs from 'qs';
 
 const baseUrl = `${API_BASE}Account/WorkoutLog`;
 
@@ -7,8 +6,12 @@ export const GetAllWorkoutLogStatsUrl = () => `${baseUrl}/Stat`;
 
 export const GetWorkoutWeekUrl = () => `${baseUrl}/Week`;
 
-export const GetWorkoutWeekWithDateUrl = (date: Date) => {
+export const GetWorkoutWeekWithDateUrl = (date: string) => {
+  
   console.log(date);
+  console.log(new Date(date));
+  console.log(new Date(date).toISOString());
+  
   
   if(date != null) {
     return `${baseUrl}/Week?date=${date}`;
