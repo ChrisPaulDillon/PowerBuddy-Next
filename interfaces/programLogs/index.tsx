@@ -1,5 +1,13 @@
 import { IExercise } from '../exercises';
 
+export interface IProgramLogInputScratch {
+  noOfWeeks: number;
+  startDate: Date | undefined;
+  endDate: Date | undefined;
+  userId: string;
+  customName: string;
+}
+
 export interface IProgramLogCalendarStats {
   workoutDates: Array<Date>;
   personalBestDates: Array<Date>;

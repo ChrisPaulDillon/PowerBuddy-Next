@@ -10,20 +10,17 @@ import { PbPrimaryButton } from '../../common/Buttons';
 import { MdAccountBox } from 'react-icons/md';
 import { validateInput, validateEmailInput } from '../../../util/formInputs';
 import { validatePassword } from '../../../util/formInputs';
-import { LoginUser, RegisterUser } from '../../../redux/area/account/userActions';
-import { RegisterUserUrl } from '../../../api/account/user';
+import { LoginUserUrl, RegisterUserUrl } from '../../../api/account/user';
 import axios from 'axios';
 import { setAuthorizationToken } from '../../../redux/util/authorization';
-import { REGISTER_USER } from '../../../redux/actionTypes';
+import { LOGIN_USER, REGISTER_USER } from '../../../redux/actionTypes';
 
 const LoginForm = ({ onClose }: any) => {
   const [showPW, setShowPW] = React.useState(false);
   const handleClick = () => setShowPW(!showPW);
 
   const [error, setError] = useState<boolean>(false);
-  const [success, setSuccess] = useState<boolean>(false);
   const [isSignUp, setIsSignUp] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
   const dispatcher = useDispatch();
   const toast = useToast();
 
@@ -51,18 +48,42 @@ const LoginForm = ({ onClose }: any) => {
           status: 'success',
           duration: 2000,
           isClosable: true,
-          position: 'top-right',
+          position: 'top',
         });
-      } catch (error) {}
-      //dispatcher(RegisterUser(user, setLoading, setError, setSuccess, setIsSignUp));
+        setIsSignUp(false);
+      } catch (error) {
+        setError(true);
+      }
     } else {
       const user: IUser = {
         email: email,
         userName: email,
         password: password,
       };
-      dispatcher(LoginUser(user, setLoading, setError));
-      onClose();
+      try {
+        const response = await axios.post(LoginUserUrl(), user);
+        toast({
+          title: 'Success',
+          description: 'Successfully Signed In',
+          status: 'success',
+          duration: 2000,
+          isClosable: true,
+          position: 'top',
+        });
+        localStorage.setItem('token', response.data.token);
+        setAuthorizationToken(response.data.token);
+        dispatcher({
+          type: LOGIN_USER,
+          user: response.data.user,
+          isAuthenticated: true,
+        });
+        onClose();
+        setTimeout(function () {
+          window.location.reload();
+        }, 1500);
+      } catch (error) {
+        setError(true);
+      }
     }
   };
 

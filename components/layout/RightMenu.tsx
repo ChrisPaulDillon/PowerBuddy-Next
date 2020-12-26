@@ -1,4 +1,5 @@
 import { Accordion, Box, Button, Divider, Link, Stack, Switch, Text, useColorMode, useToast } from '@chakra-ui/core';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { useState } from 'react';
 import { useMemo } from 'react';
@@ -6,7 +7,6 @@ import { FaMoon } from 'react-icons/fa';
 import { IoIosLogOut } from 'react-icons/io';
 import { MdArrowBack, MdChevronRight, MdPersonPin } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import useAuthentication from '../../hooks/useAuthentication';
 import { deauthenticateUser } from '../../redux/area/account/userActions';
 import { TextSm } from '../common/Texts';
@@ -25,7 +25,7 @@ interface IRightNavProps {
 
 export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
   useAuthentication();
-  const history = useHistory();
+  const router = useRouter();
   const [menuSection, setMenuSection] = useState<MenuSection | undefined>(MenuSection.Main);
   const dispatcher = useDispatch();
   const toast = useToast();
@@ -53,7 +53,7 @@ export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
               icon: MdPersonPin,
               onClick: () => {
                 onClose();
-                history.push(`${PROFILE_URL}/${userName!}`);
+                router.push(`${PROFILE_URL}/${userName!}`);
               },
             },
           ],

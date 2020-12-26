@@ -1,4 +1,4 @@
-export const API_BASE = process.env.REACT_APP_BASE_API;
+export const API_BASE = process.env.NEXT_PUBLIC_BASE_API;
 
 //system
 

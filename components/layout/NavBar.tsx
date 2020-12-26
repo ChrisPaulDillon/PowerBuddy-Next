@@ -13,7 +13,6 @@ import { PbPrimaryButton } from '../common/Buttons';
 import { RiAdminLine, FaHistory, FaUserFriends, BsFillGrid3X3GapFill, BsCalendarFill, MdMenu } from 'react-icons/all';
 import { WORKOUT_DIARY_URL, TEMPLATES_URL, LOGHISTORY_URL, USERS_URL, ADMIN_URL } from '../util/InternalLinks';
 import { IconType } from 'react-icons';
-import { useHistory } from 'react-router-dom';
 import PbIconButton from '../common/IconButtons';
 import Axios from 'axios';
 import { CreateWorkoutDayUrl, GetWorkoutDayIdByDateUrl } from '../../api/account/workoutDay';
@@ -22,6 +21,7 @@ import { ICreateWorkoutDayOptions } from '../../interfaces/workouts';
 import TemplateSearchBar from '../templatePrograms/TemplateSearchBar';
 import theme from '../../theme';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const sideMenu = {
   groups: [
@@ -77,7 +77,7 @@ interface INavBarProps {
 
 const NavBar: React.FC<INavBarProps> = ({ menuOpen }) => {
   const { user } = useSelector((state: IAppState) => state.state);
-  const history = useHistory();
+  const router = useRouter();
   const toast = useToast();
   const { colorMode } = useColorMode();
   const { SCREEN_MOBILE, SCREEN_DESKTOP } = useScreenSizes();
@@ -106,7 +106,7 @@ const NavBar: React.FC<INavBarProps> = ({ menuOpen }) => {
     try {
       const result = await Axios.get(GetWorkoutDayIdByDateUrl());
       if (result.data.workoutDayId !== 0) {
-        history.push(`${WORKOUT_DIARY_URL}/${result.data.workoutDayId}`);
+        router.push(`${WORKOUT_DIARY_URL}/${result.data.workoutDayId}`);
       } else if (!result.data.workoutLogId) {
         onTodayWorkoutOpen(); //No workout log was found, give options of fresh create
       } else {
@@ -132,7 +132,7 @@ const NavBar: React.FC<INavBarProps> = ({ menuOpen }) => {
     try {
       const result = await Axios.post(CreateWorkoutDayUrl(), workoutOptions);
       if (result.data !== 0) {
-        history.push(`${WORKOUT_DIARY_URL}/${result.data.workoutDayId}`);
+        router.push(`${WORKOUT_DIARY_URL}/${result.data.workoutDayId}`);
         toast({
           title: 'Success',
           description: 'Successfully created todays workout!',
@@ -253,7 +253,7 @@ const NavBar: React.FC<INavBarProps> = ({ menuOpen }) => {
           loading={buttonLoading}
           onForwardClick={async () => createWorkoutDay()}
           onBackClick={() => {
-            history.push(TEMPLATES_URL);
+            router.push(TEMPLATES_URL);
             onTodayWorkoutClose();
           }}
         />

@@ -1,6 +1,6 @@
 import { useColorMode } from '@chakra-ui/core';
+import { useRouter } from 'next/router';
 import React, { Component, useState } from 'react';
-import { useHistory } from 'react-router';
 import AsyncSelect from 'react-select/async';
 import { GetTemplatesBySearch } from '../../api/public/template';
 import theme, { getColor } from '../../theme';
@@ -10,7 +10,7 @@ import { TEMPLATES_URL } from '../util/InternalLinks';
 const TemplateSearchBar = () => {
   const [selectedOption, setSelectedOption] = useState<any>('');
   const { colorMode } = useColorMode();
-  const history = useHistory();
+  const router = useRouter();
 
   const colourStyles = {
     control: (styles) => ({
@@ -59,7 +59,7 @@ const TemplateSearchBar = () => {
   const onSearchChange = (selectedOption) => {
     if (selectedOption) {
       setSelectedOption(selectedOption);
-      history.push(`${TEMPLATES_URL}/${selectedOption.value}`);
+      router.push(`${TEMPLATES_URL}/${selectedOption.value}`);
     }
   };
 

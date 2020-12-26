@@ -9,19 +9,18 @@ import CalendarSelectFrom from './CalendarSelectForm';
 import { staticNumberList } from '../../common/static';
 import { TextXs } from '../../common/Texts';
 import { validateInput } from '../../../util/formInputs';
-import { IProgramLogInputScratch } from '../../programLog/interfaces';
 import moment from 'moment';
 import axios from 'axios';
 import { CreateProgramLogFromScratchUrl, GetAllProgramLogCalendarStatsQueryUrl } from '../../../api/account/programLog';
 import { IServerResponse } from '../../../interfaces/IServerResponse';
-import { IProgramLog, IProgramLogCalendarStats } from '../../../interfaces/programLogs';
-import { useHistory } from 'react-router-dom';
+import { IProgramLog, IProgramLogCalendarStats, IProgramLogInputScratch } from '../../../interfaces/programLogs';
 import ProgramSummary from './ProgramSummary';
 import { useEffect } from 'react';
 import { DayValue } from 'react-modern-calendar-datepicker';
 import { useAxios } from '../../../hooks/useAxios';
+
 interface IProps {
-  workoutDates: Array<Date>;
+  workoutDates?: Array<Date>;
   onClose: () => void;
   onCreateSuccessOpen: () => void;
 }

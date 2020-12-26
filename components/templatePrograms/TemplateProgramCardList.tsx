@@ -1,7 +1,6 @@
 import React from 'react';
 import { Flex } from '@chakra-ui/core';
 import { Box, Badge, Button, Image } from '@chakra-ui/core';
-import { Link } from 'react-router-dom';
 import { Card } from '../layout/Card';
 import { ITemplateProgram } from '../../interfaces/templates';
 import { HeadingMd } from '../common/Texts';
@@ -9,6 +8,7 @@ import { PbPrimaryButton } from '../common/Buttons';
 import { GiWeightLiftingDown } from 'react-icons/gi';
 import { CenterRowFlex } from '../layout/Flexes';
 import { TEMPLATES_URL } from '../util/InternalLinks';
+import Link from 'next/link';
 
 interface ListProps {
   templates: ITemplateProgram[];
@@ -48,7 +48,7 @@ const TemplateProgramCard: React.FC<Props> = ({ template }) => (
       </Box>
       <Box pt="2">
         <Link
-          to={{
+          href={{
             pathname: `${TEMPLATES_URL}/${template.templateProgramId}?program=${encodeURIComponent(template.name.replace(/\s+/g, '-'))}`,
             ...template,
           }}>
