@@ -2,5 +2,10 @@
 export interface IWeightInput {
     exerciseId: number;
     exerciseName: string;
-    weight?: number;
+    weight: number;
+}
+
+export interface ITemplateKeyVal {
+    templateProgramId: number;
+    templateName: string
 }

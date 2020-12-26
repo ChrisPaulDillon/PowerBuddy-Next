@@ -1,27 +1,94 @@
 import React, { useState } from 'react';
-import { Box, Flex, Link, useColorMode, Stack, useDisclosure, Avatar, IconButton } from '@chakra-ui/core';
-import theme from '../../theme';
-import { MdMenu } from 'react-icons/md';
+import { Box, Flex, useColorMode, Stack, useDisclosure, Avatar, useToken, useToast, IconButton } from '@chakra-ui/core';
 import { Banner } from '../common/Texts';
 import { useSelector } from 'react-redux';
 import { IAppState } from '../../redux/store';
-import PbMenu from '../common/Menus';
-import { MobileSideNav } from './SideNav';
+import { MobileSideNav } from './LeftNav';
 import useScreenSizes from '../../hooks/useScreenSizes';
-import RightNav from './RightNav';
+import RightNav from './RightMenu';
 import { PbDrawerForm } from '../common/Drawers';
-import { LoginModal } from '../common/Modals';
+import { LoginModal } from '../shared/Modals';
+import MenuBase from '../common/Menus';
+import { PbPrimaryButton } from '../common/Buttons';
+import { RiAdminLine, FaHistory, FaUserFriends, BsFillGrid3X3GapFill, BsCalendarFill, MdMenu } from 'react-icons/all';
+import { WORKOUT_DIARY_URL, TEMPLATES_URL, LOGHISTORY_URL, USERS_URL, ADMIN_URL } from '../util/InternalLinks';
+import { IconType } from 'react-icons';
+import { useHistory } from 'react-router-dom';
+import PbIconButton from '../common/IconButtons';
+import Axios from 'axios';
+import { CreateWorkoutDayUrl, GetWorkoutDayIdByDateUrl } from '../../api/account/workoutDay';
+import { ModalBackForward, ModalForward } from '../common/Modals';
+import { ICreateWorkoutDayOptions } from '../../interfaces/workouts';
+import TemplateSearchBar from '../templatePrograms/TemplateSearchBar';
+import theme from '../../theme';
+import Link from 'next/link';
+
+const sideMenu = {
+  groups: [
+    // {
+    //   name: 'Diary',
+    //   icon: BsCalendarFill,
+    //   link: DIARY_URL,
+    //   tooltip: 'View Your Program Log',
+    //   memberStatusId: 0,
+    // },
+    {
+      name: 'New Diary',
+      icon: BsCalendarFill,
+      link: WORKOUT_DIARY_URL,
+      tooltip: 'View Your Program Log',
+      memberStatusId: 0,
+    },
+    {
+      name: 'Templates',
+      icon: BsFillGrid3X3GapFill,
+      link: TEMPLATES_URL,
+      tooltip: 'View Program Templates',
+      memberStatusId: 0,
+    },
+    {
+      name: 'History',
+      icon: FaHistory,
+      link: LOGHISTORY_URL,
+      tooltip: 'View Your log history',
+      memberStatusId: 0,
+    },
+    {
+      name: 'Users',
+      icon: FaUserFriends,
+      link: USERS_URL,
+      tooltip: 'View Active Users',
+      memberStatusId: 0,
+    },
+    {
+      name: 'Admin',
+      icon: RiAdminLine,
+      link: ADMIN_URL,
+      tooltip: 'Admin Panel',
+      memberStatusId: 4,
+    },
+  ],
+};
 
 interface INavBarProps {
   menuOpen: boolean;
   setMenuOpen: any;
 }
 
-const NavBar: React.FC<INavBarProps> = ({ menuOpen, setMenuOpen }) => {
+const NavBar: React.FC<INavBarProps> = ({ menuOpen }) => {
   const { user } = useSelector((state: IAppState) => state.state);
+  const history = useHistory();
+  const toast = useToast();
   const { colorMode } = useColorMode();
   const { SCREEN_MOBILE, SCREEN_DESKTOP } = useScreenSizes();
   const { isAuthenticated } = useSelector((state: IAppState) => state.state);
+
+  const [programText, setProgramText] = useState<string>();
+  const [workoutOptions, setWorkoutOptions] = useState<ICreateWorkoutDayOptions>({ workoutDate: new Date() } as ICreateWorkoutDayOptions);
+  const [buttonLoading, setButtonLoading] = useState<boolean>(false);
+
+  const { isOpen: isCreateWorkoutOpen, onOpen: onCreateWorkoutOpen, onClose: onCreateWorkoutClose } = useDisclosure();
+  const { isOpen: isTodayWorkoutOpen, onOpen: onTodayWorkoutOpen, onClose: onTodayWorkoutClose } = useDisclosure();
   const { isOpen: isLeftNavOpen, onOpen: onLeftNavOpen, onClose: onLeftNavClose } = useDisclosure();
   const { isOpen: isMobileOpen, onOpen: onMobileOpen, onClose: onMobileClose } = useDisclosure();
   const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
@@ -29,26 +96,118 @@ const NavBar: React.FC<INavBarProps> = ({ menuOpen, setMenuOpen }) => {
   const handleBurgerMenuPress = () => {
     if (SCREEN_MOBILE) {
       onLeftNavOpen();
-    }
-    if (SCREEN_DESKTOP) {
-      setMenuOpen(!menuOpen);
     } else {
       onLeftNavOpen();
     }
   };
 
+  const doesUserHaveWorkoutToday = async () => {
+    setButtonLoading(true);
+    try {
+      const result = await Axios.get(GetWorkoutDayIdByDateUrl());
+      if (result.data.workoutDayId !== 0) {
+        history.push(`${WORKOUT_DIARY_URL}/${result.data.workoutDayId}`);
+      } else if (!result.data.workoutLogId) {
+        onTodayWorkoutOpen(); //No workout log was found, give options of fresh create
+      } else {
+        const workoutOptions: ICreateWorkoutDayOptions = {
+          workoutDate: new Date(),
+          workoutLogId: result.data.workoutLogId,
+          weekNo: result.data.weekNo,
+        };
+        setWorkoutOptions(workoutOptions);
+        setProgramText(result?.data?.templateName);
+        onCreateWorkoutOpen(); //Workout log was found, give the option to create a workout day for that log
+      }
+    } catch (error) {
+      if (error?.response?.status === 401) {
+        onLoginOpen();
+      }
+    }
+    setButtonLoading(false);
+  };
+
+  const createWorkoutDay = async () => {
+    setButtonLoading(true);
+    try {
+      const result = await Axios.post(CreateWorkoutDayUrl(), workoutOptions);
+      if (result.data !== 0) {
+        history.push(`${WORKOUT_DIARY_URL}/${result.data.workoutDayId}`);
+        toast({
+          title: 'Success',
+          description: 'Successfully created todays workout!',
+          status: 'success',
+          duration: 2000,
+          isClosable: true,
+          position: 'top',
+        });
+      }
+    } catch (error) {
+      if (error?.response?.status === 401) {
+        onLoginOpen();
+      }
+    }
+    setButtonLoading(false);
+    onTodayWorkoutClose();
+    onCreateWorkoutClose();
+  };
+
   return (
     <Flex
-      bg={theme.colors.navBackground[colorMode]}
+      as="nav"
+      bg={`linear-gradient(to left, rgb(47, 40, 250), rgba(58, 58, 58, 0))`}
       w="100%"
-      p={1}
       justifyContent="flex"
-      alignItems="center"
-      borderColor={theme.colors.borderColor[colorMode]}
-      borderBottomWidth={1}>
-      <Stack isInline w="100%" justify="space-between" align="center" ml="1">
+      alignItems="space-between"
+      minH="6vh"
+      position="relative"
+      rounded="lg"
+      top={0}>
+      <Stack isInline w="100%" justify="space-between" align="center">
         <Flex ml="1">
-          <IconButton
+          <Box ml="5" mt={1}>
+            <IconButton
+              icon={<MdMenu />}
+              size="md"
+              onClick={handleBurgerMenuPress}
+              color={theme.colors.iconColor[colorMode]}
+              aria-label=""
+              isRound
+              fontSize="1.25em"
+              variant="ghost"
+              display={SCREEN_MOBILE ? 'inline' : 'none'}
+            />
+          </Box>
+          <Banner mx={2} mt={1}>
+            PowerBuddy
+          </Banner>
+          <Box display={SCREEN_DESKTOP ? 'inherit' : 'none'}>
+            {sideMenu.groups.map((item, idx) => (
+              <Box key={idx} mx={2}>
+                <LeftNavItem
+                  name={item.name}
+                  Icon={item.icon}
+                  tooltip={item.tooltip}
+                  link={item.link}
+                  memberStatusId={item.memberStatusId}
+                  userMemberStatusId={user.memberStatusId ?? 0}
+                  isOpen={menuOpen}
+                  idx={idx}
+                />
+              </Box>
+            ))}
+          </Box>
+          <Box mt={2}>
+            <PbPrimaryButton
+              size={SCREEN_MOBILE ? 'xs' : 'sm'}
+              variant="outline"
+              onClick={async () => doesUserHaveWorkoutToday()}
+              loading={buttonLoading}>
+              Todays Workout
+            </PbPrimaryButton>
+          </Box>
+
+          {/* <IconButton
             icon={<MdMenu />}
             size="md"
             onClick={handleBurgerMenuPress}
@@ -57,22 +216,25 @@ const NavBar: React.FC<INavBarProps> = ({ menuOpen, setMenuOpen }) => {
             isRound
             fontSize="1.5em"
             variant="ghost"
-            ml="5"
-          />
-          <Banner ml="2">PowerBuddy</Banner>
+            ml={4}
+            mt={1}
+          />*/}
         </Flex>
         <Flex>
+          <Box mt={2} display={SCREEN_MOBILE ? 'none' : 'inherit'}>
+            <TemplateSearchBar />
+          </Box>
           {SCREEN_MOBILE ? (
-            <Box>
-              <Avatar size="md" name={user.userName!} onClick={isAuthenticated ? onMobileOpen : onLoginOpen} />
+            <Box px={2}>
+              <Avatar size="sm" name={user.userName!} onClick={isAuthenticated ? onMobileOpen : onLoginOpen} />
               <PbDrawerForm isOpen={isMobileOpen} onClose={onMobileClose} size="full" title={user.userName!}>
                 <RightNav userName={user.userName!} onClose={onMobileClose} />
               </PbDrawerForm>
             </Box>
           ) : isAuthenticated ? (
-            <PbMenu button={<Avatar size="md" name={user.userName!} />} py="2">
+            <MenuBase button={<Avatar size="md" name={user.userName!} />}>
               <RightNav userName={user.userName!} onClose={onMobileClose} />
-            </PbMenu>
+            </MenuBase>
           ) : (
             <Avatar size="md" name={user.userName!} onClick={onLoginOpen} />
           )}
@@ -80,7 +242,60 @@ const NavBar: React.FC<INavBarProps> = ({ menuOpen, setMenuOpen }) => {
       </Stack>
       {isLoginOpen && <LoginModal isOpen={isLoginOpen} onOpen={onLoginOpen} onClose={onLoginClose} />}
       {isLeftNavOpen && <MobileSideNav isOpen={isLeftNavOpen} onClose={onLeftNavClose} />}
+      {isTodayWorkoutOpen && (
+        <ModalBackForward
+          isOpen={isTodayWorkoutOpen}
+          onClose={onTodayWorkoutClose}
+          forwardText="Create Single"
+          backText="Create Using Template"
+          body="Create one using a weightlifting program or a one off workout"
+          title="No Workout Detected"
+          loading={buttonLoading}
+          onForwardClick={async () => createWorkoutDay()}
+          onBackClick={() => {
+            history.push(TEMPLATES_URL);
+            onTodayWorkoutClose();
+          }}
+        />
+      )}
+      {isCreateWorkoutOpen && (
+        <ModalForward
+          isOpen={isCreateWorkoutOpen}
+          onClose={onCreateWorkoutClose}
+          actionText="Add"
+          body={`You are currently running the program ${programText}, add this workout to this program?`}
+          title="No Workout Detected"
+          loading={buttonLoading}
+          onClick={async () => createWorkoutDay()}
+        />
+      )}
     </Flex>
+  );
+};
+
+interface INavItemProps {
+  name: string;
+  Icon: IconType;
+  link: string;
+  tooltip: string;
+  memberStatusId: number;
+  userMemberStatusId: number;
+  onClose?: () => void;
+  isOpen: boolean;
+  idx: number;
+}
+
+export const LeftNavItem: React.FC<INavItemProps> = ({ Icon, link, tooltip, memberStatusId, userMemberStatusId }) => {
+  return (
+    <Box ml={2}>
+      {userMemberStatusId >= memberStatusId && (
+        <Stack spacing={1} isInline w="80%" py="0.5em" justify="space-between">
+          <Link href={link}>
+            <PbIconButton Icon={Icon} size="sm" label={tooltip} color="gray.100" onClick={() => undefined} />
+          </Link>
+        </Stack>
+      )}
+    </Box>
   );
 };
 

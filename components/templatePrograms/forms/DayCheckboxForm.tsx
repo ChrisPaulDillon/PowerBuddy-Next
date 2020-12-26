@@ -1,9 +1,8 @@
-import React, { useState, NewLifecycle } from 'react';
+import React from 'react';
 import { CenterColumnFlex } from '../../layout/Flexes';
-import { DatePickerFixed } from '../../common/DatePickerFixed';
 import { PbStack } from '../../common/Stacks';
 import { Flex, Checkbox } from '@chakra-ui/core';
-import { TextXs, TextSm, HeadingMd } from '../../common/Texts';
+import { TextXs, TextSm } from '../../common/Texts';
 import moment from 'moment';
 import { ITemplateProgram } from '../../../interfaces/templates';
 
@@ -23,7 +22,7 @@ interface IProps {
   setSatChecked: (val: boolean) => void;
   sunChecked: boolean;
   setSunChecked: (val: boolean) => void;
-  templateProgram?: ITemplateProgram;
+  noOfDaysPerWeek: number;
 }
 
 const DayCheckboxForm: React.FC<IProps> = ({
@@ -42,7 +41,7 @@ const DayCheckboxForm: React.FC<IProps> = ({
   setSatChecked,
   sunChecked,
   setSunChecked,
-  templateProgram,
+  noOfDaysPerWeek,
 }) => {
   const dayOfWeek = moment(selectedDate).format('dddd');
   return (
@@ -119,7 +118,7 @@ const DayCheckboxForm: React.FC<IProps> = ({
           />
         </Flex>
       </PbStack>
-      {templateProgram != null && <TextSm>Please select {templateProgram!.noOfDaysPerWeek} Days for this program</TextSm>}
+      <TextSm>Please select {noOfDaysPerWeek} Days for this program</TextSm>
     </CenterColumnFlex>
   );
 };

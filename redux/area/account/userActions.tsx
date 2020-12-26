@@ -116,25 +116,6 @@ export const loadUserProfile: ActionCreator<ThunkAction<Promise<any>, IReduxStat
   };
 };
 
-export interface ILoadAccountNotificationsAction {
-  type: types.LOAD_ACCOUNT_NOTIFICATIONS;
-  notifications: INotificationInteraction[];
-}
-
-export const loadAccountNotifications: ActionCreator<ThunkAction<Promise<any>, IReduxState, null, ILoadAccountNotificationsAction>> = () => {
-  return async (dispatch: Dispatch) => {
-    try {
-      const response = await axios.get(`${API_BASE}Account/Notification`);
-      dispatch({
-        type: types.LOAD_ACCOUNT_NOTIFICATIONS,
-        notifications: response.data,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-
 export interface ICreateFirstVisitStatsAction {
   type: types.CREATE_FIRST_VISIT_STATS;
   notifications: INotificationInteraction[];

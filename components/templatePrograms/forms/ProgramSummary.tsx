@@ -6,8 +6,8 @@ import { TextXs } from '../../common/Texts';
 
 interface IProps {
   setCustomName: (e: any) => void;
-  startDate: Date;
-  endDate: Date;
+  startDate: Date | undefined;
+  endDate: Date | undefined;
   templateName?: string;
 }
 

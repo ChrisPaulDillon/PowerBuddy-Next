@@ -9,4 +9,5 @@ export const CreateLiftingStatUrl = () => `${baseUrl}`;
 export const CreateLiftingStatCollectionUrl = () => `${baseUrl}/Collection`;
 export const UpdateLiftingStatUrl = () => `${baseUrl}`;
 export const DeleteLiftingStatUrl = (liftingStatId: number) => `${baseUrl}/${liftingStatId}`;
+export const DeleteLiftingStatAuditUrl = (liftingStatAuditId: number) => `${baseUrl}/Audit/${liftingStatAuditId}`;
 export const UpdateLiftingStatCollectionUrl = () => `${baseUrl}/Collection`;

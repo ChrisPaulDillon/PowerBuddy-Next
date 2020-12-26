@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Heading, useColorMode, BoxProps } from '@chakra-ui/core';
+import { Text, Heading, useColorMode, BoxProps, Divider, Box } from '@chakra-ui/core';
 import theme from '../../theme';
 import { CenterColumnFlex, CenterRowFlex } from '../layout/Flexes';
 import { IconType } from 'react-icons';
@@ -13,9 +13,9 @@ interface IPageHeaderProps extends BoxProps {
 export const PageHeader: React.FC<IPageHeaderProps> = ({ Icon, size, onInfoClick, ...rest }) => {
   const { colorMode } = useColorMode();
   return (
-    <CenterRowFlex justify="center">
-      <Heading color={theme.colors.textColor[colorMode]} size="lg" fontFamily="'Roboto', serif;" {...rest}></Heading>
-    </CenterRowFlex>
+    <Box p={5}>
+      <Heading mb={1} as="h1" color={theme.colors.textColor[colorMode]} size="lg" fontFamily="'Roboto', serif;" textAlign="left" {...rest} />
+    </Box>
   );
 };
 
@@ -70,6 +70,11 @@ export const ITextSm: React.FC<BoxProps> = ({ ...rest }) => {
   );
 };
 
+export const TextXsFade: React.FC<BoxProps> = ({ ...rest }) => {
+  const { colorMode } = useColorMode();
+  return <Text color={theme.colors.quoteColor[colorMode]} fontSize="xs" textAlign="center" {...rest}></Text>;
+};
+
 export const TextXs: React.FC<BoxProps> = ({ ...rest }) => {
   const { colorMode } = useColorMode();
   return <Text color={theme.colors.textColor[colorMode]} fontSize={['xs', 'xs', 'xs', 'xs']} fontFamily="'Roboto', serif;" {...rest}></Text>;
@@ -112,7 +117,7 @@ export const TextNavItem: React.FC<BoxProps> = ({ ...rest }) => {
 
 export const Banner: React.FC<BoxProps> = ({ ...rest }) => {
   const { colorMode } = useColorMode();
-  return <Text color="red.600" fontSize="3xl" fontFamily="'trade-gothic'" textAlign="center" {...rest}></Text>;
+  return <Heading as="h1" size="lg" fontWeight="bold" color="blue.500" {...rest}></Heading>;
 };
 
 export const SubBanner: React.FC<BoxProps> = ({ ...rest }) => {

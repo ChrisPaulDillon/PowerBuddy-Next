@@ -8,6 +8,7 @@ import { HeadingMd } from '../common/Texts';
 import { PbPrimaryButton } from '../common/Buttons';
 import { GiWeightLiftingDown } from 'react-icons/gi';
 import { CenterRowFlex } from '../layout/Flexes';
+import { TEMPLATES_URL } from '../util/InternalLinks';
 
 interface ListProps {
   templates: ITemplateProgram[];
@@ -41,19 +42,17 @@ const TemplateProgramCard: React.FC<Props> = ({ template }) => (
         </Box>
       </Box>
       <Box>
-        <Box color="gray.500" fontWeight="semibold" letterSpacing="wide" fontSize="xs" textTransform="uppercase" m="2">
-          Length : {template.noOfWeeks} Weeks
+        <Box color="gray.500" fontWeight="semibold" letterSpacing="wide" fontSize="xs" m="2">
+          {template.noOfWeeks} Weeks Long
         </Box>
       </Box>
       <Box pt="2">
         <Link
           to={{
-            pathname: '/templates/' + template.templateProgramId,
+            pathname: `${TEMPLATES_URL}/${template.templateProgramId}?program=${encodeURIComponent(template.name.replace(/\s+/g, '-'))}`,
             ...template,
           }}>
-          <PbPrimaryButton colorScheme="blue" leftIcon={<GiWeightLiftingDown />}>
-            DETAILS
-          </PbPrimaryButton>
+          <PbPrimaryButton>View</PbPrimaryButton>
         </Link>
       </Box>
     </Box>

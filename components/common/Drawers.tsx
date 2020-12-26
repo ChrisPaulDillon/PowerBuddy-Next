@@ -5,101 +5,104 @@ import { Banner, HeadingMd } from './Texts';
 import { CenterColumnFlex, CenterRowFlex } from '../layout/Flexes';
 import { PbPrimaryButton } from './Buttons';
 
-interface IProps {
+interface IDrawerBaseProps {
   isOpen: boolean;
   onClose: () => void;
+  children: any;
+}
+
+const DrawerBase: React.FC<IDrawerBaseProps> = ({ isOpen, onClose, children, ...rest }) => (
+  <Drawer placement="left" onClose={onClose} isOpen={isOpen} size="full" {...rest}>
+    <DrawerOverlay />
+    <DrawerContent>
+      <DrawerHeader borderBottomWidth="1px" fontWeight="light" textAlign="center">
+        <Flex>
+          <CenterRowFlex>
+            <IconButton aria-label="" icon={<IoIosExit />} onClick={onClose} variant="ghost" size="md" isRound fontSize="1em" pt="1" />
+            <Banner>PowerBuddy</Banner>
+          </CenterRowFlex>
+        </Flex>
+      </DrawerHeader>
+      <DrawerBody>{children}</DrawerBody>
+    </DrawerContent>
+  </Drawer>
+);
+
+interface IDrawerBasicProps extends IDrawerBaseProps {
   title: string;
   body?: string;
   actionText: string;
   actionColour?: string;
   size: string;
+  loading?: boolean;
   onClick: () => void;
 }
 
-export const PbDrawer: React.FC<IProps> = ({ title, body, isOpen, onClose, onClick, actionText, children, ...rest }) => {
+export const DrawerBasic: React.FC<IDrawerBasicProps> = ({
+  title,
+  body,
+  isOpen,
+  onClose,
+  onClick,
+  actionText,
+  actionColour,
+  loading,
+  children,
+  ...rest
+}) => {
   return (
-    <Drawer placement="left" onClose={onClose} isOpen={isOpen} {...rest}>
-      <DrawerOverlay />
-      <DrawerContent>
-        <DrawerHeader borderBottomWidth="1px" fontWeight="1">
-          <Flex>
-            <CenterRowFlex>
-              <IconButton aria-label="" icon={<IoIosExit />} onClick={onClose} variant="ghost" size="md" isRound fontSize="1em" pt="1" />
-              <Banner>PowerBuddy</Banner>
-            </CenterRowFlex>
-          </Flex>
-        </DrawerHeader>
-
-        <DrawerBody>
-          <CenterColumnFlex>
-            <HeadingMd>{title}</HeadingMd>
-            <Box
-              mt="2"
-              overflowY="scroll"
-              css={{
-                scrollSnapType: 'x mandatory',
-                '::-webkit-scrollbar': { width: 0 },
-                '-msOverflowStyle': 'none',
-                scrollbarWidth: 'none',
-              }}
-              {...rest}>
-              {body}
-              {children}
-            </Box>
-            <Box mt="5">
-              <PbPrimaryButton onClick={onClick}>{actionText}</PbPrimaryButton>
-            </Box>
-          </CenterColumnFlex>
-        </DrawerBody>
-      </DrawerContent>
-    </Drawer>
+    <DrawerBase isOpen={isOpen} onClose={onClose}>
+      <CenterColumnFlex>
+        <HeadingMd>{title}</HeadingMd>
+        <Box
+          mt="2"
+          overflowY="scroll"
+          css={{
+            scrollSnapType: 'x mandatory',
+            '::-webkit-scrollbar': { width: 0 },
+            '-msOverflowStyle': 'none',
+            scrollbarWidth: 'none',
+          }}
+          {...rest}>
+          {body}
+          {children}
+        </Box>
+        <Box mt="5">
+          <PbPrimaryButton onClick={onClick} colorScheme={actionColour} loading={loading}>
+            {actionText}
+          </PbPrimaryButton>
+        </Box>
+      </CenterColumnFlex>
+    </DrawerBase>
   );
 };
 
-interface IFormProps {
-  isOpen: boolean;
-  onClose: () => void;
+interface IDrawerFormProps extends IDrawerBaseProps {
   title: string;
   size: string;
 }
 
-export const PbDrawerForm: React.FC<IFormProps> = ({ title, isOpen, onClose, children, ...rest }) => {
+export const PbDrawerForm: React.FC<IDrawerFormProps> = ({ title, isOpen, onClose, children, ...rest }) => {
   return (
-    <Box zIndex={999}>
-      <Drawer placement="left" onClose={onClose} isOpen={isOpen} {...rest}>
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerHeader borderBottomWidth="1px" fontWeight="1">
-            <Flex>
-              <CenterRowFlex>
-                <IconButton aria-label="" icon={<IoIosExit />} onClick={onClose} variant="ghost" size="md" isRound fontSize="1em" />
-                <Banner>PowerBuddy</Banner>
-              </CenterRowFlex>
-            </Flex>
-          </DrawerHeader>
-
-          <DrawerBody>
-            <Flex flexDir="column">
-              <CenterColumnFlex>
-                <HeadingMd>{title}</HeadingMd>
-              </CenterColumnFlex>
-              <Box
-                mt="2"
-                overflowY="scroll"
-                css={{
-                  scrollSnapType: 'x mandatory',
-                  '::-webkit-scrollbar': { width: 0 },
-                  '-msOverflowStyle': 'none',
-                  scrollbarWidth: 'none',
-                }}
-                {...rest}>
-                {children}
-              </Box>
-            </Flex>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
-    </Box>
+    <DrawerBase isOpen={isOpen} onClose={onClose}>
+      <Flex flexDir="column">
+        <CenterColumnFlex>
+          <HeadingMd>{title}</HeadingMd>
+        </CenterColumnFlex>
+        <Box
+          mt="2"
+          overflowY="scroll"
+          css={{
+            scrollSnapType: 'x mandatory',
+            '::-webkit-scrollbar': { width: 0 },
+            '-msOverflowStyle': 'none',
+            scrollbarWidth: 'none',
+          }}
+          {...rest}>
+          {children}
+        </Box>
+      </Flex>
+    </DrawerBase>
   );
 };
 

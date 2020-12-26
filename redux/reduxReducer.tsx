@@ -62,30 +62,6 @@ export const reduxReducer: Reducer<IReduxState, ReduxActions> = (state = initial
         user: { ...state.user, firstVisit: true },
       };
     }
-    case types.LOAD_ACCOUNT_NOTIFICATIONS: {
-      return {
-        ...state,
-        notifications: action.notifications,
-      };
-    }
-    case types.LOAD_FRIENDS_LIST: {
-      return {
-        ...state,
-        userFriendsList: action.userFriendsList,
-      };
-    }
-    case types.REQUEST_FRIEND: {
-      return {
-        ...state, //FIX
-        publicUser: { ...state.user, pendingFriendRequest: true },
-      };
-    }
-    case types.GET_USER_FRIENDS_LIST: {
-      return {
-        ...state,
-        userFriendRequests: action.userFriendRequests,
-      };
-    }
     default:
       return state;
   }

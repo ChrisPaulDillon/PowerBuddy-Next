@@ -1,5 +1,12 @@
 import { IExercise } from '../exercises';
 
+export interface ITemplateProgramFeed {
+  templateProgramId: number;
+  username: number;
+  templateName: string;
+  dateCreated: Date;
+}
+
 export interface ITemplateProgram {
   templateProgramId: number;
   name: string;
@@ -9,6 +16,7 @@ export interface ITemplateProgram {
   noOfDaysPerWeek: number;
   templateType: string;
   weightProgressionType: string;
+  activeUsersCount: number;
 }
 
 export interface ITemplateProgramExtended {
@@ -20,6 +28,7 @@ export interface ITemplateProgramExtended {
   noOfDaysPerWeek: number;
   templateType: string;
   weightProgressionType: string;
+  activeUsersCount: number;
   templateExerciseCollection: ITemplateExerciseCollection[];
   templateWeeks: ITemplateWeek[];
 }

@@ -74,6 +74,29 @@ export const FormNumberInput: React.FC<IProps> = forwardRef(({ name, placeholder
   </NumberInput>
 ));
 
+export const FormWeightInput: React.FC<IProps> = forwardRef(({ name, placeholder, onChange, value, w, size, defaultValue, min, max }, ref: any) => (
+  <NumberInput
+    name={name}
+    ref={ref}
+    step={0.25}
+    placeholder={placeholder}
+    size={size ?? 'md'}
+    onChange={onChange}
+    value={value}
+    w={w}
+    defaultValue={defaultValue}
+    variant="flushed"
+    min={min ?? 0}
+    max={max}>
+    {' '}
+    <NumberInputField />
+    <NumberInputStepper>
+      <NumberIncrementStepper />
+      <NumberDecrementStepper />
+    </NumberInputStepper>
+  </NumberInput>
+));
+
 export const EmailInput: React.FC<IProps> = forwardRef(({ name }, ref: any) => {
   return (
     <Stack spacing={4}>

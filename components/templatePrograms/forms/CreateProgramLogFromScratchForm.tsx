@@ -1,44 +1,50 @@
-import { useSelector } from "react-redux";
-import { IAppState } from "../../../redux/store";
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import {
-  Box,
-  FormControl,
-  FormErrorMessage,
-  Select,
-  useToast,
-} from "@chakra-ui/core";
-import { CenterColumnFlex } from "../../layout/Flexes";
-import { PbPrimaryButton } from "../../common/Buttons";
-import CalendarSelectFrom from "./CalendarSelectForm";
-import { staticNumberList } from "../../common/static";
-import { TextXs } from "../../common/Texts";
-import { validateInput } from "../../../util/formInputs";
-import { IProgramLogInputScratch } from "../../programLog/interfaces";
-import moment from "moment";
-import axios from "axios";
-import { CreateProgramLogFromScratchUrl } from "../../../api/account/programLog";
-import { IProgramLog } from "../../../interfaces/programLogs";
-import { useHistory, withRouter } from "react-router-dom";
-import ProgramSummary from "./ProgramSummary";
+import { useSelector } from 'react-redux';
+import { IAppState } from '../../../redux/store';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { Box, FormControl, FormErrorMessage, Select, useToast } from '@chakra-ui/core';
+import { CenterColumnFlex } from '../../layout/Flexes';
+import { PbPrimaryButton } from '../../common/Buttons';
+import CalendarSelectFrom from './CalendarSelectForm';
+import { staticNumberList } from '../../common/static';
+import { TextXs } from '../../common/Texts';
+import { validateInput } from '../../../util/formInputs';
+import { IProgramLogInputScratch } from '../../programLog/interfaces';
+import moment from 'moment';
+import axios from 'axios';
+import { CreateProgramLogFromScratchUrl, GetAllProgramLogCalendarStatsQueryUrl } from '../../../api/account/programLog';
+import { IServerResponse } from '../../../interfaces/IServerResponse';
+import { IProgramLog, IProgramLogCalendarStats } from '../../../interfaces/programLogs';
+import { useHistory } from 'react-router-dom';
+import ProgramSummary from './ProgramSummary';
+import { useEffect } from 'react';
+import { DayValue } from 'react-modern-calendar-datepicker';
+import { useAxios } from '../../../hooks/useAxios';
 interface IProps {
+  workoutDates: Array<Date>;
   onClose: () => void;
+  onCreateSuccessOpen: () => void;
 }
 
-const CreateProgramLogFromScratchForm: React.FC<IProps> = ({ onClose }) => {
-  const history = useHistory();
+const CreateProgramLogFromScratchForm: React.FC<IProps> = ({ onClose, onCreateSuccessOpen }) => {
+  const { data: calendarData, loading: calendarLoading } = useAxios<IProgramLogCalendarStats>(GetAllProgramLogCalendarStatsQueryUrl());
   const { user } = useSelector((state: IAppState) => state.state);
-  const [startDate, setStartDate] = useState<Date>(new Date());
-  const [endDate, setEndDate] = useState<Date>(new Date());
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>();
+  const [calendarDate, setCalendarDate] = useState<DayValue>();
+  const [endDate, setEndDate] = useState<Date>();
   const [phase, setPhase] = useState<number>(1);
-  const [customName, setCustomName] = useState<string>("Custom Template");
+  const [customName, setCustomName] = useState<string>('Custom Template');
   const [noOfWeeks, setNoOfWeeks] = useState<number>(0);
   const toast = useToast();
 
-  const updateCustomName = (e: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
+  useEffect(() => {
+    if (calendarDate) {
+      let date = `${calendarDate.month}/${calendarDate.day}/${calendarDate.year}`;
+      setSelectedDate(moment(date).toDate());
+    }
+  }, [calendarDate]);
+
+  const updateCustomName = (e: { target: { value: React.SetStateAction<string> } }) => {
     if (e && e.target && e.target.value) {
       setCustomName(e.target.value);
     }
@@ -48,49 +54,37 @@ const CreateProgramLogFromScratchForm: React.FC<IProps> = ({ onClose }) => {
 
   const onSubmit = async () => {
     if (phase < 2) {
-      setEndDate(moment(startDate).add(noOfWeeks!, "weeks").toDate());
+      setEndDate(moment(selectedDate).add(noOfWeeks!, 'weeks').toDate());
       setPhase(phase + 1);
     } else {
       const programLogInput: IProgramLogInputScratch = {
         userId: user.userId!,
         noOfWeeks: noOfWeeks,
-        startDate: startDate,
+        startDate: selectedDate ?? new Date(),
         endDate: endDate,
         customName: customName,
       };
       try {
-        const response = await axios.post(
-          CreateProgramLogFromScratchUrl(),
-          programLogInput
-        );
-        toast({
-          title: "Success",
-          description:
-            "Successfully Created Diary Log, redirecting to Diary Section",
-          status: "success",
-          duration: 2000,
-          isClosable: true,
-          position: "top-right",
-        });
+        const response = await axios.post<IServerResponse<IProgramLog>>(CreateProgramLogFromScratchUrl(), programLogInput);
+        onCreateSuccessOpen();
       } catch (error) {
-        if (error.response.status === 400) {
+        if (error?.response?.status === 400) {
           toast({
-            title: "Warning",
-            description:
-              "You already have a diary entry active for this time period!",
-            status: "warning",
+            title: 'Warning',
+            description: 'You already have a diary entry active for this time period!',
+            status: 'warning',
             duration: 5000,
             isClosable: true,
-            position: "top-right",
+            position: 'top-right',
           });
         } else {
           toast({
-            title: "Error",
-            description: "Could not create Diary Log, please try again later",
-            status: "error",
+            title: 'Error',
+            description: 'Could not create Diary Log, please try again later',
+            status: 'error',
             duration: 2000,
             isClosable: true,
-            position: "top-right",
+            position: 'top-right',
           });
         }
       }
@@ -101,7 +95,7 @@ const CreateProgramLogFromScratchForm: React.FC<IProps> = ({ onClose }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {phase === 1 ? (
-        <Box display={phase === 1 ? "inline" : "none"}>
+        <Box display={phase === 1 ? 'inline' : 'none'}>
           <FormControl isInvalid={errors.noOfWeeks}>
             <CenterColumnFlex mb="2">
               <TextXs p="1" mb="1">
@@ -112,32 +106,29 @@ const CreateProgramLogFromScratchForm: React.FC<IProps> = ({ onClose }) => {
                 ref={register({ validate: validateInput })}
                 name="noOfWeeks"
                 size="sm"
-                onChange={(e) => setNoOfWeeks(parseInt(e.target.value))}
-              >
-                {staticNumberList.map((x) => (
-                  <option value={x.value}>{x.label}</option>
+                onChange={(e) => setNoOfWeeks(parseInt(e.target.value))}>
+                {staticNumberList.map((x, idx) => (
+                  <option value={x.value} key={idx}>
+                    {x.label}
+                  </option>
                 ))}
               </Select>
-              <FormErrorMessage>
-                {errors.noOfWeeks && errors.noOfWeeks.message}
-              </FormErrorMessage>
+              <FormErrorMessage>{errors.noOfWeeks && errors.noOfWeeks.message}</FormErrorMessage>
             </CenterColumnFlex>
           </FormControl>
           <CalendarSelectFrom
-            selectedDate={startDate}
-            setSelectedDate={setStartDate}
+            selectedDate={selectedDate}
+            calendarDate={calendarDate}
+            setCalendarDate={setCalendarDate}
+            workoutDates={calendarData?.workoutDates!}
           />
         </Box>
       ) : (
         <Box />
       )}
       {phase === 2 ? (
-        <Box display={phase === 2 ? "inline" : "none"}>
-          <ProgramSummary
-            setCustomName={updateCustomName}
-            startDate={startDate}
-            endDate={endDate}
-          />
+        <Box display={phase === 2 ? 'inline' : 'none'}>
+          <ProgramSummary setCustomName={updateCustomName} startDate={selectedDate} endDate={endDate} />
         </Box>
       ) : (
         <Box />
@@ -145,7 +136,7 @@ const CreateProgramLogFromScratchForm: React.FC<IProps> = ({ onClose }) => {
 
       <CenterColumnFlex p="3" mt="2">
         <PbPrimaryButton type="submit" loading={formState.isSubmitting}>
-          {phase < 3 ? "Continue" : "Complete"}
+          {phase < 3 ? 'Continue' : 'Complete'}
         </PbPrimaryButton>
       </CenterColumnFlex>
     </form>

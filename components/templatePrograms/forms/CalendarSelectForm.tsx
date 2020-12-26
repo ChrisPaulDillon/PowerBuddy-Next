@@ -1,19 +1,21 @@
-import React, { useState } from 'react';
-import { DatePickerFixed } from '../../common/DatePickerFixed';
-import { Box } from '@chakra-ui/core';
-import { HeadingMd, HeadingSm, TextSm, TextXs } from '../../common/Texts';
+import React, { Dispatch, SetStateAction } from 'react';
+import { TextXs } from '../../common/Texts';
 import { CenterColumnFlex } from '../../layout/Flexes';
 import moment from 'moment';
+import ModernCalendar from '../../common/ModernCalendar';
+import { DayValue } from 'react-modern-calendar-datepicker';
 
 interface IProps {
-  selectedDate: Date;
-  setSelectedDate: any;
+  selectedDate: Date | undefined;
+  calendarDate: DayValue | undefined;
+  setCalendarDate: any;
+  workoutDates?: Array<Date>;
 }
 
-const CalendarSelectFrom: React.FC<IProps> = ({ selectedDate, setSelectedDate }) => {
+const CalendarSelectFrom: React.FC<IProps> = ({ selectedDate, calendarDate, setCalendarDate, workoutDates }) => {
   return (
     <CenterColumnFlex>
-      <DatePickerFixed startDate={selectedDate} changeDate={(date: Date) => setSelectedDate(date)} />
+      <ModernCalendar calendarDate={calendarDate} setCalendarDate={setCalendarDate} workoutDates={workoutDates!} />
       <TextXs mt="2">You have selected {moment(selectedDate).format('MMM Do YY')} as your start date</TextXs>
     </CenterColumnFlex>
   );

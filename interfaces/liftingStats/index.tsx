@@ -5,6 +5,11 @@ export interface IPersonalBestDetailed {
   liftFeed: Array<ILiftFeed>;
 }
 
+export interface ILiftingStatGrouped {
+  exerciseName: string;
+  liftingStats: Array<ILiftingStat>;
+}
+
 export interface ILiftingStat {
   liftingStatId?: number;
   userId: string;
@@ -26,6 +31,7 @@ export interface ILiftingStatAudit {
 }
 
 export interface ILiftFeed {
+  liftingStatAuditId: number;
   userName: string;
   liftingStatId: number;
   userId: string;

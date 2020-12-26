@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { Input } from '@chakra-ui/core';
+import { BoxProps, Input } from '@chakra-ui/core';
 
-interface IProps {
+interface ISearchBarProps extends BoxProps {
   onChange: (e: any) => void;
   placeholder?: string;
 }
 
-const SearchBar: React.FC<IProps> = ({ onChange, placeholder }) => {
-  return <Input onChange={onChange} w={['70%', '60%', '50%', '40%']} placeholder={placeholder} variant="flushed" />;
+const SearchBar: React.FC<ISearchBarProps> = ({ onChange, placeholder }) => {
+  return <Input onChange={onChange} placeholder={placeholder} variant="flushed" maxW="300px" />;
 };
 
 export default SearchBar;

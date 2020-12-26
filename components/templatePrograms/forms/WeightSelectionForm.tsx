@@ -2,14 +2,14 @@ import React from 'react';
 import { Box } from '@chakra-ui/core';
 import { TextSm, TextXs } from '../../common/Texts';
 import { CenterColumnFlex } from '../../layout/Flexes';
-import { FormInput } from '../../common/Inputs';
+import { FormInput, FormNumberInput, FormWeightInput } from '../../common/Inputs';
 import { PbStack } from '../../common/Stacks';
 import { IWeightInput } from '../interfaces';
 
 interface IProps {
   weightProgressionType: string;
   weightInput: IWeightInput[];
-  updateWeightInput: (exerciseId: number, weight: string) => void;
+  updateWeightInput: (exerciseId: number, weight: number) => void;
 }
 
 const WeightSelectionForm: React.FC<IProps> = ({ weightProgressionType, weightInput, updateWeightInput }) => {
@@ -17,30 +17,30 @@ const WeightSelectionForm: React.FC<IProps> = ({ weightProgressionType, weightIn
     <CenterColumnFlex>
       {weightProgressionType === 'PERCENTAGE' ? (
         <Box>
-          {weightInput.map((x) => (
-            <PbStack>
+          {weightInput.map((x, idx) => (
+            <PbStack key={idx}>
               <TextSm>{x.exerciseName}</TextSm>
-              <FormInput
+              <FormWeightInput
                 name={x.exerciseId!.toString()}
                 defaultValue={x.weight ?? 0}
                 maxW="100px"
-                onChange={(e) => updateWeightInput(x.exerciseId, e.target.value)}
+                onChange={(e: number) => updateWeightInput(x.exerciseId, e)}
               />
               kg
             </PbStack>
           ))}
-          <TextXs mt="3">Enter the weights you want the percentages to be based off of</TextXs>
+          <TextXs mt="3">Enter the weights you want the initial percentages to be based off</TextXs>
         </Box>
       ) : (
         <Box>
-          {weightInput.map((x) => (
-            <PbStack>
+          {weightInput.map((x, idx) => (
+            <PbStack key={idx}>
               <TextSm>{x.exerciseName}</TextSm>
-              <FormInput
+              <FormWeightInput
                 name={x.exerciseId!.toString()}
                 defaultValue={x.weight ?? 0}
                 maxW="100px"
-                onChange={(e) => updateWeightInput(x.exerciseId, e.target.value)}
+                onChange={(e: number) => updateWeightInput(x.exerciseId, e)}
               />
               kg
             </PbStack>

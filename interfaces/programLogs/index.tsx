@@ -10,7 +10,6 @@ export interface IProgramLogStats {
   lifetimeLogCount?: number;
   lifetimeDayCount?: number;
   lifetimeExerciseCount?: number;
-  lifetimeExerciseCompletedCount?: number;
   programLogStats: Array<IProgramLog>;
 }
 
@@ -28,7 +27,6 @@ export interface IProgramLog {
   friday: boolean;
   saturday: boolean;
   sunday: boolean;
-  active: boolean;
   programLogWeeks?: Array<IProgramLogWeek>;
   templateName?: string;
   customName?: string;
@@ -38,6 +36,20 @@ export interface IProgramLog {
 }
 
 export interface IProgramLogWeek {
+  programLogWeekId: number;
+  programLogId: number;
+  userId: string;
+  weekNo: number;
+  startDate: Date;
+  endDate: Date;
+  programLogDays: Array<IProgramLogDay>;
+}
+
+export interface IProgramLogWeekExtended {
+  customName: string;
+  templateName: string;
+  noOfWeeks: number;
+  templateProgramId: number;
   programLogWeekId: number;
   programLogId: number;
   userId: string;
@@ -67,7 +79,6 @@ export interface IProgramLogExercise {
   reps?: number;
   comment?: string;
   completed?: boolean;
-  personalBest?: boolean;
   exerciseTonnage?: number;
   exerciseName?: string;
   programLogRepSchemes?: Array<IProgramLogRepScheme>;
@@ -86,4 +97,16 @@ export interface IProgramLogRepScheme {
   completed?: boolean;
   repsCompleted?: number;
   personalBest?: boolean;
+}
+
+export interface IWorkoutDaySummary {
+  programLogDayId: number;
+  date: Date;
+  personalBestCount: number;
+  workoutExerciseSummaries: Array<IWorkoutExerciseSummary>;
+}
+
+export interface IWorkoutExerciseSummary {
+  ExerciseName: string;
+  NoOfSets: number;
 }

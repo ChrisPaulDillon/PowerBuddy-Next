@@ -1,5 +1,4 @@
-import { ILoadUserFriendsListAction, ISendFriendRequestAction, IGetUserFriendRequestsAction } from './area/account/friendsListActions';
-import { ILoginUserAction, ICreateFirstVisitStatsAction, ILoadUserProfileActions, ILoadAccountNotificationsAction } from './area/account/userActions';
+import { ILoginUserAction, ICreateFirstVisitStatsAction, ILoadUserProfileActions } from './area/account/userActions';
 import { ILoadExercisesAction, ILoadExerciseMuscleGroupsAction, ILoadExerciseTypesAction } from './area/public/exerciseActions';
 import { ILoadQuotesAction, IGetAllGendersAction, IGetAllMemberStatusAction } from './area/public/systemActions';
 
@@ -12,8 +11,4 @@ export type ReduxActions =
   | IGetAllMemberStatusAction
   | ILoginUserAction
   | ICreateFirstVisitStatsAction
-  | ILoadUserProfileActions
-  | ILoadAccountNotificationsAction
-  | ILoadUserFriendsListAction
-  | ISendFriendRequestAction
-  | IGetUserFriendRequestsAction;
+  | ILoadUserProfileActions;

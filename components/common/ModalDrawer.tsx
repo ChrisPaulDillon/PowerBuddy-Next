@@ -1,32 +1,60 @@
 import { Box } from '@chakra-ui/core';
 import React from 'react';
 import useScreenSizes from '../../hooks/useScreenSizes';
-import { PbDrawer, PbDrawerForm } from './Drawers';
-import { PbModal, PbModalForm } from './Modals';
+import { DrawerBasic, PbDrawerForm } from './Drawers';
+import { ModalForward, ModalForm } from './Modals';
 
-interface IModalProps {
+interface IModalDrawerProps {
   isOpen: boolean;
   onClose: () => void;
   title: string;
   body?: string;
   actionText: string;
   actionColour?: string;
+  loading?: boolean;
   onClick: () => void;
   children?: any;
 }
 
-export const PbModalDrawer: React.FC<IModalProps> = ({ title, body, isOpen, onClose, onClick, actionText, actionColour, children }) => {
+export const PbModalDrawer: React.FC<IModalDrawerProps> = ({
+  title,
+  body,
+  isOpen,
+  onClose,
+  onClick,
+  actionText,
+  actionColour,
+  loading,
+  children,
+}) => {
   const { SCREEN_MOBILE } = useScreenSizes();
   return (
     <Box>
       {SCREEN_MOBILE ? (
-        <PbDrawer isOpen={isOpen} title={title} body={body} onClose={onClose} size="full" onClick={onClick} actionText={actionText}>
+        <DrawerBasic
+          isOpen={isOpen}
+          title={title}
+          body={body}
+          onClose={onClose}
+          size="full"
+          onClick={onClick}
+          actionText={actionText}
+          actionColour={actionColour}
+          loading={loading}>
           {children}
-        </PbDrawer>
+        </DrawerBasic>
       ) : (
-        <PbModal isOpen={isOpen} title={title} body={body} onClose={onClose} onClick={onClick} actionText={actionText}>
+        <ModalForward
+          isOpen={isOpen}
+          title={title}
+          body={body}
+          onClose={onClose}
+          onClick={onClick}
+          actionText={actionText}
+          actionColour={actionColour}
+          loading={loading}>
           {children}
-        </PbModal>
+        </ModalForward>
       )}
     </Box>
   );
@@ -40,7 +68,7 @@ interface IProps {
   children?: any;
 }
 
-export const PbModalDrawerForm: React.FC<IProps> = ({ title, isOpen, onClose, size, children }) => {
+export const ModalDrawerForm: React.FC<IProps> = ({ title, isOpen, onClose, size, children }) => {
   const { SCREEN_MOBILE } = useScreenSizes();
   return (
     <Box>
@@ -49,9 +77,9 @@ export const PbModalDrawerForm: React.FC<IProps> = ({ title, isOpen, onClose, si
           {children}
         </PbDrawerForm>
       ) : (
-        <PbModalForm isOpen={isOpen} title={title} onClose={onClose} size={size}>
+        <ModalForm isOpen={isOpen} title={title} onClose={onClose} size={size}>
           {children}
-        </PbModalForm>
+        </ModalForm>
       )}
     </Box>
   );
