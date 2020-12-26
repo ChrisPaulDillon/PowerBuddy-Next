@@ -7,7 +7,6 @@ import { GetAllWorkoutLogStatsUrl } from '../../api/account/workoutLog';
 import { useAxios } from '../../hooks/useAxios';
 import { IWorkoutDaySummary, IWorkoutLogStats } from '../../interfaces/workouts';
 import ProgressSpinner from '../../components/common/ProgressSpinner';
-import { GetWorkoutSummariesUrl } from '../../api/account/programLogDay';
 import { TagExerciseCount, TagProgramDaysCount, TagProgramLogsCount } from '../../components/shared/Tags';
 import { FaHistory } from 'react-icons/fa';
 import LogHistoryList from '../../components/logHistory/LogHistoryList';
@@ -16,7 +15,7 @@ import WorkoutDaySummarySingle from '../../components/logHistory/WorkoutDaySumma
 
 const Index: NextPage = () => {
   const { loading, data: workoutLogStats, statusCode } = useAxios<IWorkoutLogStats>(GetAllWorkoutLogStatsUrl());
-  const { data: workoutSummaries } = useAxios<IWorkoutDaySummary[]>(GetWorkoutSummariesUrl());
+  //   const { data: workoutSummaries } = useAxios<IWorkoutDaySummary[]>(GetWorkoutSummariesUrl());
 
   if (loading) return <ProgressSpinner />;
 
@@ -51,15 +50,15 @@ const Index: NextPage = () => {
               {workoutLogStats && workoutLogStats.workoutLogStats && <LogHistoryList workoutLogStats={workoutLogStats!.workoutLogStats!} />}
             </TabPanel>
             <TabPanel>
-              {workoutSummaries && (
+              {/* {workoutSummaries && (
                 <CenterColumnFlex flexDir={{ lg: 'row', md: 'row', sm: 'row', xs: 'column' }} wrap="wrap">
                   {workoutSummaries.map((x, idx) => (
                     <Box key={idx} p={4}>
-                      {/* <WorkoutDaySummarySingle {...x} /> */}
+                     <WorkoutDaySummarySingle {...x} /> 
                     </Box>
                   ))}
                 </CenterColumnFlex>
-              )}
+              )} */}
             </TabPanel>
           </TabPanels>
         </Tabs>

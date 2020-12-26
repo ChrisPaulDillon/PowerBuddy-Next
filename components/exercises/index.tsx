@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import ExerciseCardList from './ExerciseCardList';
-import { IExercise } from '../../interfaces/exercises';
-import { Box, Flex } from '@chakra-ui/core';
+import { Box } from '@chakra-ui/core';
 import { IAppState } from '../../redux/store';
 import SearchBar from '../shared/SearchBar';
 import useExerciseSearch from '../../hooks/exercises/useExerciseSearch';
@@ -13,8 +12,6 @@ import ProgressSpinner from '../common/ProgressSpinner';
 
 const ExerciseIndexPage = () => {
   const { exercises } = useSelector((state: IAppState) => state.state);
-  const { exerciseMuscleGroups } = useSelector((state: IAppState) => state.state);
-  const { exerciseTypes } = useSelector((state: IAppState) => state.state);
 
   const [searchTerm, setSearchTerm] = useState<string>('');
   const filteredExercises = useExerciseSearch(exercises, searchTerm);

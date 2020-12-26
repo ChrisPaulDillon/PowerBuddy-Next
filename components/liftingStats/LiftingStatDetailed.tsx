@@ -1,6 +1,5 @@
 import { Box, SimpleGrid, useDisclosure } from '@chakra-ui/core';
 import React, { useEffect } from 'react';
-import { useHistory, useParams } from 'react-router';
 import { GetLiftingStatByIdUrl } from '../../api/account/liftingStats';
 import { useAxios } from '../../hooks/useAxios';
 import { IPersonalBestDetailed } from '../../interfaces/liftingStats';
@@ -10,14 +9,15 @@ import { CenterColumnFlex } from '../layout/Flexes';
 import { ModalBack } from '../common/Modals';
 import { WORKOUT_DIARY_URL } from '../util/InternalLinks';
 import { BreadcrumbBase, IBreadcrumbInput } from '../common/Breadcrumbs';
+import { useRouter } from 'next/router';
 
 interface IProps {}
 
 const LiftingStatDetailed: React.FC<IProps> = ({}) => {
-  //@ts-ignore
-  const { exerciseId } = useParams();
-  const history = useHistory();
-  const { loading, data: liftingStat, error } = useAxios<IPersonalBestDetailed>(GetLiftingStatByIdUrl(exerciseId));
+  const router = useRouter();
+  const { exerciseId } = router.query;
+
+  const { loading, data: liftingStat, error } = useAxios<IPersonalBestDetailed>(GetLiftingStatByIdUrl(parseInt(exerciseId as string)));
 
   const { isOpen: isBackOpen, onOpen: onBackOpen, onClose: onBackClose } = useDisclosure();
 
@@ -64,7 +64,7 @@ const LiftingStatDetailed: React.FC<IProps> = ({}) => {
             onClose={onBackClose}
             title="No Data Found"
             body="You currently have no data logged for this exercise, fill in your diary and stats will appear here"
-            onClick={() => history.push(WORKOUT_DIARY_URL)}
+            onClick={() => router.push(WORKOUT_DIARY_URL)}
           />
         )}
       </CenterColumnFlex>

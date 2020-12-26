@@ -11,7 +11,6 @@ import { ITemplateProgramExtended } from '../../../interfaces/templates';
 import WeightSelectionForm from './WeightSelectionForm';
 import { GetPersonalBestsForTemplate } from '../../../api/account/liftingStats';
 import { useAxios } from '../../../hooks/useAxios';
-import { GetAllProgramLogCalendarStatsQueryUrl } from '../../../api/account/programLog';
 import { IWeightInput } from '../interfaces';
 import { DayValue } from 'react-modern-calendar-datepicker';
 import { IProgramLogCalendarStats } from '../../../interfaces/programLogs';
@@ -31,7 +30,7 @@ interface IProps {
 
 const CreateProgramLogFromTemplateForm: React.FC<IProps> = ({ onClose, template, onCreateSuccessOpen }) => {
   const { user } = useSelector((state: IAppState) => state.state);
-  const { data: calendarData, loading: calendarLoading } = useAxios<IProgramLogCalendarStats>(GetAllProgramLogCalendarStatsQueryUrl());
+  // const { data: calendarData, loading: calendarLoading } = useAxios<IProgramLogCalendarStats>(GetAllProgramLogCalendarStatsQueryUrl());
   const { data: weightInput, loading: weightInputLoading } = useAxios<IWeightInput[]>(GetPersonalBestsForTemplate(template.templateProgramId!));
   const [curWeightInputs, setCurWeightInputs] = useState<IWeightInput[]>([]);
   const [calendarDate, setCalendarDate] = useState<DayValue>();
@@ -147,7 +146,7 @@ const CreateProgramLogFromTemplateForm: React.FC<IProps> = ({ onClose, template,
     }
   };
 
-  if (weightInputLoading || calendarLoading) return <ProgressSpinner />;
+  if (weightInputLoading) return <ProgressSpinner />;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -157,7 +156,7 @@ const CreateProgramLogFromTemplateForm: React.FC<IProps> = ({ onClose, template,
             selectedDate={selectedDate}
             calendarDate={calendarDate}
             setCalendarDate={setCalendarDate}
-            workoutDates={calendarData?.workoutDates!}
+            // workoutDates={calendarData?.workoutDates!}
           />
         </Box>
       )}

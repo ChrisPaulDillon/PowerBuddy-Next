@@ -5,8 +5,6 @@ import { PbPrimaryButton } from '../../common/Buttons';
 import { PbStack } from '../../common/Stacks';
 import { TextSm } from '../../common/Texts';
 import { FormNumberInput } from '../../common/Inputs';
-import { useProgramLogContext } from '../ProgramLogContext';
-import axios from 'axios';
 import { IWorkoutExercise, IWorkoutSet } from '../../../interfaces/workouts';
 import { CreateWorkoutSetCollectionUrl } from '../../../api/account/workoutSet';
 import { useWorkoutContext } from '../../workouts/WorkoutContext';

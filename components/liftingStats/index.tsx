@@ -15,11 +15,11 @@ import LiftingStatList from './LiftingStatList';
 import { useDisclosure } from '@chakra-ui/core';
 import { ModalForward } from '../common/Modals';
 import { LoginModal } from '../shared/Modals';
-import { useHistory } from 'react-router';
 import { WORKOUT_DIARY_URL } from '../util/InternalLinks';
+import { useRouter } from 'next/router';
 
 const LiftingStatsIndexPage = () => {
-  const history = useHistory();
+  const router = useRouter();
   const { user } = useSelector((state: IAppState) => state.state);
   const { loading, data: liftingStats, statusCode: statCode } = useAxios<ILiftingStatGrouped[]>(GetAllUserLiftingStatsUrl());
   const { loading: feedLoad, data: feedData } = useAxios<ILiftFeed[]>(GetLiftFeedByUserName(user.userName!));
@@ -62,7 +62,7 @@ const LiftingStatsIndexPage = () => {
           isOpen={isNoStatsOpen}
           onClose={onNoStatsClose}
           title="No Personal Bests Recorded"
-          onClick={() => history.push(WORKOUT_DIARY_URL)}
+          onClick={() => router.push(WORKOUT_DIARY_URL)}
           body="Start recording workouts in the diary and you will be notified automatically when personal bests are hit!"
           actionText="Go to Diary"
         />

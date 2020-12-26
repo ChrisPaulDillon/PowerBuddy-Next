@@ -11,14 +11,12 @@ import { TextXs } from '../../common/Texts';
 import { validateInput } from '../../../util/formInputs';
 import moment from 'moment';
 import axios from 'axios';
-import { CreateProgramLogFromScratchUrl, GetAllProgramLogCalendarStatsQueryUrl } from '../../../api/account/programLog';
 import { IServerResponse } from '../../../interfaces/IServerResponse';
 import { IProgramLog, IProgramLogCalendarStats, IProgramLogInputScratch } from '../../../interfaces/programLogs';
 import ProgramSummary from './ProgramSummary';
 import { useEffect } from 'react';
 import { DayValue } from 'react-modern-calendar-datepicker';
 import { useAxios } from '../../../hooks/useAxios';
-
 interface IProps {
   workoutDates?: Array<Date>;
   onClose: () => void;
@@ -26,7 +24,7 @@ interface IProps {
 }
 
 const CreateProgramLogFromScratchForm: React.FC<IProps> = ({ onClose, onCreateSuccessOpen }) => {
-  const { data: calendarData, loading: calendarLoading } = useAxios<IProgramLogCalendarStats>(GetAllProgramLogCalendarStatsQueryUrl());
+  // const { data: calendarData, loading: calendarLoading } = useAxios<IProgramLogCalendarStats>(GetAllProgramLogCalendarStatsQueryUrl());
   const { user } = useSelector((state: IAppState) => state.state);
   const [selectedDate, setSelectedDate] = useState<Date | undefined>();
   const [calendarDate, setCalendarDate] = useState<DayValue>();
@@ -64,7 +62,7 @@ const CreateProgramLogFromScratchForm: React.FC<IProps> = ({ onClose, onCreateSu
         customName: customName,
       };
       try {
-        const response = await axios.post<IServerResponse<IProgramLog>>(CreateProgramLogFromScratchUrl(), programLogInput);
+        // const response = await axios.post<IServerResponse<IProgramLog>>(CreateProgramLogFromScratchUrl(), programLogInput);
         onCreateSuccessOpen();
       } catch (error) {
         if (error?.response?.status === 400) {
@@ -119,7 +117,7 @@ const CreateProgramLogFromScratchForm: React.FC<IProps> = ({ onClose, onCreateSu
             selectedDate={selectedDate}
             calendarDate={calendarDate}
             setCalendarDate={setCalendarDate}
-            workoutDates={calendarData?.workoutDates!}
+            // workoutDates={calendarData?.workoutDates!}
           />
         </Box>
       ) : (

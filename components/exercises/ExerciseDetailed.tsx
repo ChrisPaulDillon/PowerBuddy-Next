@@ -5,13 +5,13 @@ import { IExercise } from '../../interfaces/exercises/index';
 import { GetExerciseByIdUrl } from '../../api/public/exercise';
 import { useAxios } from '../../hooks/useAxios';
 import ProgressSpinner from '../common/ProgressSpinner';
-import { useParams } from 'react-router';
 import { BiDumbbell } from 'react-icons/all';
+import { useRouter } from 'next/router';
 
 const ExerciseDetailed = () => {
-  //@ts-ignore
-  const { exerciseId } = useParams();
-  const { loading, data, error } = useAxios<IExercise>(GetExerciseByIdUrl(exerciseId!));
+  const router = useRouter();
+  const { exerciseId } = router.query;
+  const { loading, data, error } = useAxios<IExercise>(GetExerciseByIdUrl(parseInt(exerciseId as string)));
   const [exercise, setExercise] = useState<IExercise>({} as IExercise);
 
   useEffect(() => {

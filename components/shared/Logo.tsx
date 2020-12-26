@@ -1,9 +1,8 @@
 import React from 'react';
-import logo from '../../images/logo.png';
-import { Image } from '@chakra-ui/core';
+import Image from 'next/image';
 
 const Logo = () => {
-  return <Image boxSize="100px" color={['white', 'white', 'primary.500', 'primary.500']} src={logo} />;
+  return <Image width="100px" height="50px" src="/../../images/logo.png" />;
 };
 
 export default Logo;

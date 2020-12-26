@@ -1,36 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import TemplateProgramCardList from './TemplateProgramCardList';
 import { Box, Flex, useDisclosure } from '@chakra-ui/core';
-import SearchBar from '../shared/SearchBar';
 import { PageHeader } from '../common/Texts';
 import { CenterColumnFlex } from '../layout/Flexes';
 import { PbPrimaryButton } from '../common/Buttons';
-import ProgramGenerationFromScratchForm from './forms/CreateProgramLogFromScratchForm';
 import { ITemplateProgram } from '../../interfaces/templates';
-import { GetAllTemplateProgramsUrl, GetTemplatesBySearch } from '../../api/public/template';
+import { GetAllTemplateProgramsUrl } from '../../api/public/template';
 import { useAxios } from '../../hooks/useAxios';
 import ProgressSpinner from '../common/ProgressSpinner';
 import { ModalDrawerForm } from '../common/ModalDrawer';
 import { IAppState } from '../../redux/store';
 import { useSelector } from 'react-redux';
 import { LoginModal } from '../shared/Modals';
-import { IProgramLogCalendarStats } from '../../interfaces/programLogs';
-import { GetAllProgramLogCalendarStatsQueryUrl } from '../../api/account/programLog';
 import { ModalForward } from '../common/Modals';
-import { useHistory } from 'react-router';
 import { WORKOUT_DIARY_URL } from '../util/InternalLinks';
-import AsyncSelect from 'react-select';
-import ReactSelectExample from './TemplateSearchBar';
-import { SelectSearchable } from '../common/SearchSelect';
+import { useRouter } from 'next/router';
+import CreateProgramLogFromScratchForm from './forms/CreateProgramLogFromScratchForm';
 
 const TemplateIndexPage = () => {
-  const history = useHistory();
+  const router = useRouter();
   const { data, loading } = useAxios<ITemplateProgram[]>(GetAllTemplateProgramsUrl());
-  const { data: calendarData, loading: calendarLoading } = useAxios<IProgramLogCalendarStats>(GetAllProgramLogCalendarStatsQueryUrl());
+  // const { data: calendarData, loading: calendarLoading } = useAxios<IProgramLogCalendarStats>(GetAllProgramLogCalendarStatsQueryUrl());
   const [templates, setTemplates] = useState<ITemplateProgram[]>([]);
   const [] = useState<string>('');
   const { isAuthenticated } = useSelector((state: IAppState) => state.state);
-  const [selectedOption, setSelectedOption] = useState<any>('');
+  const [] = useState<any>('');
 
   const { isOpen: isCreateOpen, onOpen: onCreateOpen, onClose: onCreateClose } = useDisclosure();
   const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
@@ -46,39 +40,7 @@ const TemplateIndexPage = () => {
   //   }
   // }, [templateKeyVal]);
 
-  const fetchData = (inputValue, callback) => {
-    if (!inputValue) {
-      callback([]);
-    } else {
-      setTimeout(() => {
-        fetch(GetTemplatesBySearch(inputValue), {
-          method: 'GET',
-        })
-          .then((resp) => {
-            return resp.json();
-          })
-          .then((data) => {
-            const tempArray = [];
-            data.forEach((element) => {
-              //@ts-ignore
-              tempArray.push({ label: `${element.templateName}`, value: element.templateProgramId });
-            });
-            callback(tempArray);
-          })
-          .catch((error) => {
-            console.log(error, 'catch the hoop');
-          });
-      });
-    }
-  };
-
-  const onSearchChange = (selectedOption) => {
-    if (selectedOption) {
-      setSelectedOption(selectedOption);
-    }
-  };
-
-  if (loading || calendarLoading) return <ProgressSpinner />;
+  if (loading) return <ProgressSpinner />;
 
   return (
     <Box>
@@ -98,9 +60,9 @@ const TemplateIndexPage = () => {
       <TemplateProgramCardList templates={templates} />
       {isCreateOpen && (
         <ModalDrawerForm title="Create a New Diary Log" isOpen={isCreateOpen} onClose={onCreateClose}>
-          <ProgramGenerationFromScratchForm
+          <CreateProgramLogFromScratchForm
             onClose={onCreateClose}
-            workoutDates={calendarData!.workoutDates!}
+            // workoutDates={calendarData!.workoutDates!}
             onCreateSuccessOpen={onCreateSuccessClose}
           />
         </ModalDrawerForm>
@@ -110,7 +72,7 @@ const TemplateIndexPage = () => {
         <ModalForward
           isOpen={isCreateSuccessOpen}
           onClose={onCreateSuccessClose}
-          onClick={() => history.push(WORKOUT_DIARY_URL)}
+          onClick={() => router.push(WORKOUT_DIARY_URL)}
           body="Successfully created custom program, go to diary?"
           title="Success! 🎉🎉"
           actionText="Go to Diary"

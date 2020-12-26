@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, FormErrorMessage, FormControl, Box, useToast } from '@chakra-ui/core';
 import { CenterColumnFlex } from '../../layout/Flexes';
 import { validateInput } from '../../../util/formInputs';
 import { FormInput } from '../../common/Inputs';
-import { useProgramLogContext } from '../ProgramLogContext';
 import axios from 'axios';
-import { UpdateProgramLogDayNotesUrl } from '../../../api/account/programLogDay';
 import { UpdateWorkoutNoteUrl } from '../../../api/account/workoutDay';
 import { useWorkoutContext } from '../../workouts/WorkoutContext';
 

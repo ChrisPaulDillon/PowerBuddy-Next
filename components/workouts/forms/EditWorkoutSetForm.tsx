@@ -2,13 +2,10 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Box, useToast } from '@chakra-ui/core';
 import { FormNumberInput } from '../../common/Inputs';
-import { IProgramLogRepScheme } from '../../../interfaces/programLogs/index';
 import { PbPrimaryButton } from '../../common/Buttons';
 import { PbStack } from '../../common/Stacks';
 import { TextSm } from '../../common/Texts';
 import { CenterColumnFlex } from '../../layout/Flexes';
-import { useProgramLogContext } from '../ProgramLogContext';
-import { DeleteProgramLogRepSchemeUrl, UpdateProgramLogRepSchemeUrl } from '../../../api/account/programLogRepScheme';
 import axios from 'axios';
 import { IWorkoutSet } from '../../../interfaces/workouts';
 import { DeleteWorkoutSetUrl, UpdateWorkoutSetUrl } from '../../../api/account/workoutSet';
@@ -29,7 +26,7 @@ const EditWorkoutSetForm: React.FC<IProps> = ({ workoutDayId, workoutSet, onClos
 
   const { EditSet, DeleteSet } = useWorkoutContext();
 
-  const { register, handleSubmit, formState } = useForm();
+  const { handleSubmit, formState } = useForm();
 
   const onEditSubmit = async () => {
     workoutSet.weightLifted = weightUpdated;

@@ -6,7 +6,6 @@ import { ILiftFeed } from '../../interfaces/liftingStats';
 import { TextSm } from '../common/Texts';
 import moment from 'moment';
 import { formatDate } from '../../util/dateHelper';
-import { Link as RouterLink } from 'react-router-dom';
 import { MdDeleteForever } from 'react-icons/md';
 import PbIconButton from '../common/IconButtons';
 import Axios from 'axios';
@@ -70,7 +69,7 @@ const LiftFeedSingle: React.FC<ILiftFeedSingleProps> = ({ liftFeed }) => {
     <Box p="2">
       <TextSm>
         {repRange}RM achieved at {weight}kg on{' '}
-        <Link as={RouterLink} to={onClick} color="teal.500">
+        <Link to={onClick} color="teal.500">
           {exerciseName}
         </Link>{' '}
         {moment(formatDate(dateChanged)).isSame(new Date(), 'day') ? '' : 'on'} {formatDate(dateChanged)}!

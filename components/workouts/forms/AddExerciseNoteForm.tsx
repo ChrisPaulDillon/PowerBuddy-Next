@@ -4,9 +4,7 @@ import { Button, FormErrorMessage, FormControl, useToast } from '@chakra-ui/core
 import { CenterColumnFlex } from '../../layout/Flexes';
 import { validateInput } from '../../../util/formInputs';
 import { FormInput } from '../../common/Inputs';
-import { useProgramLogContext } from '../ProgramLogContext';
 import axios from 'axios';
-import { UpdateWorkoutNoteUrl } from '../../../api/account/workoutDay';
 import { UpdateWorkoutExerciseNoteUrl } from '../../../api/account/workoutExercise';
 import { useWorkoutContext } from '../../workouts/WorkoutContext';
 
@@ -17,7 +15,7 @@ interface IProps {
   note: string | undefined;
 }
 
-const AddExerciseNoteForm: React.FC<IProps> = ({ onClose, workoutExerciseId, workoutDayId, note }) => {
+const AddExerciseNoteForm: React.FC<IProps> = ({ onClose, workoutExerciseId, note }) => {
   const { UpdateExerciseNotes } = useWorkoutContext();
   const toast = useToast();
 

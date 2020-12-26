@@ -2,8 +2,8 @@ import React, { useCallback } from 'react';
 import { Flex, Box, Button, Text } from '@chakra-ui/core';
 import { Card } from '../layout/Card';
 import { IExercise } from '../../interfaces/exercises';
-import { useHistory } from 'react-router-dom';
 import { HeadingMd, PageHeader, TextSm, TextXs } from '../common/Texts';
+import { useRouter } from 'next/router';
 
 interface Props {
   exercises: IExercise[];
@@ -17,8 +17,8 @@ const ExerciseCardList: React.FC<Props> = ({ exercises }) => (
 );
 
 const ExerciseCardSingle: React.FC<IExercise> = ({ exerciseId, exerciseName, exerciseTypeName }) => {
-  const history = useHistory();
-  const handleDetailClick = useCallback(() => history.push(`/exercises/${exerciseId}`), [history]);
+  const router = useRouter();
+  const handleDetailClick = useCallback(() => router.push(`/exercises/${exerciseId}`), [history]);
 
   return (
     <Card borderWidth="1px" rounded="lg" overflow="hidden" m="2" textAlign="center">
