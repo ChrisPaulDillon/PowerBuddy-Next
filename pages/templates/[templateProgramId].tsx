@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 import { PbPrimaryButton } from '../../components/common/Buttons';
 import { ModalDrawerForm } from '../../components/common/ModalDrawer';
 import { ModalForward } from '../../components/common/Modals';
-import { PageHeader, TextXsFade } from '../../components/common/Texts';
+import { PageTitle, TextXsFade } from '../../components/common/Texts';
 import { CenterColumnFlex } from '../../components/layout/Flexes';
 import { LoginModal } from '../../components/shared/Modals';
 import TemplateProgramCardList from '../../components/templatePrograms/TemplateProgramCardList';
@@ -42,7 +42,7 @@ const TemplateProgramSingle: NextPage = () => {
   ];
 
   if (loading || template == undefined) return <ProgressSpinner />;
-  if (error) return <PageHeader>No Template Found</PageHeader>;
+  if (error) return <PageTitle>No Template Found</PageTitle>;
 
   return (
     <Box>
@@ -52,7 +52,7 @@ const TemplateProgramSingle: NextPage = () => {
       <CenterColumnFlex>
         <Box mt="2">
           <CenterColumnFlex flexDir="column">
-            <PageHeader>{template?.name}</PageHeader>
+            <PageTitle>{template?.name}</PageTitle>
             <Flex pt={2}>
               <Box pr={2}>
                 <Badge colorScheme="green" fontSize="0.8em">
