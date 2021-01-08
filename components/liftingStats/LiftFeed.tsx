@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Flex, Box, Link, useToast } from '@chakra-ui/core';
 import { useSelector } from 'react-redux';
 import { IAppState } from '../../redux/store';
-import { ILiftFeed } from '../../interfaces/liftingStats';
 import { TextSm } from '../common/Texts';
 import moment from 'moment';
 import { formatDate } from '../../util/dateHelper';
@@ -10,6 +9,7 @@ import { MdDeleteForever } from 'react-icons/md';
 import PbIconButton from '../common/IconButtons';
 import Axios from 'axios';
 import { DeleteLiftingStatAuditUrl } from '../../api/account/liftingStats';
+import { ILiftFeed } from 'powerbuddy-shared';
 
 interface IProps {
   liftFeed: ILiftFeed[];

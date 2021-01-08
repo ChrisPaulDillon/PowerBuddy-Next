@@ -5,7 +5,6 @@ import moment from 'moment';
 import { CenterColumnFlex, CenterRowFlex } from '../layout/Flexes';
 import { PbStack } from '../common/Stacks';
 import { Card, CardSm } from '../layout/Card';
-import { IProgramLog } from '../../interfaces/programLogs';
 import { CgArrowTopRight } from 'react-icons/all';
 import PbIconButton from '../common/IconButtons';
 import { TrashIconButton } from '../shared/IconButtons';
@@ -13,9 +12,9 @@ import { PbModalDrawer } from '../common/ModalDrawer';
 import { DeleteLogModalDrawer } from '../shared/ModalDrawers';
 import { TagExerciseCount, TagProgramDaysCount, TagProgramWeeksCount } from '../shared/Tags';
 import { BadgeCompleted, BadgeInProgress } from '../shared/Badges';
-import { IWorkoutLog } from '../../interfaces/workouts';
 import { useRouter } from 'next/router';
 import { WORKOUT_DIARY_URL } from '../../InternalLinks';
+import { IWorkoutLog } from 'powerbuddy-shared';
 
 interface IProps {
   workoutLogStats: IWorkoutLog[];

@@ -10,13 +10,11 @@ import { staticNumberList } from '../../common/static';
 import { TextXs } from '../../common/Texts';
 import { validateInput } from '../../../util/formInputs';
 import moment from 'moment';
-import axios from 'axios';
-import { IServerResponse } from '../../../interfaces/IServerResponse';
-import { IProgramLog, IProgramLogCalendarStats, IProgramLogInputScratch } from '../../../interfaces/programLogs';
 import ProgramSummary from './ProgramSummary';
 import { useEffect } from 'react';
 import { DayValue } from 'react-modern-calendar-datepicker';
 import { useAxios } from '../../../hooks/useAxios';
+import { IProgramLogInputScratch } from 'powerbuddy-shared/lib';
 interface IProps {
   workoutDates?: Array<Date>;
   onClose: () => void;

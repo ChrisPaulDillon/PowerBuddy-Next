@@ -2,7 +2,6 @@ import { Box, SimpleGrid, useDisclosure } from '@chakra-ui/core';
 import React, { useEffect } from 'react';
 import { GetLiftingStatByIdUrl } from '../../api/account/liftingStats';
 import { useAxios } from '../../hooks/useAxios';
-import { IPersonalBestDetailed } from '../../interfaces/liftingStats';
 import { PageTitle, TextSm } from '../common/Texts';
 import ProgressSpinner from '../common/ProgressSpinner';
 import { CenterColumnFlex } from '../layout/Flexes';
@@ -10,6 +9,7 @@ import { ModalBack } from '../common/Modals';
 import { WORKOUT_DIARY_URL } from '../../InternalLinks';
 import { BreadcrumbBase, IBreadcrumbInput } from '../common/Breadcrumbs';
 import { useRouter } from 'next/router';
+import { IPersonalBestDetailed } from 'powerbuddy-shared';
 
 interface IProps {}
 

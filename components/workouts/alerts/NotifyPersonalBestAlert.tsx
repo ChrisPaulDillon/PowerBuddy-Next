@@ -1,8 +1,8 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import { Button, Box } from '@chakra-ui/core';
-import { ILiftingStat } from './../../../interfaces/liftingStats/index';
 import { TextSm, ITextSm } from '../../common/Texts';
 import { CenterColumnFlex } from '../../layout/Flexes';
+import { ILiftingStat } from 'powerbuddy-shared';
 
 interface IProps {
   personalBests: ILiftingStat[];

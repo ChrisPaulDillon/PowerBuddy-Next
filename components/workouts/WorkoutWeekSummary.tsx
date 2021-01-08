@@ -2,7 +2,6 @@ import { Box, Flex, useColorMode } from '@chakra-ui/core';
 import moment from 'moment';
 import React from 'react';
 import { CgArrowTopRight } from 'react-icons/cg';
-import { IWorkoutDaySummary, IWorkoutExerciseSummary, IWorkoutWeekSummary } from '../../interfaces/workouts';
 import PbIconButton from '../common/IconButtons';
 import { PbStack } from '../common/Stacks';
 import { HeadingMd, TextSm, TextXs } from '../common/Texts';
@@ -12,6 +11,7 @@ import { BadgeWeekNo, BadgeWorkoutName } from '../shared/Badges';
 import theme from '../../theme';
 import { WORKOUT_DIARY_URL } from '../../InternalLinks';
 import { useRouter } from 'next/router';
+import { IWorkoutDaySummary, IWorkoutExerciseSummary, IWorkoutWeekSummary } from 'powerbuddy-shared';
 
 interface IProps {
   weekSummary: IWorkoutWeekSummary;

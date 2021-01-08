@@ -4,7 +4,6 @@ import { PbStack } from '../../common/Stacks';
 import { Flex, Checkbox } from '@chakra-ui/core';
 import { TextXs, TextSm } from '../../common/Texts';
 import moment from 'moment';
-import { ITemplateProgram } from '../../../interfaces/templates';
 
 interface IProps {
   selectedDate: Date;

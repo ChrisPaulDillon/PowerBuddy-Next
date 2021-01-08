@@ -9,10 +9,10 @@ import { FormWeightInput } from '../../common/Inputs';
 import { TextRep, TextLg } from '../../common/Texts';
 import { CenterColumnFlex } from '../../layout/Flexes';
 import axios from 'axios';
-import { ICreateWorkoutExercise } from '../../../interfaces/workouts';
 import { CreateWorkoutExerciseUrl } from '../../../api/account/workoutExercise';
 import { useWorkoutContext } from '../../workouts/WorkoutContext';
 import useLoadExercises from '../../../hooks/redux/useLoadExercises';
+import { ICreateWorkoutExercise } from 'powerbuddy-shared';
 
 interface IProps {
   onClose: () => void;

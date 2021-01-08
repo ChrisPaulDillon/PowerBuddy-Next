@@ -7,9 +7,9 @@ import { PbStack } from '../../common/Stacks';
 import { TextSm } from '../../common/Texts';
 import { CenterColumnFlex } from '../../layout/Flexes';
 import axios from 'axios';
-import { IWorkoutSet } from '../../../interfaces/workouts';
 import { DeleteWorkoutSetUrl, UpdateWorkoutSetUrl } from '../../../api/account/workoutSet';
 import { useWorkoutContext } from '../../workouts/WorkoutContext';
+import { IWorkoutSet } from 'powerbuddy-shared';
 
 interface IProps {
   workoutDayId: number;

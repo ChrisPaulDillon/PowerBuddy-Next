@@ -10,7 +10,6 @@ import { ProgramExerciseCard } from '../layout/Card';
 import { CenterRowFlex } from '../layout/Flexes';
 import { PERSONALBESTS_URL } from '../../InternalLinks';
 import theme from '../../theme';
-import { IWorkoutExercise, IWorkoutSet } from '../../interfaces/workouts';
 import moment from 'moment';
 import { useWorkoutContext } from './WorkoutContext';
 import Link from 'next/link';
@@ -19,6 +18,7 @@ import AddExerciseNoteForm from './forms/AddExerciseNoteForm';
 import QuickAddSetsForm from './forms/QuickAddSetsForm';
 import DeleteWorkoutExerciseAlert from './alerts/DeleteWorkoutExerciseAlert';
 import EditWorkoutSetForm from './forms/EditWorkoutSetForm';
+import { IWorkoutExercise, IWorkoutSet } from 'powerbuddy-shared';
 
 interface IExerciseProps {
   key?: number;

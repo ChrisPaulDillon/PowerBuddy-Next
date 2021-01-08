@@ -1,7 +1,7 @@
 import { Box, Flex } from '@chakra-ui/core';
 import moment from 'moment';
+import { ILiftingStat, ILiftingStatGrouped } from 'powerbuddy-shared';
 import React from 'react';
-import { ILiftingStat, ILiftingStatGrouped } from '../../interfaces/liftingStats';
 import { PbStack } from '../common/Stacks';
 import { HeadingMd, TextSm } from '../common/Texts';
 

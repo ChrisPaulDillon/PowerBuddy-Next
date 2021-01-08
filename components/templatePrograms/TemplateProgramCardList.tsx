@@ -1,14 +1,12 @@
 import React from 'react';
-import { Flex } from '@chakra-ui/core';
-import { Box, Badge, Button, Image } from '@chakra-ui/core';
+import { Box, Badge } from '@chakra-ui/core';
 import { Card } from '../layout/Card';
-import { ITemplateProgram } from '../../interfaces/templates';
 import { HeadingMd } from '../common/Texts';
 import { PbPrimaryButton } from '../common/Buttons';
-import { GiWeightLiftingDown } from 'react-icons/gi';
 import { CenterRowFlex } from '../layout/Flexes';
 import { TEMPLATES_URL } from '../../InternalLinks';
 import Link from 'next/link';
+import { ITemplateProgram } from 'powerbuddy-shared';
 
 interface ListProps {
   templates: ITemplateProgram[];

@@ -7,19 +7,17 @@ import CalendarSelectFrom from './CalendarSelectForm';
 import DayCheckboxForm from './DayCheckboxForm';
 import { CenterColumnFlex } from '../../layout/Flexes';
 import { PbPrimaryButton } from '../../common/Buttons';
-import { ITemplateProgramExtended, IWeightInput } from '../../../interfaces/templates';
 import WeightSelectionForm from './WeightSelectionForm';
 import { GetPersonalBestsForTemplate } from '../../../api/account/liftingStats';
 import { useAxios } from '../../../hooks/useAxios';
 import { DayValue } from 'react-modern-calendar-datepicker';
-import { IProgramLogCalendarStats } from '../../../interfaces/programLogs';
 import RepeatTemplateForm from './RepeatTemplateForm';
 import ProgressSpinner from '../../common/ProgressSpinner';
 import Axios from 'axios';
 import { CreateWorkoutLogFromTemplateUrl } from '../../../api/account/workoutLog';
-import { IWorkoutLogTemplateInput } from '../../../interfaces/workouts';
 import { useSelector } from 'react-redux';
 import { IAppState } from '../../../redux/store';
+import { ITemplateProgramExtended, IWeightInput, IWorkoutLogTemplateInput } from 'powerbuddy-shared';
 
 interface IProps {
   onClose: () => void;

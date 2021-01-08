@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormErrorMessage, FormControl, Button, Flex, Box, InputGroup, InputRightElement, useToast } from '@chakra-ui/core';
 import { FormInput } from '../../common/Inputs';
-import { IUser } from '../../../interfaces/users';
 import { CenterColumnFlex } from '../../layout/Flexes';
 import { useDispatch } from 'react-redux';
 import { TextError, TextXs } from '../../common/Texts';
@@ -14,6 +13,7 @@ import { LoginUserUrl, RegisterUserUrl } from '../../../api/account/user';
 import axios from 'axios';
 import { setAuthorizationToken } from '../../../redux/util/authorization';
 import { LOGIN_USER, REGISTER_USER } from '../../../redux/actionTypes';
+import { IUser } from 'powerbuddy-shared';
 
 const LoginForm = ({ onClose }: any) => {
   const [showPW, setShowPW] = React.useState(false);

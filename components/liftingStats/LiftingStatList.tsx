@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Flex } from '@chakra-ui/core';
 import LiftingStatGrouped from './LiftingStatsGrouped';
-import { ILiftingStat, ILiftingStatGrouped } from '../../interfaces/liftingStats';
+import { ILiftingStatGrouped } from 'powerbuddy-shared';
 
 const LiftingStatList = () => {
   const [liftingStats] = useState<ILiftingStatGrouped[]>();

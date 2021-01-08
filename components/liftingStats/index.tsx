@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { CenterColumnFlex } from '../layout/Flexes';
 import SearchBar from '../shared/SearchBar';
 import { GetAllUserLiftingStatsUrl } from '../../api/account/liftingStats';
-import { ILiftFeed, ILiftingStatGrouped } from '../../interfaces/liftingStats';
 import { useAxios } from '../../hooks/useAxios';
 import ProgressSpinner from '../common/ProgressSpinner';
 import { GetLiftFeedByUserName } from '../../api/public/liftingStat';
@@ -16,6 +15,7 @@ import { LoginModal } from '../shared/Modals';
 import { WORKOUT_DIARY_URL } from '../../InternalLinks';
 import { useRouter } from 'next/router';
 import { PageTitle } from '../common/Texts';
+import { ILiftingStatGrouped, ILiftFeed } from 'powerbuddy-shared';
 
 const LiftingStatsIndexPage = () => {
   const router = useRouter();

@@ -5,10 +5,10 @@ import { PbPrimaryButton } from '../../common/Buttons';
 import { PbStack } from '../../common/Stacks';
 import { TextSm } from '../../common/Texts';
 import { FormNumberInput } from '../../common/Inputs';
-import { IWorkoutExercise, IWorkoutSet } from '../../../interfaces/workouts';
 import { CreateWorkoutSetCollectionUrl } from '../../../api/account/workoutSet';
 import { useWorkoutContext } from '../../workouts/WorkoutContext';
 import Axios from 'axios';
+import { IWorkoutExercise, IWorkoutSet } from 'powerbuddy-shared';
 
 interface IProps {
   workoutExercise: IWorkoutExercise;

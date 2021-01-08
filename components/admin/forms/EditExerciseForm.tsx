@@ -7,11 +7,11 @@ import { PbStack } from '../../common/Stacks';
 import { TextSm, TextXs } from '../../common/Texts';
 import { CenterColumnFlex } from '../../layout/Flexes';
 import { validateInput } from '../../../util/formInputs';
-import { IExercise } from '../../../interfaces/exercises';
 import { IAppState } from '../../../redux/store';
 import { FormInput } from '../../common/Inputs';
 import axios from 'axios';
 import { UpdateExerciseAdminUrl } from '../../../api/admin/exercise';
+import { IExercise } from 'powerbuddy-shared/lib';
 
 interface IProps {
   exerciseId: number;

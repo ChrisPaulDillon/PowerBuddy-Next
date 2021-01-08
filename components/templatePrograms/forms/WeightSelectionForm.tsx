@@ -4,7 +4,7 @@ import { TextSm, TextXs } from '../../common/Texts';
 import { CenterColumnFlex } from '../../layout/Flexes';
 import { FormInput, FormNumberInput, FormWeightInput } from '../../common/Inputs';
 import { PbStack } from '../../common/Stacks';
-import { IWeightInput } from '../../../interfaces/templates';
+import { IWeightInput } from 'powerbuddy-shared';
 
 interface IProps {
   weightProgressionType: string;

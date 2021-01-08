@@ -8,11 +8,11 @@ import { Select } from '@chakra-ui/core';
 import { TextXs } from '../../common/Texts';
 import { validateInput } from '../../../util/formInputs';
 import { FormInput } from '../../common/Inputs';
-import { ICExercise, IExerciseMuscleGroup } from '../../../interfaces/exercises';
 import { PbStack } from '../../common/Stacks';
 import { CenterColumnFlex } from '../../layout/Flexes';
 import { CreateExerciseUrl } from '../../../api/account/exercise';
 import axios from 'axios';
+import { ICExercise, IExerciseMuscleGroup } from 'powerbuddy-shared';
 
 interface IProps {}
 

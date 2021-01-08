@@ -1,10 +1,10 @@
 import React from 'react';
 import { Box, Flex } from '@chakra-ui/core';
 import { TextSm, TextXs } from '../common/Texts';
-import { IWorkoutDaySummary } from '../../interfaces/programLogs';
 import { CardSm } from '../layout/Card';
 import moment from 'moment';
 import { TagPersonalBest } from '../shared/Tags';
+import { IWorkoutDaySummary } from 'powerbuddy-shared';
 
 const WorkoutDaySummarySingle: React.FC<IWorkoutDaySummary> = ({ date, personalBestCount, workoutExerciseSummaries }) => {
   return (
@@ -15,8 +15,8 @@ const WorkoutDaySummarySingle: React.FC<IWorkoutDaySummary> = ({ date, personalB
       </Box>
       {workoutExerciseSummaries!.map((x, idx) => (
         <Flex key={idx}>
-          <TextXs>{x.ExerciseName}</TextXs>
-          <TextXs>{x.NoOfSets}</TextXs>
+          <TextXs>{x.exerciseName}</TextXs>
+          <TextXs>{x.noOfSets}</TextXs>
         </Flex>
       ))}
     </CardSm>
