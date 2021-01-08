@@ -1,159 +1,118 @@
+import { Box, useDisclosure } from '@chakra-ui/core';
+import axios from 'axios';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { GetWorkoutWeekWithDateUrl } from '../api/account/workoutLog';
+import { GetAllTemplateProgramsUrl } from '../api/public/template';
+import MCalendar from '../components/common/MCalendar';
+import { ModalForward } from '../components/common/Modals';
+import ProgressSpinner from '../components/common/ProgressSpinner';
+import { CenterColumnFlex } from '../components/layout/Flexes';
 import { PageContent, PageHeader } from '../components/layout/Page';
+import { LoginModal } from '../components/shared/Modals';
+import { WORKOUT_DIARY_URL, TEMPLATES_URL } from '../components/util/InternalLinks';
+import WorkoutWeekSummary from '../components/workouts/WorkoutWeekSummary';
+import useAuthentication from '../hooks/useAuthentication';
+import { useAxios } from '../hooks/useAxios';
+import { ITemplateProgram } from '../interfaces/templates';
+import { IWorkoutWeekSummary } from '../interfaces/workouts';
+import { IAppState } from '../redux/store';
 
 export default function Home() {
+  useAuthentication();
+  const { user } = useSelector((state: IAppState) => state.state);
+  const router = useRouter();
+  const { date } = router.query;
+
+  const { data: weekData, loading: weekLoading } = useAxios<IWorkoutWeekSummary>(GetWorkoutWeekWithDateUrl(date as string));
+
+  const [selectedDate, handleDateChange] = useState(new Date());
+
+  const [, setTemplates] = useState<ITemplateProgram[]>([]);
+
+  const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
+  const { isOpen: isNoDiaryOpen, onClose: onNoDiaryClose } = useDisclosure();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await axios.get(GetAllTemplateProgramsUrl());
+        setTemplates(data && data.data);
+      } catch (err) {}
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    router.push(`?date=${selectedDate.toISOString()}`);
+  }, [selectedDate]);
+
+  useEffect(() => {
+    if (Object.keys(user).length === 0) {
+      onLoginOpen();
+    }
+  }, [user]);
+
+  if (weekLoading) return <ProgressSpinner />;
+
   return (
-    <div className="container">
-      <PageHeader title="Welcome"></PageHeader>
+    <Box>
+      <PageHeader title="Diary">Diary</PageHeader>
       <PageContent>
-        <h1 className="title">Welcome to the PowerBuddy Web App</h1>
-
-        <p className="description">Please note the web app is still in beta</p>
-
-        <style jsx>{`
-          .container {
-            min-height: 100vh;
-            padding: 0 0.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-          }
-
-          main {
-            padding: 5rem 0;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-          }
-
-          footer {
-            width: 100%;
-            height: 100px;
-            border-top: 1px solid #eaeaea;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
-
-          footer img {
-            margin-left: 0.5rem;
-          }
-
-          footer a {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
-
-          a {
-            color: inherit;
-            text-decoration: none;
-          }
-
-          .title a {
-            color: #0070f3;
-            text-decoration: none;
-          }
-
-          .title a:hover,
-          .title a:focus,
-          .title a:active {
-            text-decoration: underline;
-          }
-
-          .title {
-            margin: 0;
-            line-height: 1.15;
-            font-size: 4rem;
-          }
-
-          .title,
-          .description {
-            text-align: center;
-          }
-
-          .description {
-            line-height: 1.5;
-            font-size: 1.5rem;
-          }
-
-          code {
-            background: #fafafa;
-            border-radius: 5px;
-            padding: 0.75rem;
-            font-size: 1.1rem;
-            font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-          }
-
-          .grid {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-
-            max-width: 800px;
-            margin-top: 3rem;
-          }
-
-          .card {
-            margin: 1rem;
-            flex-basis: 45%;
-            padding: 1.5rem;
-            text-align: left;
-            color: inherit;
-            text-decoration: none;
-            border: 1px solid #eaeaea;
-            border-radius: 10px;
-            transition: color 0.15s ease, border-color 0.15s ease;
-          }
-
-          .card:hover,
-          .card:focus,
-          .card:active {
-            color: #0070f3;
-            border-color: #0070f3;
-          }
-
-          .card h3 {
-            margin: 0 0 1rem 0;
-            font-size: 1.5rem;
-          }
-
-          .card p {
-            margin: 0;
-            font-size: 1.25rem;
-            line-height: 1.5;
-          }
-
-          .logo {
-            height: 1em;
-          }
-
-          @media (max-width: 600px) {
-            .grid {
-              width: 100%;
-              flex-direction: column;
-            }
-          }
-        `}</style>
-
-        <style jsx global>{`
-          html,
-          body {
-            padding: 0;
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-              sans-serif;
-          }
-
-          * {
-            box-sizing: border-box;
-          }
-        `}</style>
+        <Box mt={5} w="100%">
+          <CenterColumnFlex pb={4}>
+            <MCalendar selectedDate={selectedDate} handleDateChange={handleDateChange} />
+          </CenterColumnFlex>
+          <WorkoutWeekSummary weekSummary={weekData!} />
+          {/* {workoutWeek && workoutWeek.map((x) => <WorkoutDay workoutDay={x} />)} */}
+          {/* {SCREEN_MOBILE && Object.keys(programLogWeek).length !== 0 && (
+            <ProgramLogWeek weekNo={weekNo} onLeftClick={handleWeekNoLeftClick} onRightClick={handleWeekNoRightClick}>
+              <Swiper effect="cube">
+                {programLogWeek.programLogDays.map((pld) => (
+                  <SwiperSlide key={pld.programLogDayId!}>
+                    <ProgramLogDay key={pld.programLogDayId} programLogDay={pld} />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </ProgramLogWeek>
+          )}
+          {SCREEN_DESKTOP && programLogWeek?.programLogDays && (
+            <ProgramLogWeekTab
+              programLogDays={programLogWeek?.programLogDays!}
+              weekNo={weekNo}
+              onLeftClick={handleWeekNoLeftClick}
+              onRightClick={handleWeekNoRightClick}
+            />
+          )} */}
+        </Box>
+        {/* {isExtendOpen && (
+        <ModalBackForward
+          isOpen={isExtendOpen}
+          onClose={onExtendClose}
+          title="End of Program Reached"
+          body="Would you like to extend this program another week?"
+          onBackClick={onExtendClose}
+          onForwardClick={() => (())}
+          //onForwardClick={handleModalForwardClick}
+          backText="Return to Diary"
+          forwardText="Add Week"
+          loading={addWeekLoading}
+        />
+      )} */}
+        {isLoginOpen && <LoginModal isOpen={isLoginOpen} onOpen={onLoginOpen} onClose={onLoginClose} />}
+        {isNoDiaryOpen && (
+          <ModalForward
+            isOpen={isNoDiaryOpen}
+            onClose={onNoDiaryClose}
+            title="No Active Diary 😨"
+            onClick={() => router.push(TEMPLATES_URL)}
+            body="You do not currently have an active diary, you can create one by visiting the templates section"
+            actionText="Go to Program Templates"
+          />
+        )}
       </PageContent>
-    </div>
+    </Box>
   );
 }

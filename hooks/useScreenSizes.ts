@@ -33,7 +33,7 @@ function calcSize(size: ISize) {
   const SCREEN_MD = size.width > 768 && size.width <= 1200;
   const SCREEN_LG = size.width > 1200;
 
-  const SCREEN_MOBILE = SCREEN_XS || SCREEN_MD;
+  const SCREEN_MOBILE = size.width <= 768;
   const SCREEN_DESKTOP = size.width === 0 || !SCREEN_MOBILE;
 
   return {
