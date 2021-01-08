@@ -16,7 +16,7 @@ import MemberCrown from '../../components/shared/MemberCrown';
 import { Error } from '../../components/common/Error';
 import { PageContent, PageHeader } from '../../components/layout/Page';
 
-const Index: NextPage = () => {
+const UserProfile: NextPage = () => {
   const router = useRouter();
   const { userName } = router.query;
   const { user } = useSelector((state: IAppState) => state.state);
@@ -29,7 +29,7 @@ const Index: NextPage = () => {
   }, [data]);
 
   if (requestLoading) return <ProgressSpinner />;
-  if (requestError) return <Error statusCode={404} description="User Could Not Be Found With This Username" />;
+  // if (requestError) return <Error statusCode={404} description="User Could Not Be Found With This Username" />;
 
   return (
     <Box>
@@ -38,15 +38,15 @@ const Index: NextPage = () => {
         <CenterColumnFlex>
           <UserAvatar name={publicUser.userName!} size="lg" />
           <PageTitle>{publicUser.userName!}'s Profile </PageTitle>
-          <MemberCrown memberStatusId={publicUser.memberStatusId!} mt="2" />
+          <MemberCrown memberStatusId={publicUser.memberStatusId!} />
 
           {user.userName !== publicUser.userName ? (
-            <CenterColumnFlex mt="3">
+            <CenterColumnFlex mt={2}>
               {publicUser.isPublic ? (
                 <CenterColumnFlex>
-                  <HeadingMd>{publicUser.sportType ?? publicUser.sportType} </HeadingMd>
-                  <TextSm>{publicUser.gender ?? publicUser.gender}</TextSm>
-                  <TextSm>{publicUser.liftingLevel ?? publicUser.liftingLevel + 'Lifter'}</TextSm>
+                  {publicUser?.sportType && <HeadingMd>{publicUser.sportType} </HeadingMd>}
+                  {publicUser?.gender && <TextSm>{publicUser.gender}</TextSm>}
+                  {publicUser?.liftingLevel && <TextSm>{publicUser.liftingLevel + 'Lifter'}</TextSm>}
                 </CenterColumnFlex>
               ) : (
                 <HeadingMd>This users profile is not public</HeadingMd>
@@ -62,4 +62,4 @@ const Index: NextPage = () => {
   );
 };
 
-export default Index;
+export default UserProfile;
