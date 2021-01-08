@@ -1,12 +1,12 @@
 import { Box, Flex, Select, Switch } from '@chakra-ui/core';
 import React, { useState } from 'react';
+import { IWeightInput } from '../../../interfaces/templates';
 import { validateInput } from '../../../util/formInputs';
 import { FormInput, FormNumberInput, FormWeightInput } from '../../common/Inputs';
 import { PbStack } from '../../common/Stacks';
 import { staticNumberList } from '../../common/static';
 import { TextSm, TextXs } from '../../common/Texts';
 import { CenterColumnFlex } from '../../layout/Flexes';
-import { IWeightInput } from '../interfaces';
 
 interface IProps {
   incrementalWeightInput: IWeightInput[];
