@@ -11,7 +11,7 @@ import { Banner } from '../common/Texts';
 import { MdMenu } from 'react-icons/md';
 import { IAppState } from '../../redux/store';
 import useScreenSizes from '../../hooks/useScreenSizes';
-import { ADMIN_URL, USERS_URL, LOGHISTORY_URL, TEMPLATES_URL, WORKOUT_DIARY_URL } from '../util/InternalLinks';
+import { ADMIN_URL, USERS_URL, LOGHISTORY_URL, TEMPLATES_URL, WORKOUT_DIARY_URL } from '../../InternalLinks';
 import PbIconButton from '../common/IconButtons';
 import { MenuItem } from '../common/Menus';
 import Link from 'next/link';

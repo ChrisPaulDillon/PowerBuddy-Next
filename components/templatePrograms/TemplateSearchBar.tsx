@@ -5,7 +5,7 @@ import AsyncSelect from 'react-select/async';
 import { GetTemplatesBySearch } from '../../api/public/template';
 import theme, { getColor } from '../../theme';
 import RightNav from '../layout/RightMenu';
-import { TEMPLATES_URL } from '../util/InternalLinks';
+import { TEMPLATES_URL } from '../../InternalLinks';
 
 const TemplateSearchBar = () => {
   const [selectedOption, setSelectedOption] = useState<any>('');

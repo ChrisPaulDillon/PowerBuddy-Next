@@ -12,7 +12,7 @@ import ProgressSpinner from '../components/common/ProgressSpinner';
 import { CenterColumnFlex } from '../components/layout/Flexes';
 import { PageContent, PageHeader } from '../components/layout/Page';
 import { LoginModal } from '../components/shared/Modals';
-import { WORKOUT_DIARY_URL, TEMPLATES_URL } from '../components/util/InternalLinks';
+import { WORKOUT_DIARY_URL, TEMPLATES_URL } from '../InternalLinks';
 import WorkoutWeekSummary from '../components/workouts/WorkoutWeekSummary';
 import useAuthentication from '../hooks/useAuthentication';
 import { useAxios } from '../hooks/useAxios';

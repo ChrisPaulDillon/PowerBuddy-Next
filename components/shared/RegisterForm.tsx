@@ -12,7 +12,7 @@ import { REGISTER_USER } from '../../redux/actionTypes';
 import { setAuthorizationToken } from '../../redux/util/authorization';
 import { useDispatch } from 'react-redux';
 import { CenterColumnFlex } from '../layout/Flexes';
-import { PORTAL_URL } from '../util/InternalLinks';
+import { PORTAL_URL } from '../../InternalLinks';
 
 const RegisterForm = () => {
   const { handleSubmit, errors, register, formState } = useForm();

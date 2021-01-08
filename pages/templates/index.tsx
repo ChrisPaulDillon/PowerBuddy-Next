@@ -5,7 +5,7 @@ import axios, { AxiosResponse } from 'axios';
 import React, { useEffect, useState } from 'react';
 import { GetAllTemplateProgramsUrl } from '../../api/public/template';
 import { ITemplateProgram } from '../../interfaces/templates';
-import { WORKOUT_DIARY_URL } from '../../components/util/InternalLinks';
+import { WORKOUT_DIARY_URL } from '../../InternalLinks';
 import { useSelector } from 'react-redux';
 import { PbPrimaryButton } from '../../components/common/Buttons';
 import { ModalDrawerForm } from '../../components/common/ModalDrawer';

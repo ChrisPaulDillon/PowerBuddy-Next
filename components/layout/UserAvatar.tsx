@@ -1,7 +1,7 @@
 import React from 'react';
 import { Avatar } from '@chakra-ui/core';
 import { PbToolTip } from '../common/ToolTips';
-import { PROFILE_URL } from '../util/InternalLinks';
+import { PROFILE_URL } from '../../InternalLinks';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 

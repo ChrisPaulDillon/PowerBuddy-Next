@@ -13,7 +13,7 @@ import LiftingStatList from './LiftingStatList';
 import { useDisclosure } from '@chakra-ui/core';
 import { ModalForward } from '../common/Modals';
 import { LoginModal } from '../shared/Modals';
-import { WORKOUT_DIARY_URL } from '../util/InternalLinks';
+import { WORKOUT_DIARY_URL } from '../../InternalLinks';
 import { useRouter } from 'next/router';
 import { PageTitle } from '../common/Texts';
 

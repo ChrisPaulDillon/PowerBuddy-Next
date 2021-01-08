@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { Box, Flex, useDisclosure, useToast } from '@chakra-ui/core';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { WORKOUT_DIARY_URL } from '../../components/util/InternalLinks';
+import { WORKOUT_DIARY_URL } from '../../InternalLinks';
 import { TextXs } from '../../components/common/Texts';
 import { CenterColumnFlex, CenterRowFlex } from '../../components/layout/Flexes';
 import { DeleteWorkoutLogUrl } from '../../api/account/workoutLog';

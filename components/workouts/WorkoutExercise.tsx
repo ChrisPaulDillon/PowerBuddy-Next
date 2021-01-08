@@ -8,7 +8,7 @@ import { ModalDrawerForm } from '../common/ModalDrawer';
 import { HeadingXs } from '../common/Texts';
 import { ProgramExerciseCard } from '../layout/Card';
 import { CenterRowFlex } from '../layout/Flexes';
-import { PERSONALBESTS_URL } from '../util/InternalLinks';
+import { PERSONALBESTS_URL } from '../../InternalLinks';
 import theme from '../../theme';
 import { IWorkoutExercise, IWorkoutSet } from '../../interfaces/workouts';
 import moment from 'moment';

@@ -1,19 +1,14 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { IAppState } from '../../redux/store';
+import React from 'react';
 import UserAvatar from '../layout/UserAvatar';
 import { Box, Flex } from '@chakra-ui/core';
-import { IUser, IFriendsListAssoc } from '../../interfaces/users';
-import { TextSm } from '../common/Texts';
+import { IUser } from '../../interfaces/users';
 import { TextXs } from '../common/Texts';
-import { CenterColumnFlex } from '../layout/Flexes';
 
 interface IProps {
   publicUsers: IUser[];
 }
 
 const UserList: React.FC<IProps> = ({ publicUsers }) => {
-  const { userFriendsList } = useSelector((state: IAppState) => state.state);
   return (
     <Flex wrap="wrap">
       {publicUsers.map((x, idx) => (

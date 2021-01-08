@@ -15,7 +15,7 @@ import { TagExerciseCount, TagProgramDaysCount, TagProgramWeeksCount } from '../
 import { BadgeCompleted, BadgeInProgress } from '../shared/Badges';
 import { IWorkoutLog } from '../../interfaces/workouts';
 import { useRouter } from 'next/router';
-import { WORKOUT_DIARY_URL } from '../util/InternalLinks';
+import { WORKOUT_DIARY_URL } from '../../InternalLinks';
 
 interface IProps {
   workoutLogStats: IWorkoutLog[];

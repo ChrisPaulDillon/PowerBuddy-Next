@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 import useAuthentication from '../../hooks/useAuthentication';
 import { deauthenticateUser } from '../../redux/area/account/userActions';
 import { TextSm } from '../common/Texts';
-import { PROFILE_URL } from '../util/InternalLinks';
+import { PROFILE_URL } from '../../InternalLinks';
 
 export enum MenuSection {
   Main,

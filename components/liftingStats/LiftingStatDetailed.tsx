@@ -7,7 +7,7 @@ import { PageTitle, TextSm } from '../common/Texts';
 import ProgressSpinner from '../common/ProgressSpinner';
 import { CenterColumnFlex } from '../layout/Flexes';
 import { ModalBack } from '../common/Modals';
-import { WORKOUT_DIARY_URL } from '../util/InternalLinks';
+import { WORKOUT_DIARY_URL } from '../../InternalLinks';
 import { BreadcrumbBase, IBreadcrumbInput } from '../common/Breadcrumbs';
 import { useRouter } from 'next/router';
 

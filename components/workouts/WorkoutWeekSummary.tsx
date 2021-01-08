@@ -10,7 +10,7 @@ import { CardSm } from '../layout/Card';
 import { CenterColumnFlex, CenterRowFlex } from '../layout/Flexes';
 import { BadgeWeekNo, BadgeWorkoutName } from '../shared/Badges';
 import theme from '../../theme';
-import { WORKOUT_DIARY_URL } from '../util/InternalLinks';
+import { WORKOUT_DIARY_URL } from '../../InternalLinks';
 import { useRouter } from 'next/router';
 
 interface IProps {

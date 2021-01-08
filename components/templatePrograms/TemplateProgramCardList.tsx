@@ -7,7 +7,7 @@ import { HeadingMd } from '../common/Texts';
 import { PbPrimaryButton } from '../common/Buttons';
 import { GiWeightLiftingDown } from 'react-icons/gi';
 import { CenterRowFlex } from '../layout/Flexes';
-import { TEMPLATES_URL } from '../util/InternalLinks';
+import { TEMPLATES_URL } from '../../InternalLinks';
 import Link from 'next/link';
 
 interface ListProps {
@@ -49,7 +49,8 @@ const TemplateProgramCard: React.FC<Props> = ({ template }) => (
       <Box pt="2">
         <Link
           href={{
-            pathname: `${TEMPLATES_URL}/${template.templateProgramId}?program=${encodeURIComponent(template.name.replace(/\s+/g, '-'))}`,
+            pathname: `${TEMPLATES_URL}/${template.templateProgramId}`,
+            query: `program=${encodeURIComponent(template.name.replace(/\s+/g, '-'))}`,
             ...template,
           }}>
           <PbPrimaryButton>View</PbPrimaryButton>

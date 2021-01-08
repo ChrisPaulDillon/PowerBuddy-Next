@@ -11,7 +11,7 @@ import { LoginModal } from '../shared/Modals';
 import MenuBase from '../common/Menus';
 import { PbPrimaryButton } from '../common/Buttons';
 import { RiAdminLine, FaHistory, FaUserFriends, BsFillGrid3X3GapFill, BsCalendarFill, MdMenu } from 'react-icons/all';
-import { WORKOUT_DIARY_URL, TEMPLATES_URL, LOGHISTORY_URL, USERS_URL, ADMIN_URL } from '../util/InternalLinks';
+import { WORKOUT_DIARY_URL, TEMPLATES_URL, LOGHISTORY_URL, USERS_URL, ADMIN_URL } from '../../InternalLinks';
 import { IconType } from 'react-icons';
 import PbIconButton from '../common/IconButtons';
 import Axios from 'axios';
@@ -35,7 +35,7 @@ const sideMenu = {
     {
       name: 'New Diary',
       icon: BsCalendarFill,
-      link: WORKOUT_DIARY_URL,
+      link: '',
       tooltip: 'View Your Program Log',
       memberStatusId: 0,
     },
