@@ -4,13 +4,7 @@ import theme from '../../theme';
 import { CenterColumnFlex, CenterRowFlex } from '../layout/Flexes';
 import { IconType } from 'react-icons';
 
-interface IPageHeaderProps extends BoxProps {
-  Icon?: IconType;
-  size?: string;
-  onInfoClick?: () => void;
-}
-
-export const PageHeader: React.FC<IPageHeaderProps> = ({ Icon, size, onInfoClick, ...rest }) => {
+export const PageTitle: React.FC<BoxProps> = ({ ...rest }) => {
   const { colorMode } = useColorMode();
   return (
     <Box p={5}>

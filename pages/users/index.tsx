@@ -1,11 +1,11 @@
 import { Box } from '@chakra-ui/core';
 import { NextPage } from 'next';
 import React, { useEffect, useState } from 'react';
-import { FaUserFriends } from 'react-icons/fa';
 import { GetAllActiveUserProfilesUrl } from '../../api/public/user';
 import ProgressSpinner from '../../components/common/ProgressSpinner';
-import { PageHeader } from '../../components/common/Texts';
+import { PageTitle } from '../../components/common/Texts';
 import { CenterColumnFlex } from '../../components/layout/Flexes';
+import { PageContent, PageHeader } from '../../components/layout/Page';
 import UserList from '../../components/users/UserList';
 import { useAxios } from '../../hooks/useAxios';
 import { IUser } from '../../interfaces/users';
@@ -22,10 +22,13 @@ const Index: NextPage = () => {
 
   return (
     <Box>
-      <CenterColumnFlex>
-        <PageHeader Icon={FaUserFriends}>Users</PageHeader>
-        <UserList publicUsers={publicUsers} />
-      </CenterColumnFlex>
+      <PageHeader title="Active Users" />
+      <PageContent>
+        <CenterColumnFlex>
+          <PageTitle>Users</PageTitle>
+          <UserList publicUsers={publicUsers} />
+        </CenterColumnFlex>
+      </PageContent>
     </Box>
   );
 };

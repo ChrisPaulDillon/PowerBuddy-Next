@@ -165,7 +165,7 @@ const NavBar: React.FC<INavBarProps> = ({ menuOpen }) => {
       top={0}>
       <Stack isInline w="100%" justify="space-between" align="center">
         <Flex ml="1">
-          <Box ml="5" mt={1}>
+          <Box mt={1}>
             <IconButton
               icon={<MdMenu />}
               size="md"

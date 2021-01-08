@@ -12,6 +12,7 @@ import axios from 'axios';
 import { ICreateWorkoutExercise } from '../../../interfaces/workouts';
 import { CreateWorkoutExerciseUrl } from '../../../api/account/workoutExercise';
 import { useWorkoutContext } from '../../workouts/WorkoutContext';
+import useLoadExercises from '../../../hooks/redux/useLoadExercises';
 
 interface IProps {
   onClose: () => void;
@@ -19,6 +20,7 @@ interface IProps {
 }
 
 const AddExerciseForm: React.FC<IProps> = ({ onClose, workoutDayId }) => {
+  useLoadExercises();
   const { exercises } = useSelector((state: IAppState) => state.state);
   const [sets, setSets] = useState<number>(1);
   const [reps, setReps] = useState<number>(1);

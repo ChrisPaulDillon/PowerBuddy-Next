@@ -31,6 +31,7 @@ import { Error } from '../../components/common/Error';
 import AddWorkoutNoteForm from '../../components/workouts/forms/AddWorkoutNoteForm';
 import NotifiyPersonalBestAlert from '../../components/workouts/alerts/NotifyPersonalBestAlert';
 import AddExerciseForm from '../../components/workouts/forms/AddExerciseForm';
+import { PageHeader } from '../../components/layout/Page';
 
 const WorkoutDay: NextPage = () => {
   const router = useRouter();
@@ -155,6 +156,7 @@ const WorkoutDay: NextPage = () => {
 
   return (
     <Box w="100%">
+      <PageHeader title="" />
       <WorkoutProvider workoutDay={workoutDay} setWorkoutDay={setWorkoutDay} contentDisabled={contentDisabled}>
         <BreadcrumbBase values={breadcrumbInput} />
         <CardNoShadow borderWidth="0.5px" rounded="lg" overflow="hidden" textAlign="center" minH="250px" w="100%" p="2" my="5">
