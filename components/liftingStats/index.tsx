@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { PageHeader } from '../common/Texts';
 import { CenterColumnFlex } from '../layout/Flexes';
 import SearchBar from '../shared/SearchBar';
 import { GetAllUserLiftingStatsUrl } from '../../api/account/liftingStats';
 import { ILiftFeed, ILiftingStatGrouped } from '../../interfaces/liftingStats';
-import LiftingStatProvider from './LiftingStatContext';
 import { useAxios } from '../../hooks/useAxios';
 import ProgressSpinner from '../common/ProgressSpinner';
 import { GetLiftFeedByUserName } from '../../api/public/liftingStat';
@@ -17,6 +15,7 @@ import { ModalForward } from '../common/Modals';
 import { LoginModal } from '../shared/Modals';
 import { WORKOUT_DIARY_URL } from '../util/InternalLinks';
 import { useRouter } from 'next/router';
+import { PageTitle } from '../common/Texts';
 
 const LiftingStatsIndexPage = () => {
   const router = useRouter();
@@ -50,12 +49,10 @@ const LiftingStatsIndexPage = () => {
 
   return (
     <CenterColumnFlex>
-      <LiftingStatProvider liftingStats={liftingStats!}>
-        <PageHeader size="20px">Your Personal Bests</PageHeader>
-        <SearchBar onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search personal bests..." />
-        <LiftFeed liftFeed={liftFeed} />
-        <LiftingStatList />
-      </LiftingStatProvider>
+      <PageTitle>Your Personal Bests</PageTitle>
+      <SearchBar onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search personal bests..." />
+      <LiftFeed liftFeed={liftFeed} />
+      <LiftingStatList />
       {isLoginOpen && <LoginModal isOpen={isLoginOpen} onOpen={onLoginOpen} onClose={onLoginClose} />}
       {isNoStatsOpen && (
         <ModalForward

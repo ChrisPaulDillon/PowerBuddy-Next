@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { GetLiftingStatByIdUrl } from '../../api/account/liftingStats';
 import { useAxios } from '../../hooks/useAxios';
 import { IPersonalBestDetailed } from '../../interfaces/liftingStats';
-import { PageHeader, TextSm } from '../common/Texts';
+import { PageTitle, TextSm } from '../common/Texts';
 import ProgressSpinner from '../common/ProgressSpinner';
 import { CenterColumnFlex } from '../layout/Flexes';
 import { ModalBack } from '../common/Modals';
@@ -31,13 +31,13 @@ const LiftingStatDetailed: React.FC<IProps> = ({}) => {
   }, [error]);
 
   if (loading || liftingStat === undefined) return <ProgressSpinner />;
-  if (error) return <PageHeader>No Personal Best Found</PageHeader>;
+  if (error) return <PageTitle>No Personal Best Found</PageTitle>;
 
   return (
     <Box>
       <BreadcrumbBase values={breadcrumbInput} />
       <CenterColumnFlex w="100%">
-        <PageHeader>{liftingStat!.exerciseName!}</PageHeader>
+        <PageTitle>{liftingStat!.exerciseName!}</PageTitle>
         <TextSm pb={5}>{liftingStat!.lifeTimeTonnage}kg Lifetime Tonnage </TextSm>
         {/* <LiftFeed liftFeed={liftingStat!.liftFeed} /> */}
         <SimpleGrid spacing="25px" columns={2}>
