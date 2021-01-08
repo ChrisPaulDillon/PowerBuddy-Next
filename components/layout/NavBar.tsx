@@ -17,11 +17,11 @@ import PbIconButton from '../common/IconButtons';
 import Axios from 'axios';
 import { CreateWorkoutDayUrl, GetWorkoutDayIdByDateUrl } from '../../api/account/workoutDay';
 import { ModalBackForward, ModalForward } from '../common/Modals';
-import { ICreateWorkoutDayOptions } from '../../interfaces/workouts';
 import TemplateSearchBar from '../templatePrograms/TemplateSearchBar';
 import theme from '../../theme';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { ICreateWorkoutDayOptions } from 'powerbuddy-shared';
 
 const sideMenu = {
   groups: [
