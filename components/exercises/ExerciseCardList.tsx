@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { Flex, Box, Button, Text } from '@chakra-ui/core';
 import { Card } from '../layout/Card';
 import { IExercise } from '../../interfaces/exercises';
-import { HeadingMd, PageHeader, TextSm, TextXs } from '../common/Texts';
+import { HeadingMd, TextSm, TextXs } from '../common/Texts';
 import { useRouter } from 'next/router';
 
 interface Props {
