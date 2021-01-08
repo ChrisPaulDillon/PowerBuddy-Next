@@ -1,4 +1,4 @@
-import { IWeightInput } from '../../components/templatePrograms/interfaces';
+import { IWeightInput } from '../templates';
 
 export interface IWorkoutLogTemplateInput {
   userId: string;

@@ -1,5 +1,16 @@
 import { IExercise } from '../exercises';
 
+export interface IWeightInput {
+  exerciseId: number;
+  exerciseName: string;
+  weight: number;
+}
+
+export interface ITemplateKeyVal {
+  templateProgramId: number;
+  templateName: string;
+}
+
 export interface ITemplateProgramFeed {
   templateProgramId: number;
   username: number;
@@ -90,15 +101,4 @@ export interface IDaysSelected {
   sunday: boolean;
   startDate: Date;
   counter: number;
-}
-
-export interface IWeightInput {
-  exerciseId: number;
-  exerciseName: string;
-  weight: number;
-}
-
-export interface ITemplateKeyVal {
-  templateProgramId: number;
-  templateName: string;
 }
