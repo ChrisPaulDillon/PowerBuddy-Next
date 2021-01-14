@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ILiftingStat } from '../../interfaces/liftingStats/index';
+import { ILiftingStat } from 'powerbuddy-shared';
 
 const useLiftingStatSearch = (stats: ILiftingStat[], searchTerm: string) => {
   const [filteredStats, setFilteredStats] = useState<ILiftingStat[]>(stats!);

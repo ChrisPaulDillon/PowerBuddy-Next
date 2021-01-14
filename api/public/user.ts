@@ -6,3 +6,6 @@ export const GetAllActiveUserProfilesUrl = () => `${baseUrl}/All`
 
 export const GetPublicUserProfileUrl = (userName: string) =>
   `${baseUrl}/Profile/${userName}`;
+
+export const SendPasswordResetUrl = (emailAddress: string) =>
+  `${baseUrl}/ResetPassword/${emailAddress}`;

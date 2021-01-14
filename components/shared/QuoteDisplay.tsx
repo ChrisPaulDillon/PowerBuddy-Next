@@ -2,7 +2,7 @@ import { Box } from '@chakra-ui/core';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useShuffleArray } from '../../hooks/useShuffleArray';
-import { IQuote } from '../../interfaces/system';
+import { IQuote } from 'powerbuddy-shared';
 import { IAppState } from '../../redux/store';
 import { TextQuote, TextAuthorQuote } from '../common/Texts';
 import { CenterColumnFlex } from '../layout/Flexes';

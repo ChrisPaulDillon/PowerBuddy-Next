@@ -16,8 +16,8 @@ import { WORKOUT_DIARY_URL, TEMPLATES_URL } from '../InternalLinks';
 import WorkoutWeekSummary from '../components/workouts/WorkoutWeekSummary';
 import useAuthentication from '../hooks/useAuthentication';
 import { useAxios } from '../hooks/useAxios';
-import { ITemplateProgram } from '../interfaces/templates';
-import { IWorkoutWeekSummary } from '../interfaces/workouts';
+import { ITemplateProgram } from 'powerbuddy-shared';
+import { IWorkoutWeekSummary } from 'powerbuddy-shared';
 import { IAppState } from '../redux/store';
 
 export default function Home() {

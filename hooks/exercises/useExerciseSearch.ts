@@ -1,4 +1,4 @@
-import { IExercise } from '../../interfaces/exercises/index';
+import { IExercise } from 'powerbuddy-shared';
 import React, { useState, useEffect } from 'react';
 import usePrevious from '../util/usePrevious';
 

@@ -5,7 +5,7 @@ import { HeadingMd, PageTitle } from '../../components/common/Texts';
 import { CenterColumnFlex } from '../../components/layout/Flexes';
 import { GetAllWorkoutLogStatsUrl } from '../../api/account/workoutLog';
 import { useAxios } from '../../hooks/useAxios';
-import { IWorkoutLogStats } from '../../interfaces/workouts';
+import { IWorkoutLogStats } from 'powerbuddy-shared';
 import ProgressSpinner from '../../components/common/ProgressSpinner';
 import { TagExerciseCount, TagProgramDaysCount, TagProgramLogsCount } from '../../components/shared/Tags';
 import LogHistoryList from '../../components/logHistory/LogHistoryList';

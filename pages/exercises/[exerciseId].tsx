@@ -7,7 +7,7 @@ import { PageSubHeader, PageTitle, TextSm, TextXs } from '../../components/commo
 import { CenterColumnFlex } from '../../components/layout/Flexes';
 import { PageContent, PageHeader } from '../../components/layout/Page';
 import { useAxios } from '../../hooks/useAxios';
-import { IExercise } from '../../interfaces/exercises';
+import { IExercise } from 'powerbuddy-shared';
 
 const ExerciseDetailed = () => {
   const router = useRouter();

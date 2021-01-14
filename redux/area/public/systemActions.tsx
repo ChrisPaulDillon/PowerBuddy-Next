@@ -2,7 +2,7 @@ import * as types from '../../actionTypes';
 import axios from 'axios';
 import { ActionCreator, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-import { IQuote, IGender, IMemberStatus } from '../../../interfaces/system';
+import { IQuote, IGender, IMemberStatus } from 'powerbuddy-shared';
 import { GetAllQuotesUrl } from '../../../api/public/quote';
 import { GetAllGendersUrl, GetAllMemberStatusUrl } from '../../../api/public/system';
 import { IReduxState } from '../../initialState';

@@ -2,7 +2,7 @@ import * as types from '../../actionTypes';
 import axios from 'axios';
 import { ActionCreator, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-import { IExercise, IExerciseMuscleGroup, IExerciseType } from '../../../interfaces/exercises';
+import { IExercise, IExerciseMuscleGroup, IExerciseType } from 'powerbuddy-shared';
 import { GetAllExerciseTypesUrl } from '../../../api/public/exercise';
 import { GetAllExercisesUrl, GetAllExerciseMuscleGroupsUrl } from '../../../api/public/exercise';
 import { IReduxState } from '../../initialState';

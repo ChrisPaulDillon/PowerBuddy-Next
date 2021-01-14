@@ -4,7 +4,7 @@ import { Box, Flex, useDisclosure } from '@chakra-ui/core';
 import axios, { AxiosResponse } from 'axios';
 import React, { useEffect, useState } from 'react';
 import { GetAllTemplateProgramsUrl } from '../../api/public/template';
-import { ITemplateProgram } from '../../interfaces/templates';
+import { ITemplateProgram } from 'powerbuddy-shared';
 import { WORKOUT_DIARY_URL } from '../../InternalLinks';
 import { useSelector } from 'react-redux';
 import { PbPrimaryButton } from '../../components/common/Buttons';

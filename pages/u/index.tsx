@@ -8,7 +8,7 @@ import { CenterColumnFlex } from '../../components/layout/Flexes';
 import { PageContent, PageHeader } from '../../components/layout/Page';
 import UserList from '../../components/users/UserList';
 import { useAxios } from '../../hooks/useAxios';
-import { IUser } from '../../interfaces/users';
+import { IUser } from 'powerbuddy-shared';
 
 const Index: NextPage = () => {
   const { loading, data } = useAxios<IUser[]>(GetAllActiveUserProfilesUrl());

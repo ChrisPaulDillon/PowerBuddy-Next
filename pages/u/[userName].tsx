@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { GetPublicUserProfileUrl } from '../../api/public/user';
 import { useAxios } from '../../hooks/useAxios';
-import { IPublicUser } from '../../interfaces/users';
+import { IPublicUser } from 'powerbuddy-shared';
 import { IAppState } from '../../redux/store';
 import UserSettingsForm from '../../components/account/forms/EditProfileForm';
 import ProgressSpinner from '../../components/common/ProgressSpinner';

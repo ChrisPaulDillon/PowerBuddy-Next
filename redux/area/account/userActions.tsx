@@ -2,7 +2,7 @@ import * as types from '../../actionTypes';
 import axios from 'axios';
 import { Dispatch, ActionCreator } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-import { IUser, INotificationInteraction } from '../../../interfaces/users';
+import { IUser, INotificationInteraction } from 'powerbuddy-shared';
 import { setAuthorizationToken } from '../../util/authorization';
 import { LoginUserUrl, GetLoggedInUsersProfileUrl, CreateFirstVisitStatsUrl, RegisterUserUrl } from '../../../api/account/user';
 import { API_BASE } from '../../actionTypes';

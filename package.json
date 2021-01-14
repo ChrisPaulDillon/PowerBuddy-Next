@@ -21,7 +21,7 @@
     "moment": "^2.29.1",
     "next": "^10.0.2",
     "next-transpile-modules": "^4.1.0",
-    "powerbuddy-shared": "^1.0.6",
+    "powerbuddy-shared": "^1.0.9",
     "react": "17.0.1",
     "react-dom": "16.13.1",
     "react-hook-form": "^6.13.1",

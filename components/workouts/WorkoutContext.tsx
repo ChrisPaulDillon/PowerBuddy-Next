@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from 'react';
-import { IWorkoutDay, IWorkoutExercise, IWorkoutSet } from '../../interfaces/workouts';
+import { IWorkoutDay, IWorkoutExercise, IWorkoutSet } from 'powerbuddy-shared';
 
 interface IContextOutputProps {
   workoutDay: IWorkoutDay;

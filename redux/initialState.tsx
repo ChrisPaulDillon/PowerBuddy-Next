@@ -1,10 +1,10 @@
-import { ITemplateProgram } from '../interfaces/templates';
-import { ILiftingStat, ILiftFeed } from '../interfaces/liftingStats';
-import { IQuote, IGender, IMemberStatus } from '../interfaces/system';
-import { IUser, IFriendRequest } from '../interfaces/users';
-import { INotificationInteraction, IFriendsListAssoc } from '../interfaces/users/index';
-import { ITemplateDifficulty, IRepSchemeType } from '../interfaces/system/index';
-import { IExercise, IExerciseMuscleGroup, IExerciseType } from '../interfaces/exercises';
+import { ITemplateProgram } from 'powerbuddy-shared';
+import { ILiftingStat, ILiftFeed } from 'powerbuddy-shared';
+import { IQuote, IGender, IMemberStatus } from 'powerbuddy-shared';
+import { IUser, IFriendRequest } from 'powerbuddy-shared';
+import { INotificationInteraction, IFriendsListAssoc } from 'powerbuddy-shared';
+import { ITemplateDifficulty, IRepSchemeType } from 'powerbuddy-shared';
+import { IExercise, IExerciseMuscleGroup, IExerciseType } from 'powerbuddy-shared';
 
 export interface IReduxState {
   genders: IGender[];

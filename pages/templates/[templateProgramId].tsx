@@ -4,7 +4,7 @@ import { Badge, Box, Flex, Tab, TabList, TabPanel, TabPanels, Tabs, useDisclosur
 import axios, { AxiosResponse } from 'axios';
 import React, { useEffect, useState } from 'react';
 import { GetAllTemplateProgramsUrl, GetTemplateProgramByIdUrl } from '../../api/public/template';
-import { ITemplateProgram, ITemplateProgramExtended } from '../../interfaces/templates';
+import { ITemplateProgram, ITemplateProgramExtended } from 'powerbuddy-shared';
 import { TEMPLATES_URL, WORKOUT_DIARY_URL } from '../../InternalLinks';
 import { useSelector } from 'react-redux';
 import { PbPrimaryButton } from '../../components/common/Buttons';

@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { FormErrorMessage, FormControl, Input, Button, Icon } from '@chakra-ui/core';
 import { validateEmailInput, validateInput, validatePassword } from '../../util/formInputs';
 import { AiFillStar, AiTwotoneLock, MdEmail } from 'react-icons/all';
-import { IUser } from '../../interfaces/users';
+import { IUser } from 'powerbuddy-shared';
 import axios from 'axios';
 import { RegisterUserUrl } from '../../api/account/user';
 import { REGISTER_USER } from '../../redux/actionTypes';
