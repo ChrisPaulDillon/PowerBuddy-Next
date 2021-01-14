@@ -35,7 +35,7 @@ const sideMenu = {
     {
       name: 'New Diary',
       icon: BsCalendarFill,
-      link: '',
+      link: '/',
       tooltip: 'View Your Program Log',
       memberStatusId: 0,
     },
