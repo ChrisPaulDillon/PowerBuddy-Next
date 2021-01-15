@@ -1,6 +1,6 @@
-import { Box, Flex, FormControl, FormErrorMessage, useToast } from '@chakra-ui/core';
+import { Box, Flex, FormControl, FormErrorMessage, Link, useToast } from '@chakra-ui/core';
 import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { MdAccountBox } from 'react-icons/md';
 import { TiArrowBack } from 'react-icons/ti';
@@ -10,7 +10,7 @@ import { validateEmailInput } from '../../../util/formInputs';
 import { PbPrimaryButton } from '../../common/Buttons';
 import PbIconButton from '../../common/IconButtons';
 import { FormInput } from '../../common/Inputs';
-import { TextXs } from '../../common/Texts';
+import { TextSm, TextXs } from '../../common/Texts';
 import { CenterColumnFlex } from '../../layout/Flexes';
 import { LoginStateEnum } from '../factories/LoginFormFactory';
 
@@ -18,7 +18,10 @@ const SendPasswordResetForm = ({ onClose, setLoginState }) => {
   const toast = useToast();
   const { register, handleSubmit, errors, formState } = useForm();
 
-  const onSubmit = async ({ email }: any) => {
+  const [pwResetSent, setPwResetSent] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>('');
+
+  const onSubmit = async () => {
     try {
       const response = await axios.post(SendPasswordResetUrl(email));
     } catch (error) {}
@@ -30,8 +33,20 @@ const SendPasswordResetForm = ({ onClose, setLoginState }) => {
       isClosable: true,
       position: 'top',
     });
-    setLoginState(LoginStateEnum.Login);
+    setPwResetSent(true);
   };
+
+  if (pwResetSent)
+    return (
+      <Flex>
+        <TextXs textAlign="center">
+          Password reset link successfully sent. Please check your inbox. Didn't receive an email?{' '}
+          <Link onClick={async () => await onSubmit()}>
+            <TextXs color="blue.500">Send Again</TextXs>
+          </Link>
+        </TextXs>
+      </Flex>
+    );
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -41,7 +56,12 @@ const SendPasswordResetForm = ({ onClose, setLoginState }) => {
           <FormControl isInvalid={errors.email}>
             <Box p="1">
               <TextXs>Email Address</TextXs>
-              <FormInput name="email" ref={register({ validate: validateEmailInput })} placeholder="example@examplesite.com" />
+              <FormInput
+                name="email"
+                ref={register({ validate: validateEmailInput })}
+                placeholder="example@examplesite.com"
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </Box>
             <FormErrorMessage>{errors.email && errors.email.message}</FormErrorMessage>
           </FormControl>

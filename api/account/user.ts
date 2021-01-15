@@ -9,5 +9,8 @@ export const GetLoggedInUsersProfileUrl = () => `${baseUrl}Profile`;
 export const CreateFirstVisitStatsUrl = () => `${baseUrl}FirstVisit`;
 export const EditProfileUrl = () => `${baseUrl}Profile`;
 
-export const ChangePasswordUrl = (emailAddress: string) => 
-`${baseUrl}ChangePassword/${emailAddress}`;
+export const ChangePasswordUrl = (userId: string) => 
+`${baseUrl}ChangePassword/${userId}`;
+
+export const VerifyEmailUrl = (userId: string) => 
+`${baseUrl}VerifyEmail/${userId}`;

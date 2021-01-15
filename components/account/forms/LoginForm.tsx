@@ -15,16 +15,21 @@ import { setAuthorizationToken } from '../../../redux/util/authorization';
 import { LOGIN_USER } from '../../../redux/actionTypes';
 import { IUser } from 'powerbuddy-shared';
 import { LoginStateEnum } from '../factories/LoginFormFactory';
+import { SendEmailConfirmationUrl } from '../../../api/public/email';
+import { ImGrin2 } from 'react-icons/im';
 
 const LoginForm = ({ onClose, setLoginState }: any) => {
   const [showPW, setShowPW] = React.useState(false);
-  const handleClick = () => setShowPW(!showPW);
   const [error, setError] = useState<boolean>(false);
+  const [emailNotVerified, setEmailNotVerified] = useState<boolean>(false);
+  const [userId, setUserId] = useState<string>('');
 
   const dispatcher = useDispatch();
   const toast = useToast();
 
   const { register, handleSubmit, errors, formState } = useForm();
+
+  const handleClick = () => setShowPW(!showPW);
 
   const onSubmit = async ({ email, password }: any) => {
     const user: IUser = {
@@ -50,10 +55,44 @@ const LoginForm = ({ onClose, setLoginState }: any) => {
         isAuthenticated: true,
       });
       onClose();
-    } catch (error) {
-      setError(true);
+    } catch (err) {
+      const errorCode = err?.response?.data;
+      console.log(errorCode);
+
+      if (errorCode?.code == 'EmailNotConfirmedException') {
+        setEmailNotVerified(true);
+        setUserId(errorCode?.message);
+      } else {
+        setError(true);
+      }
     }
   };
+
+  const sendEmailConfirmation = async () => {
+    try {
+      const response = await axios.post(SendEmailConfirmationUrl(userId! as string));
+      toast({
+        title: 'Success',
+        description: 'Confirmation Email Sent Successfully. Please check your inbox',
+        status: 'success',
+        duration: 2000,
+        isClosable: true,
+        position: 'top',
+      });
+    } catch (error) {}
+  };
+
+  if (emailNotVerified)
+    return (
+      <Flex>
+        <TextXs textAlign="center">
+          Email Not Confirmed. You must confirm your email address before proceeding.{' '}
+          <Link onClick={async () => await sendEmailConfirmation()}>
+            <TextXs color="blue.500">Send Again</TextXs>
+          </Link>
+        </TextXs>
+      </Flex>
+    );
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
