@@ -57,8 +57,6 @@ const LoginForm = ({ onClose, setLoginState }: any) => {
       onClose();
     } catch (err) {
       const errorCode = err?.response?.data;
-      console.log(errorCode);
-
       if (errorCode?.code == 'EmailNotConfirmedException') {
         setEmailNotVerified(true);
         setUserId(errorCode?.message);
@@ -84,7 +82,7 @@ const LoginForm = ({ onClose, setLoginState }: any) => {
 
   if (emailNotVerified)
     return (
-      <Flex>
+      <Flex justify="center">
         <TextXs textAlign="center">
           Email Not Confirmed. You must confirm your email address before proceeding.{' '}
           <Link onClick={async () => await sendEmailConfirmation()}>
