@@ -16,7 +16,6 @@ import { LOGIN_USER } from '../../../redux/actionTypes';
 import { IUser } from 'powerbuddy-shared';
 import { LoginStateEnum } from '../factories/LoginFormFactory';
 import { SendEmailConfirmationUrl } from '../../../api/public/email';
-import { ImGrin2 } from 'react-icons/im';
 
 const LoginForm = ({ onClose, setLoginState }: any) => {
   const [showPW, setShowPW] = React.useState(false);

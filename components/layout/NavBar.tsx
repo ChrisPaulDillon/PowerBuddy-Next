@@ -22,6 +22,7 @@ import theme from '../../theme';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ICreateWorkoutDayOptions } from 'powerbuddy-shared';
+import { isMobile } from 'react-device-detect';
 
 const sideMenu = {
   groups: [
@@ -175,13 +176,13 @@ const NavBar: React.FC<INavBarProps> = ({ menuOpen }) => {
               isRound
               fontSize="1.25em"
               variant="ghost"
-              display={SCREEN_MOBILE ? 'inherit' : 'none'}
+              display={isMobile || SCREEN_MOBILE ? 'inherit' : 'none'}
             />
           </Box>
           <Banner mx={2} mt={1}>
             PowerBuddy
           </Banner>
-          <Box display={SCREEN_MOBILE ? 'none' : 'inherit'}>
+          <Box display={isMobile || SCREEN_MOBILE ? 'none' : 'inherit'}>
             {sideMenu.groups.map((item, idx) => (
               <Box key={idx} mx={2}>
                 <LeftNavItem
@@ -199,7 +200,7 @@ const NavBar: React.FC<INavBarProps> = ({ menuOpen }) => {
           </Box>
           <Box mt={2} mx={2}>
             <PbPrimaryButton
-              size={SCREEN_MOBILE ? 'xs' : 'sm'}
+              size={isMobile || SCREEN_MOBILE ? 'xs' : 'sm'}
               variant="outline"
               onClick={async () => doesUserHaveWorkoutToday()}
               loading={buttonLoading}>
