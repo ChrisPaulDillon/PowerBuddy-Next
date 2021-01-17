@@ -21,7 +21,7 @@ interface IEditProfile {
 
 const EditProfileForm = () => {
   const { user } = useSelector((state: IAppState) => state.state);
-  const [bodyWeight, setBodyWeight] = useState<number>(user.bodyWeight!);
+  const [bodyWeight, setBodyWeight] = useState<number>(user?.bodyWeight!);
   const toast = useToast();
 
   const updateBodyWeight = (e) => {
@@ -29,8 +29,6 @@ const EditProfileForm = () => {
       setBodyWeight(e);
     }
   };
-
-  console.log('hi');
 
   const { handleSubmit, formState, register } = useForm();
 
@@ -52,7 +50,7 @@ const EditProfileForm = () => {
           status: 'success',
           duration: 2000,
           isClosable: true,
-          position: 'top-right',
+          position: 'top',
         });
       }
     } catch (error) {
@@ -62,7 +60,7 @@ const EditProfileForm = () => {
         status: 'error',
         duration: 2000,
         isClosable: true,
-        position: 'top-right',
+        position: 'top',
       });
     }
   };
