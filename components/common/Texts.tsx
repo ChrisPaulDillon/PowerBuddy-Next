@@ -6,11 +6,7 @@ import { IconType } from 'react-icons';
 
 export const PageTitle: React.FC<BoxProps> = ({ ...rest }) => {
   const { colorMode } = useColorMode();
-  return (
-    <Box p={5}>
-      <Heading mb={1} as="h1" color={theme.colors.textColor[colorMode]} size="lg" fontFamily="'Roboto', serif;" textAlign="left" {...rest} />
-    </Box>
-  );
+  return <Heading mb={1} as="h1" color={theme.colors.textColor[colorMode]} size="lg" fontFamily="'Roboto', serif;" textAlign="left" {...rest} />;
 };
 
 export const PageSubHeader: React.FC<BoxProps> = ({ ...rest }) => {

@@ -154,16 +154,7 @@ const NavBar: React.FC<INavBarProps> = ({ menuOpen }) => {
   };
 
   return (
-    <Flex
-      as="nav"
-      bg={`linear-gradient(to left, rgb(47, 40, 250), rgba(58, 58, 58, 0))`}
-      w="100%"
-      justifyContent="flex"
-      alignItems="space-between"
-      minH="6vh"
-      position="relative"
-      rounded="lg"
-      top={0}>
+    <Flex as="nav" w="100%" justifyContent="flex" alignItems="space-between" minH="6vh" position="relative" rounded="lg" top={0}>
       <Stack isInline w="100%" justify="space-between" align="center">
         <Flex ml="1">
           <Box mt={1}>
@@ -176,28 +167,11 @@ const NavBar: React.FC<INavBarProps> = ({ menuOpen }) => {
               isRound
               fontSize="1.25em"
               variant="ghost"
-              display={isMobile || SCREEN_MOBILE ? 'inherit' : 'none'}
             />
           </Box>
           <Banner mx={2} mt={1}>
             PowerBuddy
           </Banner>
-          <Box display={isMobile || SCREEN_MOBILE ? 'none' : 'inherit'}>
-            {sideMenu.groups.map((item, idx) => (
-              <Box key={idx} mx={2}>
-                <LeftNavItem
-                  name={item.name}
-                  Icon={item.icon}
-                  tooltip={item.tooltip}
-                  link={item.link}
-                  memberStatusId={item.memberStatusId}
-                  userMemberStatusId={user.memberStatusId ?? 0}
-                  isOpen={menuOpen}
-                  idx={idx}
-                />
-              </Box>
-            ))}
-          </Box>
           <Box mt={2} mx={2}>
             <PbPrimaryButton
               size={isMobile || SCREEN_MOBILE ? 'xs' : 'sm'}

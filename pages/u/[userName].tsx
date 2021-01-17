@@ -8,7 +8,7 @@ import { GetPublicUserProfileUrl } from '../../api/public/user';
 import { useAxios } from '../../hooks/useAxios';
 import { IPublicUser } from 'powerbuddy-shared';
 import { IAppState } from '../../redux/store';
-import UserSettingsForm from '../../components/account/forms/EditProfileForm';
+import UserSettingsForm from '../../components/account/settings/forms/EditProfileForm';
 import ProgressSpinner from '../../components/common/ProgressSpinner';
 import { CenterColumnFlex } from '../../components/layout/Flexes';
 import UserAvatar from '../../components/layout/UserAvatar';
@@ -31,6 +31,7 @@ const UserProfile: NextPage = () => {
   if (requestLoading) return <ProgressSpinner />;
   // if (requestError) return <Error statusCode={404} description="User Could Not Be Found With This Username" />;
 
+  if (Object.keys(user).length === 0) return <Error statusCode={404} description="No User Found under this username" />;
   return (
     <Box>
       <PageHeader title="Profile" />
@@ -39,23 +40,18 @@ const UserProfile: NextPage = () => {
           <UserAvatar name={publicUser.userName!} size="lg" />
           <PageTitle>{publicUser.userName!}'s Profile </PageTitle>
           <MemberCrown memberStatusId={publicUser.memberStatusId!} />
-
-          {user.userName !== publicUser.userName ? (
-            <CenterColumnFlex mt={2}>
-              {publicUser.isPublic ? (
-                <CenterColumnFlex>
-                  {publicUser?.sportType && <HeadingMd>{publicUser.sportType} </HeadingMd>}
-                  {publicUser?.gender && <TextSm>{publicUser.gender}</TextSm>}
-                  {publicUser?.liftingLevel && <TextSm>{publicUser.liftingLevel + 'Lifter'}</TextSm>}
-                </CenterColumnFlex>
-              ) : (
-                <HeadingMd>This users profile is not public</HeadingMd>
-              )}
-              {/* <LiftFeed userName={publicUser.userName!} /> */}
-            </CenterColumnFlex>
-          ) : (
-            <UserSettingsForm />
-          )}
+          <CenterColumnFlex mt={2}>
+            {publicUser.isPublic ? (
+              <CenterColumnFlex>
+                {publicUser?.sportType && <HeadingMd>{publicUser.sportType} </HeadingMd>}
+                {publicUser?.gender && <TextSm>{publicUser.gender}</TextSm>}
+                {publicUser?.liftingLevel && <TextSm>{publicUser.liftingLevel + 'Lifter'}</TextSm>}
+              </CenterColumnFlex>
+            ) : (
+              <HeadingMd>This users profile is not public</HeadingMd>
+            )}
+            {/* <LiftFeed userName={publicUser.userName!} /> */}
+          </CenterColumnFlex>
         </CenterColumnFlex>
       </PageContent>
     </Box>

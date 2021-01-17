@@ -21,7 +21,7 @@ const sideMenu = {
     {
       name: 'Diary',
       icon: BsCalendarFill,
-      link: WORKOUT_DIARY_URL,
+      link: '/',
       tooltip: 'View Your Program Log',
       memberStatusId: 0,
     },
