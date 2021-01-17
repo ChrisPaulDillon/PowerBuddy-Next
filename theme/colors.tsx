@@ -51,7 +51,7 @@ const calendarTextNonMonth = { light: 'gray.200', dark: 'gray.200' };
 const primary = { light: 'purple.500', dark: 'purple.700' };
 
 const navBackground = { light: 'gray.100', dark: 'gray.800' };
-const borderColor = { light: 'purple.500', dark: 'purple.700' };
+const borderColor = { light: 'gray.300', dark: 'gray.700' };
 const iconColor = { light: 'gray.500', dark: 'gray.100' };
 
 const background = { light: 'gray.100', dark: 'gray.800' };
