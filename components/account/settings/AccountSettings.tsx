@@ -63,7 +63,7 @@ const AccountSettings = () => {
 
   return (
     <Box minW={{ xl: '1000px' }} maxW={{ xl: '1000px' }}>
-      <Flex justify="center" flexDir="column" align="center" py={2}>
+      <Flex justify="center" flexDir="column" align="center" py={2} pb={[5, 3, 2, 1]}>
         <UserAvatar userName={user?.userName} />
         <PageTitle>{user?.userName}</PageTitle>
       </Flex>
@@ -80,8 +80,8 @@ const AccountSettings = () => {
         </Box>
         <SettingContent>
           {selectedItem == MenuSection.Profile && <EditProfileForm />}
-          {selectedItem == MenuSection.Security && <TextSm>Not yet available</TextSm>}
-          {selectedItem == MenuSection.WorkoutLog && <TextSm>Not Yet Available</TextSm>}
+          {selectedItem == MenuSection.Security && <TextSm>Unavailable</TextSm>}
+          {selectedItem == MenuSection.WorkoutLog && <TextSm>Unavailable</TextSm>}
         </SettingContent>
       </Flex>
     </Box>
@@ -94,9 +94,9 @@ interface IContentProps {
 
 const SettingContent: React.FC<IContentProps> = ({ children }) => {
   return (
-    <Box px={4}>
+    <Box px={4} minW="260px">
       <Box pb={2}>
-        <HeadingMd>Test</HeadingMd>
+        <HeadingMd>Profile</HeadingMd>
         <Divider />
       </Box>
       <Box>{children}</Box>
