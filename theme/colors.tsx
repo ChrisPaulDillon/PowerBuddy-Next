@@ -44,6 +44,8 @@ const purple = {
   900: '#13001e',
 };
 
+const menuItemSelected = { light: 'gray.300', dark: 'gray.700' };
+
 const calendar = { light: 'gray.700', dark: 'gray.700' };
 const calendarText = { light: 'gray.50', dark: 'gray.50' };
 const calendarTextNonMonth = { light: 'gray.200', dark: 'gray.200' };
@@ -74,7 +76,7 @@ const colors = {
   primary,
   purple,
   green,
-
+  menuItemSelected,
   // gray,
   hyperLink,
   background,

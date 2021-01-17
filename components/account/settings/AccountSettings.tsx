@@ -10,6 +10,7 @@ import { HeadingMd, PageTitle, TextSm, TextXs } from '../../common/Texts';
 import UserAvatar from '../../layout/UserAvatar';
 import theme from '../../../theme';
 import { log } from 'console';
+import EditProfileForm from './forms/EditProfileForm';
 
 export enum MenuSection {
   Profile,
@@ -22,43 +23,46 @@ const AccountSettings = () => {
   const { user } = useSelector((state: IAppState) => state.state);
   const { colorMode } = useColorMode();
 
-  const settings = useMemo(
-    () => ({
-      groups: [
-        {
-          items: [
-            {
-              name: 'Profile',
-              menuItem: MenuSection.Profile,
-              onClick: () => {},
+  const settings = {
+    groups: [
+      {
+        items: [
+          {
+            name: 'Profile',
+            menuItem: MenuSection.Profile,
+            onClick: () => {
+              setSelectedItem(MenuSection.Profile);
             },
-          ],
-        },
-        {
-          items: [
-            {
-              name: 'Security',
-              menuItem: MenuSection.Security,
-              onClick: () => {},
+          },
+        ],
+      },
+      {
+        items: [
+          {
+            name: 'Security',
+            menuItem: MenuSection.Security,
+            onClick: () => {
+              setSelectedItem(MenuSection.Security);
             },
-          ],
-        },
-        {
-          items: [
-            {
-              name: 'Workout Log',
-              menuItem: MenuSection.WorkoutLog,
-              onClick: () => {},
+          },
+        ],
+      },
+      {
+        items: [
+          {
+            name: 'Workout Log',
+            menuItem: MenuSection.WorkoutLog,
+            onClick: () => {
+              setSelectedItem(MenuSection.WorkoutLog);
             },
-          ],
-        },
-      ],
-    }),
-    [user]
-  );
+          },
+        ],
+      },
+    ],
+  };
 
   return (
-    <Box minW={{ xl: '1200px' }} maxW={{ xl: '1200px' }}>
+    <Box minW={{ xl: '1000px' }} maxW={{ xl: '1000px' }}>
       <Flex justify="center" flexDir="column" align="center" py={2}>
         <UserAvatar userName={user?.userName} />
         <PageTitle>{user?.userName}</PageTitle>
@@ -74,23 +78,28 @@ const AccountSettings = () => {
             </Box>
           ))}
         </Box>
-        <SettingContent />
+        <SettingContent>
+          {selectedItem == MenuSection.Profile && <EditProfileForm />}
+          {selectedItem == MenuSection.Security && <TextSm>Not yet available</TextSm>}
+          {selectedItem == MenuSection.WorkoutLog && <TextSm>Not Yet Available</TextSm>}
+        </SettingContent>
       </Flex>
     </Box>
   );
 };
 
-const SettingContent = () => {
+interface IContentProps {
+  children: any;
+}
+
+const SettingContent: React.FC<IContentProps> = ({ children }) => {
   return (
     <Box px={4}>
       <Box pb={2}>
         <HeadingMd>Test</HeadingMd>
         <Divider />
       </Box>
-      <TextXs>
-        "The quick brown fox jumps over the lazy dog" is an English-language pangram—a sentence that contains all of the letters of the English
-        alphabet. Owing to its existence, Chakra was created.
-      </TextXs>
+      <Box>{children}</Box>
     </Box>
   );
 };
@@ -104,20 +113,18 @@ interface IItemProps {
 
 const SettingItem: React.FC<IItemProps> = ({ name, menuItem, onClick, selectedItem }) => {
   const { colorMode } = useColorMode();
-  const [isSelected] = useState<boolean>(menuItem == selectedItem);
 
-  console.log(selectedItem);
-  console.log(menuItem);
-  console.log(isSelected);
+  let isSelected = menuItem == selectedItem;
 
   return (
     <Box>
       <Button
         w="100%"
         borderLeft={isSelected ? '1px' : '0'}
-        bg={isSelected ? 'gray.700' : 'transparent'}
+        bg={isSelected ? theme.colors.menuItemSelected[colorMode] : 'transparent'}
         borderColor="red.500"
         borderRadius={0}
+        onClick={onClick}
         size="sm">
         <TextXs fontWeight="light" textAlign="left">
           {name}

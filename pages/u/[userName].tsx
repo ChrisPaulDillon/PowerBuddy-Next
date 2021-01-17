@@ -8,7 +8,7 @@ import { GetPublicUserProfileUrl } from '../../api/public/user';
 import { useAxios } from '../../hooks/useAxios';
 import { IPublicUser } from 'powerbuddy-shared';
 import { IAppState } from '../../redux/store';
-import UserSettingsForm from '../../components/account/forms/EditProfileForm';
+import UserSettingsForm from '../../components/account/settings/forms/EditProfileForm';
 import ProgressSpinner from '../../components/common/ProgressSpinner';
 import { CenterColumnFlex } from '../../components/layout/Flexes';
 import UserAvatar from '../../components/layout/UserAvatar';
