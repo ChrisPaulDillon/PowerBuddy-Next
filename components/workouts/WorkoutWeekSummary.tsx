@@ -99,15 +99,17 @@ const WorkoutWeekSummary: React.FC<IProps> = ({ weekSummary }) => {
             </Flex>
           ))}
       </CenterRowFlex>
-      <Box mt={2} mx={2}>
-        <PbPrimaryButton
-          size={isMobile || SCREEN_MOBILE ? 'xs' : 'sm'}
-          variant="outline"
-          onClick={async () => await doesUserHaveWorkoutToday()}
-          loading={buttonLoading}>
-          Todays Workout
-        </PbPrimaryButton>
-      </Box>
+      <CenterColumnFlex>
+        <Box mt={2} mx={2}>
+          <PbPrimaryButton
+            size={isMobile || SCREEN_MOBILE ? 'xs' : 'sm'}
+            variant="outline"
+            onClick={async () => await doesUserHaveWorkoutToday()}
+            loading={buttonLoading}>
+            Todays Workout
+          </PbPrimaryButton>
+        </Box>
+      </CenterColumnFlex>
       {isLoginOpen && <LoginModal isOpen={isLoginOpen} onOpen={onLoginOpen} onClose={onLoginClose} />}
       {isTodayWorkoutOpen && (
         <ModalBackForward
