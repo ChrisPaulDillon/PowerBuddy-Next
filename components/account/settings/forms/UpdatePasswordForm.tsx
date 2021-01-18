@@ -20,12 +20,14 @@ const UpdatePasswordForm = () => {
 
   const [error, setError] = useState<boolean>(false);
 
-  const { handleSubmit, formState, register, errors } = useForm();
+  const { handleSubmit, formState, register, errors, reset } = useForm();
 
   const onSubmit = async ({ oldPassword, password1, password2 }: any) => {
     if (password1 !== password2) {
       setError(true);
+      return;
     }
+    setError(false);
 
     const passwordInput: IUpdatePasswordInput = {
       oldPassword: oldPassword,
@@ -39,21 +41,34 @@ const UpdatePasswordForm = () => {
           title: 'Success',
           description: 'Successfully Changed Password',
           status: 'success',
+          duration: 4000,
+          isClosable: true,
+          position: 'top',
+        });
+      }
+    } catch (err) {
+      const errorCode = err?.response?.data;
+      if (errorCode?.code == 'InvalidCredentialsException') {
+        toast({
+          title: 'Error',
+          description: 'You have incorrectly entered your current password',
+          status: 'error',
+          duration: 2000,
+          isClosable: true,
+          position: 'top',
+        });
+      } else {
+        toast({
+          title: 'Error',
+          description: 'Password Could Not Be Updated',
+          status: 'error',
           duration: 2000,
           isClosable: true,
           position: 'top',
         });
       }
-    } catch (error) {
-      toast({
-        title: 'Error',
-        description: 'Password Could Not Be Updated',
-        status: 'error',
-        duration: 2000,
-        isClosable: true,
-        position: 'top',
-      });
     }
+    reset();
   };
 
   return (
