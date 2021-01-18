@@ -116,10 +116,8 @@ interface ILeftMenuItemsProps {
 
 const LeftMenuItems: React.FC<ILeftMenuItemsProps> = ({ menuOpen, onClose }) => {
   const { user } = useSelector((state: IAppState) => state.state);
-  console.log(sideMenu.groups.length);
-
   return (
-    <CenterColumnFlex w="100%">
+    <Box>
       {sideMenu.groups.map((item, idx) => (
         <Box key={idx}>
           <LeftNavItem
@@ -136,7 +134,7 @@ const LeftMenuItems: React.FC<ILeftMenuItemsProps> = ({ menuOpen, onClose }) => 
           {idx !== sideMenu.groups.length - 2 && menuOpen && <Divider />}
         </Box>
       ))}
-    </CenterColumnFlex>
+    </Box>
   );
 };
 
@@ -158,7 +156,7 @@ export const LeftNavItem: React.FC<INavItemProps> = ({ name, Icon, link, tooltip
     <Box key={idx}>
       {isOpen && userMemberStatusId >= memberStatusId ? (
         <>
-          <Box>
+          <Box w="100%">
             <PbToolTip label={tooltip}>
               <Link href={link}>
                 <MenuItem title={name} Icon={Icon} color={theme.colors.navIconColor[colorMode]} onClick={onClose} />

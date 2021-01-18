@@ -1,4 +1,3 @@
-import { useRadio } from '@chakra-ui/core';
 import { API_BASE } from '../../redux/actionTypes';
 
 const baseUrl = `${API_BASE}Account/User/`;
@@ -11,6 +10,9 @@ export const EditProfileUrl = () => `${baseUrl}Profile`;
 
 export const ChangePasswordUrl = (userId: string) => 
 `${baseUrl}ChangePassword/${userId}`;
+
+export const UpdatePasswordUrl = () => 
+`${baseUrl}UpdatePassword`;
 
 export const VerifyEmailUrl = (userId: string) => 
 `${baseUrl}VerifyEmail/${userId}`;

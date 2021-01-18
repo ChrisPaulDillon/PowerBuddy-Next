@@ -11,6 +11,8 @@ import UserAvatar from '../../layout/UserAvatar';
 import theme from '../../../theme';
 import { log } from 'console';
 import EditProfileForm from './forms/EditProfileForm';
+import ChangePasswordForm from '../forms/ChangePasswordForm';
+import UpdatePasswordForm from './forms/UpdatePasswordForm';
 
 export enum MenuSection {
   Profile,
@@ -80,7 +82,7 @@ const AccountSettings = () => {
         </Box>
         <SettingContent>
           {selectedItem == MenuSection.Profile && <EditProfileForm />}
-          {selectedItem == MenuSection.Security && <TextSm>Unavailable</TextSm>}
+          {selectedItem == MenuSection.Security && <UpdatePasswordForm />}
           {selectedItem == MenuSection.WorkoutLog && <TextSm>Unavailable</TextSm>}
         </SettingContent>
       </Flex>
