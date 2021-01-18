@@ -31,7 +31,7 @@ import { Error } from '../../components/common/Error';
 import AddWorkoutNoteForm from '../../components/workouts/forms/AddWorkoutNoteForm';
 import NotifiyPersonalBestAlert from '../../components/workouts/alerts/NotifyPersonalBestAlert';
 import AddExerciseForm from '../../components/workouts/forms/AddExerciseForm';
-import { PageHeader } from '../../components/layout/Page';
+import { PageContent, PageHeader } from '../../components/layout/Page';
 
 const WorkoutDay: NextPage = () => {
   const router = useRouter();
@@ -136,7 +136,7 @@ const WorkoutDay: NextPage = () => {
   };
 
   var breadcrumbInput: IBreadcrumbInput[] = [
-    { href: WORKOUT_DIARY_URL, name: 'Workout diary' },
+    { href: '/', name: 'Workout Diary' },
     { href: '#', name: dateHighlighted ? 'Todays Workout' : moment(workoutDay.date).format('dddd Do MMM') },
   ];
 
@@ -152,84 +152,86 @@ const WorkoutDay: NextPage = () => {
 
   if (dayLoading) return <ProgressSpinner />;
 
-  if (dayCode === 404) return <Error title="No Workout Found" description="Have you followed a broken link?" statusCode={404} />;
+  if (dayCode === 404 && !dayLoading) return <Error title="No Workout Found" description="Have you followed a broken link?" statusCode={404} />;
 
   return (
     <Box w="100%">
-      <PageHeader title="" />
+      <PageHeader title="Workout" />
       <WorkoutProvider workoutDay={workoutDay} setWorkoutDay={setWorkoutDay} contentDisabled={contentDisabled}>
-        <BreadcrumbBase values={breadcrumbInput} />
-        <CardNoShadow borderWidth="0.5px" rounded="lg" overflow="hidden" textAlign="center" minH="250px" w="100%" p="2" my="5">
-          <PbStack mb={1} w="100%">
-            <Flex justify={{ lg: 'left', md: 'left', sm: 'left', xs: 'center' }} w="100%">
-              <CenterRowFlex justifyContent="center" ml={3}>
-                <PbPrimaryButton size="sm">Complete Workout</PbPrimaryButton>
-                <PbIconButton
-                  label="Complete Workout"
-                  Icon={FaCheckCircle}
-                  color={workoutDay.completed ? 'green.500' : 'gray.500'}
-                  onClick={() => updateWorkoutDay()}
-                  isLoading={loading}
-                  isDisabled={dayEnabled || contentDisabled}
-                />
-                <PbIconButton
-                  label="Add New Exercise"
-                  Icon={BiDumbbell}
-                  color="blue.500"
-                  fontSize="25px"
-                  onClick={onAddExerciseOpen}
-                  isDisabled={contentDisabled}
-                />
+        <PageContent>
+          <BreadcrumbBase values={breadcrumbInput} />
+          <CardNoShadow borderWidth="0.5px" rounded="lg" overflow="hidden" textAlign="center" minH="250px" w="100%" p="2" my="5">
+            <PbStack mb={1} w="100%">
+              <Flex justify={{ lg: 'left', md: 'left', sm: 'left', xs: 'center' }} w="100%">
+                <CenterRowFlex justifyContent="center" ml={3}>
+                  <PbPrimaryButton size="sm">Complete Workout</PbPrimaryButton>
+                  <PbIconButton
+                    label="Complete Workout"
+                    Icon={FaCheckCircle}
+                    color={workoutDay.completed ? 'green.500' : 'gray.500'}
+                    onClick={() => updateWorkoutDay()}
+                    isLoading={loading}
+                    isDisabled={dayEnabled || contentDisabled}
+                  />
+                  <PbIconButton
+                    label="Add New Exercise"
+                    Icon={BiDumbbell}
+                    color="blue.500"
+                    fontSize="25px"
+                    onClick={onAddExerciseOpen}
+                    isDisabled={contentDisabled}
+                  />
 
-                <MenuBase
-                  button={<PbIconButton label="Additional Options" Icon={AiOutlineMore} onClick={() => undefined} isDisabled={contentDisabled} />}
-                  menuItems={menuItems}
-                />
-              </CenterRowFlex>
-            </Flex>
-            <BadgeWorkoutName body={workoutDay.templateName!} />
-          </PbStack>
+                  <MenuBase
+                    button={<PbIconButton label="Additional Options" Icon={AiOutlineMore} onClick={() => undefined} isDisabled={contentDisabled} />}
+                    menuItems={menuItems}
+                  />
+                </CenterRowFlex>
+              </Flex>
+              <BadgeWorkoutName body={workoutDay.templateName!} />
+            </PbStack>
 
-          <Box p="2">
-            {workoutDay?.workoutExercises == null ? (
-              <CenterColumnFlex mt="5">
-                <TextXs>No exercises found, click the weight icon to get started!</TextXs>
-              </CenterColumnFlex>
-            ) : (
-              workoutDay.workoutExercises!.map((we, idx) => (
-                <Box key={idx}>
-                  <WorkoutExercise workoutExercise={we} date={workoutDay.date} />
-                </Box>
-              ))
-            )}
-          </Box>
-        </CardNoShadow>
-        {isAddExerciseOpen && (
-          <ModalDrawerForm isOpen={isAddExerciseOpen} onClose={onAddExerciseClose} title="Add Exercise to Workout">
-            <AddExerciseForm onClose={onAddExerciseClose} workoutDayId={workoutDay.workoutDayId!} />
-          </ModalDrawerForm>
-        )}
-        {personalBests.length > 0 && (
-          <ModalDrawerForm title="Personal Best Hit! 🎉🎉" isOpen={personalBests.length > 0} onClose={() => setPersonalBests([])}>
-            <NotifiyPersonalBestAlert personalBests={personalBests} setPersonalBests={setPersonalBests} />
-          </ModalDrawerForm>
-        )}
-        {isDeleteLogOpen && (
-          <PbModalDrawer
-            title="Delete Diary Log?"
-            isOpen={isDeleteLogOpen}
-            body="Are you sure? This cannot be undone"
-            onClose={onDeleteLogClose}
-            onClick={async () => await deleteLog()}
-            actionText="Delete"
-            loading={deleteLogLoading}
-          />
-        )}
-        {isAddWorkoutNoteOpen && (
-          <ModalDrawerForm title="Add Workout Note" isOpen={isAddWorkoutNoteOpen} onClose={onAddWorkoutNoteClose}>
-            <AddWorkoutNoteForm workoutDayId={workoutDay.workoutDayId!} onClose={onAddWorkoutNoteClose} note={workoutDay.comment!} />
-          </ModalDrawerForm>
-        )}
+            <Box p="2">
+              {workoutDay?.workoutExercises == null ? (
+                <CenterColumnFlex mt="5">
+                  <TextXs>No exercises found, click the weight icon to get started!</TextXs>
+                </CenterColumnFlex>
+              ) : (
+                workoutDay.workoutExercises!.map((we, idx) => (
+                  <Box key={idx}>
+                    <WorkoutExercise workoutExercise={we} date={workoutDay.date} />
+                  </Box>
+                ))
+              )}
+            </Box>
+          </CardNoShadow>
+          {isAddExerciseOpen && (
+            <ModalDrawerForm isOpen={isAddExerciseOpen} onClose={onAddExerciseClose} title="Add Exercise to Workout">
+              <AddExerciseForm onClose={onAddExerciseClose} workoutDayId={workoutDay.workoutDayId!} />
+            </ModalDrawerForm>
+          )}
+          {personalBests.length > 0 && (
+            <ModalDrawerForm title="Personal Best Hit! 🎉🎉" isOpen={personalBests.length > 0} onClose={() => setPersonalBests([])}>
+              <NotifiyPersonalBestAlert personalBests={personalBests} setPersonalBests={setPersonalBests} />
+            </ModalDrawerForm>
+          )}
+          {isDeleteLogOpen && (
+            <PbModalDrawer
+              title="Delete Diary Log?"
+              isOpen={isDeleteLogOpen}
+              body="Are you sure? This cannot be undone"
+              onClose={onDeleteLogClose}
+              onClick={async () => await deleteLog()}
+              actionText="Delete"
+              loading={deleteLogLoading}
+            />
+          )}
+          {isAddWorkoutNoteOpen && (
+            <ModalDrawerForm title="Add Workout Note" isOpen={isAddWorkoutNoteOpen} onClose={onAddWorkoutNoteClose}>
+              <AddWorkoutNoteForm workoutDayId={workoutDay.workoutDayId!} onClose={onAddWorkoutNoteClose} note={workoutDay.comment!} />
+            </ModalDrawerForm>
+          )}
+        </PageContent>
       </WorkoutProvider>
     </Box>
   );

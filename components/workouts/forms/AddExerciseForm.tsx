@@ -53,6 +53,8 @@ const AddExerciseForm: React.FC<IProps> = ({ onClose, workoutDayId }) => {
 
     try {
       const response = await axios.post(CreateWorkoutExerciseUrl(), workoutExercise);
+      console.log(response.data);
+
       CreateExercise(response.data);
       toast({
         title: 'Success',

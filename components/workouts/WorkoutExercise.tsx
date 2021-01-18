@@ -50,14 +50,14 @@ export const WorkoutExercise: React.FC<IExerciseProps> = React.memo(({ workoutEx
           justifyContent={{ lg: 'initial', md: 'left', sm: 'left', xs: 'center' }}>
           <Flex mt="1">
             <HeadingXs mr="1" minW="50px">
-              {workoutExercise.noOfSets} Sets
+              {workoutExercise?.noOfSets} Sets
             </HeadingXs>
             <Link
-              href={`${PERSONALBESTS_URL}/${workoutExercise.exerciseId}?exercise=${encodeURIComponent(
-                workoutExercise.exerciseName!.replace(/\s+/g, '-').toLowerCase()
+              href={`${PERSONALBESTS_URL}/${workoutExercise?.exerciseId}?exercise=${encodeURIComponent(
+                workoutExercise?.exerciseName!.replace(/\s+/g, '-').toLowerCase()
               )}`}>
               <HeadingXs minW="150px" color={theme.colors.hyperLink[colorMode]}>
-                {workoutExercise.exerciseName}
+                {workoutExercise?.exerciseName}
               </HeadingXs>
             </Link>
           </Flex>

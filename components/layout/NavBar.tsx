@@ -84,12 +84,6 @@ const NavBar: React.FC<INavBarProps> = ({ menuOpen }) => {
   const { SCREEN_MOBILE, SCREEN_DESKTOP } = useScreenSizes();
   const { isAuthenticated } = useSelector((state: IAppState) => state.state);
 
-  const [programText, setProgramText] = useState<string>();
-  const [workoutOptions, setWorkoutOptions] = useState<ICreateWorkoutDayOptions>({ workoutDate: new Date() } as ICreateWorkoutDayOptions);
-  const [buttonLoading, setButtonLoading] = useState<boolean>(false);
-
-  const { isOpen: isCreateWorkoutOpen, onOpen: onCreateWorkoutOpen, onClose: onCreateWorkoutClose } = useDisclosure();
-  const { isOpen: isTodayWorkoutOpen, onOpen: onTodayWorkoutOpen, onClose: onTodayWorkoutClose } = useDisclosure();
   const { isOpen: isLeftNavOpen, onOpen: onLeftNavOpen, onClose: onLeftNavClose } = useDisclosure();
   const { isOpen: isMobileOpen, onOpen: onMobileOpen, onClose: onMobileClose } = useDisclosure();
   const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
@@ -100,57 +94,6 @@ const NavBar: React.FC<INavBarProps> = ({ menuOpen }) => {
     } else {
       onLeftNavOpen();
     }
-  };
-
-  const doesUserHaveWorkoutToday = async () => {
-    setButtonLoading(true);
-    try {
-      const result = await Axios.get(GetWorkoutDayIdByDateUrl());
-      if (result.data.workoutDayId !== 0) {
-        router.push(`${WORKOUT_DIARY_URL}/${result.data.workoutDayId}`);
-      } else if (!result.data.workoutLogId) {
-        onTodayWorkoutOpen(); //No workout log was found, give options of fresh create
-      } else {
-        const workoutOptions: ICreateWorkoutDayOptions = {
-          workoutDate: new Date(),
-          workoutLogId: result.data.workoutLogId,
-          weekNo: result.data.weekNo,
-        };
-        setWorkoutOptions(workoutOptions);
-        setProgramText(result?.data?.templateName);
-        onCreateWorkoutOpen(); //Workout log was found, give the option to create a workout day for that log
-      }
-    } catch (error) {
-      if (error?.response?.status === 401) {
-        onLoginOpen();
-      }
-    }
-    setButtonLoading(false);
-  };
-
-  const createWorkoutDay = async () => {
-    setButtonLoading(true);
-    try {
-      const result = await Axios.post(CreateWorkoutDayUrl(), workoutOptions);
-      if (result.data !== 0) {
-        router.push(`${WORKOUT_DIARY_URL}/${result.data.workoutDayId}`);
-        toast({
-          title: 'Success',
-          description: 'Successfully created todays workout!',
-          status: 'success',
-          duration: 2000,
-          isClosable: true,
-          position: 'top',
-        });
-      }
-    } catch (error) {
-      if (error?.response?.status === 401) {
-        onLoginOpen();
-      }
-    }
-    setButtonLoading(false);
-    onTodayWorkoutClose();
-    onCreateWorkoutClose();
   };
 
   return (
@@ -172,28 +115,6 @@ const NavBar: React.FC<INavBarProps> = ({ menuOpen }) => {
           <Banner mx={2} mt={1}>
             PowerBuddy
           </Banner>
-          <Box mt={2} mx={2}>
-            <PbPrimaryButton
-              size={isMobile || SCREEN_MOBILE ? 'xs' : 'sm'}
-              variant="outline"
-              onClick={async () => doesUserHaveWorkoutToday()}
-              loading={buttonLoading}>
-              Todays Workout
-            </PbPrimaryButton>
-          </Box>
-
-          {/* <IconButton
-            icon={<MdMenu />}
-            size="md"
-            onClick={handleBurgerMenuPress}
-            color={theme.colors.iconColor[colorMode]}
-            aria-label=""
-            isRound
-            fontSize="1.5em"
-            variant="ghost"
-            ml={4}
-            mt={1}
-          />*/}
         </Flex>
         <Flex>
           <Box mt={2} display={SCREEN_MOBILE ? 'none' : 'inherit'}>
@@ -217,33 +138,6 @@ const NavBar: React.FC<INavBarProps> = ({ menuOpen }) => {
       </Stack>
       {isLoginOpen && <LoginModal isOpen={isLoginOpen} onOpen={onLoginOpen} onClose={onLoginClose} />}
       {isLeftNavOpen && <MobileSideNav isOpen={isLeftNavOpen} onClose={onLeftNavClose} />}
-      {isTodayWorkoutOpen && (
-        <ModalBackForward
-          isOpen={isTodayWorkoutOpen}
-          onClose={onTodayWorkoutClose}
-          forwardText="Create Single"
-          backText="Create Using Template"
-          body="Create one using a weightlifting program or a one off workout"
-          title="No Workout Detected"
-          loading={buttonLoading}
-          onForwardClick={async () => createWorkoutDay()}
-          onBackClick={() => {
-            router.push(TEMPLATES_URL);
-            onTodayWorkoutClose();
-          }}
-        />
-      )}
-      {isCreateWorkoutOpen && (
-        <ModalForward
-          isOpen={isCreateWorkoutOpen}
-          onClose={onCreateWorkoutClose}
-          actionText="Add"
-          body={`You are currently running the program ${programText}, add this workout to this program?`}
-          title="No Workout Detected"
-          loading={buttonLoading}
-          onClick={async () => createWorkoutDay()}
-        />
-      )}
     </Flex>
   );
 };
