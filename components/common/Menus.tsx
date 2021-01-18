@@ -35,17 +35,7 @@ export interface IMenuItem {
 
 export const MenuItem: React.FC<IMenuItem> = ({ title, Icon, onClick, color, loading, fontSize, ...rest }) => {
   return (
-    <Button
-      as={'a'}
-      isFullWidth
-      borderRadius={0}
-      justifyContent="left"
-      p={0}
-      bg="transparent"
-      onClick={onClick}
-      isLoading={loading}
-      // _hover={{ bg: '#ebedf0' }}
-      {...rest}>
+    <Button as={'a'} isFullWidth borderRadius={0} justifyContent="left" p={0} bg="transparent" onClick={onClick} isLoading={loading} {...rest}>
       <Stack isInline w="100%" px="1em" align="center">
         <Box as={Icon} size="1.25em" color={color} pr={1} />
         <TextXs fontWeight="light" minW="75px" fontSize={fontSize ?? 'sm'}>
