@@ -16,3 +16,9 @@ export const UpdatePasswordUrl = () =>
 
 export const VerifyEmailUrl = (userId: string) => 
 `${baseUrl}VerifyEmail/${userId}`;
+
+export const RequestSmsVerificationUrl = () => 
+`${baseUrl}Sms/RequestVerification`;
+
+export const SendSmsVerificationUrl = () => 
+`${baseUrl}Sms/SendVerification`;
