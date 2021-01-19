@@ -1,18 +1,12 @@
 import { Box, Button, Divider, Flex, useColorMode } from '@chakra-ui/core';
-import React, { useMemo, useState } from 'react';
-import { FaMoon } from 'react-icons/fa';
-import { IoIosLogOut } from 'react-icons/io';
-import { MdPersonPin } from 'react-icons/md';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { IAppState } from '../../../redux/store';
-import PbIconButton from '../../common/IconButtons';
 import { HeadingMd, PageTitle, TextSm, TextXs } from '../../common/Texts';
 import UserAvatar from '../../layout/UserAvatar';
 import theme from '../../../theme';
-import { log } from 'console';
 import EditProfileForm from './forms/EditProfileForm';
-import ChangePasswordForm from '../forms/ChangePasswordForm';
-import UpdatePasswordForm from './forms/UpdatePasswordForm';
+import SecurityGroup from './SecurityGroup';
 
 export enum MenuSection {
   Profile,
@@ -82,7 +76,9 @@ const AccountSettings = () => {
         </Box>
         <SettingContent>
           {selectedItem == MenuSection.Profile && <EditProfileForm />}
-          {selectedItem == MenuSection.Security && <UpdatePasswordForm />}
+          {selectedItem == MenuSection.Security && (
+            <SecurityGroup currentPhoneNumber={user?.phoneNumber} phoneNumberConfirmed={user?.phoneNumberConfirmed} />
+          )}
           {selectedItem == MenuSection.WorkoutLog && <TextSm>Unavailable</TextSm>}
         </SettingContent>
       </Flex>
