@@ -42,26 +42,6 @@ export const reduxReducer: Reducer<IReduxState, ReduxActions> = (state = initial
         memberStatus: action.memberStatus,
       };
     }
-    case types.LOGIN_USER: {
-      return {
-        ...state,
-        isAuthenticated: action.isAuthenticated,
-        user: action.user,
-      };
-    }
-    case types.LOAD_USER_PROFILE: {
-      return {
-        ...state,
-        user: action.user,
-        isAuthenticated: action.isAuthenticated,
-      };
-    }
-    case types.CREATE_FIRST_VISIT_STATS: {
-      return {
-        ...state, //TODO UPDATE LIFTING STATS
-        user: { ...state.user, firstVisit: true },
-      };
-    }
     default:
       return state;
   }

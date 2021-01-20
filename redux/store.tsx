@@ -2,7 +2,6 @@ import { createStore, applyMiddleware, Store, compose, AnyAction } from 'redux';
 import thunk from 'redux-thunk';
 import { combineReducers } from 'redux';
 import { reduxReducer } from './reduxReducer';
-import { DESTROY_SESSION } from './actionTypes';
 import { IReduxState } from './initialState';
 
 export interface IAppState {
@@ -17,9 +16,6 @@ const appReducer = combineReducers<IAppState>({
 });
 
 const rootReducer = (state: any, action: AnyAction) => {
-  // Clear all data in redux store to initial.
-  if (action.type === DESTROY_SESSION) state = undefined;
-
   return appReducer(state, action);
 };
 
