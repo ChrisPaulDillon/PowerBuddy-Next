@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Checkbox, useToast } from '@chakra-ui/core';
+import { Box, Checkbox, Radio, RadioGroup, Stack, useToast } from '@chakra-ui/core';
 import { useForm } from 'react-hook-form';
 import { CenterColumnFlex } from '../../../layout/Flexes';
 import { PbPrimaryButton } from '../../../common/Buttons';
@@ -16,11 +16,14 @@ interface IEditProfile {
   lastName: string;
   bodyWeight: number;
   quotesEnabled: boolean;
+  usingMetric: boolean;
 }
 
 const EditProfileForm = () => {
   const { user } = useUserContext();
   const [bodyWeight, setBodyWeight] = useState<number>(user?.bodyWeight!);
+  const [usingMetric, setUsingMetric] = useState(user?.usingMetric ? '1' : '2');
+
   const toast = useToast();
 
   const updateBodyWeight = (e) => {
@@ -38,6 +41,7 @@ const EditProfileForm = () => {
       lastName: lastName,
       quotesEnabled: quotesEnabled,
       bodyWeight: bodyWeight,
+      usingMetric: usingMetric === '1' ? true : false,
     };
 
     try {
@@ -97,7 +101,19 @@ const EditProfileForm = () => {
             <Checkbox name="quotesEnabled" color="green.500" defaultIsChecked={user.quotesEnabled} ref={register} />
           </PbStack>
         </Box>
-        <CenterColumnFlex mt="4">
+        <Box m="1" mt={1}>
+          <RadioGroup onChange={(e) => setUsingMetric(e.toString())} value={usingMetric}>
+            <PbStack>
+              <Radio value="1">
+                <TextXs mr={2}>Metric</TextXs>
+              </Radio>
+              <Radio value="2">
+                <TextXs>Pounds</TextXs>
+              </Radio>
+            </PbStack>
+          </RadioGroup>
+        </Box>
+        <CenterColumnFlex mt={3}>
           <PbPrimaryButton type="submit" loading={formState.isSubmitting}>
             Update
           </PbPrimaryButton>

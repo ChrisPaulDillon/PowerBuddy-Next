@@ -80,6 +80,7 @@ const LoginForm = ({ onClose, setLoginState }: any) => {
         isClosable: true,
         position: 'top',
       });
+      const response = await axios.post(SendEmailConfirmationUrl(userId));
     } catch (error) {}
   };
 

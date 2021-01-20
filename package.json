@@ -1,5 +1,5 @@
 {
-  "name": "learn-starter",
+  "name": "PowerBuddy-NextJs",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -22,7 +22,7 @@
     "moment": "^2.29.1",
     "next": "^10.0.2",
     "next-transpile-modules": "^4.1.0",
-    "powerbuddy-shared": "^1.0.15",
+    "powerbuddy-shared": "^1.0.18",
     "react": "17.0.1",
     "react-device-detect": "^1.15.0",
     "react-dom": "16.13.1",

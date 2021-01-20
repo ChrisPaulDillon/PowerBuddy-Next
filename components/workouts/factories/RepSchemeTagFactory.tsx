@@ -50,7 +50,8 @@ const RepSchemeTagFactory: React.FC<IProps> = ({ weightLifted, noOfReps, current
 };
 
 const NormalRepSchemeTag = ({ setEditRepAlert, setRepsAchieved, weightLifted, noOfReps, currentReps, repColor }: any) => {
-  const { contentDisabled } = useWorkoutContext();
+  const { contentDisabled, weightType } = useWorkoutContext();
+
   return (
     <PbTag rounded="full" maxH="25px">
       <Box
@@ -67,7 +68,7 @@ const NormalRepSchemeTag = ({ setEditRepAlert, setRepsAchieved, weightLifted, no
           '80px', // 48em-62em
           '80px', // 62em+
         ]}>
-        {weightLifted <= 0 ? 'BW x' : weightLifted + 'kg x'}
+        {weightLifted <= 0 ? 'BW x' : weightLifted + `${weightType} x`}
         {noOfReps}
       </TextRep>
       <PbToolTip label="Click to set how many reps were achieved on this set">
@@ -79,39 +80,49 @@ const NormalRepSchemeTag = ({ setEditRepAlert, setRepsAchieved, weightLifted, no
   );
 };
 
-const PersonalBestRepSchemeTag = ({ weightLifted, noOfReps }: any) => (
-  <PbTag rounded="full" maxH="25px">
-    <TextRep
-      minW={[
-        '65px', // 0-30em
-        '70px', // 30em-48em
-        '80px', // 48em-62em
-        '80px', // 62em+
-      ]}>
-      {weightLifted}kg x{noOfReps}
-    </TextRep>
-    <PbToolTip label="New Lifetime PR Hit!">
-      <IconButton icon={<FaCrown />} colorScheme="yellow" fontSize="17px" aria-label="" isRound variant="ghost" size="sm" />
-    </PbToolTip>
-  </PbTag>
-);
+const PersonalBestRepSchemeTag = ({ weightLifted, noOfReps }: any) => {
+  const { contentDisabled, weightType } = useWorkoutContext();
 
-const DisabledRepSchemeTag = ({ setEditRepAlert, weightLifted, noOfReps }: any) => (
-  <PbTag rounded="full" maxH="25px">
-    <Box as={MdModeEdit} aria-label="" size="1em" onClick={() => setEditRepAlert(true)} />
-    <TextRep
-      minW={[
-        '65px', // 0-30em
-        '70px', // 30em-48em
-        '80px', // 48em-62em
-        '80px', // 62em+
-      ]}>
-      {weightLifted}kg x{noOfReps}
-    </TextRep>
-    <PbToolTip label="Cannot mark future exercises">
-      <IconButton icon={<FaBan />} fontSize="15px" aria-label="" variant="ghost" size="sm" isRound />
-    </PbToolTip>
-  </PbTag>
-);
+  return (
+    <PbTag rounded="full" maxH="25px">
+      <TextRep
+        minW={[
+          '65px', // 0-30em
+          '70px', // 30em-48em
+          '80px', // 48em-62em
+          '80px', // 62em+
+        ]}>
+        {weightLifted}
+        {weightType} x{noOfReps}
+      </TextRep>
+      <PbToolTip label="New Lifetime PR Hit!">
+        <IconButton icon={<FaCrown />} colorScheme="yellow" fontSize="17px" aria-label="" isRound variant="ghost" size="sm" />
+      </PbToolTip>
+    </PbTag>
+  );
+};
+
+const DisabledRepSchemeTag = ({ setEditRepAlert, weightLifted, noOfReps }: any) => {
+  const { contentDisabled, weightType } = useWorkoutContext();
+
+  return (
+    <PbTag rounded="full" maxH="25px">
+      <Box as={MdModeEdit} aria-label="" size="1em" onClick={() => setEditRepAlert(true)} />
+      <TextRep
+        minW={[
+          '65px', // 0-30em
+          '70px', // 30em-48em
+          '80px', // 48em-62em
+          '80px', // 62em+
+        ]}>
+        {weightLifted}
+        {weightType} x{noOfReps}
+      </TextRep>
+      <PbToolTip label="Cannot mark future exercises">
+        <IconButton icon={<FaBan />} fontSize="15px" aria-label="" variant="ghost" size="sm" isRound />
+      </PbToolTip>
+    </PbTag>
+  );
+};
 
 export default RepSchemeTagFactory;

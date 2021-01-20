@@ -24,8 +24,6 @@ const PhoneNumberVerifyForm: React.FC<IProps> = ({ currentPhoneNumber, phoneNumb
 
   const { handleSubmit, formState, register, errors } = useForm();
 
-  console.log(phoneNumberConfirmed);
-
   const onSubmit = async ({ phoneNumber, code }: any) => {
     if (smsSent) {
       try {

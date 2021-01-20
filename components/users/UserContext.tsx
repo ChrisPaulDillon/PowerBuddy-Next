@@ -24,7 +24,5 @@ export default function UserProvider({ user, setUser, children }: IContextInputP
     setIsAuthenticated(Object.keys(user).length > 0);
   }, [user]);
 
-  console.log(isAuthenticated);
-
   return <UserContext.Provider value={{ user, setUser, isAuthenticated }}>{children}</UserContext.Provider>;
 }
