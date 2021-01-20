@@ -20,10 +20,10 @@ export const validatePassword = (value: string) => {
   let error;
   if (!value) {
     error = 'Password is Required';
-  } else if (value.length < 8) {
-    error = 'Minimum 8 Characters';
-  } else if (!/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/.test(value)) {
-    error = 'Must contain one special character & upper case letter';
+  } else if (value.length < 6) {
+    error = 'Password must be a minimum of 6 Characters';
+  } else if ((/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/).test(value)) {
+    error = 'Must contain one upper case and numerical value';
   }
   return error || true;
 };

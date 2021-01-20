@@ -8,7 +8,6 @@ import { TextError, TextXs } from '../../common/Texts';
 import { PbPrimaryButton } from '../../common/Buttons';
 import { MdAccountBox } from 'react-icons/md';
 import { validateInput } from '../../../util/formInputs';
-import { validatePassword } from '../../../util/formInputs';
 import { LoginUserUrl } from '../../../api/account/user';
 import axios from 'axios';
 import { setAuthorizationToken } from '../../../redux/util/authorization';

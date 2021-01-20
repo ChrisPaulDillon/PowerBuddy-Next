@@ -1,5 +1,4 @@
 import { Box, Button, Flex, FormControl, FormErrorMessage, InputGroup, InputRightElement, Link, useToast } from '@chakra-ui/core';
-import { setUser } from '@sentry/react';
 import axios from 'axios';
 import { IUser } from 'powerbuddy-shared/lib';
 import React, { useState } from 'react';
@@ -8,8 +7,6 @@ import { MdAccountBox, TiArrowBack } from 'react-icons/all';
 import { useDispatch } from 'react-redux';
 import { RegisterUserUrl } from '../../../api/account/user';
 import { SendEmailConfirmationUrl } from '../../../api/public/email';
-import { REGISTER_USER } from '../../../redux/actionTypes';
-import { setAuthorizationToken } from '../../../redux/util/authorization';
 import { validateEmailInput, validateInput, validatePassword } from '../../../util/formInputs';
 import { PbPrimaryButton } from '../../common/Buttons';
 import PbIconButton from '../../common/IconButtons';
@@ -18,7 +15,7 @@ import { TextXs, TextError } from '../../common/Texts';
 import { CenterColumnFlex } from '../../layout/Flexes';
 import { LoginStateEnum } from '../factories/LoginFormFactory';
 
-const RegisterForm = ({ onClose, setLoginState }: any) => {
+const RegisterForm = ({ setLoginState }: any) => {
   const [showPW, setShowPW] = React.useState(false);
   const handleClick = () => setShowPW(!showPW);
 
@@ -26,12 +23,9 @@ const RegisterForm = ({ onClose, setLoginState }: any) => {
   const [signedUp, setSignedUp] = useState<boolean>(false);
   const [userId, setUserId] = useState<string>('');
 
-  const dispatcher = useDispatch();
   const toast = useToast();
 
   const { register, handleSubmit, errors, formState } = useForm();
-
-  console.log(signedUp);
 
   const onSubmit = async ({ email, username, password }: any) => {
     const user: IUser = {
@@ -61,7 +55,6 @@ const RegisterForm = ({ onClose, setLoginState }: any) => {
 
   const sendEmailConfirmation = async () => {
     try {
-      const response = await axios.post(SendEmailConfirmationUrl(userId! as string));
       toast({
         title: 'Success',
         description: 'Confirmation Email Sent Successfully. Please check your inbox',
