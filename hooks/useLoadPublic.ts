@@ -17,7 +17,6 @@ const useLoadPublic = () => {
   const { memberStatus } = useSelector((state: IAppState) => state.state);
   const { repSchemeTypes } = useSelector((state: IAppState) => state.state);
   const { templateDifficulties } = useSelector((state: IAppState) => state.state);
-  const { templates } = useSelector((state: IAppState) => state.state);
 
   const dispatcher = useDispatch();
 
