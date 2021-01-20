@@ -6,9 +6,7 @@ import { useMemo } from 'react';
 import { FaMoon } from 'react-icons/fa';
 import { IoIosLogOut } from 'react-icons/io';
 import { MdArrowBack, MdChevronRight, MdPersonPin } from 'react-icons/md';
-import { useDispatch } from 'react-redux';
 import useAuthentication from '../../hooks/useAuthentication';
-import { deauthenticateUser } from '../../redux/area/account/userActions';
 import { TextSm } from '../common/Texts';
 import { PROFILE_URL, SETTINGS_URL } from '../../InternalLinks';
 import { FcSettings } from 'react-icons/fc';
@@ -29,7 +27,6 @@ export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
   useAuthentication();
   const router = useRouter();
   const [menuSection, setMenuSection] = useState<MenuSection | undefined>(MenuSection.Main);
-  const dispatcher = useDispatch();
   const toast = useToast();
 
   const userMenu = useMemo(
@@ -147,7 +144,7 @@ export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
 
 export const MainMenuContent = (props: any) => <Accordion className="hide-scrollbar" allowToggle h="100%" {...props} />;
 
-const MenuPageSingle = ({ title, description, onClickBack, children, ...rest }: any) => {
+const MenuPageSingle = ({ title, description, onClickBack, children }: any) => {
   return (
     <>
       <Stack isInline w="100%" justify="space-between" align="center" px="0.5em" mb="1em">
