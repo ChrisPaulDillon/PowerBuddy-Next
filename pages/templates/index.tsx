@@ -21,7 +21,7 @@ import { PageContent, PageHeader } from '../../components/layout/Page';
 const Index: NextPage = () => {
   const router = useRouter();
 
-  const { isAuthenticated } = useSelector((state: IAppState) => state.state);
+  const { isAuthenticated } = useUserContext();
 
   const [templates, setTemplates] = useState<ITemplateProgram[]>([]);
 

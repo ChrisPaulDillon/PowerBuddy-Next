@@ -12,6 +12,7 @@ import { deauthenticateUser } from '../../redux/area/account/userActions';
 import { TextSm } from '../common/Texts';
 import { PROFILE_URL, SETTINGS_URL } from '../../InternalLinks';
 import { FcSettings } from 'react-icons/fc';
+import { setAuthorizationToken } from '../../redux/util/authorization';
 
 export enum MenuSection {
   Main,
@@ -80,7 +81,8 @@ export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
               icon: IoIosLogOut,
               onClick: () => {
                 onClose();
-                dispatcher(deauthenticateUser());
+                localStorage.removeItem('token');
+                setAuthorizationToken(null);
                 toast({
                   title: 'Success',
                   description: 'Successfully Logged Out',

@@ -1,5 +1,3 @@
-import { useSelector } from 'react-redux';
-import { IAppState } from '../../../redux/store';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Box, FormControl, FormErrorMessage, Select, useToast } from '@chakra-ui/core';
@@ -13,8 +11,8 @@ import moment from 'moment';
 import ProgramSummary from './ProgramSummary';
 import { useEffect } from 'react';
 import { DayValue } from 'react-modern-calendar-datepicker';
-import { useAxios } from '../../../hooks/useAxios';
 import { IProgramLogInputScratch } from 'powerbuddy-shared/lib';
+import { useUserContext } from '../../users/UserContext';
 interface IProps {
   workoutDates?: Array<Date>;
   onClose: () => void;
@@ -23,7 +21,7 @@ interface IProps {
 
 const CreateProgramLogFromScratchForm: React.FC<IProps> = ({ onClose, onCreateSuccessOpen }) => {
   // const { data: calendarData, loading: calendarLoading } = useAxios<IProgramLogCalendarStats>(GetAllProgramLogCalendarStatsQueryUrl());
-  const { user } = useSelector((state: IAppState) => state.state);
+  const { user } = useUserContext();
   const [selectedDate, setSelectedDate] = useState<Date | undefined>();
   const [calendarDate, setCalendarDate] = useState<DayValue>();
   const [endDate, setEndDate] = useState<Date>();
@@ -52,13 +50,6 @@ const CreateProgramLogFromScratchForm: React.FC<IProps> = ({ onClose, onCreateSu
       setEndDate(moment(selectedDate).add(noOfWeeks!, 'weeks').toDate());
       setPhase(phase + 1);
     } else {
-      const programLogInput: IProgramLogInputScratch = {
-        userId: user.userId!,
-        noOfWeeks: noOfWeeks,
-        startDate: selectedDate ?? new Date(),
-        endDate: endDate,
-        customName: customName,
-      };
       try {
         // const response = await axios.post<IServerResponse<IProgramLog>>(CreateProgramLogFromScratchUrl(), programLogInput);
         onCreateSuccessOpen();

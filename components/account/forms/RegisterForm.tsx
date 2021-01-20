@@ -4,9 +4,7 @@ import { IUser } from 'powerbuddy-shared/lib';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { MdAccountBox, TiArrowBack } from 'react-icons/all';
-import { useDispatch } from 'react-redux';
 import { RegisterUserUrl } from '../../../api/account/user';
-import { SendEmailConfirmationUrl } from '../../../api/public/email';
 import { validateEmailInput, validateInput, validatePassword } from '../../../util/formInputs';
 import { PbPrimaryButton } from '../../common/Buttons';
 import PbIconButton from '../../common/IconButtons';
@@ -21,7 +19,7 @@ const RegisterForm = ({ setLoginState }: any) => {
 
   const [error, setError] = useState<boolean>(false);
   const [signedUp, setSignedUp] = useState<boolean>(false);
-  const [userId, setUserId] = useState<string>('');
+  const [, setUserId] = useState<string>('');
 
   const toast = useToast();
 

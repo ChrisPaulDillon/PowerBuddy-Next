@@ -6,10 +6,11 @@ import { IQuote } from 'powerbuddy-shared';
 import { IAppState } from '../../redux/store';
 import { TextQuote, TextAuthorQuote } from '../common/Texts';
 import { CenterColumnFlex } from '../layout/Flexes';
+import { useUserContext } from '../users/UserContext';
 
 const QuoteDisplay = () => {
   const { quotes } = useSelector((state: IAppState) => state.state);
-  const { user } = useSelector((state: IAppState) => state.state);
+  const { user } = useUserContext();
   const quoteOfDayEntry = useShuffleArray(quotes) as IQuote;
 
   if (quotes.length <= 0 || !user.quotesEnabled) return <Box></Box>;

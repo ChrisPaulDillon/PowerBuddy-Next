@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import { Box, Checkbox, Flex, useToast } from '@chakra-ui/core';
+import { Box, Checkbox, useToast } from '@chakra-ui/core';
 import { useForm } from 'react-hook-form';
 import { CenterColumnFlex } from '../../../layout/Flexes';
 import { PbPrimaryButton } from '../../../common/Buttons';
 import { TextXs } from '../../../common/Texts';
 import { PbStack } from '../../../common/Stacks';
-import { useSelector } from 'react-redux';
-import { IAppState } from '../../../../redux/store';
 import { FormInput, FormNumberInput } from '../../../common/Inputs';
 import axios from 'axios';
 import { EditProfileUrl } from '../../../../api/account/user';
+import { useUserContext } from '../../../users/UserContext';
 
 interface IEditProfile {
   userId: string;
@@ -20,7 +19,7 @@ interface IEditProfile {
 }
 
 const EditProfileForm = () => {
-  const { user } = useSelector((state: IAppState) => state.state);
+  const { user } = useUserContext();
   const [bodyWeight, setBodyWeight] = useState<number>(user?.bodyWeight!);
   const toast = useToast();
 
@@ -34,7 +33,7 @@ const EditProfileForm = () => {
 
   const onSubmit = async ({ firstName, lastName, quotesEnabled }: any) => {
     const profile: IEditProfile = {
-      userId: user.userId!,
+      userId: user?.userId!,
       firstName: firstName,
       lastName: lastName,
       quotesEnabled: quotesEnabled,
@@ -73,7 +72,7 @@ const EditProfileForm = () => {
             <TextXs pt="3" pr="1" minW="80px">
               First Name
             </TextXs>
-            <FormInput name="firstName" defaultValue={user!.firstName!} ref={register} size="sm" />
+            <FormInput name="firstName" defaultValue={user?.firstName!} ref={register} size="sm" />
           </PbStack>
         </Box>
         <Box m="1">
@@ -81,7 +80,7 @@ const EditProfileForm = () => {
             <TextXs pt="3" pr="1" minW="80px">
               Last Name
             </TextXs>
-            <FormInput name="lastName" defaultValue={user!.lastName!} ref={register} size="sm" />
+            <FormInput name="lastName" defaultValue={user?.lastName!} ref={register} size="sm" />
           </PbStack>
         </Box>
         <Box m="1">
@@ -89,7 +88,7 @@ const EditProfileForm = () => {
             <TextXs pt="3" pr="1" minW="80px">
               Weight
             </TextXs>
-            <FormNumberInput name="weight" defaultValue={user!.bodyWeight!} ref={register} onChange={(e) => updateBodyWeight(e)} size="sm" />
+            <FormNumberInput name="weight" defaultValue={user?.bodyWeight!} ref={register} onChange={(e) => updateBodyWeight(e)} size="sm" />
           </PbStack>
         </Box>
         <Box m="1" mt="2">

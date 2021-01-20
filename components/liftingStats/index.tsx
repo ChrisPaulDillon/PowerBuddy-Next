@@ -5,8 +5,6 @@ import { GetAllUserLiftingStatsUrl } from '../../api/account/liftingStats';
 import { useAxios } from '../../hooks/useAxios';
 import ProgressSpinner from '../common/ProgressSpinner';
 import { GetLiftFeedByUserName } from '../../api/public/liftingStat';
-import { useSelector } from 'react-redux';
-import { IAppState } from '../../redux/store';
 import LiftFeed from './LiftFeed';
 import LiftingStatList from './LiftingStatList';
 import { useDisclosure } from '@chakra-ui/core';
@@ -16,10 +14,11 @@ import { WORKOUT_DIARY_URL } from '../../InternalLinks';
 import { useRouter } from 'next/router';
 import { PageTitle } from '../common/Texts';
 import { ILiftingStatGrouped, ILiftFeed } from 'powerbuddy-shared';
+import { useUserContext } from '../users/UserContext';
 
 const LiftingStatsIndexPage = () => {
   const router = useRouter();
-  const { user } = useSelector((state: IAppState) => state.state);
+  const { user } = useUserContext();
   const { loading, data: liftingStats, statusCode: statCode } = useAxios<ILiftingStatGrouped[]>(GetAllUserLiftingStatsUrl());
   const { loading: feedLoad, data: feedData } = useAxios<ILiftFeed[]>(GetLiftFeedByUserName(user.userName!));
   const [liftFeed, setLiftFeed] = useState<ILiftFeed[]>([]);

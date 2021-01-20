@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import NavBar from './NavBar';
-import SideNav from './LeftNav';
 import Page from './Page';
-import { Flex, Box, useColorMode, useDisclosure, useToken } from '@chakra-ui/core';
+import { Flex, useColorMode, useDisclosure } from '@chakra-ui/core';
 import FirstVisitAlert from '../misc/FirstVisitAlert';
-import { IAppState } from '../../redux/store';
-import { useSelector } from 'react-redux';
 import useScreenSizes from '../../hooks/useScreenSizes';
 import { Banner, HeadingMd } from '../common/Texts';
 import { CenterColumnFlex } from './Flexes';
@@ -13,14 +10,14 @@ import { ModalForm } from '../common/Modals';
 import { PbDrawerHeaderless } from '../common/Drawers';
 import theme from '../../theme';
 import Footer from './Footer';
+import { useUserContext } from '../users/UserContext';
 
 const Layout = ({ children }: any) => {
   const { colorMode } = useColorMode();
   const [menuOpen, setMenuOpen] = useState(false);
-  const { user } = useSelector((state: IAppState) => state.state);
-  const { isAuthenticated } = useSelector((state: IAppState) => state.state);
+  const { user, isAuthenticated } = useUserContext();
   const [, setAddFirstVisitAlert] = useState<boolean | undefined>(true);
-  const { onOpen, onClose } = useDisclosure();
+  const { onClose } = useDisclosure();
   const { SCREEN_MOBILE } = useScreenSizes();
 
   return (

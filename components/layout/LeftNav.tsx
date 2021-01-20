@@ -1,20 +1,19 @@
 import React from 'react';
-import { Box, Flex, useColorMode, Stack, Button, DrawerOverlay, DrawerContent, DrawerHeader, DrawerBody, Drawer, Divider } from '@chakra-ui/core';
+import { Box, Flex, useColorMode, Stack, DrawerOverlay, DrawerContent, DrawerHeader, DrawerBody, Drawer, Divider } from '@chakra-ui/core';
 import { BsFillGrid3X3GapFill, BsCalendarFill } from 'react-icons/bs';
 import { RiAdminLine, FaHistory, FaUserFriends } from 'react-icons/all';
 import theme from '../../theme';
 import { PbToolTip } from '../common/ToolTips';
 import { IconType } from 'react-icons/lib';
-import { CenterColumnFlex } from './Flexes';
-import { useSelector } from 'react-redux';
 import { Banner } from '../common/Texts';
 import { MdMenu } from 'react-icons/md';
-import { IAppState } from '../../redux/store';
 import useScreenSizes from '../../hooks/useScreenSizes';
-import { ADMIN_URL, USERS_URL, LOGHISTORY_URL, TEMPLATES_URL, WORKOUT_DIARY_URL } from '../../InternalLinks';
+import { ADMIN_URL, USERS_URL, LOGHISTORY_URL, TEMPLATES_URL } from '../../InternalLinks';
 import PbIconButton from '../common/IconButtons';
 import { MenuItem } from '../common/Menus';
 import Link from 'next/link';
+import { useUserContext } from '../users/UserContext';
+import { IUser } from 'powerbuddy-shared/lib';
 
 const sideMenu = {
   groups: [
@@ -58,6 +57,8 @@ const sideMenu = {
 
 export const MobileSideNav = ({ isOpen, onClose }) => {
   const { colorMode } = useColorMode();
+  const { user } = useUserContext();
+
   return (
     <Box>
       <Drawer placement="left" onClose={onClose} isOpen={isOpen} size="xs">
@@ -71,7 +72,7 @@ export const MobileSideNav = ({ isOpen, onClose }) => {
             </Flex>
           </DrawerHeader>
           <DrawerBody>
-            <LeftMenuItems menuOpen={isOpen} onClose={onClose} />
+            <LeftMenuItems menuOpen={isOpen} onClose={onClose} user={user} />
           </DrawerBody>
         </DrawerContent>
       </Drawer>
@@ -86,6 +87,7 @@ interface ISideNavProps {
 const LeftNav: React.FC<ISideNavProps> = ({ menuOpen, ...props }) => {
   const { colorMode } = useColorMode();
   const { SCREEN_DESKTOP } = useScreenSizes();
+  const { user } = useUserContext();
 
   return (
     <Box>
@@ -102,7 +104,7 @@ const LeftNav: React.FC<ISideNavProps> = ({ menuOpen, ...props }) => {
           h="100%"
           minW="75px"
           {...props}>
-          <LeftMenuItems menuOpen={menuOpen} />
+          <LeftMenuItems menuOpen={menuOpen} user={user} />
         </Flex>
       )}
     </Box>
@@ -112,10 +114,10 @@ const LeftNav: React.FC<ISideNavProps> = ({ menuOpen, ...props }) => {
 interface ILeftMenuItemsProps {
   menuOpen: boolean;
   onClose?: () => void;
+  user: IUser;
 }
 
-const LeftMenuItems: React.FC<ILeftMenuItemsProps> = ({ menuOpen, onClose }) => {
-  const { user } = useSelector((state: IAppState) => state.state);
+const LeftMenuItems: React.FC<ILeftMenuItemsProps> = ({ menuOpen, onClose, user }) => {
   return (
     <Box>
       {sideMenu.groups.map((item, idx) => (
@@ -126,7 +128,7 @@ const LeftMenuItems: React.FC<ILeftMenuItemsProps> = ({ menuOpen, onClose }) => 
             tooltip={item.tooltip}
             link={item.link}
             memberStatusId={item.memberStatusId}
-            userMemberStatusId={user.memberStatusId ?? 0}
+            userMemberStatusId={user?.memberStatusId ?? 0}
             isOpen={menuOpen}
             onClose={onClose}
             idx={idx}

@@ -1,12 +1,11 @@
 import { Box, Button, Divider, Flex, useColorMode } from '@chakra-ui/core';
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { IAppState } from '../../../redux/store';
 import { HeadingMd, PageTitle, TextSm, TextXs } from '../../common/Texts';
 import UserAvatar from '../../layout/UserAvatar';
 import theme from '../../../theme';
 import EditProfileForm from './forms/EditProfileForm';
 import SecurityGroup from './SecurityGroup';
+import { useUserContext } from '../../users/UserContext';
 
 export enum MenuSection {
   Profile,
@@ -16,7 +15,7 @@ export enum MenuSection {
 
 const AccountSettings = () => {
   const [selectedItem, setSelectedItem] = useState<MenuSection>(MenuSection.Profile);
-  const { user } = useSelector((state: IAppState) => state.state);
+  const { user } = useUserContext();
   const { colorMode } = useColorMode();
 
   const settings = {

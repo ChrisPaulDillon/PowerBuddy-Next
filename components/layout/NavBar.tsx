@@ -15,6 +15,7 @@ import PbIconButton from '../common/IconButtons';
 import TemplateSearchBar from '../templatePrograms/TemplateSearchBar';
 import theme from '../../theme';
 import Link from 'next/link';
+import { useUserContext } from '../users/UserContext';
 
 interface INavBarProps {
   menuOpen: boolean;
@@ -22,10 +23,9 @@ interface INavBarProps {
 }
 
 const NavBar: React.FC<INavBarProps> = ({}) => {
-  const { user } = useSelector((state: IAppState) => state.state);
+  const { user, isAuthenticated } = useUserContext();
   const { colorMode } = useColorMode();
   const { SCREEN_MOBILE } = useScreenSizes();
-  const { isAuthenticated } = useSelector((state: IAppState) => state.state);
 
   const { isOpen: isLeftNavOpen, onOpen: onLeftNavOpen, onClose: onLeftNavClose } = useDisclosure();
   const { isOpen: isMobileOpen, onOpen: onMobileOpen, onClose: onMobileClose } = useDisclosure();

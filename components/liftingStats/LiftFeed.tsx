@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Flex, Box, Link, useToast } from '@chakra-ui/core';
-import { useSelector } from 'react-redux';
-import { IAppState } from '../../redux/store';
 import { TextSm } from '../common/Texts';
 import moment from 'moment';
 import { formatDate } from '../../util/dateHelper';
@@ -10,14 +8,13 @@ import PbIconButton from '../common/IconButtons';
 import Axios from 'axios';
 import { DeleteLiftingStatAuditUrl } from '../../api/account/liftingStats';
 import { ILiftFeed } from 'powerbuddy-shared';
+import { useUserContext } from '../users/UserContext';
 
 interface IProps {
   liftFeed: ILiftFeed[];
 }
 
 const LiftFeed: React.FC<IProps> = ({ liftFeed }) => {
-  const { user } = useSelector((state: IAppState) => state.state);
-
   return (
     <Flex flexDir="column" flexWrap="wrap" justifyContent="center" alignItems="center" p="4" w="100%">
       {liftFeed.map((x, idx) => (
@@ -35,7 +32,7 @@ interface ILiftFeedSingleProps {
 
 const LiftFeedSingle: React.FC<ILiftFeedSingleProps> = ({ liftFeed }) => {
   const [loading, setLoading] = useState<boolean>(false);
-  const { repRange, userName, dateChanged, weight, exerciseName, liftingStatId, exerciseId, liftingStatAuditId } = liftFeed;
+  const { repRange, dateChanged, weight, exerciseName, exerciseId, liftingStatAuditId } = liftFeed;
 
   const toast = useToast();
   const onClick = () => `/personalBests/${exerciseId}`;

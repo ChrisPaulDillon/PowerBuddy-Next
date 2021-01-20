@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import { FormErrorMessage, FormControl, Button, Flex, Box, InputGroup, InputRightElement, useToast, Link } from '@chakra-ui/core';
 import { FormInput } from '../../common/Inputs';
 import { CenterColumnFlex, CenterRowFlex } from '../../layout/Flexes';
-import { useDispatch } from 'react-redux';
 import { TextError, TextXs } from '../../common/Texts';
 import { PbPrimaryButton } from '../../common/Buttons';
 import { MdAccountBox } from 'react-icons/md';
@@ -11,10 +10,10 @@ import { validateInput } from '../../../util/formInputs';
 import { LoginUserUrl } from '../../../api/account/user';
 import axios from 'axios';
 import { setAuthorizationToken } from '../../../redux/util/authorization';
-import { LOGIN_USER } from '../../../redux/actionTypes';
 import { IUser } from 'powerbuddy-shared';
 import { LoginStateEnum } from '../factories/LoginFormFactory';
 import { SendEmailConfirmationUrl } from '../../../api/public/email';
+import { useUserContext } from '../../users/UserContext';
 
 const LoginForm = ({ onClose, setLoginState }: any) => {
   const [showPW, setShowPW] = React.useState(false);
@@ -23,7 +22,8 @@ const LoginForm = ({ onClose, setLoginState }: any) => {
   const [emailNotVerified, setEmailNotVerified] = useState<boolean>(false);
   const [userId, setUserId] = useState<string>('');
 
-  const dispatcher = useDispatch();
+  const { setUser } = useUserContext();
+
   const toast = useToast();
 
   const { register, handleSubmit, errors, formState } = useForm();
@@ -49,11 +49,7 @@ const LoginForm = ({ onClose, setLoginState }: any) => {
       });
       localStorage.setItem('token', response.data.token);
       setAuthorizationToken(response.data.token);
-      dispatcher({
-        type: LOGIN_USER,
-        user: response.data.user,
-        isAuthenticated: true,
-      });
+      setUser(response.data.user);
       onClose();
     } catch (err) {
       const errorCode = err?.response?.data;
@@ -68,7 +64,7 @@ const LoginForm = ({ onClose, setLoginState }: any) => {
         setError('Too many login attempts. Please wait 10 minutes before proceeding');
       }
       if (errorCode?.code == 'UserNotFoundException') {
-        setError('No User found with the associated Username or Email. Make sure you correctly typed these details');
+        setError('No User found with the associated Username or Email');
       }
       setShowError(true);
     }
@@ -76,7 +72,6 @@ const LoginForm = ({ onClose, setLoginState }: any) => {
 
   const sendEmailConfirmation = async () => {
     try {
-      const response = await axios.post(SendEmailConfirmationUrl(userId! as string));
       toast({
         title: 'Success',
         description: 'Confirmation Email Sent Successfully. Please check your inbox',

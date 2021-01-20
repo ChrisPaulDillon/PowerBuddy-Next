@@ -1,19 +1,29 @@
-import { loadUserProfile } from "./../redux/area/account/userActions";
-import { useDisclosure } from "@chakra-ui/core";
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { IAppState } from "../redux/store";
+import { useEffect, useState } from "react";
 import { setAuthorizationToken } from "../redux/util/authorization";
+import { useUserContext } from "../components/users/UserContext";
+import axios from "axios";
+import { GetLoggedInUsersProfileUrl } from "../api/account/user";
+
 
 const useAuthentication = () => {
-  const { isAuthenticated } = useSelector((state: IAppState) => state.state);
-  const { user } = useSelector((state: IAppState) => state.state);
-  const [userAuthenticated, setUserAuthenticated] = useState(false);
-  const dispatcher = useDispatch();
+  const { isAuthenticated } = useUserContext();
+  const { user, setUser } = useUserContext();
+  const [handleAuthentication, setHandleAuthentication] = useState<boolean>(false);
 
   useEffect(() => {
+    const loadUserProfile = async (): Promise<void> => {
+      try {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
+        const response = await axios.get(GetLoggedInUsersProfileUrl());
+        if (response && response.data) {
+          setUser(response.data);
+          setHandleAuthentication(true);
+        }
+      } catch (error) {}
+    };
+
     if (isAuthenticated && Object.keys(user).length !== 0) {
-      return;
+      setHandleAuthentication(true);
     }
     if (!isAuthenticated) {
       if (
@@ -23,14 +33,13 @@ const useAuthentication = () => {
         setAuthorizationToken(localStorage.getItem("token"));
         //user is authenticated, load profile
         if (Object.keys(user).length === 0) {
-          dispatcher(loadUserProfile());
+          loadUserProfile();
         }
       }
-      setUserAuthenticated(true);
     }
-  }, [isAuthenticated]);
+  }, []);
 
-  return isAuthenticated;
+  return handleAuthentication;
 };
 
 export default useAuthentication;

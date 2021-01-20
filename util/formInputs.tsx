@@ -22,8 +22,9 @@ export const validatePassword = (value: string) => {
     error = 'Password is Required';
   } else if (value.length < 6) {
     error = 'Password must be a minimum of 6 Characters';
-  } else if ((/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/).test(value)) {
-    error = 'Must contain one upper case and numerical value';
+  // } else if ((/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/).test(value)) {
+  //   error = 'Must contain one upper case and numerical value';
+  // }
   }
   return error || true;
 };

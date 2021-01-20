@@ -3,7 +3,6 @@ import axios from 'axios';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { GetWorkoutWeekWithDateUrl } from '../api/account/workoutLog';
 import { GetAllTemplateProgramsUrl } from '../api/public/template';
 import MCalendar from '../components/common/MCalendar';
@@ -18,15 +17,15 @@ import useAuthentication from '../hooks/useAuthentication';
 import { useAxios } from '../hooks/useAxios';
 import { ITemplateProgram } from 'powerbuddy-shared';
 import { IWorkoutWeekSummary } from 'powerbuddy-shared';
-import { IAppState } from '../redux/store';
+import { useUserContext } from '../components/users/UserContext';
 
 export default function Home() {
   useAuthentication();
-  const { user } = useSelector((state: IAppState) => state.state);
+  const { user } = useUserContext();
   const router = useRouter();
   const { date } = router.query;
 
-  const { data: weekData, loading: weekLoading } = useAxios<IWorkoutWeekSummary>(GetWorkoutWeekWithDateUrl(date as string));
+  const { data: weekData, loading: weekLoading, error: weekError } = useAxios<IWorkoutWeekSummary>(GetWorkoutWeekWithDateUrl(date as string));
 
   const [selectedDate, handleDateChange] = useState(new Date());
 
@@ -50,10 +49,10 @@ export default function Home() {
   }, [selectedDate]);
 
   useEffect(() => {
-    if (Object.keys(user).length === 0) {
+    if (weekError) {
       onLoginOpen();
     }
-  }, [user]);
+  }, [weekData]);
 
   if (weekLoading) return <ProgressSpinner />;
 

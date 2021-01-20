@@ -29,7 +29,7 @@ const TemplateProgramSingle: NextPage = () => {
   const router = useRouter();
   const { templateProgramId } = router.query;
 
-  const { isAuthenticated } = useSelector((state: IAppState) => state.state);
+  const { isAuthenticated } = useUserContext();
 
   const { loading, data: template, error } = useAxios<ITemplateProgramExtended>(GetTemplateProgramByIdUrl(parseInt(templateProgramId as string)));
 

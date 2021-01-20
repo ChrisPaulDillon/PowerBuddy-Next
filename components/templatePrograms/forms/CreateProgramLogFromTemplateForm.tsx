@@ -13,11 +13,8 @@ import { useAxios } from '../../../hooks/useAxios';
 import { DayValue } from 'react-modern-calendar-datepicker';
 import RepeatTemplateForm from './RepeatTemplateForm';
 import ProgressSpinner from '../../common/ProgressSpinner';
-import Axios from 'axios';
-import { CreateWorkoutLogFromTemplateUrl } from '../../../api/account/workoutLog';
-import { useSelector } from 'react-redux';
-import { IAppState } from '../../../redux/store';
 import { ITemplateProgramExtended, IWeightInput, IWorkoutLogTemplateInput } from 'powerbuddy-shared';
+import { useUserContext } from '../../users/UserContext';
 
 interface IProps {
   onClose: () => void;
@@ -26,7 +23,7 @@ interface IProps {
 }
 
 const CreateProgramLogFromTemplateForm: React.FC<IProps> = ({ onClose, template, onCreateSuccessOpen }) => {
-  const { user } = useSelector((state: IAppState) => state.state);
+  const { user } = useUserContext();
   // const { data: calendarData, loading: calendarLoading } = useAxios<IProgramLogCalendarStats>(GetAllProgramLogCalendarStatsQueryUrl());
   const { data: weightInput, loading: weightInputLoading } = useAxios<IWeightInput[]>(GetPersonalBestsForTemplate(template.templateProgramId!));
   const [curWeightInputs, setCurWeightInputs] = useState<IWeightInput[]>([]);
@@ -108,7 +105,6 @@ const CreateProgramLogFromTemplateForm: React.FC<IProps> = ({ onClose, template,
           dayCount: dayCount,
           weightInputs: curWeightInputs,
         };
-        const response = await Axios.post(CreateWorkoutLogFromTemplateUrl(template.templateProgramId), workoutLog);
         toast({
           title: 'Success',
           description: 'Diary successfully created, visit the diary section to begin tracking',
