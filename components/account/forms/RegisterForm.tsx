@@ -28,16 +28,14 @@ const RegisterForm = ({ setLoginState }: any) => {
   const { register, handleSubmit, errors, formState } = useForm();
 
   const onSubmit = async ({ email, username, password }: any) => {
+    setError(false);
     const user: IUser = {
       email: email,
       userName: username,
       password: password,
     };
     try {
-      setError(false);
       const response = await axios.post(RegisterUserUrl(), user);
-      console.log(response.data);
-
       setUserId(response.data);
       toast({
         title: 'Success',
