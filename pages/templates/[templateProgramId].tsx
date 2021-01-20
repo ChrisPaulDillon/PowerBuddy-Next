@@ -1,22 +1,16 @@
-import { NextPage, NextPageContext } from 'next';
+import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { Badge, Box, Flex, Tab, TabList, TabPanel, TabPanels, Tabs, useDisclosure } from '@chakra-ui/core';
-import axios, { AxiosResponse } from 'axios';
-import React, { useEffect, useState } from 'react';
-import { GetAllTemplateProgramsUrl, GetTemplateProgramByIdUrl } from '../../api/public/template';
-import { ITemplateProgram, ITemplateProgramExtended } from 'powerbuddy-shared';
+import React from 'react';
+import { GetTemplateProgramByIdUrl } from '../../api/public/template';
+import { ITemplateProgramExtended } from 'powerbuddy-shared';
 import { TEMPLATES_URL, WORKOUT_DIARY_URL } from '../../InternalLinks';
-import { useSelector } from 'react-redux';
 import { PbPrimaryButton } from '../../components/common/Buttons';
 import { ModalDrawerForm } from '../../components/common/ModalDrawer';
 import { ModalForward } from '../../components/common/Modals';
 import { PageTitle, TextXsFade } from '../../components/common/Texts';
 import { CenterColumnFlex } from '../../components/layout/Flexes';
 import { LoginModal } from '../../components/shared/Modals';
-import TemplateProgramCardList from '../../components/templatePrograms/TemplateProgramCardList';
-import { IAppState } from '../../redux/store';
-import CreateProgramLogFromScratchForm from '../../components/templatePrograms/forms/CreateProgramLogFromScratchForm';
-import templates from '.';
 import { useAxios } from '../../hooks/useAxios';
 import { BreadcrumbBase, IBreadcrumbInput } from '../../components/common/Breadcrumbs';
 import ProgressSpinner from '../../components/common/ProgressSpinner';
@@ -24,6 +18,7 @@ import CreateProgramLogFromTemplateForm from '../../components/templatePrograms/
 import { FaRunning } from 'react-icons/all';
 import { TemplateWeekCard } from '../../components/templatePrograms/TemplateWeekCard';
 import { PageContent, PageHeader } from '../../components/layout/Page';
+import { useUserContext } from '../../components/users/UserContext';
 
 const TemplateProgramSingle: NextPage = () => {
   const router = useRouter();
