@@ -19,7 +19,8 @@ import { SendEmailConfirmationUrl } from '../../../api/public/email';
 
 const LoginForm = ({ onClose, setLoginState }: any) => {
   const [showPW, setShowPW] = React.useState(false);
-  const [error, setError] = useState<boolean>(false);
+  const [error, setError] = useState<string>('');
+  const [showError, setShowError] = useState<boolean>(false);
   const [emailNotVerified, setEmailNotVerified] = useState<boolean>(false);
   const [userId, setUserId] = useState<string>('');
 
@@ -37,6 +38,7 @@ const LoginForm = ({ onClose, setLoginState }: any) => {
       password: password,
     };
     try {
+      setShowError(false);
       const response = await axios.post(LoginUserUrl(), user);
       toast({
         title: 'Success',
@@ -59,9 +61,17 @@ const LoginForm = ({ onClose, setLoginState }: any) => {
       if (errorCode?.code == 'EmailNotConfirmedException') {
         setEmailNotVerified(true);
         setUserId(errorCode?.message);
-      } else {
-        setError(true);
       }
+      if (errorCode?.code == 'InvalidCredentialsException') {
+        setError('Invalid Username/Email or Password');
+      }
+      if (errorCode?.code == 'AccountLockoutException') {
+        setError('Too many login attempts. Please wait 10 minutes before proceeding');
+      }
+      if (errorCode?.code == 'UserNotFoundException') {
+        setError('No User found with the associated Username or Email. Make sure you correctly typed these details');
+      }
+      setShowError(true);
     }
   };
 
@@ -111,7 +121,7 @@ const LoginForm = ({ onClose, setLoginState }: any) => {
                   type={showPW ? 'text' : 'password'}
                   placeholder="Enter password"
                   name="password"
-                  ref={register({ validate: validatePassword })}
+                  ref={register({ validate: validateInput })}
                 />
                 <InputRightElement width="4.5rem">
                   <Button h="1.75rem" size="sm" onClick={handleClick}>
@@ -122,9 +132,11 @@ const LoginForm = ({ onClose, setLoginState }: any) => {
               <FormErrorMessage>{errors.password && errors.password.message}</FormErrorMessage>
             </FormControl>
           </Box>
-          <TextError textAlign="center" display={error ? 'visible' : 'none'} py={2}>
-            Invalid Username or Password
-          </TextError>
+          {showError && (
+            <TextError textAlign="center" py={2}>
+              {error}
+            </TextError>
+          )}
           <CenterRowFlex pt={1}>
             <TextXs px={1} color="gray.500">
               Forgot Password?{' '}

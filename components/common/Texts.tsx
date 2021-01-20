@@ -82,7 +82,7 @@ export const TextExercise: React.FC<BoxProps> = ({ ...rest }) => {
 
 export const TextError: React.FC<BoxProps> = ({ ...rest }) => {
   const { colorMode } = useColorMode();
-  return <Text color="red.500" fontSize="1xs" fontFamily="'Roboto', serif;" {...rest}></Text>;
+  return <Text color="red.500" fontSize="xs" fontFamily="'Roboto', serif;" {...rest}></Text>;
 };
 
 export const TextExerciseRep: React.FC<BoxProps> = ({ ...rest }) => {
