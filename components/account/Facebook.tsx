@@ -30,7 +30,7 @@ export const Facebook = ({ onClose }) => {
       toast({
         title: 'Error',
         description: 'Could not sign in using Facebook, try an alternative',
-        status: 'success',
+        status: 'error',
         duration: 2000,
         isClosable: true,
         position: 'top',
@@ -38,14 +38,5 @@ export const Facebook = ({ onClose }) => {
     }
   };
 
-  return (
-    <FacebookLogin
-      appId="399640227879888"
-      autoLoad
-      fields="name,email,picture"
-      onClick={() => {}}
-      callback={handleFacebookLogin}
-      icon="fa-facebook"
-    />
-  );
+  return <FacebookLogin appId="399640227879888" fields="name,email,picture" onClick={() => {}} callback={handleFacebookLogin} icon="fa-facebook" />;
 };
