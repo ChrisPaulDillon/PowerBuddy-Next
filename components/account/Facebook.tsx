@@ -10,10 +10,12 @@ export const Facebook = ({ onClose }) => {
   const toast = useToast();
   const { setUser } = useUserContext();
 
-  const handleFacebookLogin = async (response) => {
+  const handleFacebookLogin = (response) => {
     const { accessToken } = response;
+    console.log(accessToken);
+
     try {
-      await axios.post(LoginWithFacebookUrl(), { accessToken: accessToken });
+      axios.post(LoginWithFacebookUrl(), { accessToken: accessToken });
       toast({
         title: 'Success',
         description: 'Successfully Signed In',
