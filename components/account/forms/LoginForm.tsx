@@ -7,7 +7,7 @@ import { TextError, TextXs } from '../../common/Texts';
 import { PbPrimaryButton } from '../../common/Buttons';
 import { MdAccountBox } from 'react-icons/md';
 import { validateInput } from '../../../util/formInputs';
-import { LoginUserUrl } from '../../../api/account/user';
+import { LoginUserUrl } from '../../../api/account/auth';
 import axios from 'axios';
 import { setAuthorizationToken } from '../../../redux/util/authorization';
 import { IUser } from 'powerbuddy-shared';
@@ -154,7 +154,7 @@ const LoginForm = ({ onClose, setLoginState }: any) => {
             </CenterRowFlex>
           </Box>
           <Box mt={2}>
-            <Facebook />
+            <Facebook onClose={onClose} />
           </Box>
         </Box>
       </CenterColumnFlex>

@@ -3,7 +3,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AiFillCheckCircle, ImBlocked } from 'react-icons/all';
-import { RequestSmsVerificationUrl, SendSmsVerificationUrl } from '../../../../api/account/user';
+import { RequestSmsVerificationUrl, SendSmsVerificationUrl } from '../../../../api/account/auth';
 import { validateInput } from '../../../../util/formInputs';
 import { PbPrimaryButton } from '../../../common/Buttons';
 import { FormInput } from '../../../common/Inputs';
@@ -23,8 +23,6 @@ const PhoneNumberVerifyForm: React.FC<IProps> = ({ currentPhoneNumber, phoneNumb
   const [smsSent, setSmsSent] = useState<boolean>(false);
 
   const { handleSubmit, formState, register, errors } = useForm();
-
-  console.log(phoneNumberConfirmed);
 
   const onSubmit = async ({ phoneNumber, code }: any) => {
     if (smsSent) {

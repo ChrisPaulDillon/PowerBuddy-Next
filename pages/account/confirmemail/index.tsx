@@ -3,7 +3,7 @@ import axios from 'axios';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { VerifyEmailUrl } from '../../../api/account/user';
+import { VerifyEmailUrl } from '../../../api/account/auth';
 import { SendEmailConfirmationUrl } from '../../../api/public/email';
 import ProgressSpinner from '../../../components/common/ProgressSpinner';
 import { PageTitle, TextSm } from '../../../components/common/Texts';
