@@ -1,3 +1,4 @@
+import { useUserContext } from './../components/users/UserContext';
 import axios from 'axios';
 import { useState, useEffect, } from "react";
 
@@ -6,6 +7,7 @@ export function useAxios<T>(uri: string) {
   const [error, setError] = useState();
   const [statusCode, setStatusCode] = useState<number>(0);
   const [loading, setLoading] = useState(false);
+  const { user } = useUserContext();
 
   useEffect(() => {
     if (!uri) return;
@@ -14,7 +16,7 @@ export function useAxios<T>(uri: string) {
       .then((response) => setData(response.data))
       .catch(function (error) { if(error.response) setStatusCode(error.response.status); setError(error); })
       .then(() => setLoading(false))
-  }, [uri]);
+  }, [uri, user]);
 
   return {
     loading,

@@ -12,7 +12,6 @@ import axios from 'axios';
 import { setAuthorizationToken } from '../../../redux/util/authorization';
 import { IUser } from 'powerbuddy-shared';
 import { LoginStateEnum } from '../factories/LoginFormFactory';
-import { SendEmailConfirmationUrl } from '../../../api/public/email';
 import { useUserContext } from '../../users/UserContext';
 import { Facebook } from '../Facebook';
 
