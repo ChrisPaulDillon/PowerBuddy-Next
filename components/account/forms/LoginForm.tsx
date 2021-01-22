@@ -14,6 +14,7 @@ import { IUser } from 'powerbuddy-shared';
 import { LoginStateEnum } from '../factories/LoginFormFactory';
 import { SendEmailConfirmationUrl } from '../../../api/public/email';
 import { useUserContext } from '../../users/UserContext';
+import { Facebook } from '../Facebook';
 
 const LoginForm = ({ onClose, setLoginState }: any) => {
   const [showPW, setShowPW] = React.useState(false);
@@ -151,6 +152,9 @@ const LoginForm = ({ onClose, setLoginState }: any) => {
                 <TextXs color="blue.500">Register</TextXs>
               </Link>
             </CenterRowFlex>
+          </Box>
+          <Box mt={2}>
+            <Facebook />
           </Box>
         </Box>
       </CenterColumnFlex>
