@@ -30,7 +30,7 @@ const MyApp = ({ Component }) => {
   useEffect(() => {
     const loadUserProfile = async (): Promise<void> => {
       try {
-        axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
+        axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('accessToken')}`;
         const response = await axios.get(GetLoggedInUsersProfileUrl());
         if (response && response.data) {
           setUser(response.data);
@@ -38,8 +38,8 @@ const MyApp = ({ Component }) => {
       } catch (error) {}
     };
 
-    if (localStorage.getItem('token') != null && localStorage.getItem('token')!.length > 1) {
-      setAuthorizationToken(localStorage.getItem('token'));
+    if (localStorage.getItem('accessToken') != null && localStorage.getItem('accessToken')!.length > 1) {
+      setAuthorizationToken(localStorage.getItem('accessToken'));
       loadUserProfile();
     }
   }, []);

@@ -13,6 +13,8 @@ import { FcSettings } from 'react-icons/fc';
 import { setAuthorizationToken } from '../../redux/util/authorization';
 import { useUserContext } from '../users/UserContext';
 import { LoginModal } from '../shared/Modals';
+import axios from 'axios';
+import { LogoutUserUrl } from '../../api/account/auth';
 
 export enum MenuSection {
   Main,
@@ -33,6 +35,10 @@ export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
   const { isAuthenticated } = useUserContext();
 
   const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
+
+  const logoutUser = async () => {
+    const response = await axios.post(LogoutUserUrl(localStorage.getItem('refreshToken')));
+  };
 
   const userMenu = useMemo(
     () => ({
@@ -84,7 +90,9 @@ export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
               onClick: () => {
                 onClose();
                 if (isAuthenticated) {
-                  localStorage.removeItem('token');
+                  logoutUser();
+                  localStorage.removeItem('accessToken');
+                  localStorage.removeItem('refreshToken');
                   setAuthorizationToken(null);
                   toast({
                     title: 'Success',
