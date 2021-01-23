@@ -14,7 +14,7 @@ import { IUser } from 'powerbuddy-shared';
 import { LoginStateEnum } from '../factories/LoginFormFactory';
 import { useUserContext } from '../../users/UserContext';
 import { Facebook } from '../Facebook';
-import { handleLoginTokens } from '../../../api/axiosUtils';
+import { handleLoginTokens } from '../../../util/axiosUtils';
 
 const LoginForm = ({ onClose, setLoginState }: any) => {
   const [showPW, setShowPW] = React.useState(false);

@@ -1,4 +1,4 @@
-import { RefreshTokenUrl } from './account/auth';
+import { RefreshTokenUrl } from '../api/account/auth';
 import axios from 'axios';
 import createAuthRefreshInterceptor from 'axios-auth-refresh';
 import { setAuthorizationToken } from '../redux/util/authorization';
@@ -29,9 +29,3 @@ const refreshAuthLogic = failedRequest => {
  
 // Instantiate the interceptor (you can chain it as it returns the axios instance)
 createAuthRefreshInterceptor(axios, refreshAuthLogic);
- 
-// // Make a call. If it returns a 401 error, the refreshAuthLogic will be run, 
-// // and the request retried with the new token
-// axios.get('https://www.example.com/restricted/area')
-//     .then(/* ... */)
-//     .catch(/* ... */);
