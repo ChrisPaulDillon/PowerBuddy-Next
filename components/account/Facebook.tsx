@@ -10,7 +10,7 @@ export const Facebook = ({ onClose }) => {
   const toast = useToast();
   const { setUser } = useUserContext();
 
-  const handleFacebookLogin = async (response) => {
+  const handleFacebookLogin = async (response): Promise<void> => {
     const { accessToken } = response;
     try {
       await axios.post(LoginWithFacebookUrl(), { accessToken: accessToken });
@@ -24,6 +24,8 @@ export const Facebook = ({ onClose }) => {
       });
       handleLoginTokens(response.data.accessToken, response.data.refreshToken);
       setUser(response.data.user);
+      console.log(response.data.accessToken);
+
       onClose();
     } catch (err) {
       toast({
