@@ -3,7 +3,7 @@ import axios from 'axios';
 import React from 'react';
 import FacebookLogin from 'react-facebook-login';
 import { LoginWithFacebookUrl } from '../../api/account/auth';
-import { handleLoginTokens } from '../../api/axiosUtils';
+import { handleLoginTokens } from '../../util/axiosUtils';
 import { useUserContext } from '../users/UserContext';
 
 export const Facebook = ({ onClose }) => {
@@ -27,7 +27,6 @@ export const Facebook = ({ onClose }) => {
           isClosable: true,
           position: 'top',
         });
-        onClose();
       });
 
     //   handleLoginTokens(response.data.accessToken, response.data.refreshToken);

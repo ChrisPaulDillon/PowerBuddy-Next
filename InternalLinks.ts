@@ -8,3 +8,4 @@ export const PERSONALBESTS_URL = '/personalbests';
 export const ADMIN_URL = '/admin';
 export const PROFILE_URL = '/u';
 export const SETTINGS_URL = '/account/settings'
+export const LOGIN_URL = '/account/login'
