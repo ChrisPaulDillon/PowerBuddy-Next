@@ -49,8 +49,8 @@ const LoginForm = ({ onClose, setLoginState }: any) => {
         position: 'top',
       });
       handleLoginTokens(response.data.accessToken, response.data.refreshToken);
-
       setUser(response.data.user);
+
       onClose();
     } catch (err) {
       const errorCode = err?.response?.data;
