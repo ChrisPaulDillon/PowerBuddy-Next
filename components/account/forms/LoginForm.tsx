@@ -14,6 +14,7 @@ import { IUser } from 'powerbuddy-shared';
 import { LoginStateEnum } from '../factories/LoginFormFactory';
 import { useUserContext } from '../../users/UserContext';
 import { Facebook } from '../Facebook';
+import { handleLoginTokens } from '../../../api/axiosUtils';
 
 const LoginForm = ({ onClose, setLoginState }: any) => {
   const [showPW, setShowPW] = React.useState(false);
@@ -47,8 +48,8 @@ const LoginForm = ({ onClose, setLoginState }: any) => {
         isClosable: true,
         position: 'top',
       });
-      localStorage.setItem('token', response.data.token);
-      setAuthorizationToken(response.data.token);
+      handleLoginTokens(response.data.accessToken, response.data.refreshToken);
+
       setUser(response.data.user);
       onClose();
     } catch (err) {

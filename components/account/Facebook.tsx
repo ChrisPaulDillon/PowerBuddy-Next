@@ -38,13 +38,5 @@ export const Facebook = ({ onClose }) => {
     }
   };
 
-  return (
-    <FacebookLogin
-      appId="399640227879888"
-      fields="name,email,picture"
-      onClick={() => {}}
-      callback={async () => await handleFacebookLogin}
-      icon="fa-facebook"
-    />
-  );
+  return <FacebookLogin appId="399640227879888" fields="name,email,picture" onClick={() => {}} callback={handleFacebookLogin} icon="fa-facebook" />;
 };
