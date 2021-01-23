@@ -12,31 +12,37 @@ export const Facebook = ({ onClose }) => {
 
   const handleFacebookLogin = async (response): Promise<void> => {
     const { accessToken } = response;
-    try {
-      await axios.post(LoginWithFacebookUrl(), { accessToken: accessToken });
-      toast({
-        title: 'Success',
-        description: 'Successfully Signed In',
-        status: 'success',
-        duration: 2000,
-        isClosable: true,
-        position: 'top',
+    return axios
+      .post(LoginWithFacebookUrl(), {
+        accessToken: accessToken,
+      })
+      .then((response) => {
+        handleLoginTokens(response.data.accessToken, response.data.refreshToken);
+        setUser(response.data.user);
+        toast({
+          title: 'Success',
+          description: 'Successfully Signed In',
+          status: 'success',
+          duration: 2000,
+          isClosable: true,
+          position: 'top',
+        });
+        onClose();
       });
-      handleLoginTokens(response.data.accessToken, response.data.refreshToken);
-      setUser(response.data.user);
-      console.log(response.data.accessToken);
 
-      onClose();
-    } catch (err) {
-      toast({
-        title: 'Error',
-        description: 'Could not sign in using Facebook, try an alternative',
-        status: 'error',
-        duration: 2000,
-        isClosable: true,
-        position: 'top',
-      });
-    }
+    //   handleLoginTokens(response.data.accessToken, response.data.refreshToken);
+
+    //   onClose();
+    // } catch (err) {
+    //   toast({
+    //     title: 'Error',
+    //     description: 'Could not sign in using Facebook, try an alternative',
+    //     status: 'error',
+    //     duration: 2000,
+    //     isClosable: true,
+    //     position: 'top',
+    //   });
+    // }
   };
 
   return <FacebookLogin appId="399640227879888" fields="name,email,picture" onClick={() => {}} callback={handleFacebookLogin} icon="fa-facebook" />;
