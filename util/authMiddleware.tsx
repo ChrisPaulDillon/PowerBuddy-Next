@@ -1,8 +1,5 @@
 import { Box } from '@chakra-ui/core';
 import { useUserContext } from '../components/users/UserContext';
-import { NextPage, NextPageContext } from 'next';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 import React from 'react';
 import { LoginModal } from '../components/shared/Modals';
 
@@ -27,33 +24,6 @@ export const withAuthorized = (WrappedComponent) => {
     //const account = await getAccount(ctx);
     const componentProps = WrappedComponent.getInitialProps && (await WrappedComponent.getInitialProps(ctx));
     return { ...componentProps };
-  };
-
-  //Wrapper.whyDidYouRender = true;
-
-  return Wrapper;
-};
-
-export const withOAuth = () => (WrappedComponent: NextPage) => {
-  const Wrapper = (props) => {
-    const { user } = useUserContext();
-    const router = useRouter();
-
-    const doLogin = () => {
-      router.push(LoginRoute(router.asPath));
-    };
-
-    useEffect(() => {
-      if (Object.keys(user).length === 0 || !user) {
-        doLogin();
-      }
-    }, [user]);
-
-    console.log(user);
-
-    //if (!user) return <Box />;
-
-    return <WrappedComponent {...{ ...props }} />;
   };
 
   return Wrapper;
