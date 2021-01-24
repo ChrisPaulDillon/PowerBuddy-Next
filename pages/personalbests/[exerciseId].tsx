@@ -19,7 +19,8 @@ const ExerciseSpecificPersonalBest: NextPage = () => {
 
   const { isOpen: isBackOpen, onClose: onBackClose } = useDisclosure();
 
-  if (loading || liftingStatDetailed === undefined) return <ProgressSpinner />;
+  if (loading) return <ProgressSpinner />;
+
   if (error) return <PageTitle>No Personal Best Found</PageTitle>;
 
   return (
