@@ -28,7 +28,7 @@ interface IContextInputProps {
 }
 
 export default function WorkoutProvider({ workoutDay, setWorkoutDay, contentDisabled, children }: IContextInputProps) {
-  const [weightType, setWeightType] = useState<string>(workoutDay?.usingMetric ? 'kg' : 'lbs');
+  const [weightType, setWeightType] = useState<string>('kg');
 
   useEffect(() => {
     setWeightType(workoutDay?.usingMetric ? 'kg' : 'lbs');
