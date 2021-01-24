@@ -9,6 +9,7 @@ import { CreateWorkoutSetCollectionUrl } from '../../../api/account/workoutSet';
 import { useWorkoutContext } from '../../workouts/WorkoutContext';
 import Axios from 'axios';
 import { IWorkoutExercise, IWorkoutSet } from 'powerbuddy-shared';
+import { useUserContext } from '../../users/UserContext';
 
 interface IProps {
   workoutExercise: IWorkoutExercise;
@@ -21,6 +22,7 @@ interface IProps {
 const QuickAddSetsForm: React.FC<IProps> = ({ workoutExercise, suggestedReps, suggestedWeight, totalSets, onClose }) => {
   const toast = useToast();
   const { handleSubmit, formState } = useForm();
+  const { weightType } = useUserContext();
 
   const [noOfSets, setNoOfSets] = useState<number>(1);
   const [noOfReps, setNoOfReps] = useState<number>(suggestedReps);
@@ -88,7 +90,7 @@ const QuickAddSetsForm: React.FC<IProps> = ({ workoutExercise, suggestedReps, su
         <FormNumberInput defaultValue={suggestedReps} maxW="250px" onChange={(e: number) => setNoOfReps(e)} />
       </PbStack>
       <PbStack>
-        <TextSm minW="60px">Weight (kg)</TextSm>
+        <TextSm minW="60px">Weight ({weightType})</TextSm>
         <FormNumberInput defaultValue={suggestedWeight} maxW="250px" onChange={(e: number) => setWeight(e)} />
       </PbStack>
       <Flex p="1" mt="1" justifyContent="center">

@@ -9,7 +9,7 @@ const Page: React.FC = ({ children, ...rest }) => {
     <Box
       position="relative"
       height="100vh"
-      width="100%"
+      width={{ lg: '1800px', md: '1200px', sm: '800px', xs: '400px', base: '1800px' }}
       alignContent="center"
       justifyContent="center"
       alignItems="center"
@@ -36,7 +36,7 @@ export const PageHeader: React.FC<IPageHeaderProps> = ({ title }) => {
     <Head>
       {' '}
       <title>
-        {process.env.NEXT_PUBLIC_SITE_NAME} | {title}
+        {title} | {process.env.NEXT_PUBLIC_SITE_NAME}
       </title>
       <link rel="icon" href="/icons/favicon.ico" />
     </Head>

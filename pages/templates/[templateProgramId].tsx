@@ -37,7 +37,7 @@ const TemplateProgramSingle: NextPage = () => {
     { href: '#', name: template?.name },
   ];
 
-  if (loading || template == undefined) return <ProgressSpinner />;
+  if (loading) return <ProgressSpinner />;
   if (error) return <PageTitle>No Template Found</PageTitle>;
 
   return (
@@ -80,12 +80,12 @@ const TemplateProgramSingle: NextPage = () => {
             <Box pt={['8', '5', '4', '4']}>
               <Tabs variant="enclosed-colored" colorScheme="purple" align="center" size="md" isFitted>
                 <TabList>
-                  {template!.templateWeeks!.map((tw) => {
+                  {template?.templateWeeks!.map((tw) => {
                     return <Tab>Week {tw.weekNo}</Tab>;
                   })}
                 </TabList>
                 <TabPanels>
-                  {template!.templateWeeks!.map((tw) => {
+                  {template?.templateWeeks!.map((tw) => {
                     return (
                       <TabPanel>
                         <TemplateWeekCard key={tw.templateWeekId} {...tw} />

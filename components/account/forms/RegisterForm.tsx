@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { MdAccountBox, TiArrowBack } from 'react-icons/all';
 import { RegisterUserUrl } from '../../../api/account/auth';
+import { SendEmailConfirmationUrl } from '../../../api/public/email';
 import { validateEmailInput, validateInput, validatePassword } from '../../../util/formInputs';
 import { PbPrimaryButton } from '../../common/Buttons';
 import PbIconButton from '../../common/IconButtons';
@@ -19,7 +20,7 @@ const RegisterForm = ({ setLoginState }: any) => {
 
   const [error, setError] = useState<boolean>(false);
   const [signedUp, setSignedUp] = useState<boolean>(false);
-  const [, setUserId] = useState<string>('');
+  const [userId, setUserId] = useState<string>('');
 
   const toast = useToast();
 
@@ -59,6 +60,7 @@ const RegisterForm = ({ setLoginState }: any) => {
         isClosable: true,
         position: 'top',
       });
+      const response = await axios.post(SendEmailConfirmationUrl(userId));
     } catch (error) {}
   };
 

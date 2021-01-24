@@ -15,6 +15,7 @@ import { LoginStateEnum } from '../factories/LoginFormFactory';
 import { useUserContext } from '../../users/UserContext';
 import { Facebook } from '../Facebook';
 import { handleLoginTokens } from '../../../util/axiosUtils';
+import { SendEmailConfirmationUrl } from '../../../api/public/email';
 
 const LoginForm = ({ onClose, setLoginState }: any) => {
   const [showPW, setShowPW] = React.useState(false);
@@ -81,6 +82,7 @@ const LoginForm = ({ onClose, setLoginState }: any) => {
         isClosable: true,
         position: 'top',
       });
+      const response = await axios.post(SendEmailConfirmationUrl(userId));
     } catch (error) {}
   };
 
