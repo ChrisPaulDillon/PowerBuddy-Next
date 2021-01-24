@@ -29,7 +29,6 @@ const NavBar: React.FC<INavBarProps> = ({}) => {
 
   const { isOpen: isLeftNavOpen, onOpen: onLeftNavOpen, onClose: onLeftNavClose } = useDisclosure();
   const { isOpen: isMobileOpen, onOpen: onMobileOpen, onClose: onMobileClose } = useDisclosure();
-  const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
 
   const handleBurgerMenuPress = () => {
     if (SCREEN_MOBILE) {
@@ -67,21 +66,18 @@ const NavBar: React.FC<INavBarProps> = ({}) => {
           )}
           {SCREEN_MOBILE ? (
             <Box px={2}>
-              <Avatar size="sm" name={user.userName!} onClick={isAuthenticated ? onMobileOpen : onLoginOpen} />
+              <Avatar size="sm" name={user.userName!} onClick={onMobileOpen} />
               <PbDrawerForm isOpen={isMobileOpen} onClose={onMobileClose} size="full" title={user.userName!}>
                 <RightNav userName={user.userName!} onClose={onMobileClose} />
               </PbDrawerForm>
             </Box>
-          ) : isAuthenticated ? (
+          ) : (
             <MenuBase button={<Avatar size="md" name={user.userName!} />}>
               <RightNav userName={user.userName!} onClose={onMobileClose} />
             </MenuBase>
-          ) : (
-            <Avatar size="md" name={user.userName!} onClick={onLoginOpen} />
           )}
         </Flex>
       </Stack>
-      {isLoginOpen && <LoginModal isOpen={isLoginOpen} onOpen={onLoginOpen} onClose={onLoginClose} />}
       {isLeftNavOpen && <MobileSideNav isOpen={isLeftNavOpen} onClose={onLeftNavClose} />}
     </Flex>
   );

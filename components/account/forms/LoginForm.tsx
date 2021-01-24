@@ -7,13 +7,14 @@ import { TextError, TextXs } from '../../common/Texts';
 import { PbPrimaryButton } from '../../common/Buttons';
 import { MdAccountBox } from 'react-icons/md';
 import { validateInput } from '../../../util/formInputs';
-import { LoginUserUrl } from '../../../api/account/user';
+import { LoginUserUrl } from '../../../api/account/auth';
 import axios from 'axios';
 import { setAuthorizationToken } from '../../../redux/util/authorization';
 import { IUser } from 'powerbuddy-shared';
 import { LoginStateEnum } from '../factories/LoginFormFactory';
-import { SendEmailConfirmationUrl } from '../../../api/public/email';
 import { useUserContext } from '../../users/UserContext';
+import { Facebook } from '../Facebook';
+import { handleLoginTokens } from '../../../util/axiosUtils';
 
 const LoginForm = ({ onClose, setLoginState }: any) => {
   const [showPW, setShowPW] = React.useState(false);
@@ -47,9 +48,9 @@ const LoginForm = ({ onClose, setLoginState }: any) => {
         isClosable: true,
         position: 'top',
       });
-      localStorage.setItem('token', response.data.token);
-      setAuthorizationToken(response.data.token);
+      handleLoginTokens(response.data.accessToken, response.data.refreshToken);
       setUser(response.data.user);
+
       onClose();
     } catch (err) {
       const errorCode = err?.response?.data;
@@ -152,6 +153,9 @@ const LoginForm = ({ onClose, setLoginState }: any) => {
                 <TextXs color="blue.500">Register</TextXs>
               </Link>
             </CenterRowFlex>
+          </Box>
+          <Box mt={2}>
+            <Facebook onClose={onClose} />
           </Box>
         </Box>
       </CenterColumnFlex>

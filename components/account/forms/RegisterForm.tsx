@@ -4,7 +4,7 @@ import { IUser } from 'powerbuddy-shared/lib';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { MdAccountBox, TiArrowBack } from 'react-icons/all';
-import { RegisterUserUrl } from '../../../api/account/user';
+import { RegisterUserUrl } from '../../../api/account/auth';
 import { validateEmailInput, validateInput, validatePassword } from '../../../util/formInputs';
 import { PbPrimaryButton } from '../../common/Buttons';
 import PbIconButton from '../../common/IconButtons';

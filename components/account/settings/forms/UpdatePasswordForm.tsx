@@ -2,7 +2,7 @@ import { Box, FormControl, FormErrorMessage, useToast } from '@chakra-ui/core';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { UpdatePasswordUrl } from '../../../../api/account/user';
+import { UpdatePasswordUrl } from '../../../../api/account/auth';
 import { validateInput } from '../../../../util/formInputs';
 import { PbPrimaryButton } from '../../../common/Buttons';
 import { FormInput } from '../../../common/Inputs';

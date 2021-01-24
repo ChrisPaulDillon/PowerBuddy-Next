@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { ChangePasswordUrl } from '../../../api/account/user';
+import { ChangePasswordUrl } from '../../../api/account/auth';
 import { PbPrimaryButton } from '../../common/Buttons';
 import { FormInput, FormNumberInput } from '../../common/Inputs';
 import { PbStack } from '../../common/Stacks';

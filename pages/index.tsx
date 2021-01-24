@@ -13,10 +13,12 @@ import WorkoutWeekSummary from '../components/workouts/WorkoutWeekSummary';
 import { useAxios } from '../hooks/useAxios';
 import { IWorkoutWeekSummary } from 'powerbuddy-shared';
 import useAuthentication from '../hooks/useAuthentication';
+import { NextPage } from 'next';
+import { useUserContext } from '../components/users/UserContext';
+import { withAuthorized } from '../util/authMiddleware';
 
-export default function Home() {
+const Index: NextPage = () => {
   const router = useRouter();
-  const handleAuthentication = useAuthentication();
   const { date } = router.query;
 
   const { data: weekData, loading: weekLoading, error: weekError } = useAxios<IWorkoutWeekSummary>(GetWorkoutWeekWithDateUrl(date as string));
@@ -29,12 +31,6 @@ export default function Home() {
   useEffect(() => {
     router.push(`?date=${selectedDate.toISOString()}`);
   }, [selectedDate]);
-
-  useEffect(() => {
-    if (!handleAuthentication) {
-      onLoginOpen();
-    }
-  }, [handleAuthentication]);
 
   if (weekLoading) return <ProgressSpinner />;
 
@@ -96,4 +92,6 @@ export default function Home() {
       </PageContent>
     </Box>
   );
-}
+};
+
+export default withAuthorized(Index);

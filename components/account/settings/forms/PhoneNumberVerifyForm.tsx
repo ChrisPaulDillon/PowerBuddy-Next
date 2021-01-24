@@ -3,7 +3,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AiFillCheckCircle, ImBlocked } from 'react-icons/all';
-import { RequestSmsVerificationUrl, SendSmsVerificationUrl } from '../../../../api/account/user';
+import { RequestSmsVerificationUrl, SendSmsVerificationUrl } from '../../../../api/account/auth';
 import { validateInput } from '../../../../util/formInputs';
 import { PbPrimaryButton } from '../../../common/Buttons';
 import { FormInput } from '../../../common/Inputs';

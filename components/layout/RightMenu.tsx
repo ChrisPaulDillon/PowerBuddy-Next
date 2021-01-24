@@ -1,16 +1,20 @@
-import { Accordion, Box, Button, Divider, Link, Stack, Switch, Text, useColorMode, useToast } from '@chakra-ui/core';
+import { Accordion, Box, Button, Divider, Link, Stack, Switch, Text, useColorMode, useDisclosure, useToast } from '@chakra-ui/core';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useState } from 'react';
 import { useMemo } from 'react';
 import { FaMoon } from 'react-icons/fa';
-import { IoIosLogOut } from 'react-icons/io';
+import { IoIosLogIn, IoIosLogOut } from 'react-icons/io';
 import { MdArrowBack, MdChevronRight, MdPersonPin } from 'react-icons/md';
 import useAuthentication from '../../hooks/useAuthentication';
 import { TextSm } from '../common/Texts';
 import { PROFILE_URL, SETTINGS_URL } from '../../InternalLinks';
 import { FcSettings } from 'react-icons/fc';
 import { setAuthorizationToken } from '../../redux/util/authorization';
+import { useUserContext } from '../users/UserContext';
+import { LoginModal } from '../shared/Modals';
+import axios from 'axios';
+import { LogoutUserUrl } from '../../api/account/auth';
 
 export enum MenuSection {
   Main,
@@ -28,6 +32,13 @@ export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
   const router = useRouter();
   const [menuSection, setMenuSection] = useState<MenuSection | undefined>(MenuSection.Main);
   const toast = useToast();
+  const { isAuthenticated } = useUserContext();
+
+  const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
+
+  const logoutUser = async () => {
+    const response = await axios.post(LogoutUserUrl(localStorage.getItem('refreshToken')));
+  };
 
   const userMenu = useMemo(
     () => ({
@@ -35,7 +46,7 @@ export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
         {
           items: [
             {
-              loggedInOnly: true,
+              loggedInOnly: false,
               name: 'Dark Mode',
               icon: FaMoon,
               onClick: () => {
@@ -73,31 +84,37 @@ export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
         {
           items: [
             {
-              loggedInOnly: true,
-              name: 'Logout',
-              icon: IoIosLogOut,
+              loggedInOnly: false,
+              name: isAuthenticated ? 'Logout' : 'Login',
+              icon: isAuthenticated ? IoIosLogOut : IoIosLogIn,
               onClick: () => {
                 onClose();
-                localStorage.removeItem('token');
-                setAuthorizationToken(null);
-                toast({
-                  title: 'Success',
-                  description: 'Successfully Logged Out',
-                  status: 'success',
-                  duration: 2000,
-                  isClosable: true,
-                  position: 'top',
-                });
-                setTimeout(function () {
-                  window.location.reload();
-                }, 1500);
+                if (isAuthenticated) {
+                  logoutUser();
+                  localStorage.removeItem('accessToken');
+                  localStorage.removeItem('refreshToken');
+                  setAuthorizationToken(null);
+                  toast({
+                    title: 'Success',
+                    description: 'Successfully Logged Out',
+                    status: 'success',
+                    duration: 2000,
+                    isClosable: true,
+                    position: 'top',
+                  });
+                  setTimeout(function () {
+                    window.location.reload();
+                  }, 1500);
+                } else {
+                  onLoginOpen();
+                }
               },
             },
           ],
         },
       ],
     }),
-    [userName]
+    [userName, isAuthenticated]
   );
 
   return (
@@ -108,36 +125,42 @@ export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
         <>
           {userMenu.groups.map((group, idx) => (
             <Box key={idx}>
-              {group.items.map((item: any) => (
-                <Button
-                  key={item.name}
-                  as={'a'}
-                  isFullWidth
-                  borderRadius={0}
-                  alignItems="center"
-                  justifyContent="left"
-                  p={0}
-                  bg="transparent"
-                  onClick={(e) => item.onClick(e, false)}>
-                  <Stack isInline w="100%" px="1.5em" align="center" justify="center">
-                    <Box as={item.icon} size="1.25em"></Box>
-                    <Text ml="0.5em" fontWeight="normal">
-                      {item.name}
-                    </Text>
-                    <Stack isInline ml="auto" align="center" justify="center">
-                      <Text fontSize="0.75em" fontWeight="normal">
-                        {item.value}
+              {group.items.map((item: any) => {
+                if (!isAuthenticated && item.loggedInOnly) {
+                  return null;
+                }
+                return (
+                  <Button
+                    key={item.name}
+                    as={'a'}
+                    isFullWidth
+                    borderRadius={0}
+                    alignItems="center"
+                    justifyContent="left"
+                    p={0}
+                    bg="transparent"
+                    onClick={(e) => item.onClick(e, false)}>
+                    <Stack isInline w="100%" px="1.5em" align="center" justify="center">
+                      <Box as={item.icon} size="1.25em"></Box>
+                      <Text ml="0.5em" fontWeight="normal">
+                        {item.name}
                       </Text>
-                      {item.showChevron && <Box as={MdChevronRight} size="1.5em" />}
+                      <Stack isInline ml="auto" align="center" justify="center">
+                        <Text fontSize="0.75em" fontWeight="normal">
+                          {item.value}
+                        </Text>
+                        {item.showChevron && <Box as={MdChevronRight} size="1.5em" />}
+                      </Stack>
                     </Stack>
-                  </Stack>
-                </Button>
-              ))}
+                  </Button>
+                );
+              })}
               {idx !== userMenu.groups.length - 1 && <Divider />}
             </Box>
           ))}
         </>
       )}
+      {isLoginOpen && <LoginModal isOpen={isLoginOpen} onOpen={onLoginOpen} onClose={onLoginClose} />}
     </MainMenuContent>
   );
 };
