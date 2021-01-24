@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/core';
 import { useUserContext } from '../components/users/UserContext';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { LoginModal } from '../components/shared/Modals';
 
 export const LoginRoute = (targetURL?: string) => `/account/login${targetURL ? `?TargetURL=${targetURL}` : ''}`;
@@ -8,11 +8,22 @@ export const LoginRoute = (targetURL?: string) => `/account/login${targetURL ? `
 export const withAuthorized = (WrappedComponent) => {
   const Wrapper = (props) => {
     const { user } = useUserContext();
+    const [promptLogin, setPromptLogin] = useState<boolean>(false);
 
-    if (Object.keys(user).length === 0) {
+    useEffect(() => {
+      setTimeout(() => {
+        if (Object.keys(user).length === 0) {
+          setPromptLogin(true);
+        } else {
+          setPromptLogin(false);
+        }
+      }, 2000);
+    }, [user]);
+
+    if (promptLogin) {
       return (
         <Box>
-          <LoginModal isOpen={true} />
+          <LoginModal isOpen={promptLogin} />
           <WrappedComponent {...props} />
         </Box>
       );
