@@ -76,7 +76,7 @@ const EditProfileForm = () => {
             <TextXs pt="3" pr="1" minW="80px">
               First Name
             </TextXs>
-            <FormInput name="firstName" defaultValue={user?.firstName!} ref={register} size="sm" />
+            <FormInput name="firstName" defaultValue={user?.firstName} ref={register} size="sm" />
           </PbStack>
         </Box>
         <Box m="1">
@@ -84,7 +84,7 @@ const EditProfileForm = () => {
             <TextXs pt="3" pr="1" minW="80px">
               Last Name
             </TextXs>
-            <FormInput name="lastName" defaultValue={user?.lastName!} ref={register} size="sm" />
+            <FormInput name="lastName" defaultValue={user?.lastName} ref={register} size="sm" />
           </PbStack>
         </Box>
         <Box m="1">
@@ -92,13 +92,13 @@ const EditProfileForm = () => {
             <TextXs pt="3" pr="1" minW="80px">
               Weight
             </TextXs>
-            <FormNumberInput name="weight" defaultValue={user?.bodyWeight!} ref={register} onChange={(e) => updateBodyWeight(e)} size="sm" />
+            <FormNumberInput name="weight" defaultValue={user?.bodyWeight} ref={register} onChange={(e) => updateBodyWeight(e)} size="sm" />
           </PbStack>
         </Box>
         <Box m="1" mt="2">
           <PbStack>
             <TextXs>Quotes Enabled?</TextXs>
-            <Checkbox name="quotesEnabled" color="green.500" defaultIsChecked={user.quotesEnabled} ref={register} />
+            <Checkbox name="quotesEnabled" color="green.500" defaultIsChecked={user?.quotesEnabled} ref={register} />
           </PbStack>
         </Box>
         <Box m="1" mt={1}>
