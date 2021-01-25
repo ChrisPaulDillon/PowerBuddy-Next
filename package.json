@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
   "name": "powerbuddy",
-=======
-  "name": "PowerBuddy-NextJs",
->>>>>>> ba5282ea51145d86314ed5a71e95529fa5cd1edc
   "version": "0.1.0",
   "private": true,
   "scripts": {
