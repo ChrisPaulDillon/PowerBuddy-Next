@@ -17,26 +17,26 @@ import CreateProgramLogFromScratchForm from '../../components/templatePrograms/f
 import { PageContent, PageHead } from '../../components/layout/Page';
 import { useUserContext } from '../../components/users/UserContext';
 
-const Index: NextPage = ({ templates }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Index: NextPage = () => {
   const router = useRouter();
 
   const { isAuthenticated } = useUserContext();
 
-  //const [templates, setTemplates] = useState<ITemplateProgram[]>([]);
+  const [templates, setTemplates] = useState<ITemplateProgram[]>([]);
 
   const { isOpen: isCreateOpen, onOpen: onCreateOpen, onClose: onCreateClose } = useDisclosure();
   const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
   const { isOpen: isCreateSuccessOpen, onClose: onCreateSuccessClose } = useDisclosure();
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const data = await axios.get(GetAllTemplateProgramsUrl());
-  //       setTemplates(data && data.data);
-  //     } catch (err) {}
-  //   };
-  //   fetchData();
-  // }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await axios.get(GetAllTemplateProgramsUrl());
+        setTemplates(data && data.data);
+      } catch (err) {}
+    };
+    fetchData();
+  }, []);
 
   return (
     <Box>
@@ -79,20 +79,6 @@ const Index: NextPage = ({ templates }: InferGetStaticPropsType<typeof getStatic
       </PageContent>
     </Box>
   );
-};
-
-export const getStaticProps: GetStaticProps = async () => {
-  // Call an external API endpoint to get posts
-  const response = await fetch(GetAllTemplateProgramsUrl());
-  const data = await response.json();
-
-  // By returning { props: { posts } }, the Blog component
-  // will receive `posts` as a prop at build time
-  return {
-    props: {
-      templates: data,
-    },
-  };
 };
 
 export default Index;
