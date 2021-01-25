@@ -83,14 +83,14 @@ const Index: NextPage = ({ templates }: InferGetStaticPropsType<typeof getStatic
 
 export const getStaticProps: GetStaticProps = async () => {
   // Call an external API endpoint to get posts
-  const response = await axios.get(GetAllTemplateProgramsUrl());
-  const templates = response.data;
+  const response = await fetch(GetAllTemplateProgramsUrl());
+  const data = await response.json();
 
   // By returning { props: { posts } }, the Blog component
   // will receive `posts` as a prop at build time
   return {
     props: {
-      templates,
+      templates: data,
     },
   };
 };

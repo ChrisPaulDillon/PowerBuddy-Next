@@ -20,7 +20,7 @@ export const withAuthorized = (WrappedComponent) => {
       }, 2000);
     }, [user]);
 
-    if (promptLogin) {
+    if (Object.keys(user).length === 0) {
       return (
         <Box>
           <LoginModal isOpen={promptLogin} />
