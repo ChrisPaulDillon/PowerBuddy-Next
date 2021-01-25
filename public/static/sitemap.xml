@@ -6,77 +6,77 @@
       xmlns:xhtml="http://www.w3.org/1999/xhtml">
       
 	<url>
-		<loc>http://localhost:3000//account/changepassword/index</loc>
+		<loc>https://webapp.powerbuddy.gg/account/changepassword/index</loc>
 		<lastmod>2021-01-25</lastmod>
 	</url>
 
 	<url>
-		<loc>http://localhost:3000//account/confirmemail/index</loc>
+		<loc>https://webapp.powerbuddy.gg/account/confirmemail/index</loc>
 		<lastmod>2021-01-25</lastmod>
 	</url>
 
 	<url>
-		<loc>http://localhost:3000//account/login/index</loc>
+		<loc>https://webapp.powerbuddy.gg/account/settings/index</loc>
 		<lastmod>2021-01-25</lastmod>
 	</url>
 
 	<url>
-		<loc>http://localhost:3000//account/settings/index</loc>
+		<loc>https://webapp.powerbuddy.gg/exercises/index</loc>
 		<lastmod>2021-01-25</lastmod>
 	</url>
 
 	<url>
-		<loc>http://localhost:3000//exercises/index</loc>
+		<loc>https://webapp.powerbuddy.gg/exercises/[exerciseId]</loc>
 		<lastmod>2021-01-25</lastmod>
 	</url>
 
 	<url>
-		<loc>http://localhost:3000//exercises/[exerciseId]</loc>
+		<loc>https://webapp.powerbuddy.gg/history/index</loc>
 		<lastmod>2021-01-25</lastmod>
 	</url>
 
 	<url>
-		<loc>http://localhost:3000//history/index</loc>
+		<loc>https://webapp.powerbuddy.gg/index</loc>
 		<lastmod>2021-01-25</lastmod>
 	</url>
 
 	<url>
-		<loc>http://localhost:3000//index</loc>
+		<loc>https://webapp.powerbuddy.gg/personalbests/index</loc>
 		<lastmod>2021-01-25</lastmod>
 	</url>
 
 	<url>
-		<loc>http://localhost:3000//personalbests/index</loc>
+		<loc>https://webapp.powerbuddy.gg/personalbests/[exerciseId]</loc>
 		<lastmod>2021-01-25</lastmod>
 	</url>
 
 	<url>
-		<loc>http://localhost:3000//templates/index</loc>
+		<loc>https://webapp.powerbuddy.gg/templates/index</loc>
 		<lastmod>2021-01-25</lastmod>
 	</url>
 
 	<url>
-		<loc>http://localhost:3000//templates/[templateProgramId]</loc>
+		<loc>https://webapp.powerbuddy.gg/templates/[templateProgramId]</loc>
 		<lastmod>2021-01-25</lastmod>
 	</url>
 
 	<url>
-		<loc>http://localhost:3000//u/index</loc>
+		<loc>https://webapp.powerbuddy.gg/u/index</loc>
 		<lastmod>2021-01-25</lastmod>
 	</url>
 
 	<url>
-		<loc>http://localhost:3000//u/[userName]</loc>
+		<loc>https://webapp.powerbuddy.gg/u/[userName]</loc>
 		<lastmod>2021-01-25</lastmod>
 	</url>
 
 	<url>
-		<loc>http://localhost:3000//workoutdiary/[workoutDayId]</loc>
+		<loc>https://webapp.powerbuddy.gg/workoutdiary/[workoutDayId]</loc>
 		<lastmod>2021-01-25</lastmod>
 	</url>
 
 	<url>
-		<loc>http://localhost:3000//extraPath</loc>
+		<loc>https://webapp.powerbuddy.gg/extraPath</loc>
 		<lastmod>2021-01-25</lastmod>
 	</url>
 </urlset>
