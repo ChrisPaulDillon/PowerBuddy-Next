@@ -11,6 +11,8 @@ import axios from 'axios';
 import { GetLoggedInUsersProfileUrl } from '../api/account/user';
 import UserProvider from '../components/users/UserContext';
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
 //const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 Sentry.init({
   dsn: process.env.REACT_APP_SENTRY,
