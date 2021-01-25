@@ -5,6 +5,7 @@ interface IContextOutputProps {
   user: IUser;
   setUser: any;
   isAuthenticated: boolean;
+  weightType: string;
 }
 
 const UserContext = createContext({} as IContextOutputProps);
@@ -19,12 +20,15 @@ interface IContextInputProps {
 
 export default function UserProvider({ user, setUser, children }: IContextInputProps) {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(Object.keys(user).length > 0);
+  const [weightType, setWeightType] = useState<string>('kg');
+
+  useEffect(() => {
+    setWeightType(user?.usingMetric ? 'kg' : 'lbs');
+  }, [user]);
 
   useEffect(() => {
     setIsAuthenticated(Object.keys(user).length > 0);
   }, [user]);
 
-  console.log(isAuthenticated);
-
-  return <UserContext.Provider value={{ user, setUser, isAuthenticated }}>{children}</UserContext.Provider>;
+  return <UserContext.Provider value={{ user, setUser, isAuthenticated, weightType }}>{children}</UserContext.Provider>;
 }

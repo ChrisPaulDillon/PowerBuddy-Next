@@ -5,6 +5,7 @@ import { CenterColumnFlex } from '../../layout/Flexes';
 import { FormInput, FormNumberInput, FormWeightInput } from '../../common/Inputs';
 import { PbStack } from '../../common/Stacks';
 import { IWeightInput } from 'powerbuddy-shared';
+import { useUserContext } from '../../users/UserContext';
 
 interface IProps {
   weightProgressionType: string;
@@ -13,20 +14,23 @@ interface IProps {
 }
 
 const WeightSelectionForm: React.FC<IProps> = ({ weightProgressionType, weightInput, updateWeightInput }) => {
+  const { weightType } = useUserContext();
+
   return (
     <CenterColumnFlex>
       {weightProgressionType === 'PERCENTAGE' ? (
         <Box>
           {weightInput.map((x, idx) => (
             <PbStack key={idx}>
-              <TextSm>{x.exerciseName}</TextSm>
+              <TextSm>
+                {x.exerciseName} ({weightType})
+              </TextSm>
               <FormWeightInput
                 name={x.exerciseId!.toString()}
                 defaultValue={x.weight ?? 0}
                 maxW="100px"
                 onChange={(e: number) => updateWeightInput(x.exerciseId, e)}
               />
-              kg
             </PbStack>
           ))}
           <TextXs mt="3">Enter the weights you want the initial percentages to be based off</TextXs>
@@ -35,14 +39,15 @@ const WeightSelectionForm: React.FC<IProps> = ({ weightProgressionType, weightIn
         <Box>
           {weightInput.map((x, idx) => (
             <PbStack key={idx}>
-              <TextSm>{x.exerciseName}</TextSm>
+              <TextSm>
+                {x.exerciseName} ({weightType})
+              </TextSm>
               <FormWeightInput
                 name={x.exerciseId!.toString()}
                 defaultValue={x.weight ?? 0}
                 maxW="100px"
                 onChange={(e: number) => updateWeightInput(x.exerciseId, e)}
               />
-              kg
             </PbStack>
           ))}
           <TextXs>

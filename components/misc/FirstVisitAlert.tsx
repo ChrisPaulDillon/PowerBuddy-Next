@@ -1,38 +1,38 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Button, FormErrorMessage, Input, FormControl, Box, RadioGroup, Radio, IconButton } from '@chakra-ui/core';
-import { useDispatch } from 'react-redux';
+import { Button, Box, RadioGroup, Radio, IconButton } from '@chakra-ui/core';
 import { TextSm, ITextSm } from '../common/Texts';
 import { PbStack } from '../common/Stacks';
 import { GiMale, GiFemale, GiHelicopter } from 'react-icons/gi';
 import { CenterColumnFlex } from '../layout/Flexes';
-import { CreateFirstVisitStats } from '../../redux/area/account/userActions';
 import { TextXs } from '../common/Texts';
-import { FormNumberInput } from '../common/Inputs';
+import axios from 'axios';
+import { CreateFirstVisitStatsUrl } from '../../api/account/user';
 
 interface IProps {
-  setAddFirstVisitAlert: (arg0: boolean) => any;
+  onClose: () => void;
 }
 
-const FirstVisitAlert: React.FC<IProps> = ({ setAddFirstVisitAlert }) => {
+const FirstVisitAlert: React.FC<IProps> = ({ onClose }) => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [, setError] = useState<boolean>(false);
-  const [, setSuccess] = useState<boolean>(false);
-  const dispatcher = useDispatch();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [maleSelected, setMaleSelected] = useState<boolean>(false);
   const [femaleSelected, setFemaleSelected] = useState<boolean>(false);
   const [bottomNote, setBottomNote] = useState<string>('');
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
+    setLoading(true);
     if (currentPage < 4) {
       return;
     } else {
       data.genderId = maleSelected ? 3 : 2;
-      dispatcher(CreateFirstVisitStats(data, setLoading, setError, setSuccess));
-      setAddFirstVisitAlert(true);
+      try {
+        await axios.post(CreateFirstVisitStatsUrl(), data);
+      } catch (err) {}
+      onClose();
     }
+    setLoading(false);
   };
 
   const determinePage = () => {

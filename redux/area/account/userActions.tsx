@@ -2,12 +2,10 @@ import * as types from '../../actionTypes';
 import axios from 'axios';
 import { Dispatch, ActionCreator } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-import { INotificationInteraction } from 'powerbuddy-shared';
 import { CreateFirstVisitStatsUrl } from '../../../api/account/user';
 import { IReduxState } from '../../initialState';
 export interface ICreateFirstVisitStatsAction {
   type: types.CREATE_FIRST_VISIT_STATS;
-  notifications: INotificationInteraction[];
 }
 
 export const CreateFirstVisitStats: ActionCreator<ThunkAction<Promise<any>, IReduxState, null, ICreateFirstVisitStatsAction>> = (

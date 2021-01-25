@@ -9,7 +9,7 @@ import { CardSm } from '../layout/Card';
 import { CenterColumnFlex, CenterRowFlex } from '../layout/Flexes';
 import { BadgeWeekNo, BadgeWorkoutName } from '../shared/Badges';
 import theme from '../../theme';
-import { TEMPLATES_URL, WORKOUT_DIARY_URL } from '../../InternalLinks';
+import { TEMPLATES_URL, WORKOUT_DAY_URL, WORKOUT_DIARY_URL } from '../../InternalLinks';
 import router, { useRouter } from 'next/router';
 import { isMobile } from 'react-device-detect';
 import { PbPrimaryButton } from '../common/Buttons';
@@ -158,7 +158,7 @@ const WorkoutDaySummarySingle: React.FC<IWorkoutDaySummary> = ({
         <TextSm textAlign="left" isTruncated>
           {moment(date).format('DD/MM/YYYY')}
         </TextSm>
-        <PbIconButton Icon={CgArrowTopRight} label="Go to Workout" onClick={async () => await router.push(`${WORKOUT_DIARY_URL}/${workoutDayId}`)} />
+        <PbIconButton Icon={CgArrowTopRight} label="Go to Workout" onClick={async () => await router.push(`${WORKOUT_DAY_URL}/${workoutDayId}`)} />
       </PbStack>
       {
         hasWorkoutData ? (

@@ -24,7 +24,7 @@ const EditWorkoutSetForm: React.FC<IProps> = ({ workoutDayId, workoutSet, onClos
   const [noOfRepsUpdated, setNoOfRepsUpdated] = useState<number>(noOfReps!);
   const [weightUpdated, setWeightUpdated] = useState<number>(weightLifted!);
 
-  const { EditSet, DeleteSet } = useWorkoutContext();
+  const { EditSet, DeleteSet, weightType } = useWorkoutContext();
 
   const { handleSubmit, formState } = useForm();
 
@@ -102,7 +102,7 @@ const EditWorkoutSetForm: React.FC<IProps> = ({ workoutDayId, workoutSet, onClos
           <FormNumberInput name="reps" defaultValue={noOfReps} onChange={(e: number) => updateReps(e)} />
         </PbStack>
         <PbStack>
-          <TextSm minW="100px">Weight</TextSm>
+          <TextSm minW="100px">Weight ({weightType})</TextSm>
           <FormNumberInput name="weight" defaultValue={weightLifted} onChange={(e: number) => updateWeight(e)} />
         </PbStack>
         <CenterColumnFlex mt="3">

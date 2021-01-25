@@ -15,6 +15,8 @@ import RepeatTemplateForm from './RepeatTemplateForm';
 import ProgressSpinner from '../../common/ProgressSpinner';
 import { ITemplateProgramExtended, IWeightInput, IWorkoutLogTemplateInput } from 'powerbuddy-shared';
 import { useUserContext } from '../../users/UserContext';
+import axios from 'axios';
+import { CreateWorkoutLogFromTemplateUrl } from '../../../api/account/workoutLog';
 
 interface IProps {
   onClose: () => void;
@@ -105,6 +107,7 @@ const CreateProgramLogFromTemplateForm: React.FC<IProps> = ({ onClose, template,
           dayCount: dayCount,
           weightInputs: curWeightInputs,
         };
+        const response = await axios.post(CreateWorkoutLogFromTemplateUrl(template?.templateProgramId), workoutLog);
         toast({
           title: 'Success',
           description: 'Diary successfully created, visit the diary section to begin tracking',

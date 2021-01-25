@@ -17,7 +17,6 @@ import { FaRegCommentAlt, FaCheckCircle } from 'react-icons/fa';
 import { MdWarning } from 'react-icons/md';
 import { GetWorkoutDayByIdUrl, UpdateWorkoutUrl } from '../../api/account/workoutDay';
 import { IBreadcrumbInput, BreadcrumbBase } from '../../components/common/Breadcrumbs';
-import { PbPrimaryButton } from '../../components/common/Buttons';
 import PbIconButton from '../../components/common/IconButtons';
 import MenuBase, { IMenuItem } from '../../components/common/Menus';
 import { ModalDrawerForm, PbModalDrawer } from '../../components/common/ModalDrawer';
@@ -136,7 +135,7 @@ const WorkoutDay: NextPage = () => {
   };
 
   var breadcrumbInput: IBreadcrumbInput[] = [
-    { href: '/', name: 'Workout Diary' },
+    { href: WORKOUT_DIARY_URL, name: 'Workout Diary' },
     { href: '#', name: dateHighlighted ? 'Todays Workout' : moment(workoutDay.date).format('dddd Do MMM') },
   ];
 
@@ -164,7 +163,6 @@ const WorkoutDay: NextPage = () => {
             <PbStack mb={1} w="100%">
               <Flex justify={{ lg: 'left', md: 'left', sm: 'left', xs: 'center' }} w="100%">
                 <CenterRowFlex justifyContent="center" ml={3}>
-                  <PbPrimaryButton size="sm">Complete Workout</PbPrimaryButton>
                   <PbIconButton
                     label="Complete Workout"
                     Icon={FaCheckCircle}

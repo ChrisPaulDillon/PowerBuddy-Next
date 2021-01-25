@@ -11,6 +11,7 @@ import { TagExerciseCount, TagProgramDaysCount, TagProgramLogsCount } from '../.
 import LogHistoryList from '../../components/logHistory/LogHistoryList';
 import { Error } from '../../components/common/Error';
 import { PageContent, PageHeader } from '../../components/layout/Page';
+import { withAuthorized } from '../../util/authMiddleware';
 
 const Index: NextPage = () => {
   const { loading, data: workoutLogStats, statusCode } = useAxios<IWorkoutLogStats>(GetAllWorkoutLogStatsUrl());
@@ -69,4 +70,4 @@ const Index: NextPage = () => {
   );
 };
 
-export default Index;
+export default withAuthorized(Index);

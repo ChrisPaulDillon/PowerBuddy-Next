@@ -26,7 +26,7 @@ const AddExerciseForm: React.FC<IProps> = ({ onClose, workoutDayId }) => {
   const [reps, setReps] = useState<number>(1);
   const [weight, setWeight] = useState<number>(0);
   const [exerciseIdSelected, setExerciseIdSelected] = useState<number>();
-  const { CreateExercise } = useWorkoutContext();
+  const { CreateExercise, weightType } = useWorkoutContext();
   const toast = useToast();
 
   const exerciseList = exercises.map((x) => ({
@@ -53,8 +53,6 @@ const AddExerciseForm: React.FC<IProps> = ({ onClose, workoutDayId }) => {
 
     try {
       const response = await axios.post(CreateWorkoutExerciseUrl(), workoutExercise);
-      console.log(response.data);
-
       CreateExercise(response.data);
       toast({
         title: 'Success',
@@ -114,7 +112,7 @@ const AddExerciseForm: React.FC<IProps> = ({ onClose, workoutDayId }) => {
       <Box p={2}>
         <FormWeightInput
           name="weight"
-          placeholder="Enter weight...(kg)"
+          placeholder={`Enter weight...(${weightType})`}
           onChange={(e: number) => setWeight(e)}
           w="100%"
           defaultValue={0}
@@ -137,7 +135,8 @@ const AddExerciseForm: React.FC<IProps> = ({ onClose, workoutDayId }) => {
       </LightMode>
       <CenterColumnFlex pt="3">
         <TextLg>
-          {sets}x{reps}x{weight}kg
+          {sets}x{reps}x{weight}
+          {weightType}
         </TextLg>
         <Box mt="5">
           <PbPrimaryButton type="submit" loading={formState.isSubmitting}>

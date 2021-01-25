@@ -8,5 +8,9 @@ export const GetTemplatesBySearch = (searchTerm: string) => `${baseUrl}/Search?s
 
 export const GetTemplateFeedUrl = () => `${baseUrl}/Feed`;
 
-export const GetTemplateProgramByIdUrl = (templateProgramId: number) =>
-  `${baseUrl}/${templateProgramId}`;
+export const GetTemplateProgramByIdUrl = (templateProgramId: number) => {
+  if(templateProgramId) {
+    return `${baseUrl}/${templateProgramId}`;
+  }
+}
+
