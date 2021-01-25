@@ -10,7 +10,7 @@ import ProgressSpinner from '../../components/common/ProgressSpinner';
 import { TagExerciseCount, TagProgramDaysCount, TagProgramLogsCount } from '../../components/shared/Tags';
 import LogHistoryList from '../../components/logHistory/LogHistoryList';
 import { Error } from '../../components/common/Error';
-import { PageContent, PageHeader } from '../../components/layout/Page';
+import { PageContent, PageHead } from '../../components/layout/Page';
 import { withAuthorized } from '../../util/authMiddleware';
 
 const Index: NextPage = () => {
@@ -24,7 +24,7 @@ const Index: NextPage = () => {
 
   return (
     <Box>
-      <PageHeader title="Workout History" />
+      <PageHead title="Workout History" description="View workout history and personal bests for powerlifters and weightlifters" />
       <PageContent>
         <CenterColumnFlex>
           <PageTitle>Workout History</PageTitle>

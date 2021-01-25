@@ -17,7 +17,7 @@ import ProgressSpinner from '../../components/common/ProgressSpinner';
 import CreateProgramLogFromTemplateForm from '../../components/templatePrograms/forms/CreateProgramLogFromTemplateForm';
 import { FaRunning } from 'react-icons/all';
 import { TemplateWeekCard } from '../../components/templatePrograms/TemplateWeekCard';
-import { PageContent, PageHeader } from '../../components/layout/Page';
+import { PageContent, PageHead } from '../../components/layout/Page';
 import { useUserContext } from '../../components/users/UserContext';
 
 const TemplateProgramSingle: NextPage = () => {
@@ -42,7 +42,7 @@ const TemplateProgramSingle: NextPage = () => {
 
   return (
     <Box>
-      <PageHeader title={template?.name} />
+      <PageHead title={template?.name} description="Powerbuddy view powerlifting templates such as 5/3/1" />
       <PageContent>
         <Box>
           <BreadcrumbBase values={breadcrumbInput} />

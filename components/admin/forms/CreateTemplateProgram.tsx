@@ -26,8 +26,6 @@ const CreateTemplateProgram = () => {
     }
   };
 
-  console.log(templateProgram);
-
   return (
     <Box>
       <form onSubmit={handleSubmit(onSubmit)}>

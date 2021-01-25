@@ -5,7 +5,7 @@ import { GetAllActiveUserProfilesUrl } from '../../api/public/user';
 import ProgressSpinner from '../../components/common/ProgressSpinner';
 import { PageTitle } from '../../components/common/Texts';
 import { CenterColumnFlex } from '../../components/layout/Flexes';
-import { PageContent, PageHeader } from '../../components/layout/Page';
+import { PageContent, PageHead } from '../../components/layout/Page';
 import UserList from '../../components/users/UserList';
 import { useAxios } from '../../hooks/useAxios';
 import { IUser } from 'powerbuddy-shared';
@@ -22,7 +22,7 @@ const Index: NextPage = () => {
 
   return (
     <Box>
-      <PageHeader title="Active Users" />
+      <PageHead title="Active Users" description="View PowerBuddy powerlifting members and view personal bests" />
       <PageContent>
         <CenterColumnFlex>
           <PageTitle>Users</PageTitle>

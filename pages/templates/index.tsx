@@ -14,7 +14,7 @@ import { CenterColumnFlex } from '../../components/layout/Flexes';
 import { LoginModal } from '../../components/shared/Modals';
 import TemplateProgramCardList from '../../components/templatePrograms/TemplateProgramCardList';
 import CreateProgramLogFromScratchForm from '../../components/templatePrograms/forms/CreateProgramLogFromScratchForm';
-import { PageContent, PageHeader } from '../../components/layout/Page';
+import { PageContent, PageHead } from '../../components/layout/Page';
 import { useUserContext } from '../../components/users/UserContext';
 
 const Index: NextPage = () => {
@@ -40,7 +40,10 @@ const Index: NextPage = () => {
 
   return (
     <Box>
-      <PageHeader title="Weightlifting Programs" />
+      <PageHead
+        title="Weightlifting Programs"
+        description="View PowerBuddy Weightlifting Powerlifting programs, training templates such as 5/3/1 boring but big"
+      />
       <PageContent>
         <CenterColumnFlex>
           <PageTitle>Weightlifting Programs</PageTitle>

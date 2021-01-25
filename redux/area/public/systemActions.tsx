@@ -23,9 +23,7 @@ export const loadQuotes: ActionCreator<ThunkAction<Promise<any>, IReduxState, nu
         });
         localStorage.setItem('quotes', JSON.stringify(response.data));
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 };
 
@@ -45,9 +43,7 @@ export const GetAllGenders: ActionCreator<ThunkAction<Promise<any>, IReduxState,
         });
         localStorage.setItem('genders', JSON.stringify(response.data));
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 };
 
@@ -67,8 +63,6 @@ export const GetAllMemberStatus: ActionCreator<ThunkAction<Promise<any>, IReduxS
         });
         localStorage.setItem('memberStatus', JSON.stringify(response.data));
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 };

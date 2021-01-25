@@ -14,7 +14,7 @@ const EditTemplateExerciseCollectionForm = ({}) => {
 
     return (
       <CenterColumnFlex>
-        {/* <PageHeader>Create a new Exercise</PageHeader>
+        {/* <PageHead>Create a new Exercise</PageHead>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box p="1">
           <FormInput

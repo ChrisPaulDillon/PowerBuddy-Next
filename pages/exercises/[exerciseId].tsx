@@ -5,7 +5,7 @@ import { GetExerciseByIdUrl } from '../../api/public/exercise';
 import ProgressSpinner from '../../components/common/ProgressSpinner';
 import { PageSubHeader, PageTitle, TextSm, TextXs } from '../../components/common/Texts';
 import { CenterColumnFlex } from '../../components/layout/Flexes';
-import { PageContent, PageHeader } from '../../components/layout/Page';
+import { PageContent, PageHead } from '../../components/layout/Page';
 import { useAxios } from '../../hooks/useAxios';
 import { IExercise } from 'powerbuddy-shared';
 
@@ -24,7 +24,7 @@ const ExerciseDetailed = () => {
 
   return (
     <Box>
-      <PageHeader title={exercise?.exerciseName} />
+      <PageHead title={exercise?.exerciseName} description="View weightlifting exercises on PowerBuddy" />
       <PageContent>
         <CenterColumnFlex>
           <PageTitle>{exercise?.exerciseName}</PageTitle>

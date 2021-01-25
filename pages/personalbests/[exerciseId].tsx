@@ -10,6 +10,7 @@ import ProgressSpinner from '../../components/common/ProgressSpinner';
 import { WORKOUT_DIARY_URL } from '../../InternalLinks';
 import { ModalBack } from '../../components/common/Modals';
 import PersonalBestDetailed from '../../components/liftingStats/PersonalBestDetailed';
+import { PageContent, PageHead } from '../../components/layout/Page';
 
 const ExerciseSpecificPersonalBest: NextPage = () => {
   const router = useRouter();
@@ -25,18 +26,20 @@ const ExerciseSpecificPersonalBest: NextPage = () => {
 
   return (
     <Box>
-      <PersonalBestDetailed {...liftingStatDetailed} />
-
-      {isBackOpen && (
-        <ModalBack
-          actionText="Return to Diary"
-          isOpen={isBackOpen}
-          onClose={onBackClose}
-          title="No Data Found"
-          body="You currently have no data logged for this exercise, fill in your diary and stats will appear here"
-          onClick={() => router.push(WORKOUT_DIARY_URL)}
-        />
-      )}
+      <PageHead title="Weighlifting Exercise" description="View personal bests which are automatically recorded when tracking workouts" />
+      <PageContent>
+        <PersonalBestDetailed {...liftingStatDetailed} />
+        {isBackOpen && (
+          <ModalBack
+            actionText="Return to Diary"
+            isOpen={isBackOpen}
+            onClose={onBackClose}
+            title="No Data Found"
+            body="You currently have no data logged for this exercise, fill in your diary and stats will appear here"
+            onClick={() => router.push(WORKOUT_DIARY_URL)}
+          />
+        )}
+      </PageContent>
     </Box>
   );
 };

@@ -3,13 +3,13 @@ import { NextPage } from 'next';
 import React from 'react';
 import AccountSettings from '../../../components/account/settings/AccountSettings';
 import { CenterColumnFlex } from '../../../components/layout/Flexes';
-import { PageHeader, PageContent } from '../../../components/layout/Page';
+import { PageHead, PageContent } from '../../../components/layout/Page';
 import { withAuthorized } from '../../../util/authMiddleware';
 
 const Index: NextPage = () => {
   return (
     <Box>
-      <PageHeader title="Settings" />
+      <PageHead title="Settings" description="PowerBuddy modify your settings, switch from kilogram to pounds and update personal info" />
       <PageContent>
         <CenterColumnFlex>
           <AccountSettings />

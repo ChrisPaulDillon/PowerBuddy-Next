@@ -29,12 +29,13 @@ const Page: React.FC = ({ children, ...rest }) => {
 
 interface IPageHeaderProps {
   title: string;
+  description: string;
 }
 
-export const PageHeader: React.FC<IPageHeaderProps> = ({ title }) => {
+export const PageHead: React.FC<IPageHeaderProps> = ({ title, description }) => {
   return (
     <Head>
-      {' '}
+      <meta name="description" content={description} />
       <title>
         {title} | {process.env.NEXT_PUBLIC_SITE_NAME}
       </title>

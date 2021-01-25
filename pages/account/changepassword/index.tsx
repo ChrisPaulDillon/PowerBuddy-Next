@@ -5,7 +5,7 @@ import React from 'react';
 import ChangePasswordForm from '../../../components/account/forms/ChangePasswordForm';
 import { PageTitle } from '../../../components/common/Texts';
 import { CenterColumnFlex } from '../../../components/layout/Flexes';
-import { PageContent, PageHeader } from '../../../components/layout/Page';
+import { PageContent, PageHead } from '../../../components/layout/Page';
 
 const Index: NextPage = () => {
   const router = useRouter();
@@ -13,7 +13,7 @@ const Index: NextPage = () => {
 
   return (
     <Box>
-      <PageHeader title="Change Password" />
+      <PageHead title="Change Password" description="Change your password for PowerBuddy" />
       <PageContent>
         <CenterColumnFlex>
           <PageTitle>Change Password</PageTitle>

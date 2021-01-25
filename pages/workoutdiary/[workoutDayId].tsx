@@ -30,7 +30,7 @@ import { Error } from '../../components/common/Error';
 import AddWorkoutNoteForm from '../../components/workouts/forms/AddWorkoutNoteForm';
 import NotifiyPersonalBestAlert from '../../components/workouts/alerts/NotifyPersonalBestAlert';
 import AddExerciseForm from '../../components/workouts/forms/AddExerciseForm';
-import { PageContent, PageHeader } from '../../components/layout/Page';
+import { PageContent, PageHead } from '../../components/layout/Page';
 
 const WorkoutDay: NextPage = () => {
   const router = useRouter();
@@ -155,7 +155,7 @@ const WorkoutDay: NextPage = () => {
 
   return (
     <Box w="100%">
-      <PageHeader title="Workout" />
+      <PageHead title="Workout" description="PowerBuddy Workout Diary, track personal bests and powerlifting progress" />
       <WorkoutProvider workoutDay={workoutDay} setWorkoutDay={setWorkoutDay} contentDisabled={contentDisabled}>
         <PageContent>
           <BreadcrumbBase values={breadcrumbInput} />

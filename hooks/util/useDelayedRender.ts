@@ -4,7 +4,6 @@ const useDelayedRender = (delay: number) => {
   const [delayed, setDelayed] = useState(true);
   useEffect(() => {
     const timeout = setTimeout(() => setDelayed(false), delay);
-    console.log(timeout);
 
     return () => clearTimeout(timeout);
   }, []);

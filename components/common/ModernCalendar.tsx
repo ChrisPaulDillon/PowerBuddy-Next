@@ -27,7 +27,7 @@ const ModernCalendar: React.FC<IProps> = ({ calendarDate, setCalendarDate, worko
   }, [workoutDates]);
 
   const handleDisabledSelect = (disabledDay) => {
-    console.log('Tried selecting a disabled day', disabledDay);
+    //onsole.log('Tried selecting a disabled day', disabledDay);
   };
 
   return <Calendar value={calendarDate} onChange={setCalendarDate} disabledDays={disabledDates} onDisabledDayError={handleDisabledSelect} />; // handle errorshouldHighlightWeekends

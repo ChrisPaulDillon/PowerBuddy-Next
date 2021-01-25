@@ -8,7 +8,7 @@ import { SendEmailConfirmationUrl } from '../../../api/public/email';
 import ProgressSpinner from '../../../components/common/ProgressSpinner';
 import { PageTitle, TextSm } from '../../../components/common/Texts';
 import { CenterColumnFlex } from '../../../components/layout/Flexes';
-import { PageContent, PageHeader } from '../../../components/layout/Page';
+import { PageContent, PageHead } from '../../../components/layout/Page';
 
 const Index: NextPage = () => {
   const router = useRouter();
@@ -56,7 +56,7 @@ const Index: NextPage = () => {
   if (userId == null || token == null)
     return (
       <Box>
-        <PageHeader title="Confirm Email" />
+        <PageHead title="Confirm Email" description="Confirm your email address to grant full access to your account" />
         <PageContent>
           <CenterColumnFlex>
             <PageTitle>Error. You have followed an invalid link</PageTitle>
@@ -68,7 +68,7 @@ const Index: NextPage = () => {
   if (response)
     return (
       <Box>
-        <PageHeader title="Confirm Email" />
+        <PageHead title="Confirm Email" description="Confirm your email address to grant full access to your account" />
         <PageContent>
           <CenterColumnFlex>
             <PageTitle>Email Successfully Confirmed</PageTitle>
@@ -82,7 +82,7 @@ const Index: NextPage = () => {
 
   return (
     <Box>
-      <PageHeader title="Confirm Email" />
+      <PageHead title="Confirm Email" description="Confirm your email address to grant full access to your account" />
       <PageContent>
         <CenterColumnFlex>
           <PageTitle>Error! Token has expired!</PageTitle>

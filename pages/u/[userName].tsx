@@ -11,7 +11,7 @@ import { CenterColumnFlex } from '../../components/layout/Flexes';
 import UserAvatar from '../../components/layout/UserAvatar';
 import MemberCrown from '../../components/shared/MemberCrown';
 import { Error } from '../../components/common/Error';
-import { PageContent, PageHeader } from '../../components/layout/Page';
+import { PageContent, PageHead } from '../../components/layout/Page';
 import { useUserContext } from '../../components/users/UserContext';
 
 const UserProfile: NextPage = () => {
@@ -32,7 +32,7 @@ const UserProfile: NextPage = () => {
   if (Object.keys(user).length === 0) return <Error statusCode={404} description="No User Found under this username" />;
   return (
     <Box>
-      <PageHeader title="Profile" />
+      <PageHead title="Profile" description="View PowerBuddy weightlifting powerlifting profiles" />
       <PageContent>
         <CenterColumnFlex>
           <UserAvatar name={publicUser.userName!} size="lg" />
