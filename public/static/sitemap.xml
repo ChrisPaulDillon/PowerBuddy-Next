@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+      <urlset xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 
+      http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" 
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+      xmlns:xhtml="http://www.w3.org/1999/xhtml">
+      
+	<url>
+		<loc>http://localhost:3000//account/changepassword/index</loc>
+		<lastmod>2021-01-25</lastmod>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000//account/confirmemail/index</loc>
+		<lastmod>2021-01-25</lastmod>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000//account/login/index</loc>
+		<lastmod>2021-01-25</lastmod>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000//account/settings/index</loc>
+		<lastmod>2021-01-25</lastmod>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000//exercises/index</loc>
+		<lastmod>2021-01-25</lastmod>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000//exercises/[exerciseId]</loc>
+		<lastmod>2021-01-25</lastmod>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000//history/index</loc>
+		<lastmod>2021-01-25</lastmod>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000//index</loc>
+		<lastmod>2021-01-25</lastmod>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000//personalbests/index</loc>
+		<lastmod>2021-01-25</lastmod>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000//templates/index</loc>
+		<lastmod>2021-01-25</lastmod>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000//templates/[templateProgramId]</loc>
+		<lastmod>2021-01-25</lastmod>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000//u/index</loc>
+		<lastmod>2021-01-25</lastmod>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000//u/[userName]</loc>
+		<lastmod>2021-01-25</lastmod>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000//workoutdiary/[workoutDayId]</loc>
+		<lastmod>2021-01-25</lastmod>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000//extraPath</loc>
+		<lastmod>2021-01-25</lastmod>
+	</url>
+</urlset>
