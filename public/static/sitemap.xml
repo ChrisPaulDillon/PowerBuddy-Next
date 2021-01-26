@@ -5,3 +5,418 @@
       xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
       xmlns:xhtml="http://www.w3.org/1999/xhtml">
       
+	<url>
+		<loc>https://webapp.powerbuddy.gg/account/changepassword</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/account/confirmemail</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/account/settings</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/1</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/10</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/11</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/12</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/13</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/14</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/15</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/16</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/17</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/18</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/19</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/2</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/20</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/21</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/22</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/23</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/24</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/25</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/26</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/27</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/28</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/29</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/3</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/30</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/31</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/32</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/33</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/34</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/35</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/36</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/37</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/38</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/39</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/4</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/40</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/41</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/42</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/43</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/44</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/45</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/46</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/47</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/48</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/49</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/5</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/50</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/51</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/52</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/53</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/54</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/55</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/56</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/57</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/58</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/59</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/6</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/60</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/61</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/62</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/63</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/64</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/65</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/66</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/7</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/8</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises/9</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/exercises</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/history</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/index</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/templates/1</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/templates/2</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/templates/3</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/templates/4</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/templates/5</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/templates/6</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/templates/7</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/templates/8</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/templates/9</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/templates</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+
+	<url>
+		<loc>https://webapp.powerbuddy.gg/u</loc>
+		<lastmod>2021-01-26</lastmod>
+	</url>
+</urlset>
