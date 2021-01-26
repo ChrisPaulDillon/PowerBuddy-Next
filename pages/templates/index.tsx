@@ -4,7 +4,7 @@ import { Box, Flex, useDisclosure } from '@chakra-ui/core';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { GetAllTemplateProgramsUrl } from '../../api/public/template';
-import { ITemplateProgram } from 'powerbuddy-shared';
+import { IExercise, ITemplateProgram } from 'powerbuddy-shared';
 import { WORKOUT_DIARY_URL } from '../../InternalLinks';
 import { PbPrimaryButton } from '../../components/common/Buttons';
 import { ModalDrawerForm } from '../../components/common/ModalDrawer';
@@ -16,27 +16,20 @@ import TemplateProgramCardList from '../../components/templatePrograms/TemplateP
 import CreateProgramLogFromScratchForm from '../../components/templatePrograms/forms/CreateProgramLogFromScratchForm';
 import { PageContent, PageHead } from '../../components/layout/Page';
 import { useUserContext } from '../../components/users/UserContext';
+import { useAxios } from '../../hooks/useAxios';
 
 const Index: NextPage = ({ templates }: any) => {
   const router = useRouter();
 
   const { isAuthenticated } = useUserContext();
 
+  const { loading, data: templatesv2, error } = useAxios<ITemplateProgram[]>(GetAllTemplateProgramsUrl());
+
   //const [templates, setTemplates] = useState<ITemplateProgram[]>([]);
 
   const { isOpen: isCreateOpen, onOpen: onCreateOpen, onClose: onCreateClose } = useDisclosure();
   const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
   const { isOpen: isCreateSuccessOpen, onClose: onCreateSuccessClose } = useDisclosure();
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const data = await axios.get(GetAllTemplateProgramsUrl());
-  //       setTemplates(data && data.data);
-  //     } catch (err) {}
-  //   };
-  //   fetchData();
-  // }, []);
 
   return (
     <Box>
@@ -82,7 +75,7 @@ const Index: NextPage = ({ templates }: any) => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const response = await axios.get(GetAllTemplateProgramsUrl());
+  const response = await axios.get<ITemplateProgram[]>(GetAllTemplateProgramsUrl());
 
   return {
     props: {

@@ -1,30 +1,11 @@
-const sitemap =  require('nextjs-sitemap-generator');  // Import the package
-
-const  { createServer }  =  require('http')
-
-const  { parse }  =  require('url')
-
-const next =  require('next')
-
-  
-
-const dev = process.env.NODE_ENV !==  'production'
-
-const app =  next({ dev })
-
-const handle = app.getRequestHandler()
-
-  
-
-/*
-
-Here you is you have to use the sitemap function.
-
-Using it here you are allowing to generate the sitemap file
-
-only once, just when the server starts.
-
-*/
+const sitemap =  require('nextjs-sitemap-generator'); 
+const fs =  require("fs");
+const { createServer }  = require('http');
+const { parse } = require('url');
+const next =  require('next');
+const dev = process.env.NODE_ENV !==  'production';
+const app =  next({ dev });
+const handle = app.getRequestHandler();
 
 sitemap({
 //   alternateUrls: {
@@ -34,8 +15,8 @@ sitemap({
 //     fr: 'https://example.fr',
 //   },
   baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
-  ignoredPaths: ['admin'],
-  pagesDirectory: __dirname + "\\pages",
+  ignoredPaths: ['admin', 'templates/[templateProgramId]', 'u/[userName]', 'personalbests/[exerciseId]', 'exercises/[exerciseId]', 'workoutdiary/[workoutDayId]'],
+  pagesDirectory: __dirname + "/.next/serverless/pages",
   targetDirectory : 'public/static/',
   sitemapFilename: 'sitemap.xml',
   nextConfigPath: __dirname + "\\next.config.js"
@@ -45,8 +26,8 @@ sitemap({
 
 app.prepare().then(()  =>  {
   createServer((req,  res)  =>  {
-    const  parsedUrl  =  parse(req.url,  true)
-    const  {  pathname,  query  }  =  parsedUrl
+    const parsedUrl = parse(req.url, true);
+    const  { pathname, query } = parsedUrl;
     if (pathname  ===  '/a') {
       app.render(req,  res,  '/a',  query)
     }  

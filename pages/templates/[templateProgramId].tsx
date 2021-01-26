@@ -21,13 +21,11 @@ import { PageContent, PageHead } from '../../components/layout/Page';
 import { useUserContext } from '../../components/users/UserContext';
 import axios from 'axios';
 
-const TemplateProgramSingle: NextPage = () => {
+const TemplateProgramSingle: NextPage = ({ template }: any) => {
   const router = useRouter();
   const { templateProgramId } = router.query;
 
   const { isAuthenticated } = useUserContext();
-
-  const { loading, data: template, error } = useAxios<ITemplateProgramExtended>(GetTemplateProgramByIdUrl(parseInt(templateProgramId as string)));
 
   const { isOpen: isAddProgramOpen, onOpen: onAddProgramOpen, onClose: onAddProgramClose } = useDisclosure();
   const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
@@ -37,9 +35,6 @@ const TemplateProgramSingle: NextPage = () => {
     { href: TEMPLATES_URL, name: 'Program Templates' },
     { href: '#', name: template?.name },
   ];
-
-  if (loading) return <ProgressSpinner />;
-  if (error) return <PageTitle>No Template Found</PageTitle>;
 
   return (
     <Box>
@@ -119,23 +114,21 @@ const TemplateProgramSingle: NextPage = () => {
   );
 };
 
-// export const getStaticProps: GetStaticProps = async ({ params }) => {
-//   const templateProgramId = params.id as string;
-//   const res = await axios.get<ITemplateProgram>(GetTemplateProgramByIdUrl(parseInt(templateProgramId)));
-
-//   return { props: { template: res.data } };
-// };
-
 export const getStaticPaths: GetStaticPaths = async () => {
-  // Call an external API endpoint to get posts
   const res = await axios.get<ITemplateProgram[]>(GetAllTemplateProgramsUrl());
 
-  // Get the paths we want to pre-render based on posts
-  const paths = res.data.map((template) => `/templates/${template.templateProgramId}`);
+  const paths = res.data.map((template) => ({
+    params: { templateProgramId: template.templateProgramId.toString() },
+  }));
 
-  // We'll pre-render only these paths at build time.
-  // { fallback: false } means other routes should 404.
   return { paths, fallback: false };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const templateProgramId = params.templateProgramId as string;
+  const res = await axios.get<ITemplateProgramExtended>(GetTemplateProgramByIdUrl(parseInt(templateProgramId)));
+
+  return { props: { template: res.data } };
 };
 
 export default TemplateProgramSingle;

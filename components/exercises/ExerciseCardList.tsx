@@ -8,6 +8,7 @@ import { IExercise } from 'powerbuddy-shared';
 interface Props {
   exercises: IExercise[];
 }
+
 const ExerciseCardList: React.FC<Props> = ({ exercises }) => (
   <Flex flexDirection="row" flexWrap="wrap" justifyContent="center" alignItems="center" p="1">
     {exercises.map((exercise) => (
@@ -18,8 +19,6 @@ const ExerciseCardList: React.FC<Props> = ({ exercises }) => (
 
 const ExerciseCardSingle: React.FC<IExercise> = ({ exerciseId, exerciseName, exerciseTypeName }) => {
   const router = useRouter();
-  const handleDetailClick = useCallback(() => router.push(`/exercises/${exerciseId}`), [history]);
-
   return (
     <Card borderWidth="1px" rounded="lg" overflow="hidden" m="2" textAlign="center">
       <Box p="2">
@@ -32,7 +31,7 @@ const ExerciseCardSingle: React.FC<IExercise> = ({ exerciseId, exerciseName, exe
       </TextSm>
       <TextXs fontWeight="semibold" letterSpacing="wide" fontSize="xs" textTransform="uppercase" m="2"></TextXs>
       <Box pt="2">
-        <Button colorScheme="pink" onClick={handleDetailClick}>
+        <Button colorScheme="pink" onClick={() => router.push(`/exercises/${exerciseId}`)}>
           Details
         </Button>
       </Box>

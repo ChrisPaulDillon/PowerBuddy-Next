@@ -10,7 +10,8 @@ const withMDX = require('@next/mdx')({
   extension: /\.mdx?$/,
 });
 
-const nextBuildId = require('next-build-id')
+const nextBuildId = require('next-build-id');
+
 module.exports = {
   generateBuildId: () => nextBuildId({ dir: __dirname })
 }
@@ -30,7 +31,7 @@ module.exports = withMDX(
     },
     webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
       // if (isServer) {
-      //   require('./util/generateSiteMap')
+      //   require('./scripts/generate-sitemap');
       // }
 
       return config;

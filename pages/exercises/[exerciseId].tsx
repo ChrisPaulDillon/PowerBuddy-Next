@@ -1,27 +1,14 @@
-import { Flex, Box, Divider } from '@chakra-ui/core';
-import { useRouter } from 'next/router';
-import React, { useState, useEffect } from 'react';
-import { GetExerciseByIdUrl } from '../../api/public/exercise';
-import ProgressSpinner from '../../components/common/ProgressSpinner';
+import { Box, Divider } from '@chakra-ui/core';
+import React from 'react';
+import { GetAllExercisesUrl, GetExerciseByIdUrl } from '../../api/public/exercise';
 import { PageSubHeader, PageTitle, TextSm, TextXs } from '../../components/common/Texts';
 import { CenterColumnFlex } from '../../components/layout/Flexes';
 import { PageContent, PageHead } from '../../components/layout/Page';
-import { useAxios } from '../../hooks/useAxios';
 import { IExercise } from 'powerbuddy-shared';
+import axios from 'axios';
+import { GetStaticPaths, GetStaticProps } from 'next';
 
-const ExerciseDetailed = () => {
-  const router = useRouter();
-  const { exerciseId } = router.query;
-  const { loading, data, error } = useAxios<IExercise>(GetExerciseByIdUrl(parseInt(exerciseId as string)));
-  const [exercise, setExercise] = useState<IExercise>({} as IExercise);
-
-  useEffect(() => {
-    if (data != null) setExercise(data);
-  }, [exerciseId, data, error, exercise]);
-
-  if (loading) return <ProgressSpinner />;
-  //   if (error) return <PageTitle>No exercise found</PageTitle>;
-
+const ExerciseDetailed = ({ exercise }: any) => {
   return (
     <Box>
       <PageHead title={exercise?.exerciseName} description="View weightlifting exercises on PowerBuddy" />
@@ -38,6 +25,23 @@ const ExerciseDetailed = () => {
       </PageContent>
     </Box>
   );
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const res = await axios.get<IExercise[]>(GetAllExercisesUrl());
+
+  const paths = res.data.map((exercise) => ({
+    params: { exerciseId: exercise.exerciseId.toString() },
+  }));
+
+  return { paths, fallback: false };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const exerciseId = params.exerciseId as string;
+  const res = await axios.get<IExercise>(GetExerciseByIdUrl(parseInt(exerciseId)));
+
+  return { props: { exercise: res.data } };
 };
 
 export default ExerciseDetailed;
