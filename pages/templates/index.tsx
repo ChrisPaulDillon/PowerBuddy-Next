@@ -1,4 +1,4 @@
-import { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next';
+import { GetServerSideProps, GetStaticProps, InferGetStaticPropsType, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { Box, Flex, useDisclosure } from '@chakra-ui/core';
 import axios from 'axios';
@@ -17,26 +17,26 @@ import CreateProgramLogFromScratchForm from '../../components/templatePrograms/f
 import { PageContent, PageHead } from '../../components/layout/Page';
 import { useUserContext } from '../../components/users/UserContext';
 
-const Index: NextPage = () => {
+const Index: NextPage = ({ templates }: any) => {
   const router = useRouter();
 
   const { isAuthenticated } = useUserContext();
 
-  const [templates, setTemplates] = useState<ITemplateProgram[]>([]);
+  //const [templates, setTemplates] = useState<ITemplateProgram[]>([]);
 
   const { isOpen: isCreateOpen, onOpen: onCreateOpen, onClose: onCreateClose } = useDisclosure();
   const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
   const { isOpen: isCreateSuccessOpen, onClose: onCreateSuccessClose } = useDisclosure();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await axios.get(GetAllTemplateProgramsUrl());
-        setTemplates(data && data.data);
-      } catch (err) {}
-    };
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const data = await axios.get(GetAllTemplateProgramsUrl());
+  //       setTemplates(data && data.data);
+  //     } catch (err) {}
+  //   };
+  //   fetchData();
+  // }, []);
 
   return (
     <Box>
@@ -79,6 +79,16 @@ const Index: NextPage = () => {
       </PageContent>
     </Box>
   );
+};
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const response = await axios.get(GetAllTemplateProgramsUrl());
+
+  return {
+    props: {
+      templates: response.data,
+    },
+  };
 };
 
 export default Index;

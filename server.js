@@ -35,7 +35,6 @@ sitemap({
 //   },
   baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
   ignoredPaths: ['admin'],
-  extraPaths: ['/extraPath'],
   pagesDirectory: __dirname + "\\pages",
   targetDirectory : 'public/static/',
   sitemapFilename: 'sitemap.xml',

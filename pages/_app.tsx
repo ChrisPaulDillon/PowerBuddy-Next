@@ -10,6 +10,8 @@ import { IUser } from 'powerbuddy-shared/lib';
 import axios from 'axios';
 import { GetLoggedInUsersProfileUrl } from '../api/account/user';
 import UserProvider from '../components/users/UserContext';
+import NextApp, { AppContext, AppProps } from 'next/app';
+import { NextComponentType } from 'next';
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
@@ -26,7 +28,13 @@ const config = {
 
 const customTheme2 = extendTheme({ config, ...customTheme });
 
-const MyApp = ({ Component }) => {
+export interface ModifiedAppInitialProps<A = { [key in string]: string }> {
+  appProps: A;
+}
+
+export interface ExtendedAppProps<P = { [key in string]: string }, A = { [key in string]: string }> extends AppProps<P>, ModifiedAppInitialProps<A> {}
+
+const MyApp: NextComponentType<AppContext, ModifiedAppInitialProps, ExtendedAppProps> = ({ Component, pageProps, appProps }) => {
   const [user, setUser] = useState<IUser>({} as IUser);
 
   useEffect(() => {
@@ -51,12 +59,20 @@ const MyApp = ({ Component }) => {
       <UserProvider user={user} setUser={setUser}>
         <ChakraProvider resetCSS theme={customTheme2}>
           <Layout>
-            <Component compo />
+            <Component {...appProps} {...pageProps} />;
           </Layout>
         </ChakraProvider>
       </UserProvider>
     </Provider>
   );
+};
+
+MyApp.getInitialProps = async () => {
+  return {
+    appProps: {
+      /* ...someAppProps */
+    },
+  };
 };
 
 export default MyApp;
