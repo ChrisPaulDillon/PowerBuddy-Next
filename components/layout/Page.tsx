@@ -1,7 +1,6 @@
 import { Box, useColorMode } from '@chakra-ui/core';
 import Head from 'next/head';
 import React from 'react';
-import theme from '../../theme';
 
 const Page: React.FC = ({ children, ...rest }) => {
   const { colorMode } = useColorMode();

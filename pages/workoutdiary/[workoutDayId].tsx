@@ -26,7 +26,7 @@ import { BadgeWorkoutName } from '../../components/shared/Badges';
 import WorkoutProvider from '../../components/workouts/WorkoutContext';
 import WorkoutExercise from '../../components/workouts/WorkoutExercise';
 import { ILiftingStat } from 'powerbuddy-shared';
-import { Error } from '../../components/common/Error';
+import { ErrorMessage } from '../../components/common/Error';
 import AddWorkoutNoteForm from '../../components/workouts/forms/AddWorkoutNoteForm';
 import NotifiyPersonalBestAlert from '../../components/workouts/alerts/NotifyPersonalBestAlert';
 import AddExerciseForm from '../../components/workouts/forms/AddExerciseForm';
@@ -151,7 +151,8 @@ const WorkoutDay: NextPage = () => {
 
   if (dayLoading) return <ProgressSpinner />;
 
-  if (dayCode === 404 && !dayLoading) return <Error title="No Workout Found" description="Have you followed a broken link?" statusCode={404} />;
+  if (dayCode === 404 && !dayLoading)
+    return <ErrorMessage title="No Workout Found" description="Have you followed a broken link?" statusCode={404} />;
 
   return (
     <Box w="100%">

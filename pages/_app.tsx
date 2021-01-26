@@ -12,6 +12,7 @@ import { GetLoggedInUsersProfileUrl } from '../api/account/user';
 import UserProvider from '../components/users/UserContext';
 import NextApp, { AppContext, AppProps } from 'next/app';
 import { NextComponentType } from 'next';
+import { PageHead } from '../components/layout/Page';
 
 if (process.env.NODE_ENV !== 'production') {
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
@@ -61,6 +62,7 @@ const MyApp: NextComponentType<AppContext, ModifiedAppInitialProps, ExtendedAppP
       <UserProvider user={user} setUser={setUser}>
         <ChakraProvider resetCSS theme={customTheme2}>
           <Layout>
+            <PageHead title="Home" description="PowerBuddy helps weightlifters and powerlifters reach their goals and track personal bests" />
             <Component {...appProps} {...pageProps} />
           </Layout>
         </ChakraProvider>

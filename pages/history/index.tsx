@@ -9,7 +9,7 @@ import { IWorkoutLogStats } from 'powerbuddy-shared';
 import ProgressSpinner from '../../components/common/ProgressSpinner';
 import { TagExerciseCount, TagProgramDaysCount, TagProgramLogsCount } from '../../components/shared/Tags';
 import LogHistoryList from '../../components/logHistory/LogHistoryList';
-import { Error } from '../../components/common/Error';
+import { ErrorMessage } from '../../components/common/Error';
 import { PageContent, PageHead } from '../../components/layout/Page';
 import { withAuthorized } from '../../util/authMiddleware';
 
@@ -20,7 +20,7 @@ const Index: NextPage = () => {
   if (loading) return <ProgressSpinner />;
 
   if (statusCode === 404 || workoutLogStats == null)
-    return <Error statusCode={404} description="No Diary History Found. Start a diary entry and it will appear here" />;
+    return <ErrorMessage statusCode={404} description="No Diary History Found. Start a diary entry and it will appear here" />;
 
   return (
     <Box>

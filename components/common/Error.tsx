@@ -7,7 +7,7 @@ interface IErrorProps {
   title?: string;
   description: string;
 }
-export const Error: React.FC<IErrorProps> = ({ statusCode, title, description }) => {
+export const ErrorMessage: React.FC<IErrorProps> = ({ statusCode, title, description }) => {
   if (!title) {
     switch (statusCode) {
       case 400:
