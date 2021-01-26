@@ -1,9 +1,9 @@
-import { NextPage } from 'next';
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { Badge, Box, Flex, Tab, TabList, TabPanel, TabPanels, Tabs, useDisclosure } from '@chakra-ui/core';
 import React from 'react';
-import { GetTemplateProgramByIdUrl } from '../../api/public/template';
-import { ITemplateProgramExtended } from 'powerbuddy-shared';
+import { GetAllTemplateProgramsUrl, GetTemplateProgramByIdUrl } from '../../api/public/template';
+import { ITemplateProgram, ITemplateProgramExtended } from 'powerbuddy-shared';
 import { TEMPLATES_URL, WORKOUT_DIARY_URL } from '../../InternalLinks';
 import { PbPrimaryButton } from '../../components/common/Buttons';
 import { ModalDrawerForm } from '../../components/common/ModalDrawer';
@@ -19,6 +19,7 @@ import { FaRunning } from 'react-icons/all';
 import { TemplateWeekCard } from '../../components/templatePrograms/TemplateWeekCard';
 import { PageContent, PageHead } from '../../components/layout/Page';
 import { useUserContext } from '../../components/users/UserContext';
+import axios from 'axios';
 
 const TemplateProgramSingle: NextPage = () => {
   const router = useRouter();
@@ -116,6 +117,25 @@ const TemplateProgramSingle: NextPage = () => {
       </PageContent>
     </Box>
   );
+};
+
+// export const getStaticProps: GetStaticProps = async ({ params }) => {
+//   const templateProgramId = params.id as string;
+//   const res = await axios.get<ITemplateProgram>(GetTemplateProgramByIdUrl(parseInt(templateProgramId)));
+
+//   return { props: { template: res.data } };
+// };
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  // Call an external API endpoint to get posts
+  const res = await axios.get<ITemplateProgram[]>(GetAllTemplateProgramsUrl());
+
+  // Get the paths we want to pre-render based on posts
+  const paths = res.data.map((template) => `/templates/${template.templateProgramId}`);
+
+  // We'll pre-render only these paths at build time.
+  // { fallback: false } means other routes should 404.
+  return { paths, fallback: false };
 };
 
 export default TemplateProgramSingle;

@@ -10,6 +10,11 @@ const withMDX = require('@next/mdx')({
   extension: /\.mdx?$/,
 });
 
+const nextBuildId = require('next-build-id')
+module.exports = {
+  generateBuildId: () => nextBuildId({ dir: __dirname })
+}
+
 module.exports = withMDX(
   withTM({
     target: 'serverless',

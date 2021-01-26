@@ -13,7 +13,9 @@ import UserProvider from '../components/users/UserContext';
 import NextApp, { AppContext, AppProps } from 'next/app';
 import { NextComponentType } from 'next';
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+if (process.env.NODE_ENV !== 'production') {
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+}
 
 //const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 Sentry.init({
@@ -59,7 +61,7 @@ const MyApp: NextComponentType<AppContext, ModifiedAppInitialProps, ExtendedAppP
       <UserProvider user={user} setUser={setUser}>
         <ChakraProvider resetCSS theme={customTheme2}>
           <Layout>
-            <Component {...appProps} {...pageProps} />;
+            <Component {...appProps} {...pageProps} />
           </Layout>
         </ChakraProvider>
       </UserProvider>
