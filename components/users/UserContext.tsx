@@ -1,5 +1,9 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { IUser } from 'powerbuddy-shared';
+import axios from 'axios';
+import createAuthRefreshInterceptor from 'axios-auth-refresh';
+import { RefreshTokenUrl } from '../../api/account/auth';
+import { handleAuthenticationTokens, setAuthorizationToken } from '../../util/axiosUtils';
 
 interface IContextOutputProps {
   user: IUser;
@@ -21,6 +25,27 @@ interface IContextInputProps {
 export default function UserProvider({ user, setUser, children }: IContextInputProps) {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(Object.keys(user).length > 0);
   const [weightType, setWeightType] = useState<string>('kg');
+
+  const RefreshTokenRequest = (failedRequest) => {
+    const refreshToken = localStorage.getItem('refreshToken');
+    if (refreshToken === undefined) {
+      return null;
+    }
+    return axios
+      .post(RefreshTokenUrl(), {
+        refreshToken: refreshToken,
+      })
+      .then((tokenRefreshResponse) => {
+        handleAuthenticationTokens(tokenRefreshResponse.data.accessToken, tokenRefreshResponse.data.refreshToken);
+        setIsAuthenticated(true);
+        setUser(tokenRefreshResponse.data.user);
+        console.log(tokenRefreshResponse);
+
+        return Promise.resolve();
+      });
+  };
+
+  createAuthRefreshInterceptor(axios, RefreshTokenRequest);
 
   useEffect(() => {
     setWeightType(user?.usingMetric ? 'kg' : 'lbs');

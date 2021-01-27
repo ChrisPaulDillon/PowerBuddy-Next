@@ -1,31 +1,19 @@
 import { RefreshTokenUrl } from '../api/account/auth';
 import axios from 'axios';
 import createAuthRefreshInterceptor from 'axios-auth-refresh';
-import { setAuthorizationToken } from '../redux/util/authorization';
  
-export const handleLoginTokens = (accessToken : string, refreshToken: string) => {
-    localStorage.setItem('accessToken', accessToken);
+export const handleAuthenticationTokens = (accessToken: string, refreshToken: string) => {
     localStorage.setItem('refreshToken', refreshToken);
     setAuthorizationToken(accessToken);
 }
-
-// Function that will be called to refresh authorization
-const refreshAuthLogic = failedRequest => { 
-    const accessToken = localStorage.getItem('accessToken');
-    const refreshToken = localStorage.getItem('refreshToken');
-    if(accessToken === undefined || refreshToken === undefined) {
-        return null;
+  
+export const setAuthorizationToken = (token: string | null) => {
+    if (token) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      axios.defaults.headers.common['Content-Type'] = 'application/json';
+    } else {
+      delete axios.defaults.headers.common['Authorization'];
+      axios.defaults.headers.common['Content-Type'] = 'application/json';
     }
-    return axios.post(RefreshTokenUrl(), { 
-    accessToken: accessToken, 
-    refreshToken: refreshToken
-})
-.then(tokenRefreshResponse => {
-    localStorage.setItem('accessToken', tokenRefreshResponse.data.accessToken);
-    localStorage.setItem('refreshToken', tokenRefreshResponse.data.refreshToken);
-    failedRequest.response.config.headers['Authorization'] = 'Bearer ' + tokenRefreshResponse.data.accessToken;
-    return Promise.resolve();
-}) };
- 
-// Instantiate the interceptor (you can chain it as it returns the axios instance)
-createAuthRefreshInterceptor(axios, refreshAuthLogic);
+  };
+  

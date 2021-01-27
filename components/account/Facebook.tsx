@@ -3,7 +3,7 @@ import axios from 'axios';
 import React from 'react';
 import FacebookLogin from 'react-facebook-login';
 import { LoginWithFacebookUrl } from '../../api/account/auth';
-import { handleLoginTokens } from '../../util/axiosUtils';
+import { handleAuthenticationTokens } from '../../util/axiosUtils';
 import { useUserContext } from '../users/UserContext';
 
 export const Facebook = ({ onClose }) => {
@@ -17,7 +17,7 @@ export const Facebook = ({ onClose }) => {
         accessToken: accessToken,
       })
       .then((response) => {
-        handleLoginTokens(response.data.accessToken, response.data.refreshToken);
+        handleAuthenticationTokens(response.data.accessToken, response.data.refreshToken);
         setUser(response.data.user);
         toast({
           title: 'Success',

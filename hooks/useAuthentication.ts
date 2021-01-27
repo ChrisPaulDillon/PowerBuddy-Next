@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { setAuthorizationToken } from "../redux/util/authorization";
 import { useUserContext } from "../components/users/UserContext";
 import axios from "axios";
 import { GetLoggedInUsersProfileUrl } from "../api/account/user";
+import { setAuthorizationToken } from "../util/axiosUtils";
 
 
 const useAuthentication = () => {

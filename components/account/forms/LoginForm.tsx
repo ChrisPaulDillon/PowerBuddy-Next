@@ -9,13 +9,12 @@ import { MdAccountBox } from 'react-icons/md';
 import { validateInput } from '../../../util/formInputs';
 import { LoginUserUrl } from '../../../api/account/auth';
 import axios from 'axios';
-import { setAuthorizationToken } from '../../../redux/util/authorization';
 import { IUser } from 'powerbuddy-shared';
 import { LoginStateEnum } from '../factories/LoginFormFactory';
 import { useUserContext } from '../../users/UserContext';
 import { Facebook } from '../Facebook';
-import { handleLoginTokens } from '../../../util/axiosUtils';
 import { SendEmailConfirmationUrl } from '../../../api/public/email';
+import { handleAuthenticationTokens } from '../../../util/axiosUtils';
 
 const LoginForm = ({ onClose, setLoginState }: any) => {
   const [showPW, setShowPW] = React.useState(false);
@@ -49,7 +48,7 @@ const LoginForm = ({ onClose, setLoginState }: any) => {
         isClosable: true,
         position: 'top',
       });
-      handleLoginTokens(response.data.accessToken, response.data.refreshToken);
+      handleAuthenticationTokens(response.data.accessToken, response.data.refreshToken);
       setUser(response.data.user);
 
       onClose();

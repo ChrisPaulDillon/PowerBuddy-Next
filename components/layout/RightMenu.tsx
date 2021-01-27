@@ -10,11 +10,11 @@ import useAuthentication from '../../hooks/useAuthentication';
 import { TextSm } from '../common/Texts';
 import { PROFILE_URL, SETTINGS_URL } from '../../InternalLinks';
 import { FcSettings } from 'react-icons/fc';
-import { setAuthorizationToken } from '../../redux/util/authorization';
 import { useUserContext } from '../users/UserContext';
 import { LoginModal } from '../shared/Modals';
 import axios from 'axios';
 import { LogoutUserUrl } from '../../api/account/auth';
+import { setAuthorizationToken } from '../../util/axiosUtils';
 
 export enum MenuSection {
   Main,

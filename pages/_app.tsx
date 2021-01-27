@@ -1,16 +1,13 @@
 import { ChakraProvider, extendTheme } from '@chakra-ui/core';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Provider } from 'react-redux';
 import configureStore from '../redux/store';
 import customTheme from '../theme';
 import * as Sentry from '@sentry/react';
 import Layout from '../components/layout/Layout';
-import { setAuthorizationToken } from '../redux/util/authorization';
 import { IUser } from 'powerbuddy-shared/lib';
-import axios from 'axios';
-import { GetLoggedInUsersProfileUrl } from '../api/account/user';
 import UserProvider from '../components/users/UserContext';
-import NextApp, { AppContext, AppProps } from 'next/app';
+import { AppContext, AppProps } from 'next/app';
 import { NextComponentType } from 'next';
 import { PageHead } from '../components/layout/Page';
 
@@ -39,23 +36,6 @@ export interface ExtendedAppProps<P = { [key in string]: string }, A = { [key in
 
 const MyApp: NextComponentType<AppContext, ModifiedAppInitialProps, ExtendedAppProps> = ({ Component, pageProps, appProps }) => {
   const [user, setUser] = useState<IUser>({} as IUser);
-
-  useEffect(() => {
-    const loadUserProfile = async (): Promise<void> => {
-      try {
-        axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('accessToken')}`;
-        const response = await axios.get(GetLoggedInUsersProfileUrl());
-        if (response && response.data) {
-          setUser(response.data);
-        }
-      } catch (error) {}
-    };
-
-    if (localStorage.getItem('accessToken') != null && localStorage.getItem('accessToken')!.length > 1) {
-      setAuthorizationToken(localStorage.getItem('accessToken'));
-      loadUserProfile();
-    }
-  }, []);
 
   return (
     <Provider store={store}>
