@@ -11,8 +11,18 @@ import moment from 'moment';
 import ProgramSummary from './ProgramSummary';
 import { useEffect } from 'react';
 import { DayValue } from 'react-modern-calendar-datepicker';
-import { IProgramLogInputScratch } from 'powerbuddy-shared/lib';
 import { useUserContext } from '../../users/UserContext';
+import { CreateWorkoutLogFromScratchUrl } from '../../../api/account/workoutLog';
+import axios from 'axios';
+
+export interface IWorkoutLogInputScratch {
+  noOfWeeks: number;
+  startDate: Date | undefined;
+  endDate?: Date | undefined;
+  userId: string;
+  customName: string;
+}
+
 interface IProps {
   workoutDates?: Array<Date>;
   onClose: () => void;
@@ -51,7 +61,21 @@ const CreateProgramLogFromScratchForm: React.FC<IProps> = ({ onClose, onCreateSu
       setPhase(phase + 1);
     } else {
       try {
-        // const response = await axios.post<IServerResponse<IProgramLog>>(CreateProgramLogFromScratchUrl(), programLogInput);
+        const workoutLogInput: IWorkoutLogInputScratch = {
+          userId: user?.userId,
+          startDate: selectedDate,
+          noOfWeeks: noOfWeeks,
+          customName: customName,
+        };
+        const response = await axios.post(CreateWorkoutLogFromScratchUrl(), workoutLogInput);
+        toast({
+          title: 'Success',
+          description: 'Diary successfully created, visit the diary section to begin tracking',
+          status: 'success',
+          duration: 2000,
+          isClosable: true,
+          position: 'top-right',
+        });
         onCreateSuccessOpen();
       } catch (error) {
         if (error?.response?.status === 400) {
