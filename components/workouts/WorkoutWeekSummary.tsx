@@ -92,8 +92,8 @@ const WorkoutWeekSummary: React.FC<IProps> = ({ weekSummary }) => {
     <Box>
       <CenterRowFlex justify="center">
         {weekSummary?.workoutDays &&
-          weekSummary?.workoutDays.map((x) => (
-            <Flex flexDir="column">
+          weekSummary?.workoutDays.map((x, idx) => (
+            <Flex flexDir="column" key={idx}>
               <HeadingMd textAlign="center">{moment(x.date).format('dddd')}</HeadingMd>
               <WorkoutDaySummarySingle {...x} />{' '}
             </Flex>

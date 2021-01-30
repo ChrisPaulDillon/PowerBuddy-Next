@@ -1,5 +1,5 @@
-import { ChakraProvider, extendTheme } from '@chakra-ui/core';
-import React, { useState } from 'react';
+import { ChakraProvider, extendTheme, useToast } from '@chakra-ui/core';
+import React, { useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
 import configureStore from '../redux/store';
 import customTheme from '../theme';
