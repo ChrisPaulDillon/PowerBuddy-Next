@@ -1,4 +1,4 @@
-import { Box, useDisclosure } from '@chakra-ui/core';
+import { Box, useDisclosure, useToast } from '@chakra-ui/core';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import { GetWorkoutWeekWithDateUrl } from '../api/account/workoutLog';
@@ -12,6 +12,7 @@ import { useAxios } from '../hooks/useAxios';
 import { IWorkoutWeekSummary } from 'powerbuddy-shared';
 import { NextPage } from 'next';
 import { withAuthorized } from '../util/authMiddleware';
+import * as signalR from '@microsoft/signalr';
 
 const Index: NextPage = () => {
   const router = useRouter();
@@ -22,6 +23,35 @@ const Index: NextPage = () => {
   const [selectedDate, handleDateChange] = useState(new Date());
 
   const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
+
+  const [connection, setConnection] = useState<signalR.HubConnection>();
+
+  const toast = useToast();
+
+  useEffect(() => {
+    const connection = new signalR.HubConnectionBuilder().withUrl(process.env.NEXT_PUBLIC_BASE_SIGNALR).withAutomaticReconnect().build();
+    connection.start().catch((error) => console.log(error));
+    setConnection(connection);
+    return () => {
+      connection.stop();
+      setConnection(null);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (connection) {
+      connection.on('ReceiveMessage', (message) => {
+        toast({
+          title: 'Message Received',
+          description: message,
+          status: 'success',
+          duration: 2000,
+          isClosable: true,
+          position: 'top',
+        });
+      });
+    }
+  }, [connection]);
 
   useEffect(() => {
     router.push(`?date=${selectedDate.toISOString()}`);
