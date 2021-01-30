@@ -16,16 +16,11 @@ import TemplateProgramCardList from '../../components/templatePrograms/TemplateP
 import CreateProgramLogFromScratchForm from '../../components/templatePrograms/forms/CreateProgramLogFromScratchForm';
 import { PageContent, PageHead } from '../../components/layout/Page';
 import { useUserContext } from '../../components/users/UserContext';
-import { useAxios } from '../../hooks/useAxios';
 
 const Index: NextPage = ({ templates }: any) => {
   const router = useRouter();
 
   const { isAuthenticated } = useUserContext();
-
-  const { loading, data: templatesv2, error } = useAxios<ITemplateProgram[]>(GetAllTemplateProgramsUrl());
-
-  //const [templates, setTemplates] = useState<ITemplateProgram[]>([]);
 
   const { isOpen: isCreateOpen, onOpen: onCreateOpen, onClose: onCreateClose } = useDisclosure();
   const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
