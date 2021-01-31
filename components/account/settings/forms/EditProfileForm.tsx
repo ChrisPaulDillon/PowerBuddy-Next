@@ -10,6 +10,7 @@ import axios from 'axios';
 import { EditProfileUrl } from '../../../../api/account/user';
 import { useUserContext } from '../../../users/UserContext';
 import { IUser } from 'powerbuddy-shared/lib';
+import { ToastError, ToastSuccess } from '../../../shared/Toasts';
 
 interface IEditProfile {
   userId: string;
@@ -51,24 +52,10 @@ const EditProfileForm: React.FC<IProps> = ({ user }) => {
     try {
       const response = await axios.put(EditProfileUrl(), profile);
       if (response && response.data) {
-        toast({
-          title: 'Success',
-          description: 'Successfully Updated Profile',
-          status: 'success',
-          duration: 2000,
-          isClosable: true,
-          position: 'top',
-        });
+        toast(ToastSuccess('Success', 'Successfully Updated Profile'));
       }
     } catch (error) {
-      toast({
-        title: 'Error',
-        description: 'Profile Could Not Be Updated',
-        status: 'error',
-        duration: 2000,
-        isClosable: true,
-        position: 'top',
-      });
+      toast(ToastError('Error', 'Profile Could Not Be Updated'));
     }
   };
 

@@ -11,6 +11,7 @@ import PbIconButton from '../../common/IconButtons';
 import { FormInput } from '../../common/Inputs';
 import { TextSm, TextXs } from '../../common/Texts';
 import { CenterColumnFlex } from '../../layout/Flexes';
+import { ToastSuccess } from '../../shared/Toasts';
 import { LoginStateEnum } from '../factories/LoginFormFactory';
 
 const SendPasswordResetForm = ({ onClose, setLoginState }) => {
@@ -24,14 +25,7 @@ const SendPasswordResetForm = ({ onClose, setLoginState }) => {
     try {
       const response = await axios.post(SendPasswordResetUrl(email));
     } catch (error) {}
-    toast({
-      title: 'Success',
-      description: 'If an account with the associated email exists, a reset password email has been sent',
-      status: 'success',
-      duration: 5000,
-      isClosable: true,
-      position: 'top',
-    });
+    toast(ToastSuccess('Success', 'If an account with the associated email exists, a reset password email has been sent'));
     setPwResetSent(true);
   };
 

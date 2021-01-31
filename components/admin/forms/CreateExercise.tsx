@@ -13,6 +13,7 @@ import { CenterColumnFlex } from '../../layout/Flexes';
 import { CreateExerciseUrl } from '../../../api/account/exercise';
 import axios from 'axios';
 import { ICExercise, IExerciseMuscleGroup } from 'powerbuddy-shared';
+import { ToastError, ToastSuccess } from '../../shared/Toasts';
 
 interface IProps {}
 
@@ -36,23 +37,9 @@ const CreateExercise: React.FC<IProps> = () => {
 
     try {
       await axios.post(CreateExerciseUrl(), exercise);
-      toast({
-        title: 'Success',
-        description: 'Successfully Create Exercise',
-        status: 'success',
-        duration: 2000,
-        isClosable: true,
-        position: 'top-right',
-      });
+      toast(ToastSuccess('Success', 'Successfully Create Exercise'));
     } catch (error) {
-      toast({
-        title: 'Error',
-        description: 'Exercise Could Not Be Created',
-        status: 'error',
-        duration: 2000,
-        isClosable: true,
-        position: 'top-right',
-      });
+      toast(ToastError('Error', 'Exercise Could Not Be Created'));
     }
   };
 

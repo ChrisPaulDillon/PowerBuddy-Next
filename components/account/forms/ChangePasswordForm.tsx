@@ -1,5 +1,6 @@
-import { Box, Checkbox, Flex, useToast } from '@chakra-ui/core';
+import { Box, Checkbox, Flex, position, useToast } from '@chakra-ui/core';
 import axios from 'axios';
+import { duration } from 'moment';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useForm } from 'react-hook-form';
@@ -9,6 +10,7 @@ import { FormInput, FormNumberInput } from '../../common/Inputs';
 import { PbStack } from '../../common/Stacks';
 import { TextXs } from '../../common/Texts';
 import { CenterColumnFlex } from '../../layout/Flexes';
+import { ToastError, ToastSuccess } from '../../shared/Toasts';
 
 interface IChangePasswordBody {
   token: string;
@@ -32,33 +34,12 @@ const ChangePasswordForm: React.FC<IChangePasswordFormProps> = ({ userId, token 
       };
       const response = await axios.post(ChangePasswordUrl(userId as string), changePasswordBody);
       if (response && response.data) {
-        toast({
-          title: 'Success',
-          description: 'Password Successfully Changed',
-          status: 'success',
-          duration: 2000,
-          isClosable: true,
-          position: 'top',
-        });
+        toast(ToastSuccess('Success', 'Password Successfully Changed'));
       } else {
-        toast({
-          title: 'Error',
-          description: 'Password not changed, token has expired',
-          status: 'error',
-          duration: 2000,
-          isClosable: true,
-          position: 'top',
-        });
+        toast(ToastError('Error', 'Password not changed, token has expired'));
       }
     } catch (error) {
-      toast({
-        title: 'Error',
-        description: 'Password not changed, token has expired',
-        status: 'error',
-        duration: 2000,
-        isClosable: true,
-        position: 'top',
-      });
+      toast(ToastError('Error', 'Password not changed, token has expired'));
     }
   };
 

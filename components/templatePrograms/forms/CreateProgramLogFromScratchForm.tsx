@@ -14,6 +14,7 @@ import { DayValue } from 'react-modern-calendar-datepicker';
 import { useUserContext } from '../../users/UserContext';
 import { CreateWorkoutLogFromScratchUrl } from '../../../api/account/workoutLog';
 import axios from 'axios';
+import { ToastError, ToastSuccess, ToastWarning } from '../../shared/Toasts';
 
 export interface IWorkoutLogInputScratch {
   noOfWeeks: number;
@@ -68,34 +69,13 @@ const CreateProgramLogFromScratchForm: React.FC<IProps> = ({ onClose, onCreateSu
           customName: customName,
         };
         const response = await axios.post(CreateWorkoutLogFromScratchUrl(), workoutLogInput);
-        toast({
-          title: 'Success',
-          description: 'Diary successfully created, visit the diary section to begin tracking',
-          status: 'success',
-          duration: 2000,
-          isClosable: true,
-          position: 'top-right',
-        });
+        toast(ToastSuccess('Success', 'Diary successfully created, visit the diary section to begin tracking'));
         onCreateSuccessOpen();
       } catch (error) {
         if (error?.response?.status === 400) {
-          toast({
-            title: 'Warning',
-            description: 'You already have a diary entry active for this time period!',
-            status: 'warning',
-            duration: 5000,
-            isClosable: true,
-            position: 'top-right',
-          });
+          toast(ToastWarning('Warning', 'You already have a diary entry active for this time period!'));
         } else {
-          toast({
-            title: 'Error',
-            description: 'Could not create Diary Log, please try again later',
-            status: 'error',
-            duration: 2000,
-            isClosable: true,
-            position: 'top-right',
-          });
+          toast(ToastError('Error', 'Could not create Diary Log, please try again later'));
         }
       }
       onClose();

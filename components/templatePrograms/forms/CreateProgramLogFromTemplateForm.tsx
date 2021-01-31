@@ -17,6 +17,7 @@ import { ITemplateProgramExtended, IWeightInput, IWorkoutLogTemplateInput } from
 import { useUserContext } from '../../users/UserContext';
 import axios from 'axios';
 import { CreateWorkoutLogFromTemplateUrl } from '../../../api/account/workoutLog';
+import { ToastError, ToastSuccess } from '../../shared/Toasts';
 
 interface IProps {
   onClose: () => void;
@@ -108,35 +109,14 @@ const CreateProgramLogFromTemplateForm: React.FC<IProps> = ({ onClose, template,
           weightInputs: curWeightInputs,
         };
         const response = await axios.post(CreateWorkoutLogFromTemplateUrl(template?.templateProgramId), workoutLog);
-        toast({
-          title: 'Success',
-          description: 'Diary successfully created, visit the diary section to begin tracking',
-          status: 'success',
-          duration: 2000,
-          isClosable: true,
-          position: 'top-right',
-        });
+        toast(ToastSuccess('Success', 'Diary successfully created, visit the diary section to begin tracking'));
         onClose();
         onCreateSuccessOpen();
       } catch (error) {
         if (error?.response?.status === 400) {
-          toast({
-            title: 'Warning',
-            description: 'You already have a diary entry active for this time period!',
-            status: 'warning',
-            duration: 5000,
-            isClosable: true,
-            position: 'top-right',
-          });
+          toast(ToastError('Warning', 'You already have a diary entry active for this time period!'));
         } else {
-          toast({
-            title: 'Error',
-            description: 'Diary could not be created, please try again later',
-            status: 'error',
-            duration: 2000,
-            isClosable: true,
-            position: 'top-right',
-          });
+          toast(ToastError('Error', 'Diary could not be created, please try again later'));
         }
       }
     }

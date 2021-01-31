@@ -1,9 +1,10 @@
 import { useToast } from '@chakra-ui/core';
 import axios from 'axios';
-import React from 'react';
+import React, { useRef } from 'react';
 import FacebookLogin from 'react-facebook-login';
 import { LoginWithFacebookUrl } from '../../api/account/auth';
 import { decodeJwtToken, handleAuthenticationTokens } from '../../util/axiosUtils';
+import { ToastSuccess } from '../shared/Toasts';
 import { useUserContext } from '../users/UserContext';
 
 export const Facebook = ({ onClose }) => {
@@ -20,15 +21,7 @@ export const Facebook = ({ onClose }) => {
         handleAuthenticationTokens(response.data.accessToken, response.data.refreshToken);
         const claimsValues = decodeJwtToken(response.data.accessToken);
         SetValues(claimsValues);
-
-        toast({
-          title: 'Success',
-          description: 'Successfully Signed In',
-          status: 'success',
-          duration: 2000,
-          isClosable: true,
-          position: 'top',
-        });
+        toast(ToastSuccess('Success', 'Successfully Signed In'));
       });
 
     //   handleLoginTokens(response.data.accessToken, response.data.refreshToken);

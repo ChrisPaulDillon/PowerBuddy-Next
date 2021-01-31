@@ -12,6 +12,7 @@ import PbIconButton from '../../common/IconButtons';
 import { FormInput } from '../../common/Inputs';
 import { TextXs, TextError } from '../../common/Texts';
 import { CenterColumnFlex } from '../../layout/Flexes';
+import { ToastSuccess } from '../../shared/Toasts';
 import { LoginStateEnum } from '../factories/LoginFormFactory';
 
 const RegisterForm = ({ setLoginState }: any) => {
@@ -36,14 +37,7 @@ const RegisterForm = ({ setLoginState }: any) => {
     try {
       const response = await axios.post(RegisterUserUrl(), user);
       setUserId(response.data);
-      toast({
-        title: 'Success',
-        description: 'Successfully Signed Up',
-        status: 'success',
-        duration: 2000,
-        isClosable: true,
-        position: 'top',
-      });
+      toast(ToastSuccess('Success', 'Successfully Signed Up'));
       setSignedUp(true);
     } catch (error) {
       setError(true);
@@ -52,14 +46,7 @@ const RegisterForm = ({ setLoginState }: any) => {
 
   const sendEmailConfirmation = async () => {
     try {
-      toast({
-        title: 'Success',
-        description: 'Confirmation Email Sent Successfully. Please check your inbox',
-        status: 'success',
-        duration: 2000,
-        isClosable: true,
-        position: 'top',
-      });
+      toast(ToastSuccess('Success', 'Confirmation Email Sent Successfully. Please check your inbox'));
       const response = await axios.post(SendEmailConfirmationUrl(userId));
     } catch (error) {}
   };

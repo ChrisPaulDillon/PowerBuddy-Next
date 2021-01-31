@@ -8,6 +8,7 @@ import Footer from './Footer';
 import { useUserContext } from '../users/UserContext';
 import { ModalDrawerForm } from '../common/ModalDrawer';
 import * as signalR from '@microsoft/signalr';
+import { ToastSuccess } from '../shared/Toasts';
 
 const Layout = ({ children }: any) => {
   const { colorMode } = useColorMode();
@@ -32,14 +33,7 @@ const Layout = ({ children }: any) => {
   useEffect(() => {
     if (connection) {
       connection.on('ReceiveMessage', (message) => {
-        toast({
-          title: 'Message Received',
-          description: message,
-          status: 'success',
-          duration: 2000,
-          isClosable: true,
-          position: 'top',
-        });
+        toast(ToastSuccess('Success', message));
       });
     }
   }, [connection]);

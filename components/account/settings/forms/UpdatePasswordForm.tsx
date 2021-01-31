@@ -10,6 +10,7 @@ import { FormInput } from '../../../common/Inputs';
 import { PbStack } from '../../../common/Stacks';
 import { TextSm, TextXs } from '../../../common/Texts';
 import { CenterColumnFlex } from '../../../layout/Flexes';
+import { ToastError, ToastSuccess } from '../../../shared/Toasts';
 
 interface IUpdatePasswordInput {
   oldPassword: string;
@@ -42,35 +43,14 @@ const UpdatePasswordForm: React.FC<IProps> = ({ user }) => {
     try {
       const response = await axios.put(UpdatePasswordUrl(), passwordInput);
       if (response && response.data) {
-        toast({
-          title: 'Success',
-          description: 'Successfully Changed Password',
-          status: 'success',
-          duration: 4000,
-          isClosable: true,
-          position: 'top',
-        });
+        toast(ToastSuccess('Success', 'Successfully Changed Password'));
       }
     } catch (err) {
       const errorCode = err?.response?.data;
       if (errorCode?.code == 'InvalidCredentialsException') {
-        toast({
-          title: 'Error',
-          description: 'You have incorrectly entered your current password',
-          status: 'error',
-          duration: 2000,
-          isClosable: true,
-          position: 'top',
-        });
+        toast(ToastError('Error', 'You have incorrectly entered your current password'));
       } else {
-        toast({
-          title: 'Error',
-          description: 'Password Could Not Be Updated',
-          status: 'error',
-          duration: 2000,
-          isClosable: true,
-          position: 'top',
-        });
+        toast(ToastError('Error', 'Password Could Not Be Updated'));
       }
     }
     reset();

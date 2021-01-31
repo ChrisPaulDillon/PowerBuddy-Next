@@ -10,6 +10,7 @@ import { useWorkoutContext } from '../../workouts/WorkoutContext';
 import Axios from 'axios';
 import { IWorkoutExercise, IWorkoutSet } from 'powerbuddy-shared';
 import { useUserContext } from '../../users/UserContext';
+import { ToastError, ToastSuccess } from '../../shared/Toasts';
 
 interface IProps {
   workoutExercise: IWorkoutExercise;
@@ -58,23 +59,9 @@ const QuickAddSetsForm: React.FC<IProps> = ({ workoutExercise, suggestedReps, su
     try {
       const response = await Axios.post(CreateWorkoutSetCollectionUrl(), workoutSets);
       QuickAddSetsToExercise(response.data, workoutExercise.workoutExerciseId);
-      toast({
-        title: 'Success',
-        description: 'Successfully added sets',
-        status: 'success',
-        duration: 2000,
-        isClosable: true,
-        position: 'top-right',
-      });
+      toast(ToastSuccess('Success', 'Successfully added sets'));
     } catch (ex) {
-      toast({
-        title: 'Error',
-        description: 'Could not add sets!',
-        status: 'error',
-        duration: 2000,
-        isClosable: true,
-        position: 'top-right',
-      });
+      toast(ToastError('Error', 'Could not add sets!'));
     }
     onClose();
   };

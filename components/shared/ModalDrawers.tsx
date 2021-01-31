@@ -4,6 +4,7 @@ import { useToast } from '@chakra-ui/core';
 import Axios from 'axios';
 import { DeleteWorkoutLogUrl } from '../../api/account/workoutLog';
 import { useWorkoutContext } from '../workouts/WorkoutContext';
+import { ToastError, ToastSuccess } from './Toasts';
 
 interface IModalDrawerProps {
   isOpen: boolean;
@@ -23,24 +24,10 @@ export const DeleteLogModalDrawer: React.FC<IDeleteLogModalDrawerProps> = ({ isO
     setLoading(true);
     const response = await Axios.delete(DeleteWorkoutLogUrl(workoutLogId));
     try {
-      toast({
-        title: 'Success',
-        description: 'Successfully Deleted Diary Entry',
-        status: 'success',
-        duration: 2000,
-        isClosable: true,
-        position: 'top-right',
-      });
+      toast(ToastSuccess('Success', 'Successfully Deleted Diary Entry'));
       //DeleteLog();
     } catch (error) {
-      toast({
-        title: 'Error',
-        description: 'Could not create Diary Log, please try again later',
-        status: 'error',
-        duration: 2000,
-        isClosable: true,
-        position: 'top-right',
-      });
+      toast(ToastError('Error', 'Could not create Diary Log, please try again later'));
     }
     setLoading(false);
     onClose();

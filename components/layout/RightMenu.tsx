@@ -14,6 +14,7 @@ import { LoginModal } from '../shared/Modals';
 import axios from 'axios';
 import { LogoutUserUrl } from '../../api/account/auth';
 import { setAuthorizationToken } from '../../util/axiosUtils';
+import { ToastSuccess } from '../shared/Toasts';
 
 export enum MenuSection {
   Main,
@@ -92,17 +93,10 @@ export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
                   localStorage.removeItem('accessToken');
                   localStorage.removeItem('refreshToken');
                   setAuthorizationToken(null);
-                  toast({
-                    title: 'Success',
-                    description: 'Successfully Logged Out',
-                    status: 'success',
-                    duration: 2000,
-                    isClosable: true,
-                    position: 'top',
-                  });
+                  toast(ToastSuccess('Success', 'Successfully Logged Out'));
                   setTimeout(function () {
                     window.location.reload();
-                  }, 1500);
+                  }, 1000);
                 } else {
                   onLoginOpen();
                 }

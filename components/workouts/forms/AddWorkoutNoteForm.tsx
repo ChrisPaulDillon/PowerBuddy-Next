@@ -7,6 +7,7 @@ import { FormInput } from '../../common/Inputs';
 import axios from 'axios';
 import { UpdateWorkoutNoteUrl } from '../../../api/account/workoutDay';
 import { useWorkoutContext } from '../../workouts/WorkoutContext';
+import { ToastError, ToastSuccess } from '../../shared/Toasts';
 
 interface IProps {
   onClose: () => void;
@@ -24,23 +25,9 @@ const AddWorkoutNoteForm: React.FC<IProps> = ({ note, workoutDayId, onClose }) =
     try {
       await axios.put(UpdateWorkoutNoteUrl(workoutDayId, notes));
       UpdateDayNotes(notes);
-      toast({
-        title: 'Success',
-        description: 'Successfully added notes',
-        status: 'success',
-        duration: 2000,
-        isClosable: true,
-        position: 'top-right',
-      });
+      toast(ToastSuccess('Success', 'Successfully added notes'));
     } catch (ex) {
-      toast({
-        title: 'Error',
-        description: 'Could not add notes',
-        status: 'error',
-        duration: 2000,
-        isClosable: true,
-        position: 'top-right',
-      });
+      toast(ToastError('Error', 'Could not add notes to workout'));
     }
     onClose();
   };

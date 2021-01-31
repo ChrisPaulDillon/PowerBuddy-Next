@@ -11,6 +11,7 @@ import { FormInput } from '../../../common/Inputs';
 import { PbStack } from '../../../common/Stacks';
 import { TextXs, TextSm } from '../../../common/Texts';
 import { CenterColumnFlex } from '../../../layout/Flexes';
+import { ToastError, ToastSuccess } from '../../../shared/Toasts';
 
 interface IProps {
   user: IUser;
@@ -29,25 +30,11 @@ const PhoneNumberVerifyForm: React.FC<IProps> = ({ user }) => {
       try {
         const response = await axios.post(SendSmsVerificationUrl(), { phoneNumber: phoneNumber as string, code: code as string });
         if (response && response.data) {
-          toast({
-            title: 'Success',
-            description: 'Phone Number Successfully Verified',
-            status: 'success',
-            duration: 4000,
-            isClosable: true,
-            position: 'top',
-          });
+          toast(ToastSuccess('Success', 'Phone Number Successfully Verified'));
           setSmsSent(false);
         }
       } catch (err) {
-        toast({
-          title: 'Error',
-          description: 'Verification Failed, make sure you have typed the code correctly!',
-          status: 'error',
-          duration: 2000,
-          isClosable: true,
-          position: 'top',
-        });
+        toast(ToastError('Error', 'Verification Failed, make sure you have typed the code correctly!'));
       }
     } else {
       // if (password1 !== password2) {
@@ -59,25 +46,11 @@ const PhoneNumberVerifyForm: React.FC<IProps> = ({ user }) => {
       try {
         const response = await axios.post(RequestSmsVerificationUrl(), { phoneNumber: phoneNumber as string });
         if (response && response.data) {
-          toast({
-            title: 'Success',
-            description: 'Successfully Sent Sms, Check Your Phone',
-            status: 'success',
-            duration: 4000,
-            isClosable: true,
-            position: 'top',
-          });
+          toast(ToastSuccess('Success', 'Successfully Sent Sms, Check Your Phone'));
           setSmsSent(true);
         }
       } catch (err) {
-        toast({
-          title: 'Error',
-          description: 'Invalid Phone Number Supplied',
-          status: 'error',
-          duration: 2000,
-          isClosable: true,
-          position: 'top',
-        });
+        toast(ToastError('Error', 'Invalid Phone Number Supplied'));
       }
     }
   };

@@ -10,6 +10,7 @@ import axios from 'axios';
 import { DeleteWorkoutSetUrl, UpdateWorkoutSetUrl } from '../../../api/account/workoutSet';
 import { useWorkoutContext } from '../../workouts/WorkoutContext';
 import { IWorkoutSet } from 'powerbuddy-shared';
+import { ToastError, ToastSuccess } from '../../shared/Toasts';
 
 interface IProps {
   workoutDayId: number;
@@ -35,23 +36,9 @@ const EditWorkoutSetForm: React.FC<IProps> = ({ workoutDayId, workoutSet, onClos
     try {
       await axios.put(UpdateWorkoutSetUrl(workoutDayId), workoutSet);
       EditSet(workoutSet, workoutSet.workoutExerciseId);
-      toast({
-        title: 'Success',
-        description: 'Successfully Updated Set',
-        status: 'success',
-        duration: 2000,
-        isClosable: true,
-        position: 'top-right',
-      });
+      toast(ToastSuccess('Success', 'Successfully Updated Set'));
     } catch (ex) {
-      toast({
-        title: 'Error',
-        description: 'Could not update set, please try again later',
-        status: 'error',
-        duration: 2000,
-        isClosable: true,
-        position: 'top-right',
-      });
+      toast(ToastError('Error', 'Could not update set, please try again later'));
     }
     onClose();
   };
@@ -61,23 +48,9 @@ const EditWorkoutSetForm: React.FC<IProps> = ({ workoutDayId, workoutSet, onClos
     try {
       await axios.delete(DeleteWorkoutSetUrl(workoutSetId!));
       DeleteSet(workoutSetId, workoutExerciseId);
-      toast({
-        title: 'Success',
-        description: 'Successfully Deleted Set',
-        status: 'success',
-        duration: 2000,
-        isClosable: true,
-        position: 'top-right',
-      });
+      toast(ToastSuccess('Success', 'Successfully Deleted Set'));
     } catch (ex) {
-      toast({
-        title: 'Error',
-        description: 'Could not delete set, please try again later',
-        status: 'error',
-        duration: 2000,
-        isClosable: true,
-        position: 'top-right',
-      });
+      toast(ToastError('Error', 'Could not delete set, please try again later'));
     }
     onClose();
   };

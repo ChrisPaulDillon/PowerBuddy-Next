@@ -19,6 +19,7 @@ import { ModalBackForward, ModalForward } from '../common/Modals';
 import { LoginModal } from '../shared/Modals';
 import { IWorkoutWeekSummary, ICreateWorkoutDayOptions, IWorkoutDaySummary, IWorkoutExerciseSummary } from 'powerbuddy-shared/lib';
 import { CreateWorkoutDayUrl, GetWorkoutDayIdByDateUrl } from '../../api/account/workoutDay';
+import { ToastSuccess } from '../shared/Toasts';
 
 interface IProps {
   weekSummary: IWorkoutWeekSummary;
@@ -69,14 +70,7 @@ const WorkoutWeekSummary: React.FC<IProps> = ({ weekSummary }) => {
       const result = await axios.post(CreateWorkoutDayUrl(), workoutOptions);
       if (result.data !== 0) {
         router.push(`${WORKOUT_DIARY_URL}/${result.data.workoutDayId}`);
-        toast({
-          title: 'Success',
-          description: 'Successfully created todays workout!',
-          status: 'success',
-          duration: 2000,
-          isClosable: true,
-          position: 'top',
-        });
+        toast(ToastSuccess('Success', 'Successfully created todays workout!'));
       }
     } catch (error) {
       if (error?.response?.status === 401) {

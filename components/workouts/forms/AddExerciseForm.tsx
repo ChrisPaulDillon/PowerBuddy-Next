@@ -13,6 +13,7 @@ import { CreateWorkoutExerciseUrl } from '../../../api/account/workoutExercise';
 import { useWorkoutContext } from '../../workouts/WorkoutContext';
 import useLoadExercises from '../../../hooks/redux/useLoadExercises';
 import { ICreateWorkoutExercise } from 'powerbuddy-shared';
+import { ToastError, ToastSuccess } from '../../shared/Toasts';
 
 interface IProps {
   onClose: () => void;
@@ -54,34 +55,13 @@ const AddExerciseForm: React.FC<IProps> = ({ onClose, workoutDayId }) => {
     try {
       const response = await axios.post(CreateWorkoutExerciseUrl(), workoutExercise);
       CreateExercise(response.data);
-      toast({
-        title: 'Success',
-        description: 'Successfully added new exercise',
-        status: 'success',
-        duration: 2000,
-        isClosable: true,
-        position: 'top-right',
-      });
+      toast(ToastSuccess('Success', 'Successfully added new exercise'));
       onClose();
     } catch (error) {
       if (error?.response?.status === 400) {
-        toast({
-          title: 'Error',
-          description: 'A valid exercise must be provided',
-          status: 'error',
-          duration: 2000,
-          isClosable: true,
-          position: 'top',
-        });
+        toast(ToastError('Error', 'A valid exercise must be provided'));
       } else {
-        toast({
-          title: 'Error',
-          description: 'Could not add new exercise. Do you already have this exercise for the given day?',
-          status: 'error',
-          duration: 2000,
-          isClosable: true,
-          position: 'top-right',
-        });
+        toast(ToastError('Error', 'Could not add new exercise. Do you already have this exercise for the given day?'));
       }
     }
   };

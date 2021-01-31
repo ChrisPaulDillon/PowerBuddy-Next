@@ -9,6 +9,7 @@ import Axios from 'axios';
 import { DeleteLiftingStatAuditUrl } from '../../api/account/liftingStats';
 import { ILiftFeed } from 'powerbuddy-shared';
 import { useUserContext } from '../users/UserContext';
+import { ToastSuccess } from '../shared/Toasts';
 
 interface IProps {
   liftFeed: ILiftFeed[];
@@ -41,14 +42,7 @@ const LiftFeedSingle: React.FC<ILiftFeedSingleProps> = ({ liftFeed }) => {
     setLoading(true);
     try {
       await Axios.delete(DeleteLiftingStatAuditUrl(liftingStatAuditId));
-      toast({
-        title: 'Success',
-        description: 'Successfully Deleted Personal Best',
-        status: 'success',
-        duration: 2000,
-        isClosable: true,
-        position: 'top-right',
-      });
+      toast(ToastSuccess('Success', 'Successfully Deleted Personal Best'));
     } catch (error) {
       toast({
         title: 'Error',

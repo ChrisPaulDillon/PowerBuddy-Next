@@ -9,6 +9,7 @@ import ProgressSpinner from '../../../components/common/ProgressSpinner';
 import { PageTitle, TextSm } from '../../../components/common/Texts';
 import { CenterColumnFlex } from '../../../components/layout/Flexes';
 import { PageContent, PageHead } from '../../../components/layout/Page';
+import { ToastSuccess } from '../../../components/shared/Toasts';
 
 const Index: NextPage = () => {
   const router = useRouter();
@@ -40,14 +41,7 @@ const Index: NextPage = () => {
   const sendEmailConfirmation = async () => {
     try {
       const response = await axios.post(SendEmailConfirmationUrl(userId! as string));
-      toast({
-        title: 'Success',
-        description: 'Successfully Sent Email. Please Check Your Inbox',
-        status: 'success',
-        duration: 2000,
-        isClosable: true,
-        position: 'top',
-      });
+      toast(ToastSuccess('Success', 'Successfully Sent Email. Please Check Your Inbox'));
     } catch (error) {}
   };
 

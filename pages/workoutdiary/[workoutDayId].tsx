@@ -31,6 +31,7 @@ import AddWorkoutNoteForm from '../../components/workouts/forms/AddWorkoutNoteFo
 import NotifiyPersonalBestAlert from '../../components/workouts/alerts/NotifyPersonalBestAlert';
 import AddExerciseForm from '../../components/workouts/forms/AddExerciseForm';
 import { PageContent, PageHead } from '../../components/layout/Page';
+import { ToastError, ToastSuccess } from '../../components/shared/Toasts';
 
 const WorkoutDay: NextPage = () => {
   const router = useRouter();
@@ -81,25 +82,10 @@ const WorkoutDay: NextPage = () => {
     setDeleteLogLoading(true);
     try {
       await axios.delete(DeleteWorkoutLogUrl(workoutDay.workoutLogId!));
-      toast({
-        title: 'Success',
-        description: 'Successfully deleted program log',
-        status: 'success',
-        duration: 2000,
-        isClosable: true,
-        position: 'top-right',
-      });
-
+      toast(ToastSuccess('Success', 'Successfully deleted program log'));
       onDeleteLogClose();
     } catch (error) {
-      toast({
-        title: 'Error',
-        description: 'Could not delete log, please try again later',
-        status: 'error',
-        duration: 2000,
-        isClosable: true,
-        position: 'top-right',
-      });
+      toast(ToastError('Error', 'Could not delete log, please try again later'));
     }
     setDeleteLogLoading(false);
   };
@@ -112,23 +98,9 @@ const WorkoutDay: NextPage = () => {
       if (response.data != null) {
         setPersonalBests(response.data);
       }
-      toast({
-        title: 'Success',
-        description: 'Diary Entry is now marked as complete',
-        status: 'success',
-        duration: 2000,
-        isClosable: true,
-        position: 'top-right',
-      });
+      toast(ToastSuccess('Success', 'Diary Entry is now marked as complete'));
     } catch (err) {
-      toast({
-        title: 'Error',
-        description: 'Could not mark Diary Entry as complete',
-        status: 'error',
-        duration: 2000,
-        isClosable: true,
-        position: 'top-right',
-      });
+      toast(ToastError('Error', 'Could not mark Diary Entry as complete'));
       workoutDay.completed = false;
     }
     setLoading(false);

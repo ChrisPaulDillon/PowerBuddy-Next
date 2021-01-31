@@ -15,6 +15,7 @@ import { useUserContext } from '../../users/UserContext';
 import { Facebook } from '../Facebook';
 import { SendEmailConfirmationUrl } from '../../../api/public/email';
 import { decodeJwtToken, handleAuthenticationTokens } from '../../../util/axiosUtils';
+import { ToastSuccess } from '../../shared/Toasts';
 
 const LoginForm = ({ onClose, setLoginState }: any) => {
   const [showPW, setShowPW] = React.useState(false);
@@ -40,14 +41,7 @@ const LoginForm = ({ onClose, setLoginState }: any) => {
     try {
       setShowError(false);
       const response = await axios.post(LoginUserUrl(), user);
-      toast({
-        title: 'Success',
-        description: 'Successfully Signed In',
-        status: 'success',
-        duration: 2000,
-        isClosable: true,
-        position: 'top',
-      });
+      toast(ToastSuccess('Success', 'Successfully Signed In'));
       handleAuthenticationTokens(response.data.accessToken, response.data.refreshToken);
       const claimsValues = decodeJwtToken(response.data.accessToken);
       SetValues(claimsValues);
@@ -74,14 +68,7 @@ const LoginForm = ({ onClose, setLoginState }: any) => {
 
   const sendEmailConfirmation = async () => {
     try {
-      toast({
-        title: 'Success',
-        description: 'Confirmation Email Sent Successfully. Please check your inbox',
-        status: 'success',
-        duration: 2000,
-        isClosable: true,
-        position: 'top',
-      });
+      toast(ToastSuccess('Success', 'Confirmation Email Sent Successfully. Please check your inbox'));
       const response = await axios.post(SendEmailConfirmationUrl(userId));
     } catch (error) {}
   };

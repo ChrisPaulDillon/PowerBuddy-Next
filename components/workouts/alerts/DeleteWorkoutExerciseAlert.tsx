@@ -5,6 +5,7 @@ import { CenterColumnFlex } from '../../layout/Flexes';
 import axios from 'axios';
 import { useWorkoutContext } from '../../workouts/WorkoutContext';
 import { DeleteWorkoutExerciseUrl } from '../../../api/account/workoutExercise';
+import { ToastError, ToastSuccess } from '../../shared/Toasts';
 
 interface IProps {
   onClose: () => void;
@@ -23,24 +24,10 @@ const DeleteWorkoutExerciseAlert: React.FC<IProps> = ({ onClose, workoutExercise
       if (response.data) {
         DeleteExercise(workoutExerciseId);
       }
-      toast({
-        title: 'Success',
-        description: 'Successfully Deleted Exercise',
-        status: 'success',
-        duration: 2000,
-        isClosable: true,
-        position: 'top-right',
-      });
+      toast(ToastSuccess('Success', 'Successfully Deleted Exercise'));
       onClose();
     } catch (error) {
-      toast({
-        title: 'Error',
-        description: 'Could not create Delete Exercise. Exercise has not been deleted',
-        status: 'error',
-        duration: 2000,
-        isClosable: true,
-        position: 'top-right',
-      });
+      toast(ToastError('Error', 'Could not create Delete Exercise. Exercise has not been deleted'));
     }
     setLoading(false);
   };
