@@ -6,6 +6,7 @@ import theme from '../../../theme';
 import EditProfileForm from './forms/EditProfileForm';
 import SecurityGroup from './SecurityGroup';
 import { useUserContext } from '../../users/UserContext';
+import { IUser } from 'powerbuddy-shared/lib';
 
 export enum MenuSection {
   Profile,
@@ -13,9 +14,12 @@ export enum MenuSection {
   WorkoutLog,
 }
 
-const AccountSettings = () => {
+interface IProps {
+  user: IUser;
+}
+
+const AccountSettings: React.FC<IProps> = ({ user }) => {
   const [selectedItem, setSelectedItem] = useState<MenuSection>(MenuSection.Profile);
-  const { user } = useUserContext();
   const { colorMode } = useColorMode();
 
   const settings = {
@@ -74,10 +78,8 @@ const AccountSettings = () => {
           ))}
         </Box>
         <SettingContent>
-          {selectedItem == MenuSection.Profile && <EditProfileForm />}
-          {selectedItem == MenuSection.Security && (
-            <SecurityGroup currentPhoneNumber={user?.phoneNumber} phoneNumberConfirmed={user?.phoneNumberConfirmed} />
-          )}
+          {selectedItem == MenuSection.Profile && <EditProfileForm user={user} />}
+          {selectedItem == MenuSection.Security && <SecurityGroup user={user} />}
           {selectedItem == MenuSection.WorkoutLog && <TextSm>Unavailable</TextSm>}
         </SettingContent>
       </Flex>

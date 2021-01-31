@@ -1,7 +1,27 @@
-import { RefreshTokenUrl } from '../api/account/auth';
+import { IClaimsValues } from './../components/users/UserContext';
 import axios from 'axios';
-import createAuthRefreshInterceptor from 'axios-auth-refresh';
- 
+import jwt from 'jsonwebtoken';
+
+
+export const decodeJwtToken = (accessToken: string) => {
+  var decodedJwt = jwt.decode(accessToken);
+  //TODO validate jwt 
+
+  const { UserId, UserName, UsingMetric, FirstVisit, MemberStatusId } = decodedJwt;
+  const MetricType = UsingMetric === 'True' ? 'kg' : 'lb';
+
+  const claimValues : IClaimsValues = {
+    userId: UserId,
+    userName: UserName,
+    weightType: MetricType,
+    firstVisit: FirstVisit,
+    memberStatusId: MemberStatusId
+  }
+
+  return claimValues;
+
+}
+
 export const handleAuthenticationTokens = (accessToken: string, refreshToken: string) => {
     localStorage.setItem('refreshToken', refreshToken);
     setAuthorizationToken(accessToken);
@@ -15,6 +35,6 @@ export const setAuthorizationToken = (token: string | null) => {
       delete axios.defaults.headers.common['Authorization'];
       axios.defaults.headers.common['Content-Type'] = 'application/json';
     }
-    axios.defaults.headers.common['Access-Control-Allow-Origin'] = "http://localhost:3000";
+    //axios.defaults.headers.common['Access-Control-Allow-Origin'] = "http://localhost:3000";
   };
   

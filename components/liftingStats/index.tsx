@@ -18,9 +18,9 @@ import { useUserContext } from '../users/UserContext';
 
 const LiftingStatsIndexPage = () => {
   const router = useRouter();
-  const { user } = useUserContext();
+  const { userName } = useUserContext();
   const { loading, data: liftingStats, statusCode: statCode } = useAxios<ILiftingStatGrouped[]>(GetAllUserLiftingStatsUrl());
-  const { loading: feedLoad, data: feedData } = useAxios<ILiftFeed[]>(GetLiftFeedByUserName(user.userName!));
+  const { loading: feedLoad, data: feedData } = useAxios<ILiftFeed[]>(GetLiftFeedByUserName(userName));
   const [liftFeed, setLiftFeed] = useState<ILiftFeed[]>([]);
   const [, setSearchTerm] = useState<string>('');
 

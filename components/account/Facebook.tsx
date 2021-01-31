@@ -3,12 +3,12 @@ import axios from 'axios';
 import React from 'react';
 import FacebookLogin from 'react-facebook-login';
 import { LoginWithFacebookUrl } from '../../api/account/auth';
-import { handleAuthenticationTokens } from '../../util/axiosUtils';
+import { decodeJwtToken, handleAuthenticationTokens } from '../../util/axiosUtils';
 import { useUserContext } from '../users/UserContext';
 
 export const Facebook = ({ onClose }) => {
   const toast = useToast();
-  const { setUser } = useUserContext();
+  const { SetValues } = useUserContext();
 
   const handleFacebookLogin = async (response): Promise<void> => {
     const { accessToken } = response;
@@ -18,7 +18,9 @@ export const Facebook = ({ onClose }) => {
       })
       .then((response) => {
         handleAuthenticationTokens(response.data.accessToken, response.data.refreshToken);
-        setUser(response.data.user);
+        const claimsValues = decodeJwtToken(response.data.accessToken);
+        SetValues(claimsValues);
+
         toast({
           title: 'Success',
           description: 'Successfully Signed In',

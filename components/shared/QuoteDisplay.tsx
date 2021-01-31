@@ -10,10 +10,10 @@ import { useUserContext } from '../users/UserContext';
 
 const QuoteDisplay = () => {
   const { quotes } = useSelector((state: IAppState) => state.state);
-  const { user } = useUserContext();
+  //const { user } = useUserContext();
   const quoteOfDayEntry = useShuffleArray(quotes) as IQuote;
 
-  if (quotes.length <= 0 || !user.quotesEnabled) return <Box></Box>;
+  //if (quotes.length <= 0 || !user.quotesEnabled) return <Box></Box>;
 
   return (
     <CenterColumnFlex py={[2, 3, 2, 1]} mt="1">

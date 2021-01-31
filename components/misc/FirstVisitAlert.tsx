@@ -8,6 +8,7 @@ import { CenterColumnFlex } from '../layout/Flexes';
 import { TextXs } from '../common/Texts';
 import axios from 'axios';
 import { CreateFirstVisitStatsUrl } from '../../api/account/user';
+import { IClaimsValues, useUserContext } from '../users/UserContext';
 
 interface IProps {
   onClose: () => void;
@@ -20,6 +21,7 @@ const FirstVisitAlert: React.FC<IProps> = ({ onClose }) => {
   const [femaleSelected, setFemaleSelected] = useState<boolean>(false);
   const [bottomNote, setBottomNote] = useState<string>('');
   const { register, handleSubmit } = useForm();
+  const { SetValues } = useUserContext();
 
   const onSubmit = async (data: any) => {
     setLoading(true);
@@ -29,6 +31,10 @@ const FirstVisitAlert: React.FC<IProps> = ({ onClose }) => {
       data.genderId = maleSelected ? 3 : 2;
       try {
         await axios.post(CreateFirstVisitStatsUrl(), data);
+        const claimsValues: IClaimsValues = {
+          firstVisit: true,
+        };
+        SetValues(claimsValues);
       } catch (err) {}
       onClose();
     }

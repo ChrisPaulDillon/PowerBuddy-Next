@@ -1,22 +1,22 @@
 import { Box, Divider } from '@chakra-ui/core';
+import { IUser } from 'powerbuddy-shared/lib';
 import { CenterColumnFlex } from '../../layout/Flexes';
 import PhoneNumberVerifyForm from './forms/PhoneNumberVerifyForm';
 import UpdatePasswordForm from './forms/UpdatePasswordForm';
 
 interface IProps {
-  currentPhoneNumber: string;
-  phoneNumberConfirmed: boolean;
+  user: IUser;
 }
 
-const SecurityGroup: React.FC<IProps> = ({ currentPhoneNumber, phoneNumberConfirmed }) => {
+const SecurityGroup: React.FC<IProps> = ({ user }) => {
   return (
     <Box>
       <CenterColumnFlex>
-        <UpdatePasswordForm />
+        <UpdatePasswordForm user={user} />
         <Box p={2}>
           <Divider />
         </Box>
-        <PhoneNumberVerifyForm currentPhoneNumber={currentPhoneNumber} phoneNumberConfirmed={phoneNumberConfirmed} />
+        <PhoneNumberVerifyForm user={user} />
       </CenterColumnFlex>
     </Box>
   );

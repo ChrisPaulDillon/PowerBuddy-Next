@@ -11,7 +11,7 @@ const UserAvatar = ({ userName, ...rest }: any) => {
   return (
     <Link href={profileLink}>
       <PbToolTip label={userName}>
-        <Avatar size="md" borderWidth={2} name={userName} {...rest} onClick={() => router.push(profileLink)} />
+        <Avatar size="md" borderWidth={1} name={userName} {...rest} onClick={() => router.push(profileLink)} />
       </PbToolTip>
     </Link>
   );

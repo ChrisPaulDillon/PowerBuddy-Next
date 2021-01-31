@@ -23,7 +23,7 @@ interface INavBarProps {
 }
 
 const NavBar: React.FC<INavBarProps> = ({}) => {
-  const { user, isAuthenticated } = useUserContext();
+  const { userName, isAuthenticated } = useUserContext();
   const { colorMode } = useColorMode();
   const { SCREEN_MOBILE } = useScreenSizes();
 
@@ -66,14 +66,14 @@ const NavBar: React.FC<INavBarProps> = ({}) => {
           )}
           {SCREEN_MOBILE ? (
             <Box px={2}>
-              <Avatar size="sm" name={user.userName!} onClick={onMobileOpen} />
-              <PbDrawerForm isOpen={isMobileOpen} onClose={onMobileClose} size="full" title={user.userName!}>
-                <RightNav userName={user.userName!} onClose={onMobileClose} />
+              <Avatar size="sm" name={userName} onClick={onMobileOpen} />
+              <PbDrawerForm isOpen={isMobileOpen} onClose={onMobileClose} size="full" title={userName}>
+                <RightNav userName={userName} onClose={onMobileClose} />
               </PbDrawerForm>
             </Box>
           ) : (
-            <MenuBase button={<Avatar size="md" name={user.userName!} />}>
-              <RightNav userName={user.userName!} onClose={onMobileClose} />
+            <MenuBase button={<Avatar size="md" name={userName} />}>
+              <RightNav userName={userName} onClose={onMobileClose} />
             </MenuBase>
           )}
         </Flex>

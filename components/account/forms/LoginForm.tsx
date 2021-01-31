@@ -14,7 +14,7 @@ import { LoginStateEnum } from '../factories/LoginFormFactory';
 import { useUserContext } from '../../users/UserContext';
 import { Facebook } from '../Facebook';
 import { SendEmailConfirmationUrl } from '../../../api/public/email';
-import { handleAuthenticationTokens } from '../../../util/axiosUtils';
+import { decodeJwtToken, handleAuthenticationTokens } from '../../../util/axiosUtils';
 
 const LoginForm = ({ onClose, setLoginState }: any) => {
   const [showPW, setShowPW] = React.useState(false);
@@ -23,7 +23,7 @@ const LoginForm = ({ onClose, setLoginState }: any) => {
   const [emailNotVerified, setEmailNotVerified] = useState<boolean>(false);
   const [userId, setUserId] = useState<string>('');
 
-  const { setUser } = useUserContext();
+  const { SetValues } = useUserContext();
 
   const toast = useToast();
 
@@ -49,7 +49,8 @@ const LoginForm = ({ onClose, setLoginState }: any) => {
         position: 'top',
       });
       handleAuthenticationTokens(response.data.accessToken, response.data.refreshToken);
-      setUser(response.data.user);
+      const claimsValues = decodeJwtToken(response.data.accessToken);
+      SetValues(claimsValues);
 
       onClose();
     } catch (err) {

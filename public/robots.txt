@@ -1,4 +1,4 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Disallow:
-Sitemap: https://webapp.powerbuddy.gg/static/sitemap.xml
+Sitemap: https://webapp.powerbuddy.gg/sitemap.xml

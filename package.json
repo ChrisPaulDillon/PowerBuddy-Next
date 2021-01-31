@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node server.js",
+    "dev": "node server.js --max_old_space_size=16,384",
     "build": "next build",
     "start": "NODE_ENV=production node server.js"
   },
@@ -23,6 +23,7 @@
     "globby": "^11.0.2",
     "install": "^0.13.0",
     "jimp": "^0.16.1",
+    "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
     "next": "^10.0.2",
     "next-build-id": "^3.0.0",

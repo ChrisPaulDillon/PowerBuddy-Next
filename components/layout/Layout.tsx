@@ -12,7 +12,7 @@ import * as signalR from '@microsoft/signalr';
 const Layout = ({ children }: any) => {
   const { colorMode } = useColorMode();
   const [menuOpen, setMenuOpen] = useState(false);
-  const { user, isAuthenticated } = useUserContext();
+  const { isAuthenticated, firstVisit } = useUserContext();
 
   const { onOpen, onClose } = useDisclosure();
 
@@ -45,17 +45,17 @@ const Layout = ({ children }: any) => {
   }, [connection]);
 
   useEffect(() => {
-    if (user && !user.firstVisit) {
+    if (firstVisit) {
       onOpen();
     }
-  }, [user]);
+  }, [firstVisit]);
 
   return (
     <Flex direction="column" align="center" m="0 auto" bgColor={theme.colors.background[colorMode]} mx={2}>
       <NavBar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       <Flex flexDir="row">
-        {!user.firstVisit && isAuthenticated && (
-          <ModalDrawerForm onClose={onClose} isOpen={!user.firstVisit} title="Welcome To PowerBuddy! 🎉🎉">
+        {!firstVisit && isAuthenticated && (
+          <ModalDrawerForm onClose={onClose} isOpen={!firstVisit} title="Welcome To PowerBuddy! 🎉🎉">
             <FirstVisitAlert onClose={onClose} />
           </ModalDrawerForm>
         )}

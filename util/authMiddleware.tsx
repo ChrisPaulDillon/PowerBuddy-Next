@@ -7,20 +7,18 @@ export const LoginRoute = (targetURL?: string) => `/account/login${targetURL ? `
 
 export const withAuthorized = (WrappedComponent) => {
   const Wrapper = (props) => {
-    const { user } = useUserContext();
+    const { isAuthenticated } = useUserContext();
     const [promptLogin, setPromptLogin] = useState<boolean>(false);
 
     useEffect(() => {
-      setTimeout(() => {
-        if (Object.keys(user).length === 0) {
-          setPromptLogin(true);
-        } else {
-          setPromptLogin(false);
-        }
-      }, 2000);
-    }, [user]);
+      if (!isAuthenticated) {
+        setPromptLogin(true);
+      } else {
+        setPromptLogin(false);
+      }
+    }, [isAuthenticated]);
 
-    if (Object.keys(user).length === 0) {
+    if (!isAuthenticated) {
       return (
         <Box>
           <LoginModal isOpen={promptLogin} />
@@ -32,8 +30,7 @@ export const withAuthorized = (WrappedComponent) => {
   };
 
   Wrapper.getInitialProps = async (ctx) => {
-    //const account = await getAccount(ctx);
-    const componentProps = WrappedComponent.getInitialProps && (await WrappedComponent.getInitialProps(ctx));
+    const componentProps = WrappedComponent.getStaticProps && (await WrappedComponent.getStaticProps(ctx));
     return { ...componentProps };
   };
 

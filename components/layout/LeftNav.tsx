@@ -57,7 +57,7 @@ const sideMenu = {
 
 export const MobileSideNav = ({ isOpen, onClose }) => {
   const { colorMode } = useColorMode();
-  const { user } = useUserContext();
+  const { memberStatusId } = useUserContext();
 
   return (
     <Box>
@@ -72,7 +72,7 @@ export const MobileSideNav = ({ isOpen, onClose }) => {
             </Flex>
           </DrawerHeader>
           <DrawerBody>
-            <LeftMenuItems menuOpen={isOpen} onClose={onClose} user={user} />
+            <LeftMenuItems menuOpen={isOpen} onClose={onClose} memberStatusId={memberStatusId} />
           </DrawerBody>
         </DrawerContent>
       </Drawer>
@@ -87,7 +87,7 @@ interface ISideNavProps {
 const LeftNav: React.FC<ISideNavProps> = ({ menuOpen, ...props }) => {
   const { colorMode } = useColorMode();
   const { SCREEN_DESKTOP } = useScreenSizes();
-  const { user } = useUserContext();
+  const { memberStatusId } = useUserContext();
 
   return (
     <Box>
@@ -104,7 +104,7 @@ const LeftNav: React.FC<ISideNavProps> = ({ menuOpen, ...props }) => {
           h="100%"
           minW="75px"
           {...props}>
-          <LeftMenuItems menuOpen={menuOpen} user={user} />
+          <LeftMenuItems menuOpen={menuOpen} memberStatusId={memberStatusId} />
         </Flex>
       )}
     </Box>
@@ -114,10 +114,10 @@ const LeftNav: React.FC<ISideNavProps> = ({ menuOpen, ...props }) => {
 interface ILeftMenuItemsProps {
   menuOpen: boolean;
   onClose?: () => void;
-  user: IUser;
+  memberStatusId: number;
 }
 
-const LeftMenuItems: React.FC<ILeftMenuItemsProps> = ({ menuOpen, onClose, user }) => {
+const LeftMenuItems: React.FC<ILeftMenuItemsProps> = ({ menuOpen, onClose, memberStatusId }) => {
   return (
     <Box>
       {sideMenu.groups.map((item, idx) => (
@@ -128,7 +128,7 @@ const LeftMenuItems: React.FC<ILeftMenuItemsProps> = ({ menuOpen, onClose, user 
             tooltip={item.tooltip}
             link={item.link}
             memberStatusId={item.memberStatusId}
-            userMemberStatusId={user?.memberStatusId ?? 0}
+            userMemberStatusId={memberStatusId ?? 0}
             isOpen={menuOpen}
             onClose={onClose}
             idx={idx}

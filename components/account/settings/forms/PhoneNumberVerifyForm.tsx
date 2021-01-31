@@ -1,5 +1,6 @@
 import { Box, Flex, FormControl, FormErrorMessage, Icon, Tooltip, useToast } from '@chakra-ui/core';
 import axios from 'axios';
+import { IUser } from 'powerbuddy-shared/lib';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AiFillCheckCircle, ImBlocked } from 'react-icons/all';
@@ -12,11 +13,10 @@ import { TextXs, TextSm } from '../../../common/Texts';
 import { CenterColumnFlex } from '../../../layout/Flexes';
 
 interface IProps {
-  currentPhoneNumber: string;
-  phoneNumberConfirmed: boolean;
+  user: IUser;
 }
 
-const PhoneNumberVerifyForm: React.FC<IProps> = ({ currentPhoneNumber, phoneNumberConfirmed }) => {
+const PhoneNumberVerifyForm: React.FC<IProps> = ({ user }) => {
   const toast = useToast();
 
   const [error, setError] = useState<boolean>(false);
@@ -92,10 +92,10 @@ const PhoneNumberVerifyForm: React.FC<IProps> = ({ currentPhoneNumber, phoneNumb
                 <TextXs pt="3" pr="1" minW="110px">
                   Phone Number
                 </TextXs>
-                <FormInput name="phoneNumber" ref={register({ validate: validateInput })} size="sm" defaultValue={currentPhoneNumber} />
+                <FormInput name="phoneNumber" ref={register({ validate: validateInput })} size="sm" defaultValue={user?.phoneNumber} />
               </PbStack>
               <Box ml={1}>
-                {phoneNumberConfirmed ? (
+                {user?.phoneNumberConfirmed ? (
                   <Icon as={AiFillCheckCircle} color="green.500" fontSize="20px" mt={2} />
                 ) : (
                   <Icon as={ImBlocked} color="red.500" fontSize="20px" mt={2} />

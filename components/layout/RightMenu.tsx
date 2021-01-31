@@ -6,7 +6,6 @@ import { useMemo } from 'react';
 import { FaMoon } from 'react-icons/fa';
 import { IoIosLogIn, IoIosLogOut } from 'react-icons/io';
 import { MdArrowBack, MdChevronRight, MdPersonPin } from 'react-icons/md';
-import useAuthentication from '../../hooks/useAuthentication';
 import { TextSm } from '../common/Texts';
 import { PROFILE_URL, SETTINGS_URL } from '../../InternalLinks';
 import { FcSettings } from 'react-icons/fc';
@@ -28,7 +27,6 @@ interface IRightNavProps {
 }
 
 export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
-  useAuthentication();
   const router = useRouter();
   const [menuSection, setMenuSection] = useState<MenuSection | undefined>(MenuSection.Main);
   const toast = useToast();

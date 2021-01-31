@@ -25,7 +25,7 @@ interface IProps {
 }
 
 const CreateProgramLogFromTemplateForm: React.FC<IProps> = ({ onClose, template, onCreateSuccessOpen }) => {
-  const { user } = useUserContext();
+  const { userId } = useUserContext();
   // const { data: calendarData, loading: calendarLoading } = useAxios<IProgramLogCalendarStats>(GetAllProgramLogCalendarStatsQueryUrl());
   const { data: weightInput, loading: weightInputLoading } = useAxios<IWeightInput[]>(GetPersonalBestsForTemplate(template.templateProgramId!));
   const [curWeightInputs, setCurWeightInputs] = useState<IWeightInput[]>([]);
@@ -94,7 +94,7 @@ const CreateProgramLogFromTemplateForm: React.FC<IProps> = ({ onClose, template,
     } else {
       try {
         const workoutLog: IWorkoutLogTemplateInput = {
-          userId: user?.userId!,
+          userId: userId!,
           templateProgramId: template?.templateProgramId,
           startDate: selectedDate,
           monday: monChecked,

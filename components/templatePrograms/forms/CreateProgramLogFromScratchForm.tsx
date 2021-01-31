@@ -31,7 +31,7 @@ interface IProps {
 
 const CreateProgramLogFromScratchForm: React.FC<IProps> = ({ onClose, onCreateSuccessOpen }) => {
   // const { data: calendarData, loading: calendarLoading } = useAxios<IProgramLogCalendarStats>(GetAllProgramLogCalendarStatsQueryUrl());
-  const { user } = useUserContext();
+  const { userId } = useUserContext();
   const [selectedDate, setSelectedDate] = useState<Date | undefined>();
   const [calendarDate, setCalendarDate] = useState<DayValue>();
   const [endDate, setEndDate] = useState<Date>();
@@ -62,7 +62,7 @@ const CreateProgramLogFromScratchForm: React.FC<IProps> = ({ onClose, onCreateSu
     } else {
       try {
         const workoutLogInput: IWorkoutLogInputScratch = {
-          userId: user?.userId,
+          userId: userId,
           startDate: selectedDate,
           noOfWeeks: noOfWeeks,
           customName: customName,

@@ -9,6 +9,7 @@ import { FormInput, FormNumberInput } from '../../../common/Inputs';
 import axios from 'axios';
 import { EditProfileUrl } from '../../../../api/account/user';
 import { useUserContext } from '../../../users/UserContext';
+import { IUser } from 'powerbuddy-shared/lib';
 
 interface IEditProfile {
   userId: string;
@@ -19,8 +20,11 @@ interface IEditProfile {
   usingMetric: boolean;
 }
 
-const EditProfileForm = () => {
-  const { user } = useUserContext();
+interface IProps {
+  user: IUser;
+}
+
+const EditProfileForm: React.FC<IProps> = ({ user }) => {
   const [bodyWeight, setBodyWeight] = useState<number>(user?.bodyWeight!);
   const [usingMetric, setUsingMetric] = useState(user?.usingMetric ? '1' : '2');
 

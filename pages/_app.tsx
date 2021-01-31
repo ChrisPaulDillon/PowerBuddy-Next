@@ -39,7 +39,7 @@ const MyApp: NextComponentType<AppContext, ModifiedAppInitialProps, ExtendedAppP
 
   return (
     <Provider store={store}>
-      <UserProvider user={user} setUser={setUser}>
+      <UserProvider>
         <ChakraProvider resetCSS theme={customTheme2}>
           <Layout>
             <PageHead title="Home" description="PowerBuddy helps weightlifters and powerlifters reach their goals and track personal bests" />

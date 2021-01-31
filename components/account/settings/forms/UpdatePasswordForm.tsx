@@ -1,5 +1,6 @@
 import { Box, FormControl, FormErrorMessage, useToast } from '@chakra-ui/core';
 import axios from 'axios';
+import { IUser } from 'powerbuddy-shared/lib';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { UpdatePasswordUrl } from '../../../../api/account/auth';
@@ -15,7 +16,11 @@ interface IUpdatePasswordInput {
   newPassword: string;
 }
 
-const UpdatePasswordForm = () => {
+interface IProps {
+  user: IUser;
+}
+
+const UpdatePasswordForm: React.FC<IProps> = ({ user }) => {
   const toast = useToast();
 
   const [error, setError] = useState<boolean>(false);
