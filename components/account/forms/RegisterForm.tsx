@@ -36,7 +36,7 @@ const RegisterForm = ({ setLoginState }: any) => {
     };
     try {
       const response = await axios.post(RegisterUserUrl(), user);
-      setUserId(response.data);
+      setUserId(response.data.userId);
       toast(ToastSuccess('Success', 'Successfully Signed Up'));
       setSignedUp(true);
     } catch (error) {

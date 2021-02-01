@@ -11,11 +11,13 @@ export const withAuthorized = (WrappedComponent) => {
     const [promptLogin, setPromptLogin] = useState<boolean>(false);
 
     useEffect(() => {
-      if (!isAuthenticated) {
-        setPromptLogin(true);
-      } else {
-        setPromptLogin(false);
-      }
+      setTimeout(() => {
+        if (!isAuthenticated) {
+          setPromptLogin(true);
+        } else {
+          setPromptLogin(false);
+        }
+      }, 1500);
     }, [isAuthenticated]);
 
     if (!isAuthenticated) {

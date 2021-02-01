@@ -7,20 +7,18 @@ import theme from '../../theme';
 import { CenterColumnFlex } from '../layout/Flexes';
 
 interface IToastProps {
-  title: string;
   description: string;
   userName: string;
 }
 
-export const ToastAvatar: React.FC<IToastProps> = ({ title, description, userName }) => {
+export const ToastAvatar: React.FC<IToastProps> = ({ userName, description }) => {
   const { colorMode } = useColorMode();
 
   return (
-    <Box p={1} bg={theme.colors.cardColor[colorMode]} rounded="lg">
+    <Box p={2} bg={theme.colors.cardColor[colorMode]} rounded="lg">
       <PbStack mt={1}>
         <UserAvatar userName={userName} />
         <CenterColumnFlex>
-          <TextSm>{title}</TextSm>
           <TextXs>{description}</TextXs>
         </CenterColumnFlex>
       </PbStack>

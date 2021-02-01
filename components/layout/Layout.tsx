@@ -7,8 +7,7 @@ import theme from '../../theme';
 import Footer from './Footer';
 import { useUserContext } from '../users/UserContext';
 import { ModalDrawerForm } from '../common/ModalDrawer';
-import * as signalR from '@microsoft/signalr';
-import { ToastSuccess } from '../shared/Toasts';
+import useSignalR from '../../signalR/useSignalR';
 
 const Layout = ({ children }: any) => {
   const { colorMode } = useColorMode();
@@ -17,26 +16,7 @@ const Layout = ({ children }: any) => {
 
   const { onOpen, onClose } = useDisclosure();
 
-  const [connection, setConnection] = useState<signalR.HubConnection>();
-  const toast = useToast();
-
-  useEffect(() => {
-    const connection = new signalR.HubConnectionBuilder().withUrl(process.env.NEXT_PUBLIC_BASE_SIGNALR).withAutomaticReconnect().build();
-    connection.start().catch((error) => console.log(error));
-    setConnection(connection);
-    return () => {
-      connection.stop();
-      setConnection(null);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (connection) {
-      connection.on('ReceiveMessage', (message) => {
-        toast(ToastSuccess('Success', message));
-      });
-    }
-  }, [connection]);
+  useSignalR();
 
   useEffect(() => {
     if (firstVisit) {
