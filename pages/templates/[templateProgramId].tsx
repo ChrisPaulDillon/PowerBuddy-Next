@@ -23,8 +23,6 @@ import axios from 'axios';
 
 const TemplateProgramSingle: NextPage = ({ template }: any) => {
   const router = useRouter();
-  const { templateProgramId } = router.query;
-
   const { isAuthenticated } = useUserContext();
 
   const { isOpen: isAddProgramOpen, onOpen: onAddProgramOpen, onClose: onAddProgramClose } = useDisclosure();
@@ -38,7 +36,10 @@ const TemplateProgramSingle: NextPage = ({ template }: any) => {
 
   return (
     <Box>
-      <PageHead title={template?.name} description="Powerbuddy view powerlifting templates such as 5/3/1" />
+      <PageHead
+        title={template?.name}
+        description={`Automatically generate program using the ${template.name} template. Calculate your stats for weightlifters, powerlifters and olympic weightlifters for free `}
+      />
       <PageContent>
         <Box>
           <BreadcrumbBase values={breadcrumbInput} />
