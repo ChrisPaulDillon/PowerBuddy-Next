@@ -16,6 +16,8 @@ import { Facebook } from '../Facebook';
 import { SendEmailConfirmationUrl } from '../../../api/public/email';
 import { decodeJwtToken, handleAuthenticationTokens } from '../../../util/axiosUtils';
 import { ToastSuccess } from '../../shared/Toasts';
+import { LoginUserRequest } from '../../../apiCalls/Area/account/auth';
+import { ACCOUNT_LOCKOUT, EMAIL_NOT_CONFIRMED, INVALID_CREDENTIALS, USER_NOT_FOUND } from '../../../responseCodes';
 
 const LoginForm = ({ onClose, setLoginState }: any) => {
   const [showPW, setShowPW] = React.useState(false);
@@ -38,31 +40,31 @@ const LoginForm = ({ onClose, setLoginState }: any) => {
       userName: email,
       password: password,
     };
-    try {
-      setShowError(false);
-      const response = await axios.post(LoginUserUrl(), user);
-      toast(ToastSuccess('Success', 'Successfully Signed In'));
-      handleAuthenticationTokens(response.data.accessToken, response.data.refreshToken);
-      const claimsValues = decodeJwtToken(response.data.accessToken);
-      SetValues(claimsValues);
-
-      onClose();
-    } catch (err) {
-      const errorCode = err?.response?.data;
-      if (errorCode?.code == 'EmailNotConfirmedException') {
-        setEmailNotVerified(true);
-        setUserId(errorCode?.message);
-      }
-      if (errorCode?.code == 'InvalidCredentialsException') {
-        setError('Invalid Username/Email or Password');
-      }
-      if (errorCode?.code == 'AccountLockoutException') {
-        setError('Too many login attempts. Please wait 10 minutes before proceeding');
-      }
-      if (errorCode?.code == 'UserNotFoundException') {
-        setError('No User found with the associated Username or Email');
+    setShowError(false);
+    const response = await LoginUserRequest(user);
+    if (response?.code) {
+      switch (response?.code) {
+        case EMAIL_NOT_CONFIRMED:
+          setEmailNotVerified(true);
+          setUserId(response?.message);
+          break;
+        case INVALID_CREDENTIALS:
+          setError('Invalid Username/Email or Password');
+          break;
+        case USER_NOT_FOUND:
+          setError('No User found with the associated Username or Email');
+          break;
+        case ACCOUNT_LOCKOUT:
+          setError('Too many login attempts. Please wait 10 minutes before proceeding');
+          break;
       }
       setShowError(true);
+    } else {
+      toast(ToastSuccess('Success', 'Successfully Signed In'));
+      handleAuthenticationTokens(response.accessToken, response.refreshToken);
+      const claimsValues = decodeJwtToken(response.accessToken);
+      SetValues(claimsValues);
+      onClose();
     }
   };
 

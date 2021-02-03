@@ -12,8 +12,8 @@ export const LogoutUserUrl = (refreshToken: string) => `${baseUrl}/Logout/${refr
 
 export const RefreshTokenUrl = () => `${baseUrl}/Refresh`;
 
-export const ChangePasswordUrl = (userId: string) => 
-`${baseUrl}/ChangePassword/${userId}`;
+export const ResetPasswordViaEmailUrl = (userId: string) => 
+`${baseUrl}/ResetPassword/Token/${userId}`;
 
 export const UpdatePasswordUrl = () => 
 `${baseUrl}/UpdatePassword`;

@@ -1,21 +1,12 @@
-import { Box, Checkbox, Flex, position, useToast } from '@chakra-ui/core';
-import axios from 'axios';
-import { duration } from 'moment';
-import { useRouter } from 'next/router';
+import { Box, Flex, useToast } from '@chakra-ui/core';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { ChangePasswordUrl } from '../../../api/account/auth';
+import { IChangePasswordBody, ResetPasswordViaEmailRequest } from '../../../apiCalls/Area/account/auth';
 import { PbPrimaryButton } from '../../common/Buttons';
-import { FormInput, FormNumberInput } from '../../common/Inputs';
-import { PbStack } from '../../common/Stacks';
+import { FormInput } from '../../common/Inputs';
 import { TextXs } from '../../common/Texts';
 import { CenterColumnFlex } from '../../layout/Flexes';
 import { ToastError, ToastSuccess } from '../../shared/Toasts';
-
-interface IChangePasswordBody {
-  token: string;
-  password: string;
-}
 
 interface IChangePasswordFormProps {
   userId: string;
@@ -27,19 +18,15 @@ const ChangePasswordForm: React.FC<IChangePasswordFormProps> = ({ userId, token 
   const { handleSubmit, formState, register } = useForm();
 
   const onSubmit = async ({ password }: any) => {
-    try {
-      const changePasswordBody: IChangePasswordBody = {
-        token: token.replace(/\s+/g, '+'),
-        password: password,
-      };
-      const response = await axios.post(ChangePasswordUrl(userId as string), changePasswordBody);
-      if (response && response.data) {
-        toast(ToastSuccess('Success', 'Password Successfully Changed'));
-      } else {
-        toast(ToastError('Error', 'Password not changed, token has expired'));
-      }
-    } catch (error) {
+    const changePasswordBody: IChangePasswordBody = {
+      token: token.replace(/\s+/g, '+'),
+      password: password,
+    };
+    const response = await ResetPasswordViaEmailRequest(userId, changePasswordBody);
+    if (response?.code) {
       toast(ToastError('Error', 'Password not changed, token has expired'));
+    } else {
+      toast(ToastSuccess('Success', 'Password Successfully Changed'));
     }
   };
 
