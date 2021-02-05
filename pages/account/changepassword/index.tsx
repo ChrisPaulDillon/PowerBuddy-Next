@@ -2,7 +2,7 @@ import { Box } from '@chakra-ui/core';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import React from 'react';
-import ChangePasswordForm from '../../../components/account/forms/ChangePasswordForm';
+import ChangePasswordForm from '../../../components/account/forms/ResetPasswordForm';
 import { PageTitle } from '../../../components/common/Texts';
 import { CenterColumnFlex } from '../../../components/layout/Flexes';
 import { PageContent, PageHead } from '../../../components/layout/Page';

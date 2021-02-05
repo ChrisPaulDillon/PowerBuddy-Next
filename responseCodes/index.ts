@@ -3,7 +3,9 @@
 export const USER_NOT_FOUND = "UserNotFound";
 export const EMAIL_NOT_CONFIRMED = "EmailNotConfirmed"
 export const ACCOUNT_LOCKOUT = "AccountLockout";
-export const INVALID_CREDENTIALS = "InvalidCredientials"
+export const INVALID_CREDENTIALS = "InvalidCredentials"
+export const EMAIL_OR_USERNAME_IN_USE = "EmailOrUserNameInUse";
+export const USER_PROFILE_NOT_PUBLIC = "UserProfileNotPublic"
 
 export const EXERCISE_ALREADY_EXISTS = "ExerciseAlreadyExists";
 export const EXERCISE_NOT_FOUND = "ExerciseNotFound";

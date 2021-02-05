@@ -4,6 +4,7 @@ import { IUser } from 'powerbuddy-shared/lib';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { UpdatePasswordUrl } from '../../../../api/account/auth';
+import { INVALID_CREDENTIALS } from '../../../../responseCodes';
 import { validateInput } from '../../../../util/formInputs';
 import { PbPrimaryButton } from '../../../common/Buttons';
 import { FormInput } from '../../../common/Inputs';
@@ -47,10 +48,13 @@ const UpdatePasswordForm: React.FC<IProps> = ({ user }) => {
       }
     } catch (err) {
       const errorCode = err?.response?.data;
-      if (errorCode?.code == 'InvalidCredentialsException') {
-        toast(ToastError('Error', 'You have incorrectly entered your current password'));
-      } else {
-        toast(ToastError('Error', 'Password Could Not Be Updated'));
+      switch (errorCode?.code) {
+        case INVALID_CREDENTIALS:
+          toast(ToastError('Error', 'You have incorrectly entered your current password'));
+          break;
+        default:
+          toast(ToastError('Error', 'Password Could Not Be Updated'));
+          break;
       }
     }
     reset();
