@@ -5,7 +5,6 @@ import configureStore from '../redux/store';
 import customTheme from '../theme';
 import * as Sentry from '@sentry/react';
 import Layout from '../components/layout/Layout';
-import { IUser } from 'powerbuddy-shared/lib';
 import UserProvider, { useUserContext } from '../components/users/UserContext';
 import { AppContext, AppProps } from 'next/app';
 import { NextComponentType } from 'next';
