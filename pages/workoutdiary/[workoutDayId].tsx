@@ -32,6 +32,8 @@ import NotifiyPersonalBestAlert from '../../components/workouts/alerts/NotifyPer
 import AddExerciseForm from '../../components/workouts/forms/AddExerciseForm';
 import { PageContent, PageHead } from '../../components/layout/Page';
 import { ToastError, ToastSuccess } from '../../components/shared/Toasts';
+import { GiRun } from 'react-icons/all';
+import AddWorkoutTemplateForm from '../../components/workouts/forms/AddWorkoutTemplateForm';
 
 const WorkoutDay: NextPage = () => {
   const router = useRouter();
@@ -45,12 +47,13 @@ const WorkoutDay: NextPage = () => {
   const [menuItems, setMenuItems] = useState<IMenuItem[]>([]);
   const [deleteLogLoading, setDeleteLogLoading] = useState<boolean>(false);
   const [noteLoading] = useState<boolean>(false);
-  const [] = useState<boolean>(workoutDay.comment != null ? true : false);
+  const [notesHighlighted] = useState<boolean>(workoutDay.comment != null ? true : false);
   const [contentDisabled] = useState<boolean>(false);
 
   const { isOpen: isAddExerciseOpen, onOpen: onAddExerciseOpen, onClose: onAddExerciseClose } = useDisclosure();
   const { isOpen: isDeleteLogOpen, onOpen: onDeleteLogOpen, onClose: onDeleteLogClose } = useDisclosure();
   const { isOpen: isAddWorkoutNoteOpen, onOpen: onAddWorkoutNoteOpen, onClose: onAddWorkoutNoteClose } = useDisclosure();
+  const { isOpen: isAddWorkoutTemplateOpen, onOpen: onAddWorkoutTemplateOpen, onClose: onAddWorkoutTemplateClose } = useDisclosure();
 
   const toast = useToast();
 
@@ -73,6 +76,12 @@ const WorkoutDay: NextPage = () => {
         title: 'Add Workout Note',
         Icon: FaRegCommentAlt,
         onClick: onAddWorkoutNoteOpen,
+        loading: noteLoading,
+      },
+      {
+        title: 'Create Workout Template',
+        Icon: GiRun,
+        onClick: onAddWorkoutTemplateOpen,
         loading: noteLoading,
       },
     ]);
@@ -110,16 +119,6 @@ const WorkoutDay: NextPage = () => {
     { href: WORKOUT_DIARY_URL, name: 'Workout Diary' },
     { href: '#', name: dateHighlighted ? 'Todays Workout' : moment(workoutDay.date).format('dddd Do MMM') },
   ];
-
-  //   const deleteLog = async () => {
-  //     setDeleteLogLoading(true);
-
-  //     const response = await deleteLogApiCall({ workoutId });
-  //     if (response?.status === 200) {
-  //       onDeleteLogClose();
-  //     }
-  //     setDeleteLogLoading(false);
-  //   };
 
   if (dayLoading) return <ProgressSpinner />;
 
@@ -199,7 +198,12 @@ const WorkoutDay: NextPage = () => {
           )}
           {isAddWorkoutNoteOpen && (
             <ModalDrawerForm title="Add Workout Note" isOpen={isAddWorkoutNoteOpen} onClose={onAddWorkoutNoteClose}>
-              <AddWorkoutNoteForm workoutDayId={workoutDay.workoutDayId!} onClose={onAddWorkoutNoteClose} note={workoutDay.comment!} />
+              <AddWorkoutNoteForm workoutDayId={workoutDay.workoutDayId} onClose={onAddWorkoutNoteClose} note={workoutDay.comment!} />
+            </ModalDrawerForm>
+          )}
+          {isAddWorkoutTemplateOpen && (
+            <ModalDrawerForm title="Create a new workout Template" isOpen={isAddWorkoutTemplateOpen} onClose={onAddWorkoutTemplateClose}>
+              <AddWorkoutTemplateForm workoutDay={workoutDay} onClose={onAddWorkoutTemplateClose} />
             </ModalDrawerForm>
           )}
         </PageContent>

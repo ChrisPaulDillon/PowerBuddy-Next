@@ -34,10 +34,12 @@ const RegisterForm = ({ setLoginState }: any) => {
       password: password,
     };
     const response = await RegisterUserRequest(user);
+    console.log(response);
+
     if (response?.code) {
       setError(true);
     } else {
-      setUserId(response.data.userId);
+      setUserId(response.userId);
       toast(ToastSuccess('Success', 'Successfully Signed Up'));
       setSignedUp(true);
     }

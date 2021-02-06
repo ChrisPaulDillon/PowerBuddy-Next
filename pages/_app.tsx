@@ -42,7 +42,7 @@ const MyApp: NextComponentType<AppContext, ModifiedAppInitialProps, ExtendedAppP
       const refreshToken = localStorage.getItem('refreshToken');
       await RefreshRequest(refreshToken, SetValues);
     };
-    RefreshToken();
+    //RefreshToken();
   }, []);
 
   return (

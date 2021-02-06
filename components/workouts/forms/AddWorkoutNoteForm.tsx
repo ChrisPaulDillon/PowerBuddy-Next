@@ -19,8 +19,6 @@ const AddWorkoutNoteForm: React.FC<IProps> = ({ note, workoutDayId, onClose }) =
   const { UpdateDayNotes } = useWorkoutContext();
   const toast = useToast();
 
-  const { register, handleSubmit, errors, formState } = useForm();
-
   const onSubmit = async ({ notes }: any) => {
     try {
       await axios.put(UpdateWorkoutNoteUrl(workoutDayId, notes));
@@ -31,6 +29,8 @@ const AddWorkoutNoteForm: React.FC<IProps> = ({ note, workoutDayId, onClose }) =
     }
     onClose();
   };
+
+  const { register, handleSubmit, errors, formState } = useForm();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
