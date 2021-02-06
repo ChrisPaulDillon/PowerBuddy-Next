@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { MdAccountBox } from 'react-icons/md';
 import { TiArrowBack } from 'react-icons/ti';
 import { SendPasswordResetUrl } from '../../../api/public/email';
+import { SendPasswordResetEmailRequest } from '../../../apiCalls/Area/public/email';
 import { validateEmailInput } from '../../../util/formInputs';
 import { PbPrimaryButton } from '../../common/Buttons';
 import PbIconButton from '../../common/IconButtons';
@@ -22,11 +23,10 @@ const SendPasswordResetForm = ({ onClose, setLoginState }) => {
   const [email, setEmail] = useState<string>('');
 
   const onSubmit = async () => {
-    try {
-      const response = await axios.post(SendPasswordResetUrl(email));
-    } catch (error) {}
+    await SendPasswordResetEmailRequest(email);
     toast(ToastSuccess('Success', 'If an account with the associated email exists, a reset password email has been sent'));
     setPwResetSent(true);
+    onClose();
   };
 
   if (pwResetSent)

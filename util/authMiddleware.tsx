@@ -3,8 +3,6 @@ import { useUserContext } from '../components/users/UserContext';
 import React, { useEffect, useState } from 'react';
 import { LoginModal } from '../components/shared/Modals';
 
-export const LoginRoute = (targetURL?: string) => `/account/login${targetURL ? `?TargetURL=${targetURL}` : ''}`;
-
 export const withAuthorized = (WrappedComponent) => {
   const Wrapper = (props) => {
     const { isAuthenticated } = useUserContext();

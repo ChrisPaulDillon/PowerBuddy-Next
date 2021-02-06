@@ -11,6 +11,7 @@ import { EditProfileUrl } from '../../../../api/account/user';
 import { useUserContext } from '../../../users/UserContext';
 import { IUser } from 'powerbuddy-shared/lib';
 import { ToastError, ToastSuccess } from '../../../shared/Toasts';
+import { withAuthorized } from '../../../../util/authMiddleware';
 
 interface IEditProfile {
   userId: string;
@@ -114,4 +115,4 @@ const EditProfileForm: React.FC<IProps> = ({ user }) => {
   );
 };
 
-export default EditProfileForm;
+export default withAuthorized(EditProfileForm);

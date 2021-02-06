@@ -6,10 +6,11 @@ import customTheme from '../theme';
 import * as Sentry from '@sentry/react';
 import Layout from '../components/layout/Layout';
 import { IUser } from 'powerbuddy-shared/lib';
-import UserProvider from '../components/users/UserContext';
+import UserProvider, { useUserContext } from '../components/users/UserContext';
 import { AppContext, AppProps } from 'next/app';
 import { NextComponentType } from 'next';
 import { PageHead } from '../components/layout/Page';
+import { RefreshRequest } from '../apiCalls/Area/account/auth';
 
 if (process.env.NODE_ENV !== 'production') {
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
@@ -35,7 +36,15 @@ export interface ModifiedAppInitialProps<A = { [key in string]: string }> {
 export interface ExtendedAppProps<P = { [key in string]: string }, A = { [key in string]: string }> extends AppProps<P>, ModifiedAppInitialProps<A> {}
 
 const MyApp: NextComponentType<AppContext, ModifiedAppInitialProps, ExtendedAppProps> = ({ Component, pageProps, appProps }) => {
-  const [user, setUser] = useState<IUser>({} as IUser);
+  const { SetValues } = useUserContext();
+
+  useEffect(() => {
+    const RefreshToken = async () => {
+      const refreshToken = localStorage.getItem('refreshToken');
+      await RefreshRequest(refreshToken, SetValues);
+    };
+    RefreshToken();
+  }, []);
 
   return (
     <Provider store={store}>

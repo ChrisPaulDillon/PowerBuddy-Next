@@ -1,11 +1,10 @@
 import { Box, Button, Flex, FormControl, FormErrorMessage, InputGroup, InputRightElement, Link, useToast } from '@chakra-ui/core';
-import axios from 'axios';
 import { IUser } from 'powerbuddy-shared/lib';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { MdAccountBox, TiArrowBack } from 'react-icons/all';
-import { RegisterUserUrl } from '../../../api/account/auth';
-import { SendEmailConfirmationUrl } from '../../../api/public/email';
+import { RegisterUserRequest } from '../../../apiCalls/Area/account/auth';
+import { SendEmailConfirmationRequest } from '../../../apiCalls/Area/public/email';
 import { validateEmailInput, validateInput, validatePassword } from '../../../util/formInputs';
 import { PbPrimaryButton } from '../../common/Buttons';
 import PbIconButton from '../../common/IconButtons';
@@ -34,21 +33,19 @@ const RegisterForm = ({ setLoginState }: any) => {
       userName: username,
       password: password,
     };
-    try {
-      const response = await axios.post(RegisterUserUrl(), user);
+    const response = await RegisterUserRequest(user);
+    if (response?.code) {
+      setError(true);
+    } else {
       setUserId(response.data.userId);
       toast(ToastSuccess('Success', 'Successfully Signed Up'));
       setSignedUp(true);
-    } catch (error) {
-      setError(true);
     }
   };
 
   const sendEmailConfirmation = async () => {
-    try {
-      toast(ToastSuccess('Success', 'Confirmation Email Sent Successfully. Please check your inbox'));
-      const response = await axios.post(SendEmailConfirmationUrl(userId));
-    } catch (error) {}
+    await SendEmailConfirmationRequest(userId);
+    toast(ToastSuccess('Success', 'Confirmation Email Sent Successfully. Please check your inbox'));
   };
 
   if (signedUp)
