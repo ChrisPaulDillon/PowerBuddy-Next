@@ -24,3 +24,4 @@ export const WORKOUT_DAYS_DOES_NOT_MATCH_TEMPLATE_DAYS = "WorkoutDaysDoesNotMatc
 export const WORKOUT_EXERCISE_NOT_FOUND = "WorkoutExerciseNotFound";
 export const WORKOUT_LOG_NOT_FOUND = "WorkoutLogNotFound";
 export const WORKOUT_TEMPLATE_NOT_FOUND = "WorkoutTemplateNotFound"
+export const WORKOUT_LOG_EXISTS_ON_DATE = "WorkoutLogExistsOnDate";
