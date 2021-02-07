@@ -1,4 +1,4 @@
-import { Box, Divider } from '@chakra-ui/core';
+import { Box, Divider } from '@chakra-ui/react';
 import React from 'react';
 import { GetAllExercisesUrl, GetExerciseByIdUrl } from '../../api/public/exercise';
 import { PageSubHeader, PageTitle, TextSm, TextXs } from '../../components/common/Texts';

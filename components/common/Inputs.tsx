@@ -13,7 +13,7 @@ import {
   NumberDecrementStepper,
   NumberIncrementStepper,
   NumberInputStepper,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 
 interface IProps extends BoxProps {
   name?: string;

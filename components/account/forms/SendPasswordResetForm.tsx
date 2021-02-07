@@ -1,4 +1,4 @@
-import { Box, Flex, FormControl, FormErrorMessage, Link, useToast } from '@chakra-ui/core';
+import { Box, Flex, FormControl, FormErrorMessage, Link, useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';

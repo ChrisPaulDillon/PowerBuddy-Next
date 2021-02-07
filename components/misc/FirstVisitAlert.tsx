@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Button, Box, RadioGroup, Radio, IconButton } from '@chakra-ui/core';
+import { Button, Box, RadioGroup, Radio, IconButton } from '@chakra-ui/react';
 import { TextSm, ITextSm } from '../common/Texts';
 import { PbStack } from '../common/Stacks';
 import { GiMale, GiFemale, GiHelicopter } from 'react-icons/gi';

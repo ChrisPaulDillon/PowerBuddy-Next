@@ -1,4 +1,4 @@
-import { Box, Flex, useColorMode, useDisclosure, useToast } from '@chakra-ui/core';
+import { Box, Flex, useColorMode, useDisclosure, useToast } from '@chakra-ui/react';
 import moment from 'moment';
 import React, { useState } from 'react';
 import { CgArrowTopRight } from 'react-icons/cg';

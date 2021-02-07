@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, LightMode, useColorMode } from '@chakra-ui/core';
+import { Button, LightMode, useColorMode } from '@chakra-ui/react';
 import { TextSm } from './Texts';
 import theme, { getColor } from '../../theme';
 

@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import { Box, Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/core';
+import { Box, Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 import React from 'react';
 import { HeadingMd, PageTitle } from '../../components/common/Texts';
 import { CenterColumnFlex } from '../../components/layout/Flexes';

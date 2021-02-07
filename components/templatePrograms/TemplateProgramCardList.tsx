@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Badge } from '@chakra-ui/core';
+import { Box, Badge } from '@chakra-ui/react';
 import { Card } from '../layout/Card';
 import { HeadingMd } from '../common/Texts';
 import { PbPrimaryButton } from '../common/Buttons';

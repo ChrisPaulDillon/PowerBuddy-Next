@@ -1,4 +1,4 @@
-import { useColorMode, useDisclosure, Box, Divider, Flex, Stack } from '@chakra-ui/core';
+import { useColorMode, useDisclosure, Box, Divider, Flex, Stack, LinkBox } from '@chakra-ui/react';
 import React, { memo, useCallback, useEffect, useState } from 'react';
 import { FaRegCommentAlt } from 'react-icons/fa';
 import { MdDeleteForever } from 'react-icons/md';
@@ -36,32 +36,30 @@ export const WorkoutExercise: React.FC<IExerciseProps> = React.memo(({ workoutEx
   const { isOpen: isQuickAddOpen, onOpen: onQuickAddOpen, onClose: onQuickAddClose } = useDisclosure();
 
   return (
-    <ProgramExerciseCard py="2">
+    <ProgramExerciseCard py={2}>
       <Divider />
-      <Flex
-        justify={{ lg: 'initial', md: 'left', sm: 'left', xs: 'center' }}
-        alignItems={{ lg: 'initial', md: 'left', sm: 'left', xs: 'center' }}
-        wrap="wrap">
+      <Flex justify={{ lg: 'initial', md: 'left', sm: 'center' }} alignItems={{ lg: 'initial', md: 'left', sm: 'center' }} wrap="wrap">
         <CenterRowFlex
           wrap="no-wrap"
           maxW="100vw"
-          justify={{ lg: 'initial', md: 'left', sm: 'left', xs: 'center' }}
-          alignItems={{ lg: 'initial', md: 'left', sm: 'left', xs: 'center' }}
-          justifyContent={{ lg: 'initial', md: 'left', sm: 'left', xs: 'center' }}>
+          justify={{ lg: 'initial', md: 'left', sm: 'center' }}
+          alignItems={{ lg: 'initial', md: 'left', sm: 'center' }}
+          justifyContent={{ lg: 'initial', md: 'left', sm: 'center' }}
+          mb={['5', '5', '5', '5']}>
           <Flex mt="1">
             <HeadingXs mr="1" minW="50px">
               {workoutExercise?.noOfSets} Sets
             </HeadingXs>
-            <Link
-              href={`${PERSONALBESTS_URL}/${workoutExercise?.exerciseId}?exercise=${encodeURIComponent(
-                workoutExercise?.exerciseName!.replace(/\s+/g, '-').toLowerCase()
-              )}`}>
-              <HeadingXs minW="150px" color={theme.colors.hyperLink[colorMode]}>
+            <HeadingXs minW="150px" color={theme.colors.hyperLink[colorMode]}>
+              <Link
+                href={`${PERSONALBESTS_URL}/${workoutExercise?.exerciseId}?exercise=${encodeURIComponent(
+                  workoutExercise?.exerciseName.replace(/\s+/g, '-').toLowerCase()
+                )}`}>
                 {workoutExercise?.exerciseName}
-              </HeadingXs>
-            </Link>
+              </Link>
+            </HeadingXs>
           </Flex>
-          <Box minW="100px">
+          <Box>
             <PbIconButton
               label="Add a new set"
               Icon={RiAddCircleLine}
@@ -88,10 +86,10 @@ export const WorkoutExercise: React.FC<IExerciseProps> = React.memo(({ workoutEx
             />
           </Box>
         </CenterRowFlex>
-        {workoutExercise!.workoutSets!.map((ws, idx) => {
+        {workoutExercise?.workoutSets.map((ws, idx) => {
           return (
             <Box key={idx}>
-              <WorkoutSet set={ws} date={date} workoutSets={workoutExercise.workoutSets!} workoutDayId={workoutExercise.workoutDayId!} />
+              <WorkoutSet set={ws} date={date} workoutSets={workoutExercise?.workoutSets} workoutDayId={workoutExercise?.workoutDayId} />
             </Box>
           );
         })}
@@ -100,9 +98,9 @@ export const WorkoutExercise: React.FC<IExerciseProps> = React.memo(({ workoutEx
       {isQuickAddOpen && (
         <ModalDrawerForm isOpen={isQuickAddOpen} onClose={onQuickAddClose} title="Quick Add Sets">
           <QuickAddSetsForm
-            workoutExercise={workoutExercise!}
-            suggestedReps={workoutExercise.workoutSets![0].noOfReps!}
-            suggestedWeight={workoutExercise.workoutSets![0].weightLifted!}
+            workoutExercise={workoutExercise}
+            suggestedReps={workoutExercise?.workoutSets[0].noOfReps}
+            suggestedWeight={workoutExercise?.workoutSets[0].weightLifted}
             totalSets={workoutExercise.noOfSets!}
             onClose={onQuickAddClose}
           />
@@ -128,7 +126,6 @@ export const WorkoutExercise: React.FC<IExerciseProps> = React.memo(({ workoutEx
 });
 
 interface ISetProps {
-  key?: any;
   set: IWorkoutSet;
   date: Date;
   workoutSets: IWorkoutSet[];
@@ -174,7 +171,7 @@ const WorkoutSet: React.FC<ISetProps> = memo(({ set, date, workoutSets = [], wor
     }
     setCurrentReps(newRep);
 
-    workoutSets.map((e) => {
+    workoutSets?.map((e) => {
       if (e.workoutSetId! === workoutSetId!) {
         e.repsCompleted = newRep;
         return e;
@@ -198,7 +195,7 @@ const WorkoutSet: React.FC<ISetProps> = memo(({ set, date, workoutSets = [], wor
         />
       </Stack>
       <ModalDrawerForm isOpen={isOpen} onClose={onClose} title="Edit Your Set">
-        <EditWorkoutSetForm workoutDayId={workoutDayId!} workoutSet={set} onClose={onClose} />
+        <EditWorkoutSetForm workoutDayId={workoutDayId} workoutSet={set} onClose={onClose} />
       </ModalDrawerForm>
     </Box>
   );

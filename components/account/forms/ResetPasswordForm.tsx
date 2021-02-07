@@ -1,4 +1,4 @@
-import { Box, Flex, useToast } from '@chakra-ui/core';
+import { Box, Flex, useToast } from '@chakra-ui/react';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { IChangePasswordBody, ResetPasswordViaEmailRequest } from '../../../apiCalls/Area/account/auth';

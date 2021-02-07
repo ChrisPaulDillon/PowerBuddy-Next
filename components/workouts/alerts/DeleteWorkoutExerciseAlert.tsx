@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Box, useToast } from '@chakra-ui/core';
+import { Button, Box, useToast } from '@chakra-ui/react';
 import { TextSm } from '../../common/Texts';
 import { CenterColumnFlex } from '../../layout/Flexes';
 import axios from 'axios';

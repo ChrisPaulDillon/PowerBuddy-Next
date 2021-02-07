@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Drawer, DrawerOverlay, DrawerContent, DrawerHeader, DrawerBody, Flex, IconButton, DrawerFooter } from '@chakra-ui/core';
+import { Box, Drawer, DrawerOverlay, DrawerContent, DrawerHeader, DrawerBody, Flex, IconButton, DrawerFooter } from '@chakra-ui/react';
 import { IoIosExit } from 'react-icons/all';
 import { Banner, HeadingMd } from './Texts';
 import { CenterColumnFlex, CenterRowFlex } from '../layout/Flexes';

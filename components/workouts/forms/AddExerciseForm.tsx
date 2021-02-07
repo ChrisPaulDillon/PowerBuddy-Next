@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Button, Flex, Box, FormControl, FormErrorMessage, useToast, LightMode } from '@chakra-ui/core';
+import { Button, Flex, Box, FormControl, FormErrorMessage, useToast, LightMode } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { SelectSearchable } from '../../common/SearchSelect';
 import { PbPrimaryButton } from '../../common/Buttons';

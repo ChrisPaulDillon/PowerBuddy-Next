@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import { useForm } from 'react-hook-form';
 import { CountDays } from '../../util/CountDays';
-import { Box, useToast } from '@chakra-ui/core';
+import { Box, useToast } from '@chakra-ui/react';
 import CalendarSelectFrom from './CalendarSelectForm';
 import DayCheckboxForm from './DayCheckboxForm';
 import { CenterColumnFlex } from '../../layout/Flexes';

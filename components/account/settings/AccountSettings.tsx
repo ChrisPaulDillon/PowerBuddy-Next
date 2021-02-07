@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Flex, useColorMode } from '@chakra-ui/core';
+import { Box, Button, Divider, Flex, useColorMode } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { HeadingMd, PageTitle, TextSm, TextXs } from '../../common/Texts';
 import UserAvatar from '../../layout/UserAvatar';

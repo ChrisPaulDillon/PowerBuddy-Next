@@ -1,5 +1,5 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import { Box } from '@chakra-ui/core';
+import { Box } from '@chakra-ui/react';
 import { HeadingMd, PageTitle, TextSm } from '../../components/common/Texts';
 import React from 'react';
 import { GetAllActiveUserProfilesUrl, GetPublicUserProfileUrl } from '../../api/public/user';

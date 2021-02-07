@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import { Box, useDisclosure } from '@chakra-ui/core';
+import { Box, useDisclosure } from '@chakra-ui/react';
 import { IPersonalBestDetailed } from 'powerbuddy-shared/lib';
 import { GetLiftingStatByIdUrl } from '../../api/account/liftingStats';
 import { useAxios } from '../../hooks/useAxios';

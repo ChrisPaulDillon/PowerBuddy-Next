@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Checkbox, Radio, RadioGroup, Stack, useToast } from '@chakra-ui/core';
+import { Box, Checkbox, Radio, RadioGroup, Stack, useToast } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { CenterColumnFlex } from '../../../layout/Flexes';
 import { PbPrimaryButton } from '../../../common/Buttons';

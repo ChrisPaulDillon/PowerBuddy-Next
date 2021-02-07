@@ -1,4 +1,4 @@
-import { Box, Divider } from '@chakra-ui/core';
+import { Box, Divider } from '@chakra-ui/react';
 import { IUser } from 'powerbuddy-shared/lib';
 import { CenterColumnFlex } from '../../layout/Flexes';
 import PhoneNumberVerifyForm from './forms/PhoneNumberVerifyForm';

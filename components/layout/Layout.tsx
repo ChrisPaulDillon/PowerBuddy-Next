@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import NavBar from './NavBar';
 import Page from './Page';
-import { Flex, useColorMode, useDisclosure, useToast } from '@chakra-ui/core';
+import { Flex, useColorMode, useDisclosure, useToast } from '@chakra-ui/react';
 import FirstVisitAlert from '../misc/FirstVisitAlert';
 import theme from '../../theme';
 import Footer from './Footer';

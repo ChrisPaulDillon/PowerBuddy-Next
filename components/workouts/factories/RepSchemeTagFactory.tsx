@@ -1,4 +1,4 @@
-import { Box, Button, IconButton } from '@chakra-ui/core';
+import { Box, Button, IconButton } from '@chakra-ui/react';
 import React from 'react';
 import { FaCrown, FaBan } from 'react-icons/fa';
 import { MdModeEdit } from 'react-icons/md';

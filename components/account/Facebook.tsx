@@ -1,4 +1,4 @@
-import { useToast } from '@chakra-ui/core';
+import { useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import React from 'react';
 import FacebookLogin from 'react-facebook-login';

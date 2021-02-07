@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormErrorMessage, FormControl, Button, Flex, Box, InputGroup, InputRightElement, useToast, Link } from '@chakra-ui/core';
+import { FormErrorMessage, FormControl, Button, Flex, Box, InputGroup, InputRightElement, useToast, Link } from '@chakra-ui/react';
 import { FormInput } from '../../common/Inputs';
 import { CenterColumnFlex, CenterRowFlex } from '../../layout/Flexes';
 import { TextError, TextXs } from '../../common/Texts';
@@ -19,7 +19,12 @@ import { ToastSuccess } from '../../shared/Toasts';
 import { LoginUserRequest } from '../../../apiCalls/Area/account/auth';
 import { ACCOUNT_LOCKOUT, EMAIL_NOT_CONFIRMED, INVALID_CREDENTIALS, USER_NOT_FOUND } from '../../../responseCodes';
 
-const LoginForm = ({ onClose, setLoginState }: any) => {
+interface ILoginFormProps {
+  onClose: () => void;
+  setLoginState: any;
+}
+
+const LoginForm: React.FC<ILoginFormProps> = ({ onClose, setLoginState }) => {
   const [showPW, setShowPW] = React.useState(false);
   const [error, setError] = useState<string>('');
   const [showError, setShowError] = useState<boolean>(false);

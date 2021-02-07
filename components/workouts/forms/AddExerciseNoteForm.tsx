@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Button, FormErrorMessage, FormControl, useToast } from '@chakra-ui/core';
+import { Button, FormErrorMessage, FormControl, useToast } from '@chakra-ui/react';
 import { CenterColumnFlex } from '../../layout/Flexes';
 import { validateInput } from '../../../util/formInputs';
 import { FormInput } from '../../common/Inputs';

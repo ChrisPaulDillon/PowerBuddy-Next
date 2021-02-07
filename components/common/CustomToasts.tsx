@@ -1,4 +1,4 @@
-import { Box, useColorMode } from '@chakra-ui/core';
+import { Box, useColorMode } from '@chakra-ui/react';
 import React from 'react';
 import UserAvatar from '../layout/UserAvatar';
 import { PbStack } from './Stacks';

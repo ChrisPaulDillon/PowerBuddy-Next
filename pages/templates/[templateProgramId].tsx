@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { Badge, Box, Flex, Tab, TabList, TabPanel, TabPanels, Tabs, useDisclosure } from '@chakra-ui/core';
+import { Badge, Box, Flex, Tab, TabList, TabPanel, TabPanels, Tabs, useDisclosure } from '@chakra-ui/react';
 import React from 'react';
 import { GetAllTemplateProgramsUrl, GetTemplateProgramByIdUrl } from '../../api/public/template';
 import { ITemplateProgram, ITemplateProgramExtended } from 'powerbuddy-shared';

@@ -1,4 +1,4 @@
-import { Box, FormControl, FormErrorMessage, useToast } from '@chakra-ui/core';
+import { Box, FormControl, FormErrorMessage, useToast } from '@chakra-ui/react';
 import { IWorkoutDay, IWorkoutTemplate } from 'powerbuddy-shared/lib';
 import React from 'react';
 import { useForm } from 'react-hook-form';

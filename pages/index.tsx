@@ -1,4 +1,4 @@
-import { Box, useDisclosure, useToast } from '@chakra-ui/core';
+import { Box, useDisclosure, useToast } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import { GetWorkoutWeekWithDateUrl } from '../api/account/workoutLog';

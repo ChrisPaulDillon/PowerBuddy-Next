@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, useColorMode, Stack, DrawerOverlay, DrawerContent, DrawerHeader, DrawerBody, Drawer, Divider } from '@chakra-ui/core';
+import { Box, Flex, useColorMode, Stack, DrawerOverlay, DrawerContent, DrawerHeader, DrawerBody, Drawer, Divider } from '@chakra-ui/react';
 import { BsFillGrid3X3GapFill, BsCalendarFill } from 'react-icons/bs';
 import { RiAdminLine, FaHistory, FaUserFriends } from 'react-icons/all';
 import theme from '../../theme';
@@ -99,7 +99,7 @@ const LeftNav: React.FC<ISideNavProps> = ({ menuOpen, ...props }) => {
           top={0}
           left="0%"
           bg={theme.colors.navBackground[colorMode]}
-          display={{ lg: 'inline', md: 'inline', sm: 'none', xs: 'none' }}
+          display={{ lg: 'inline', md: 'inline', sm: 'none' }}
           borderColor={theme.colors.borderColor[colorMode]}
           h="100%"
           minW="75px"

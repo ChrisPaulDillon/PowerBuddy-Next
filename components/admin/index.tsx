@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CenterColumnFlex } from '../layout/Flexes';
-import { TabList, TabPanels, TabPanel, Tabs, Tab, useDisclosure } from '@chakra-ui/core';
+import { TabList, TabPanels, TabPanel, Tabs, Tab, useDisclosure } from '@chakra-ui/react';
 import ExerciseList from './ExerciseList';
 import AdminModalExerciseFactory, { AdminModalEnum } from './factories/AdminModalExerciseFactory';
 import { PbPrimaryButton } from '../common/Buttons';

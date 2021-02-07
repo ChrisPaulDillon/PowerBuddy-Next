@@ -1,4 +1,4 @@
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/core';
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { TiChevronRight } from 'react-icons/ti';

@@ -1,4 +1,4 @@
-import { Box, Button, Flex, FormControl, FormErrorMessage, InputGroup, InputRightElement, Link, useToast } from '@chakra-ui/core';
+import { Box, Button, Flex, FormControl, FormErrorMessage, InputGroup, InputRightElement, Link, useToast } from '@chakra-ui/react';
 import { IUser } from 'powerbuddy-shared/lib';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';

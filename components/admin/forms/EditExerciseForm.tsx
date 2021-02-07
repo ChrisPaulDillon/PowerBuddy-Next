@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Box, Checkbox, Input, Select } from '@chakra-ui/core';
+import { Box, Checkbox, Input, Select } from '@chakra-ui/react';
 import { PbPrimaryButton } from '../../common/Buttons';
 import { useSelector } from 'react-redux';
 import { PbStack } from '../../common/Stacks';

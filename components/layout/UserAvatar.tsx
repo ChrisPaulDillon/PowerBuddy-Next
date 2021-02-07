@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar } from '@chakra-ui/core';
+import { Avatar } from '@chakra-ui/react';
 import { PbToolTip } from '../common/ToolTips';
 import { PROFILE_URL } from '../../InternalLinks';
 import Link from 'next/link';

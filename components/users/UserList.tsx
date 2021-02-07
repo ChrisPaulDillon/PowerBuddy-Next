@@ -1,6 +1,6 @@
 import React from 'react';
 import UserAvatar from '../layout/UserAvatar';
-import { Box, Flex } from '@chakra-ui/core';
+import { Box, Flex } from '@chakra-ui/react';
 import { TextXs } from '../common/Texts';
 import { IUser } from 'powerbuddy-shared';
 

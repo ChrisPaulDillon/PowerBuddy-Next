@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconButton } from '@chakra-ui/core';
+import { IconButton } from '@chakra-ui/react';
 import { PbToolTip } from './ToolTips';
 import { IconType } from 'react-icons';
 import { SizeType } from '../../types/unionTypes';

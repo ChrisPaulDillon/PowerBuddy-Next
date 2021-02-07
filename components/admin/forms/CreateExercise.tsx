@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Button, FormErrorMessage, FormControl, useToast } from '@chakra-ui/core';
+import { Button, FormErrorMessage, FormControl, useToast } from '@chakra-ui/react';
 import { TextSm } from '../../common/Texts';
 import { useSelector } from 'react-redux';
 import { IAppState } from '../../../redux/store';
-import { Select } from '@chakra-ui/core';
+import { Select } from '@chakra-ui/react';
 import { TextXs } from '../../common/Texts';
 import { validateInput } from '../../../util/formInputs';
 import { FormInput } from '../../common/Inputs';

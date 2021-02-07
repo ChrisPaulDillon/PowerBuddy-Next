@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, useColorMode, Stack, useDisclosure, Avatar, IconButton } from '@chakra-ui/core';
+import { Box, Flex, useColorMode, Stack, useDisclosure, Avatar, IconButton } from '@chakra-ui/react';
 import { Banner } from '../common/Texts';
 import { useSelector } from 'react-redux';
 import { IAppState } from '../../redux/store';

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Flex, Box, Link, useToast } from '@chakra-ui/core';
+import { Flex, Box, Link, useToast } from '@chakra-ui/react';
 import { TextSm } from '../common/Texts';
 import moment from 'moment';
 import { formatDate } from '../../util/dateHelper';
