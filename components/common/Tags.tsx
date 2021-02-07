@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tag, useColorMode } from '@chakra-ui/core';
+import { Tag, useColorMode } from '@chakra-ui/react';
 import theme from '../../theme';
 
 const PbTag = ({ ...rest }) => {

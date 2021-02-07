@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Checkbox, Radio, RadioGroup, Stack, useToast } from '@chakra-ui/core';
+import { Box, Checkbox, Radio, RadioGroup, useToast } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { CenterColumnFlex } from '../../../layout/Flexes';
 import { PbPrimaryButton } from '../../../common/Buttons';
@@ -8,7 +8,6 @@ import { PbStack } from '../../../common/Stacks';
 import { FormInput, FormNumberInput } from '../../../common/Inputs';
 import axios from 'axios';
 import { EditProfileUrl } from '../../../../api/account/user';
-import { useUserContext } from '../../../users/UserContext';
 import { IUser } from 'powerbuddy-shared/lib';
 import { ToastError, ToastSuccess } from '../../../shared/Toasts';
 import { withAuthorized } from '../../../../util/authMiddleware';

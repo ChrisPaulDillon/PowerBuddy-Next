@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tag, TagLabel, TagLeftIcon } from '@chakra-ui/core';
+import { Tag, TagLabel, TagLeftIcon } from '@chakra-ui/react';
 import { BiDumbbell, FaTrophy, FcCalendar } from 'react-icons/all';
 import { TextSm, TextXs } from '../common/Texts';
 import { SizeType } from '../../types/unionTypes';

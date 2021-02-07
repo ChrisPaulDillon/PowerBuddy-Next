@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Badge, useDisclosure, Flex } from '@chakra-ui/core';
+import { Box, Badge, useDisclosure, Flex } from '@chakra-ui/react';
 import { HeadingMd, TextSm, TextXs } from '../common/Texts';
 import moment from 'moment';
 import { CenterColumnFlex, CenterRowFlex } from '../layout/Flexes';

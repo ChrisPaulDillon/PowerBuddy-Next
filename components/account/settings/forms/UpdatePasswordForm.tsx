@@ -1,4 +1,4 @@
-import { Box, FormControl, FormErrorMessage, useToast } from '@chakra-ui/core';
+import { Box, FormControl, FormErrorMessage, useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import { IUser } from 'powerbuddy-shared/lib';
 import React, { useState } from 'react';

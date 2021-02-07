@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex } from '@chakra-ui/core';
+import { Box, Flex } from '@chakra-ui/react';
 import { TextSm, TextXs } from '../common/Texts';
 import { CardSm } from '../layout/Card';
 import moment from 'moment';

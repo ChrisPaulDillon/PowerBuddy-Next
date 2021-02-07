@@ -1,16 +1,14 @@
-import { Box, Flex, FormControl, FormErrorMessage, Link, useToast } from '@chakra-ui/core';
-import axios from 'axios';
+import { Box, Flex, FormControl, FormErrorMessage, Link, useToast } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { MdAccountBox } from 'react-icons/md';
 import { TiArrowBack } from 'react-icons/ti';
-import { SendPasswordResetUrl } from '../../../api/public/email';
 import { SendPasswordResetEmailRequest } from '../../../apiCalls/Area/public/email';
 import { validateEmailInput } from '../../../util/formInputs';
 import { PbPrimaryButton } from '../../common/Buttons';
 import PbIconButton from '../../common/IconButtons';
 import { FormInput } from '../../common/Inputs';
-import { TextSm, TextXs } from '../../common/Texts';
+import { TextXs } from '../../common/Texts';
 import { CenterColumnFlex } from '../../layout/Flexes';
 import { ToastSuccess } from '../../shared/Toasts';
 import { LoginStateEnum } from '../factories/LoginFormFactory';

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Box, useToast } from '@chakra-ui/core';
+import { Box, useToast } from '@chakra-ui/react';
 import { FormNumberInput } from '../../common/Inputs';
 import { PbPrimaryButton } from '../../common/Buttons';
 import { PbStack } from '../../common/Stacks';

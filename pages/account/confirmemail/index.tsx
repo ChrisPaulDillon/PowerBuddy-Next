@@ -1,4 +1,4 @@
-import { Box, Flex, Link, useToast } from '@chakra-ui/core';
+import { Box, Flex, Link, useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';

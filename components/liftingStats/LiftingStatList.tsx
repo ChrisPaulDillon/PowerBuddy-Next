@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Flex } from '@chakra-ui/core';
+import { Flex } from '@chakra-ui/react';
 import LiftingStatGrouped from './LiftingStatsGrouped';
 import { ILiftingStatGrouped } from 'powerbuddy-shared';
 

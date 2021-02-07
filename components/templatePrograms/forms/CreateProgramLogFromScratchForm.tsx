@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Box, FormControl, FormErrorMessage, Select, useToast } from '@chakra-ui/core';
+import { Box, FormControl, FormErrorMessage, Select, useToast } from '@chakra-ui/react';
 import { CenterColumnFlex } from '../../layout/Flexes';
 import { PbPrimaryButton } from '../../common/Buttons';
 import CalendarSelectFrom from './CalendarSelectForm';

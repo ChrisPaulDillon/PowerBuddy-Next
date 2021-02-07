@@ -1,5 +1,5 @@
 import { GetStaticProps, NextPage } from 'next';
-import { Box } from '@chakra-ui/core';
+import { Box } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { PageTitle } from '../../components/common/Texts';
 import ExerciseCardList from '../../components/exercises/ExerciseCardList';

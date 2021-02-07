@@ -1,4 +1,4 @@
-import { Badge } from '@chakra-ui/core';
+import { Badge } from '@chakra-ui/react';
 import React from 'react';
 
 interface IBadgeProps {

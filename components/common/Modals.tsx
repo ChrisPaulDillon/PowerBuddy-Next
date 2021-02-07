@@ -1,4 +1,4 @@
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, Box } from '@chakra-ui/core';
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, Box } from '@chakra-ui/react';
 import React from 'react';
 import { CenterColumnFlex } from '../layout/Flexes';
 import { PbPrimaryButton, SecondaryButton } from './Buttons';
@@ -14,7 +14,7 @@ interface IModalProps {
 }
 
 export const ModalBase: React.FC<IModalProps> = ({ isOpen, onClose, title, hasCloseButton = true, children }) => (
-  <Modal onClose={onClose} isOpen={isOpen} isCentered>
+  <Modal onClose={onClose} isOpen={isOpen} isCentered scrollBehavior="outside" colorScheme="blue.500">
     <ModalOverlay>
       <ModalContent pb={5}>
         <ModalHeader textAlign="center" fontWeight="lighter">

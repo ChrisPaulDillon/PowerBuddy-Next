@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/core';
+import { Box } from '@chakra-ui/react';
 import { NextPage } from 'next';
 import { IUser } from 'powerbuddy-shared/lib';
 import React from 'react';

@@ -10,7 +10,7 @@ import startOfWeek from 'date-fns/startOfWeek';
 import isWithinInterval from 'date-fns/isWithinInterval';
 import DateFnsUtils from '@date-io/date-fns';
 import chakraTheme, { getColor } from '../../theme';
-import { useColorMode, useDisclosure } from '@chakra-ui/core';
+import { useColorMode, useDisclosure } from '@chakra-ui/react';
 import { lightBlue } from '@material-ui/core/colors';
 import { AiOutlineArrowLeft} from 'react-icons/all';
 

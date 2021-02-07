@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/core';
+import { Box } from '@chakra-ui/react';
 import { GetStaticProps, NextPage } from 'next';
 import React from 'react';
 import { GetAllActiveUserProfilesUrl } from '../../api/public/user';

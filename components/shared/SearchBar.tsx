@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BoxProps, Input } from '@chakra-ui/core';
+import { BoxProps, Input } from '@chakra-ui/react';
 
 interface ISearchBarProps extends BoxProps {
   onChange: (e: any) => void;

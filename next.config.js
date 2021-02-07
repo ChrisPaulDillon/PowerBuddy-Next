@@ -1,7 +1,7 @@
 const withTM = require('next-transpile-modules')([
   //transpiled to be sure they pass `es-check es5`
   'axios',
-  '@chakra-ui/core',
+  '@chakra-ui/react',
   'react-icons',
   '@chakra-ui',
 ]);
@@ -14,7 +14,7 @@ const nextBuildId = require('next-build-id');
 
 module.exports = {
   generateBuildId: () => nextBuildId({ dir: __dirname })
-}
+};
 
 module.exports = withMDX(
   withTM({
@@ -36,5 +36,5 @@ module.exports = withMDX(
 
       return config;
     },
-  }),
+  })
 );

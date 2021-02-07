@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Button, FormErrorMessage, FormControl, useToast } from '@chakra-ui/core';
-import { TextSm } from '../../common/Texts';
+import { Button, FormErrorMessage, FormControl, useToast } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { IAppState } from '../../../redux/store';
-import { Select } from '@chakra-ui/core';
+import { Select } from '@chakra-ui/react';
 import { TextXs } from '../../common/Texts';
 import { validateInput } from '../../../util/formInputs';
 import { FormInput } from '../../common/Inputs';
@@ -19,7 +18,6 @@ interface IProps {}
 
 const CreateExercise: React.FC<IProps> = () => {
   const { exerciseTypes } = useSelector((state: IAppState) => state.state);
-  const { exerciseMuscleGroups } = useSelector((state: IAppState) => state.state);
   const toast = useToast();
 
   const exerciseTypeList = exerciseTypes.map((x) => ({
@@ -89,16 +87,8 @@ const CreateExercise: React.FC<IProps> = () => {
   );
 };
 
-interface IRegionMuscleGroup {
-  exerciseMuscleGroups: IExerciseMuscleGroup[];
-}
-
 interface IRegionMuscleGroupSingle {
   exerciseMuscleGroup: IExerciseMuscleGroup;
 }
-
-const RegionMuscleGroupSingle: React.FC<IRegionMuscleGroupSingle> = ({ exerciseMuscleGroup }) => {
-  return <TextXs p="2">{exerciseMuscleGroup.exerciseMuscleGroupName}</TextXs>;
-};
 
 export default CreateExercise;

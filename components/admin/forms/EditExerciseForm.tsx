@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Box, Checkbox, Input, Select } from '@chakra-ui/core';
+import { Box, Checkbox, Select } from '@chakra-ui/react';
 import { PbPrimaryButton } from '../../common/Buttons';
 import { useSelector } from 'react-redux';
 import { PbStack } from '../../common/Stacks';
-import { TextSm, TextXs } from '../../common/Texts';
+import { TextXs } from '../../common/Texts';
 import { CenterColumnFlex } from '../../layout/Flexes';
 import { validateInput } from '../../../util/formInputs';
 import { IAppState } from '../../../redux/store';
@@ -48,7 +48,7 @@ const EditExerciseForm: React.FC<IProps> = ({ exerciseId }) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <PbStack>
           <TextXs>Exercise Name</TextXs>
-          <FormInput name="exerciseName" ref={register({ validate: validateInput })} defaultValue={exercise!.exerciseName!} maxW={150} ml={4} />
+          <FormInput name="exerciseName" ref={register({ validate: validateInput })} defaultValue={exercise?.exerciseName} maxW={150} ml={4} />
         </PbStack>
         <PbStack>
           <TextXs>Is Main Exercise?</TextXs>

@@ -1,4 +1,4 @@
-import { Box, Flex, Select, Switch } from '@chakra-ui/core';
+import { Box, Flex, Select, Switch } from '@chakra-ui/react';
 import { IWeightInput } from 'powerbuddy-shared';
 import React, { useState } from 'react';
 import { FormInput, FormNumberInput, FormWeightInput } from '../../common/Inputs';

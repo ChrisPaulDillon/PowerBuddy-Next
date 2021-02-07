@@ -1,15 +1,14 @@
-import { ChakraProvider, extendTheme, useToast } from '@chakra-ui/core';
-import React, { useEffect, useState } from 'react';
+import { ChakraProvider } from '@chakra-ui/react';
+import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import configureStore from '../redux/store';
 import customTheme from '../theme';
 import * as Sentry from '@sentry/react';
 import Layout from '../components/layout/Layout';
-import UserProvider, { useUserContext } from '../components/users/UserContext';
+import UserProvider from '../components/users/UserContext';
 import { AppContext, AppProps } from 'next/app';
 import { NextComponentType } from 'next';
 import { PageHead } from '../components/layout/Page';
-import { RefreshRequest } from '../apiCalls/Area/account/auth';
 
 if (process.env.NODE_ENV !== 'production') {
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
@@ -21,13 +20,6 @@ Sentry.init({
 });
 const store = configureStore();
 
-const config = {
-  useSystemColorMode: true,
-  initialColorMode: 'dark',
-};
-
-const customTheme2 = extendTheme({ config, ...customTheme });
-
 export interface ModifiedAppInitialProps<A = { [key in string]: string }> {
   appProps: A;
 }
@@ -35,20 +27,20 @@ export interface ModifiedAppInitialProps<A = { [key in string]: string }> {
 export interface ExtendedAppProps<P = { [key in string]: string }, A = { [key in string]: string }> extends AppProps<P>, ModifiedAppInitialProps<A> {}
 
 const MyApp: NextComponentType<AppContext, ModifiedAppInitialProps, ExtendedAppProps> = ({ Component, pageProps, appProps }) => {
-  const { SetValues } = useUserContext();
+  //const { SetValues } = useUserContext();
 
   useEffect(() => {
-    const RefreshToken = async () => {
-      const refreshToken = localStorage.getItem('refreshToken');
-      await RefreshRequest(refreshToken, SetValues);
-    };
+    // const RefreshToken = async () => {
+    //   const refreshToken = localStorage.getItem('refreshToken');
+    //   await RefreshRequest(refreshToken, SetValues);
+    // };
     //RefreshToken();
   }, []);
 
   return (
     <Provider store={store}>
       <UserProvider>
-        <ChakraProvider resetCSS theme={customTheme2}>
+        <ChakraProvider resetCSS theme={customTheme}>
           <Layout>
             <PageHead title="Home" description="PowerBuddy helps weightlifters and powerlifters reach their goals and track personal bests" />
             <Component {...appProps} {...pageProps} />

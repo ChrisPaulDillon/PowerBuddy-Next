@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { Badge, Box, Flex, Tab, TabList, TabPanel, TabPanels, Tabs, useDisclosure } from '@chakra-ui/core';
+import { Badge, Box, Flex, Tab, TabList, TabPanel, TabPanels, Tabs, useDisclosure } from '@chakra-ui/react';
 import React from 'react';
 import { GetAllTemplateProgramsUrl, GetTemplateProgramByIdUrl } from '../../api/public/template';
 import { ITemplateProgram, ITemplateProgramExtended } from 'powerbuddy-shared';
@@ -97,7 +97,7 @@ const TemplateProgramSingle: NextPage = ({ template }: any) => {
                 <CreateProgramLogFromTemplateForm onClose={onAddProgramClose} template={template!} onCreateSuccessOpen={onCreateSuccessOpen} />
               </ModalDrawerForm>
             )}
-            {isLoginOpen && <LoginModal isOpen={isLoginOpen} onOpen={onLoginOpen} onClose={onLoginClose} />}
+            {isLoginOpen && <LoginModal isOpen={isLoginOpen} onClose={onLoginClose} />}
             {isCreateSuccessOpen && (
               <ModalForward
                 isOpen={isCreateSuccessOpen}

@@ -11,14 +11,12 @@ export const RefreshRequest = async (refreshToken: string, SetValues: (claimsVal
     const response = await axios.post(RefreshTokenUrl(), {refreshToken : refreshToken});
     const claimsValues = decodeJwtToken(response.data.accessToken);
     handleAuthenticationTokens(response.data.accessToken, response.data.refreshToken);
-    console.log(claimsValues);
-    
     SetValues(claimsValues);
     
     return response.data;
   } catch (err) {
     return err?.response?.data as IErrorResponse;
-  };
+  }
 }
 
 export const LoginUserRequest = async (user: IUser) => {
@@ -27,7 +25,7 @@ export const LoginUserRequest = async (user: IUser) => {
       return response.data;
     } catch (err) {
       return err?.response?.data as IErrorResponse;
-  };
+  }
 }
 
 export const RegisterUserRequest = async (user: IUser) => {
@@ -36,7 +34,7 @@ export const RegisterUserRequest = async (user: IUser) => {
         return response.data;
     } catch (err) {
         return err?.response?.data as IErrorResponse;
-    };
+    }
 }
 
 export interface IChangePasswordBody {
@@ -46,7 +44,7 @@ export interface IChangePasswordBody {
 
 export const ResetPasswordViaEmailRequest = async (userId: string, changePasswordBody: IChangePasswordBody ) => {
     try {
-        const response = await axios.post(ResetPasswordViaEmailUrl(userId as string), changePasswordBody);
+        const response = await axios.post(ResetPasswordViaEmailUrl(userId), changePasswordBody);
         return response.data;
     }
     catch(err) {

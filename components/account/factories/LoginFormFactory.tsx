@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/core';
+import { Box } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import LoginForm from '../forms/LoginForm';
 import RegisterForm from '../forms/RegisterForm';
@@ -10,7 +10,11 @@ export enum LoginStateEnum {
   PasswordReset,
 }
 
-const LoginFormFactory = ({ onClose }: any) => {
+interface ILoginFactoryProps {
+  onClose: () => void;
+}
+
+const LoginFormFactory: React.FC<ILoginFactoryProps> = ({ onClose }) => {
   const [loginState, setLoginState] = useState<LoginStateEnum>(LoginStateEnum.Login);
   return (
     <Box>

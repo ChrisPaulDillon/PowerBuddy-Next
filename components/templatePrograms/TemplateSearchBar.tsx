@@ -1,4 +1,4 @@
-import { useColorMode } from '@chakra-ui/core';
+import { useColorMode } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import AsyncSelect from 'react-select/async';

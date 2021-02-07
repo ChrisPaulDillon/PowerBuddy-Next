@@ -1,4 +1,4 @@
-import { ModalFooter } from '@chakra-ui/core';
+import { ModalFooter } from '@chakra-ui/react';
 import React from 'react';
 import LoginFormFactory from '../account/factories/LoginFormFactory';
 import { ModalBase } from '../common/Modals';

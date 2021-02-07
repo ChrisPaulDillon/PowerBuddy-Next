@@ -1,5 +1,5 @@
 import React from 'react';
-import { BoxProps, Spinner } from '@chakra-ui/core';
+import { BoxProps, Spinner } from '@chakra-ui/react';
 import { CenterColumnFlex } from './../layout/Flexes';
 
 const ProgressSpinner = () => {

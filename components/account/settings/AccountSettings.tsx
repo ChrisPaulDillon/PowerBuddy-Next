@@ -1,11 +1,10 @@
-import { Box, Button, Divider, Flex, useColorMode } from '@chakra-ui/core';
+import { Box, Button, Divider, Flex, useColorMode } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { HeadingMd, PageTitle, TextSm, TextXs } from '../../common/Texts';
 import UserAvatar from '../../layout/UserAvatar';
 import theme from '../../../theme';
 import EditProfileForm from './forms/EditProfileForm';
 import SecurityGroup from './SecurityGroup';
-import { useUserContext } from '../../users/UserContext';
 import { IUser } from 'powerbuddy-shared/lib';
 
 export enum MenuSection {

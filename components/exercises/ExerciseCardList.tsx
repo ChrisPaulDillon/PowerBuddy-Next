@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Flex, Box, Button, Text } from '@chakra-ui/core';
+import { Flex, Box, Button, Text } from '@chakra-ui/react';
 import { Card } from '../layout/Card';
 import { HeadingMd, TextSm, TextXs } from '../common/Texts';
 import { useRouter } from 'next/router';

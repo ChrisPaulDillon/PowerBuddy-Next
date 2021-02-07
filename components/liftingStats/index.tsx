@@ -7,7 +7,7 @@ import ProgressSpinner from '../common/ProgressSpinner';
 import { GetLiftFeedByUserName } from '../../api/public/liftingStat';
 import LiftFeed from './LiftFeed';
 import LiftingStatList from './LiftingStatList';
-import { useDisclosure } from '@chakra-ui/core';
+import { useDisclosure } from '@chakra-ui/react';
 import { ModalForward } from '../common/Modals';
 import { LoginModal } from '../shared/Modals';
 import { WORKOUT_DIARY_URL } from '../../InternalLinks';
@@ -52,7 +52,7 @@ const LiftingStatsIndexPage = () => {
       <SearchBar onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search personal bests..." />
       <LiftFeed liftFeed={liftFeed} />
       <LiftingStatList />
-      {isLoginOpen && <LoginModal isOpen={isLoginOpen} onOpen={onLoginOpen} onClose={onLoginClose} />}
+      {isLoginOpen && <LoginModal isOpen={isLoginOpen} onClose={onLoginClose} />}
       {isNoStatsOpen && (
         <ModalForward
           isOpen={isNoStatsOpen}

@@ -1,4 +1,4 @@
-import { useColorMode } from '@chakra-ui/core';
+import { useColorMode } from '@chakra-ui/react';
 import React from 'react';
 import AsyncSelect from 'react-select';
 import makeAnimated from 'react-select/animated';

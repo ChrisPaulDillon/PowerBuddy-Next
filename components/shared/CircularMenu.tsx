@@ -1,4 +1,4 @@
-import { Box, Button, IconButton, Stack } from '@chakra-ui/core';
+import { Box, Button, IconButton, Stack } from '@chakra-ui/react';
 import React, { useMemo, useState } from 'react';
 import { BiDumbbell } from 'react-icons/bi';
 import { BsFillGrid3X3GapFill } from 'react-icons/bs';

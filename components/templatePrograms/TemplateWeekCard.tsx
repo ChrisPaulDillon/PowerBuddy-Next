@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex } from '@chakra-ui/core';
+import { Box, Flex } from '@chakra-ui/react';
 import { Card } from '../layout/Card';
 import { TextSm, TextXs, HeadingMdStatic } from '../common/Texts';
 import { TagTemplateRepScheme } from '../shared/Tags';
@@ -9,7 +9,7 @@ import ITemplateExercise from 'powerbuddy-shared/lib/interfaces/templates';
 export const TemplateWeekCard: React.FC<ITemplateWeek> = ({ templateDays }) => {
   return (
     <Card p={0}>
-      <Flex flexDir={{ lg: 'row', md: 'row', sm: 'row', xs: 'column' }} flexWrap="wrap" justifyContent="center">
+      <Flex flexDir={{ lg: 'row', md: 'row', sm: 'column' }} flexWrap="wrap" justifyContent="center">
         {templateDays.map((td) => {
           return <TemplateDay key={td.templateDayId} {...td} />;
         })}

@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/core';
+import { Box } from '@chakra-ui/react';
 import { useUserContext } from '../components/users/UserContext';
 import React, { useEffect, useState } from 'react';
 import { LoginModal } from '../components/shared/Modals';
@@ -21,7 +21,7 @@ export const withAuthorized = (WrappedComponent) => {
     if (!isAuthenticated) {
       return (
         <Box>
-          <LoginModal isOpen={promptLogin} />
+          <LoginModal isOpen={promptLogin} onClose={() => {}} />
           <WrappedComponent {...props} />
         </Box>
       );

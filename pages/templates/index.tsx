@@ -1,10 +1,10 @@
-import { GetServerSideProps, GetStaticProps, InferGetStaticPropsType, NextPage } from 'next';
+import { GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { Box, Flex, useDisclosure } from '@chakra-ui/core';
+import { Box, Flex, useDisclosure } from '@chakra-ui/react';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { GetAllTemplateProgramsUrl } from '../../api/public/template';
-import { IExercise, ITemplateProgram } from 'powerbuddy-shared';
+import { ITemplateProgram } from 'powerbuddy-shared';
 import { WORKOUT_DIARY_URL } from '../../InternalLinks';
 import { PbPrimaryButton } from '../../components/common/Buttons';
 import { ModalDrawerForm } from '../../components/common/ModalDrawer';
@@ -53,7 +53,7 @@ const Index: NextPage = ({ templates }: any) => {
             />
           </ModalDrawerForm>
         )}
-        {isLoginOpen && <LoginModal isOpen={isLoginOpen} onOpen={onLoginOpen} onClose={onLoginClose} />}
+        {isLoginOpen && <LoginModal isOpen={isLoginOpen} onClose={onLoginClose} />}
         {isCreateSuccessOpen && (
           <ModalForward
             isOpen={isCreateSuccessOpen}
@@ -69,7 +69,7 @@ const Index: NextPage = ({ templates }: any) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async () => {
   const response = await axios.get<ITemplateProgram[]>(GetAllTemplateProgramsUrl());
 
   return {

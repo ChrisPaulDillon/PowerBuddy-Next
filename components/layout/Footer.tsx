@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, useColorMode, Stack, useDisclosure, useToken } from '@chakra-ui/core';
+import { Box, Flex, useColorMode, Stack, useDisclosure, useToken } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { IAppState } from '../../redux/store';
 import useScreenSizes from '../../hooks/useScreenSizes';

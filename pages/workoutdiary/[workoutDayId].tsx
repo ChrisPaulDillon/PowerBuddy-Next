@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { Box, Flex, useDisclosure, useToast } from '@chakra-ui/core';
+import { Box, Flex, useDisclosure, useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { WORKOUT_DIARY_URL } from '../../InternalLinks';
@@ -126,14 +126,14 @@ const WorkoutDay: NextPage = () => {
     return <ErrorMessage title="No Workout Found" description="Have you followed a broken link?" statusCode={404} />;
 
   return (
-    <Box w="100%">
+    <Box w="100%" mt={3}>
       <PageHead title="Workout" description="PowerBuddy Workout Diary, track personal bests and powerlifting progress" />
       <WorkoutProvider workoutDay={workoutDay} setWorkoutDay={setWorkoutDay} contentDisabled={contentDisabled}>
         <PageContent>
           <BreadcrumbBase values={breadcrumbInput} />
-          <CardNoShadow borderWidth="0.5px" rounded="lg" overflow="hidden" textAlign="center" minH="250px" w="100%" p="2" my="5">
+          <CardNoShadow borderWidth="0.5px" minH="250px" w="100%" p="2" my="5">
             <PbStack mb={1} w="100%">
-              <Flex justify={{ lg: 'left', md: 'left', sm: 'left', xs: 'center' }} w="100%">
+              <Flex justify={{ lg: 'left', md: 'left', sm: 'center' }} w="100%">
                 <CenterRowFlex justifyContent="center" ml={3}>
                   <PbIconButton
                     label="Complete Workout"
@@ -177,7 +177,7 @@ const WorkoutDay: NextPage = () => {
           </CardNoShadow>
           {isAddExerciseOpen && (
             <ModalDrawerForm isOpen={isAddExerciseOpen} onClose={onAddExerciseClose} title="Add Exercise to Workout">
-              <AddExerciseForm onClose={onAddExerciseClose} workoutDayId={workoutDay.workoutDayId!} />
+              <AddExerciseForm onClose={onAddExerciseClose} workoutDayId={workoutDay?.workoutDayId} />
             </ModalDrawerForm>
           )}
           {personalBests.length > 0 && (

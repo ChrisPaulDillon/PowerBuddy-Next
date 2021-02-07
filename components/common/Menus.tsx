@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button, LightMode, Menu, MenuButton, MenuList, Stack, Text } from '@chakra-ui/core';
+import { Box, Button, LightMode, Menu, MenuButton, MenuList, Stack, Text } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
 import { TextXs } from './Texts';
 

@@ -1,4 +1,4 @@
-import { Box, Flex } from '@chakra-ui/core';
+import { Box, Flex } from '@chakra-ui/react';
 import moment from 'moment';
 import { ILiftingStat, ILiftingStatGrouped } from 'powerbuddy-shared';
 import React from 'react';

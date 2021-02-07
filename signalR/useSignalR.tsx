@@ -1,5 +1,5 @@
 import { ToastAvatar } from '../components/common/CustomToasts';
-import { useToast } from '@chakra-ui/core';
+import { useToast } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 import { MESSAGE_METHOD_ALL } from './SignalRConstants';
 import { IUserMessage } from './types';

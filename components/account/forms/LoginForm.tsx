@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormErrorMessage, FormControl, Button, Flex, Box, InputGroup, InputRightElement, useToast, Link } from '@chakra-ui/core';
+import { FormErrorMessage, FormControl, Button, Flex, Box, InputGroup, InputRightElement, useToast, Link } from '@chakra-ui/react';
 import { FormInput } from '../../common/Inputs';
 import { CenterColumnFlex, CenterRowFlex } from '../../layout/Flexes';
 import { TextError, TextXs } from '../../common/Texts';
 import { PbPrimaryButton } from '../../common/Buttons';
 import { MdAccountBox } from 'react-icons/md';
 import { validateInput } from '../../../util/formInputs';
-import { LoginUserUrl } from '../../../api/account/auth';
 import axios from 'axios';
 import { IUser } from 'powerbuddy-shared';
 import { LoginStateEnum } from '../factories/LoginFormFactory';
@@ -19,9 +18,14 @@ import { ToastSuccess } from '../../shared/Toasts';
 import { LoginUserRequest } from '../../../apiCalls/Area/account/auth';
 import { ACCOUNT_LOCKOUT, EMAIL_NOT_CONFIRMED, INVALID_CREDENTIALS, USER_NOT_FOUND } from '../../../responseCodes';
 
-const LoginForm = ({ onClose, setLoginState }: any) => {
+interface ILoginFormProps {
+  onClose: () => void;
+  setLoginState: any;
+}
+
+const LoginForm: React.FC<ILoginFormProps> = ({ onClose, setLoginState }) => {
   const [showPW, setShowPW] = React.useState(false);
-  const [error, setError] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>('');
   const [showError, setShowError] = useState<boolean>(false);
   const [emailNotVerified, setEmailNotVerified] = useState<boolean>(false);
   const [userId, setUserId] = useState<string>('');
@@ -49,13 +53,13 @@ const LoginForm = ({ onClose, setLoginState }: any) => {
           setUserId(response?.message);
           break;
         case INVALID_CREDENTIALS:
-          setError('Invalid Username/Email or Password');
+          setErrorMessage('Invalid Username/Email or Password');
           break;
         case USER_NOT_FOUND:
-          setError('No User found with the associated Username or Email');
+          setErrorMessage('No User found with the associated Username or Email');
           break;
         case ACCOUNT_LOCKOUT:
-          setError('Too many login attempts. Please wait 10 minutes before proceeding');
+          setErrorMessage('Too many login attempts. Please wait 10 minutes before proceeding');
           break;
       }
       setShowError(true);
@@ -71,7 +75,7 @@ const LoginForm = ({ onClose, setLoginState }: any) => {
   const sendEmailConfirmation = async () => {
     try {
       toast(ToastSuccess('Success', 'Confirmation Email Sent Successfully. Please check your inbox'));
-      const response = await axios.post(SendEmailConfirmationUrl(userId));
+      await axios.post(SendEmailConfirmationUrl(userId));
     } catch (error) {}
   };
 
@@ -120,7 +124,7 @@ const LoginForm = ({ onClose, setLoginState }: any) => {
           </Box>
           {showError && (
             <TextError textAlign="center" py={2}>
-              {error}
+              {errorMessage}
             </TextError>
           )}
           <CenterRowFlex pt={1}>

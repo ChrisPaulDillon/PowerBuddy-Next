@@ -1,12 +1,9 @@
-import { theme } from '@chakra-ui/core';
+import { extendTheme } from '@chakra-ui/react';
 import colors from './colors';
-import fonts from './fonts';
 
-const customTheme = {
-  ...theme,
+const customTheme = extendTheme({
   colors,
-  fonts,
-};
+});
 
 export const getColor = (color: string) => {
   const ch = color.split('.');

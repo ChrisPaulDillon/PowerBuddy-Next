@@ -1,4 +1,4 @@
-import { Accordion, Box, Button, Divider, Link, Stack, Switch, Text, useColorMode, useDisclosure, useToast } from '@chakra-ui/core';
+import { Accordion, Box, Button, Divider, Link, Stack, Switch, Text, useColorMode, useDisclosure, useToast } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useState } from 'react';
@@ -90,7 +90,6 @@ export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
                 onClose();
                 if (isAuthenticated) {
                   logoutUser();
-                  localStorage.removeItem('accessToken');
                   localStorage.removeItem('refreshToken');
                   setAuthorizationToken(null);
                   toast(ToastSuccess('Success', 'Successfully Logged Out'));
@@ -152,7 +151,7 @@ export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
           ))}
         </>
       )}
-      {isLoginOpen && <LoginModal isOpen={isLoginOpen} onOpen={onLoginOpen} onClose={onLoginClose} />}
+      {isLoginOpen && <LoginModal isOpen={isLoginOpen} onClose={onLoginClose} />}
     </MainMenuContent>
   );
 };

@@ -1,4 +1,4 @@
-import { Box, useDisclosure } from '@chakra-ui/core';
+import { Box, useDisclosure } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { IAppState } from '../../redux/store';

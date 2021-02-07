@@ -1,4 +1,4 @@
-import { Box, useColorMode } from '@chakra-ui/core';
+import { Box, useColorMode } from '@chakra-ui/react';
 import Head from 'next/head';
 import React from 'react';
 
@@ -8,7 +8,6 @@ const Page: React.FC = ({ children, ...rest }) => {
     <Box
       position="relative"
       height="100vh"
-      width={{ lg: '1800px', md: '1200px', sm: '800px', xs: '400px', base: '1800px' }}
       alignContent="center"
       justifyContent="center"
       alignItems="center"

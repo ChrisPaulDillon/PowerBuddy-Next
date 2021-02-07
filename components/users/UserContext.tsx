@@ -38,23 +38,19 @@ export default function UserProvider({ children }: IContextInputProps) {
   const [firstVisit, setFirstVisit] = useState<boolean>(false);
   const [memberStatusId, setMemberStatusId] = useState<number>(0);
 
-  const RefreshTokenRequest = () => {
+  const RefreshTokenRequest = async () => {
     const refreshToken = localStorage.getItem('refreshToken');
     if (refreshToken === undefined) {
       return null;
     }
-    return axios
-      .post(RefreshTokenUrl(), {
-        refreshToken: refreshToken,
-      })
-      .then((tokenRefreshResponse) => {
-        //TODO Validate access token
-        const claimsValues = decodeJwtToken(tokenRefreshResponse.data.accessToken);
-        handleAuthenticationTokens(tokenRefreshResponse.data.accessToken, tokenRefreshResponse.data.refreshToken);
-        SetValues(claimsValues);
-
-        return Promise.resolve();
-      });
+    const tokenRefreshResponse = await axios.post(RefreshTokenUrl(), {
+      refreshToken: refreshToken,
+    });
+    //TODO Validate access token
+    const claimsValues = decodeJwtToken(tokenRefreshResponse.data.accessToken);
+    handleAuthenticationTokens(tokenRefreshResponse.data.accessToken, tokenRefreshResponse.data.refreshToken);
+    SetValues(claimsValues);
+    return await Promise.resolve();
   };
 
   const SetValues = ({ userId, userName, weightType, firstVisit, memberStatusId }: IClaimsValues) => {

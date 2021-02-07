@@ -1,4 +1,4 @@
-import { Box, useColorMode, BoxProps } from '@chakra-ui/core';
+import { Box, useColorMode, BoxProps } from '@chakra-ui/react';
 import React from 'react';
 import theme from '../../theme';
 
@@ -43,11 +43,11 @@ export const CardNoShadow: React.FC<BoxProps> = ({ ...rest }) => {
     <Box
       bg={theme.colors.cardColor[colorMode]}
       position="relative"
-      p="2"
+      p={2}
       alignContent="center"
       justifyContent="center"
       rounded="lg"
-      minW={['xs', 'sm', 'sm', 'sm']}
+      minW={{ lg: '1200px', md: '800px', sm: '300px' }}
       {...rest}
     />
   );

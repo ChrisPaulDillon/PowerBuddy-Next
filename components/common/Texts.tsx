@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Heading, useColorMode, BoxProps, Divider, Box } from '@chakra-ui/core';
+import { Text, Heading, useColorMode, BoxProps, Divider, Box } from '@chakra-ui/react';
 import theme from '../../theme';
 import { CenterColumnFlex, CenterRowFlex } from '../layout/Flexes';
 import { IconType } from 'react-icons';
