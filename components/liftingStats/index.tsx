@@ -52,7 +52,7 @@ const LiftingStatsIndexPage = () => {
       <SearchBar onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search personal bests..." />
       <LiftFeed liftFeed={liftFeed} />
       <LiftingStatList />
-      {isLoginOpen && <LoginModal isOpen={isLoginOpen} onOpen={onLoginOpen} onClose={onLoginClose} />}
+      {isLoginOpen && <LoginModal isOpen={isLoginOpen} onClose={onLoginClose} />}
       {isNoStatsOpen && (
         <ModalForward
           isOpen={isNoStatsOpen}

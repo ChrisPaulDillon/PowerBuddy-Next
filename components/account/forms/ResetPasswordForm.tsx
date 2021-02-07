@@ -8,12 +8,12 @@ import { TextXs } from '../../common/Texts';
 import { CenterColumnFlex } from '../../layout/Flexes';
 import { ToastError, ToastSuccess } from '../../shared/Toasts';
 
-interface IChangePasswordFormProps {
+interface IResetPasswordFormProps {
   userId: string;
   token: string;
 }
 
-const ChangePasswordForm: React.FC<IChangePasswordFormProps> = ({ userId, token }) => {
+const ResetPasswordForm: React.FC<IResetPasswordFormProps> = ({ userId, token }) => {
   const toast = useToast();
   const { handleSubmit, formState, register } = useForm();
 
@@ -55,4 +55,4 @@ const ChangePasswordForm: React.FC<IChangePasswordFormProps> = ({ userId, token 
   );
 };
 
-export default ChangePasswordForm;
+export default ResetPasswordForm;

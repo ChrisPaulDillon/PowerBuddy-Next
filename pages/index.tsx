@@ -75,7 +75,7 @@ const Index: NextPage = () => {
           loading={addWeekLoading}
         />
       )} */}
-        {isLoginOpen && <LoginModal isOpen={isLoginOpen} onOpen={onLoginOpen} onClose={onLoginClose} />}
+        {isLoginOpen && <LoginModal isOpen={isLoginOpen} onClose={onLoginClose} />}
       </PageContent>
     </Box>
   );

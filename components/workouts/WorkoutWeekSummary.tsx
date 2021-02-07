@@ -104,7 +104,7 @@ const WorkoutWeekSummary: React.FC<IProps> = ({ weekSummary }) => {
           </PbPrimaryButton>
         </Box>
       </CenterColumnFlex>
-      {isLoginOpen && <LoginModal isOpen={isLoginOpen} onOpen={onLoginOpen} onClose={onLoginClose} />}
+      {isLoginOpen && <LoginModal isOpen={isLoginOpen} onClose={onLoginClose} />}
       {isTodayWorkoutOpen && (
         <ModalBackForward
           isOpen={isTodayWorkoutOpen}

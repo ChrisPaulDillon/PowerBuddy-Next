@@ -21,7 +21,7 @@ export const withAuthorized = (WrappedComponent) => {
     if (!isAuthenticated) {
       return (
         <Box>
-          <LoginModal isOpen={promptLogin} />
+          <LoginModal isOpen={promptLogin} onClose={() => {}} />
           <WrappedComponent {...props} />
         </Box>
       );

@@ -10,5 +10,5 @@ export const CreateWorkoutTemplateRequest = async (workoutTemplate: IWorkoutTemp
       return response.data;
     } catch (err) {
       return err?.response?.data as IErrorResponse;
-  };
+  }
 }

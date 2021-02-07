@@ -97,7 +97,7 @@ const TemplateProgramSingle: NextPage = ({ template }: any) => {
                 <CreateProgramLogFromTemplateForm onClose={onAddProgramClose} template={template!} onCreateSuccessOpen={onCreateSuccessOpen} />
               </ModalDrawerForm>
             )}
-            {isLoginOpen && <LoginModal isOpen={isLoginOpen} onOpen={onLoginOpen} onClose={onLoginClose} />}
+            {isLoginOpen && <LoginModal isOpen={isLoginOpen} onClose={onLoginClose} />}
             {isCreateSuccessOpen && (
               <ModalForward
                 isOpen={isCreateSuccessOpen}

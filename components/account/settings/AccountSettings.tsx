@@ -5,7 +5,6 @@ import UserAvatar from '../../layout/UserAvatar';
 import theme from '../../../theme';
 import EditProfileForm from './forms/EditProfileForm';
 import SecurityGroup from './SecurityGroup';
-import { useUserContext } from '../../users/UserContext';
 import { IUser } from 'powerbuddy-shared/lib';
 
 export enum MenuSection {
