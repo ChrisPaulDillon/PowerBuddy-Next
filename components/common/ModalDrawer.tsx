@@ -4,10 +4,13 @@ import useScreenSizes from '../../hooks/useScreenSizes';
 import { DrawerBasic, PbDrawerForm } from './Drawers';
 import { ModalForward, ModalForm } from './Modals';
 
-interface IModalDrawerProps {
+interface IBaseProps {
   isOpen: boolean;
   onClose: () => void;
   title: string;
+}
+
+interface IModalDrawerProps extends IBaseProps {
   body?: string;
   actionText: string;
   actionColour?: string;
@@ -60,15 +63,12 @@ export const PbModalDrawer: React.FC<IModalDrawerProps> = ({
   );
 };
 
-interface IProps {
-  isOpen: boolean;
-  onClose: () => void;
-  title: string;
+interface IModalDrawerFormProps extends IBaseProps {
   size?: string;
   children?: any;
 }
 
-export const ModalDrawerForm: React.FC<IProps> = ({ title, isOpen, onClose, size, children }) => {
+export const ModalDrawerForm: React.FC<IModalDrawerFormProps> = ({ title, isOpen, onClose, size, children }) => {
   const { SCREEN_MOBILE } = useScreenSizes();
   return (
     <Box>

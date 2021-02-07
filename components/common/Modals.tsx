@@ -7,19 +7,20 @@ import { PbStack } from './Stacks';
 interface IModalProps {
   isOpen: boolean;
   onClose: () => void;
-  title: string;
+  title: string | React.ReactNode;
   body?: string;
   loading?: boolean;
+  hasCloseButton?: boolean;
 }
 
-const ModalBase: React.FC<IModalProps> = ({ isOpen, onClose, title, children }) => (
+export const ModalBase: React.FC<IModalProps> = ({ isOpen, onClose, title, hasCloseButton = true, children }) => (
   <Modal onClose={onClose} isOpen={isOpen} isCentered>
     <ModalOverlay>
       <ModalContent pb={5}>
         <ModalHeader textAlign="center" fontWeight="lighter">
           {title}
         </ModalHeader>
-        <ModalCloseButton />
+        {hasCloseButton && <ModalCloseButton />}
         <ModalBody>
           <Box p={4}>{children}</Box>
         </ModalBody>

@@ -34,8 +34,6 @@ const RegisterForm = ({ setLoginState }: any) => {
       password: password,
     };
     const response = await RegisterUserRequest(user);
-    console.log(response);
-
     if (response?.code) {
       setError(true);
     } else {
