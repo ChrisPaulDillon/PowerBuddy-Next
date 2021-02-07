@@ -1,4 +1,4 @@
-import { useColorMode, useDisclosure, Box, Divider, Flex, Stack, LinkBox } from '@chakra-ui/react';
+import { useColorMode, useDisclosure, Box, Divider, Flex, Stack } from '@chakra-ui/react';
 import React, { memo, useCallback, useEffect, useState } from 'react';
 import { FaRegCommentAlt } from 'react-icons/fa';
 import { MdDeleteForever } from 'react-icons/md';
