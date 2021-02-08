@@ -101,7 +101,7 @@ export const WorkoutExercise: React.FC<IExerciseProps> = React.memo(({ workoutEx
             workoutExercise={workoutExercise}
             suggestedReps={workoutExercise?.workoutSets[0].noOfReps}
             suggestedWeight={workoutExercise?.workoutSets[0].weightLifted}
-            totalSets={workoutExercise.noOfSets!}
+            totalSets={workoutExercise.noOfSets}
             onClose={onQuickAddClose}
           />
         </ModalDrawerForm>

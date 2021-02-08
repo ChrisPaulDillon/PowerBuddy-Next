@@ -54,13 +54,9 @@ const NormalRepSchemeTag = ({ setEditRepAlert, setRepsAchieved, weightLifted, no
 
   return (
     <PbTag rounded="full" maxH="25px">
-      <Box
-        as={MdModeEdit}
-        aria-label=""
-        size="1em"
-        onClick={() => (!contentDisabled ? setEditRepAlert(true) : null)}
-        color={contentDisabled ? 'gray' : 'gray'}
-      />
+      {!contentDisabled && (
+        <Box as={MdModeEdit} aria-label="" size="1em" onClick={() => (!contentDisabled ? setEditRepAlert(true) : null)} color="gray" />
+      )}
       <TextRep
         minW={[
           '65px', // 0-30em
@@ -81,7 +77,7 @@ const NormalRepSchemeTag = ({ setEditRepAlert, setRepsAchieved, weightLifted, no
 };
 
 const PersonalBestRepSchemeTag = ({ weightLifted, noOfReps }: any) => {
-  const { contentDisabled, weightType } = useWorkoutContext();
+  const { weightType } = useWorkoutContext();
 
   return (
     <PbTag rounded="full" maxH="25px">
@@ -103,7 +99,7 @@ const PersonalBestRepSchemeTag = ({ weightLifted, noOfReps }: any) => {
 };
 
 const DisabledRepSchemeTag = ({ setEditRepAlert, weightLifted, noOfReps }: any) => {
-  const { contentDisabled, weightType } = useWorkoutContext();
+  const { weightType } = useWorkoutContext();
 
   return (
     <PbTag rounded="full" maxH="25px">
