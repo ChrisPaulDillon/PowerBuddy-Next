@@ -2,7 +2,7 @@ import { Box, useColorMode } from '@chakra-ui/react';
 import React from 'react';
 import UserAvatar from '../layout/UserAvatar';
 import { PbStack } from './Stacks';
-import { TextSm, TextXs } from './Texts';
+import { TextXs } from './Texts';
 import theme from '../../theme';
 import { CenterColumnFlex } from '../layout/Flexes';
 

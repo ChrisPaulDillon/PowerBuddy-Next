@@ -12,14 +12,14 @@ const PersonalBestDetailed: React.FC<IPersonalBestDetailed> = ({ exerciseName, l
 
   var breadcrumbInput: IBreadcrumbInput[] = [
     { href: WORKOUT_DIARY_URL, name: 'Diary' },
-    { href: '#', name: exerciseName! },
+    { href: '#', name: exerciseName },
   ];
 
   return (
     <Box>
       <BreadcrumbBase values={breadcrumbInput} />
       <CenterColumnFlex w="100%" mt={8}>
-        <PageTitle>{exerciseName!}</PageTitle>
+        <PageTitle>{exerciseName}</PageTitle>
         <TextSm pb={5}>
           {lifeTimeTonnage}
           {weightType} Lifetime Tonnage{' '}

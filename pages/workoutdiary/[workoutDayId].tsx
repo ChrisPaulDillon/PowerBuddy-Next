@@ -19,7 +19,7 @@ import { GetWorkoutDayByIdUrl, UpdateWorkoutUrl } from '../../api/account/workou
 import { IBreadcrumbInput, BreadcrumbBase } from '../../components/common/Breadcrumbs';
 import PbIconButton from '../../components/common/IconButtons';
 import MenuBase, { IMenuItem } from '../../components/common/Menus';
-import { ModalDrawerForm, PbModalDrawer } from '../../components/common/ModalDrawer';
+import { ModalDrawerForm, PbModalDrawer } from '../../components/common/ModalDrawers';
 import { PbStack } from '../../components/common/Stacks';
 import { CardNoShadow } from '../../components/layout/Card';
 import { BadgeWorkoutName } from '../../components/shared/Badges';

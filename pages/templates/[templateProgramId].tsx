@@ -6,7 +6,7 @@ import { GetAllTemplateProgramsUrl, GetTemplateProgramByIdUrl } from '../../api/
 import { ITemplateProgram, ITemplateProgramExtended } from 'powerbuddy-shared';
 import { TEMPLATES_URL, WORKOUT_DIARY_URL } from '../../InternalLinks';
 import { PbPrimaryButton } from '../../components/common/Buttons';
-import { ModalDrawerForm } from '../../components/common/ModalDrawer';
+import { ModalDrawerForm } from '../../components/common/ModalDrawers';
 import { ModalForward } from '../../components/common/Modals';
 import { PageTitle, TextXsFade } from '../../components/common/Texts';
 import { CenterColumnFlex } from '../../components/layout/Flexes';

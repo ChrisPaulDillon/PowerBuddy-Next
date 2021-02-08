@@ -1,5 +1,5 @@
 import React from 'react';
-import { ModalDrawerForm } from '../../common/ModalDrawer';
+import { ModalDrawerForm } from '../../common/ModalDrawers';
 import CreateExercise from '../forms/CreateExercise';
 import CreateTemplateProgram from '../forms/CreateTemplateProgram';
 

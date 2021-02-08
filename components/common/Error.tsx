@@ -1,7 +1,5 @@
 import { Alert, AlertDescription, AlertTitle, Heading } from '@chakra-ui/react';
 import React from 'react';
-import Page from '../layout/Page';
-
 interface IErrorProps {
   statusCode: number;
   title?: string;

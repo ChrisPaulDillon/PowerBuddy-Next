@@ -112,13 +112,14 @@ export const ModalBackForward: React.FC<IModalBackForwardProps> = ({
 interface IModalFormProps {
   isOpen: boolean;
   onClose: () => void;
-  title: string;
+  title: string | React.ReactNode;
   size?: string;
+  hasCloseButton?: boolean;
 }
 
-export const ModalForm: React.FC<IModalFormProps> = ({ isOpen, onClose, title, children }) => {
+export const ModalForm: React.FC<IModalFormProps> = ({ isOpen, onClose, title, hasCloseButton, children }) => {
   return (
-    <ModalBase onClose={onClose} isOpen={isOpen} title={title}>
+    <ModalBase onClose={onClose} isOpen={isOpen} title={title} hasCloseButton={hasCloseButton}>
       {children}
     </ModalBase>
   );

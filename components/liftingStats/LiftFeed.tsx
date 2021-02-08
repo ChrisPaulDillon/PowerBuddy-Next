@@ -8,7 +8,6 @@ import PbIconButton from '../common/IconButtons';
 import Axios from 'axios';
 import { DeleteLiftingStatAuditUrl } from '../../api/account/liftingStats';
 import { ILiftFeed } from 'powerbuddy-shared';
-import { useUserContext } from '../users/UserContext';
 import { ToastSuccess } from '../shared/Toasts';
 
 interface IProps {

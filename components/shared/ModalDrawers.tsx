@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PbModalDrawer } from '../common/ModalDrawer';
+import { PbModalDrawer } from '../common/ModalDrawers';
 import { useToast } from '@chakra-ui/react';
 import Axios from 'axios';
 import { DeleteWorkoutLogUrl } from '../../api/account/workoutLog';

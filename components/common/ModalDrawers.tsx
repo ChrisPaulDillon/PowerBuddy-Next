@@ -1,13 +1,14 @@
 import { Box } from '@chakra-ui/react';
 import React from 'react';
 import useScreenSizes from '../../hooks/useScreenSizes';
-import { DrawerBasic, PbDrawerForm } from './Drawers';
+import { DrawerBasic, DrawerForm } from './Drawers';
 import { ModalForward, ModalForm } from './Modals';
 
 interface IBaseProps {
   isOpen: boolean;
   onClose: () => void;
-  title: string;
+  title: string | React.ReactNode;
+  hasCloseButton?: boolean;
 }
 
 interface IModalDrawerProps extends IBaseProps {
@@ -68,16 +69,16 @@ interface IModalDrawerFormProps extends IBaseProps {
   children?: any;
 }
 
-export const ModalDrawerForm: React.FC<IModalDrawerFormProps> = ({ title, isOpen, onClose, size, children }) => {
+export const ModalDrawerForm: React.FC<IModalDrawerFormProps> = ({ title, isOpen, onClose, size, hasCloseButton, children }) => {
   const { SCREEN_MOBILE } = useScreenSizes();
   return (
     <Box>
       {SCREEN_MOBILE ? (
-        <PbDrawerForm isOpen={isOpen} title={title} onClose={onClose} size="full">
+        <DrawerForm isOpen={isOpen} title={title} onClose={onClose} size="full" hasCloseButton={hasCloseButton}>
           {children}
-        </PbDrawerForm>
+        </DrawerForm>
       ) : (
-        <ModalForm isOpen={isOpen} title={title} onClose={onClose} size={size}>
+        <ModalForm isOpen={isOpen} title={title} onClose={onClose} size={size} hasCloseButton={hasCloseButton}>
           {children}
         </ModalForm>
       )}

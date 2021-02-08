@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import NavBar from './NavBar';
 import Page from './Page';
-import { Flex, useColorMode, useDisclosure, useToast } from '@chakra-ui/react';
+import { Flex, useColorMode, useDisclosure } from '@chakra-ui/react';
 import FirstVisitAlert from '../misc/FirstVisitAlert';
 import theme from '../../theme';
-import Footer from './Footer';
 import { useUserContext } from '../users/UserContext';
-import { ModalDrawerForm } from '../common/ModalDrawer';
+import { ModalDrawerForm } from '../common/ModalDrawers';
 import useSignalR from '../../signalR/useSignalR';
 
 const Layout = ({ children }: any) => {
@@ -35,7 +34,6 @@ const Layout = ({ children }: any) => {
         )}
         <Page>{children}</Page>
       </Flex>
-      <Footer />
     </Flex>
   );
 };

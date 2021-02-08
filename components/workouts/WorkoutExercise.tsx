@@ -4,7 +4,7 @@ import { FaRegCommentAlt } from 'react-icons/fa';
 import { MdDeleteForever } from 'react-icons/md';
 import { RiAddCircleLine } from 'react-icons/ri';
 import PbIconButton from '../common/IconButtons';
-import { ModalDrawerForm } from '../common/ModalDrawer';
+import { ModalDrawerForm } from '../common/ModalDrawers';
 import { HeadingXs } from '../common/Texts';
 import { ProgramExerciseCard } from '../layout/Card';
 import { CenterRowFlex } from '../layout/Flexes';

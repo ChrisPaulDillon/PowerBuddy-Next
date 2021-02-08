@@ -1,8 +1,6 @@
 import React from 'react';
-import { Text, Heading, useColorMode, BoxProps, Divider, Box } from '@chakra-ui/react';
+import { Text, Heading, useColorMode, BoxProps } from '@chakra-ui/react';
 import theme from '../../theme';
-import { CenterColumnFlex, CenterRowFlex } from '../layout/Flexes';
-import { IconType } from 'react-icons';
 
 export const PageTitle: React.FC<BoxProps> = ({ ...rest }) => {
   const { colorMode } = useColorMode();
@@ -12,9 +10,12 @@ export const PageTitle: React.FC<BoxProps> = ({ ...rest }) => {
 export const PageSubHeader: React.FC<BoxProps> = ({ ...rest }) => {
   const { colorMode } = useColorMode();
   return (
-    <CenterColumnFlex>
-      <Text color={theme.colors.textColor[colorMode]} fontSize={['lg', 'lg', 'xl', 'xl']} fontFamily="'Roboto', serif;" {...rest}></Text>
-    </CenterColumnFlex>
+    <Text
+      color={theme.colors.textColor[colorMode]}
+      fontSize={['lg', 'lg', 'xl', 'xl']}
+      fontFamily="'Roboto', serif;"
+      textAlign="center"
+      {...rest}></Text>
   );
 };
 
@@ -75,19 +76,8 @@ export const TextRep: React.FC<BoxProps> = ({ ...rest }) => {
   return <Text color={theme.colors.textColor[colorMode]} fontSize={['xs', 'sm', 'sm', 'sm']} fontFamily="'Roboto', serif;" {...rest}></Text>;
 };
 
-export const TextExercise: React.FC<BoxProps> = ({ ...rest }) => {
-  const { colorMode } = useColorMode();
-  return <Text color={theme.colors.textColor[colorMode]} fontSize="xl" fontFamily="'Roboto', serif;" {...rest}></Text>;
-};
-
 export const TextError: React.FC<BoxProps> = ({ ...rest }) => {
-  const { colorMode } = useColorMode();
   return <Text color="red.500" fontSize="xs" fontFamily="'Roboto', serif;" {...rest}></Text>;
-};
-
-export const TextExerciseRep: React.FC<BoxProps> = ({ ...rest }) => {
-  const { colorMode } = useColorMode();
-  return <Text color={theme.colors.textColor[colorMode]} fontSize="1xs" fontFamily="'Roboto', serif;" {...rest}></Text>;
 };
 
 export const TextQuote: React.FC<BoxProps> = ({ ...rest }) => {
@@ -106,11 +96,5 @@ export const TextNavItem: React.FC<BoxProps> = ({ ...rest }) => {
 };
 
 export const Banner: React.FC<BoxProps> = ({ ...rest }) => {
-  const { colorMode } = useColorMode();
   return <Heading as="h1" size="lg" fontWeight="bold" color="blue.500" {...rest}></Heading>;
-};
-
-export const SubBanner: React.FC<BoxProps> = ({ ...rest }) => {
-  const { colorMode } = useColorMode();
-  return <Text color={theme.colors.textColor[colorMode]} fontSize="2xl" fontFamily="'trade-gothic'" textAlign="left" {...rest}></Text>;
 };

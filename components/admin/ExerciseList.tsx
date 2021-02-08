@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { IAppState } from '../../redux/store';
 import { PbPrimaryButton } from '../common/Buttons';
-import { ModalDrawerForm } from '../common/ModalDrawer';
+import { ModalDrawerForm } from '../common/ModalDrawers';
 import { PbStack } from '../common/Stacks';
 import { TextSm, TextXs } from '../common/Texts';
 import EditExerciseForm from './forms/EditExerciseForm';

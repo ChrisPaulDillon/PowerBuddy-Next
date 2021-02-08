@@ -13,7 +13,6 @@ import PbIconButton from '../common/IconButtons';
 import { MenuItem } from '../common/Menus';
 import Link from 'next/link';
 import { useUserContext } from '../users/UserContext';
-import { IUser } from 'powerbuddy-shared/lib';
 
 const sideMenu = {
   groups: [

@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { useState } from 'react';
+import React from 'react';
 import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { createMuiTheme, IconButton, makeStyles, ThemeProvider } from '@material-ui/core';
 import moment from 'moment';
@@ -10,9 +10,8 @@ import startOfWeek from 'date-fns/startOfWeek';
 import isWithinInterval from 'date-fns/isWithinInterval';
 import DateFnsUtils from '@date-io/date-fns';
 import chakraTheme, { getColor } from '../../theme';
-import { useColorMode, useDisclosure } from '@chakra-ui/react';
+import { useColorMode } from '@chakra-ui/react';
 import { lightBlue } from '@material-ui/core/colors';
-import { AiOutlineArrowLeft} from 'react-icons/all';
 
 const materialTheme = createMuiTheme({
   overrides: {

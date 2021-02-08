@@ -1,6 +1,7 @@
 import { ModalFooter } from '@chakra-ui/react';
 import React from 'react';
 import LoginFormFactory from '../account/factories/LoginFormFactory';
+import { ModalDrawerForm } from '../common/ModalDrawers';
 import { ModalBase } from '../common/Modals';
 import { Banner, HeadingMd, TextSm } from '../common/Texts';
 import { CenterColumnFlex } from '../layout/Flexes';
@@ -12,7 +13,7 @@ interface ILoginModalProps {
 
 export const LoginModal: React.FC<ILoginModalProps> = ({ isOpen, onClose }) => {
   return (
-    <ModalBase
+    <ModalDrawerForm
       onClose={onClose}
       isOpen={isOpen}
       hasCloseButton={false}
@@ -22,12 +23,8 @@ export const LoginModal: React.FC<ILoginModalProps> = ({ isOpen, onClose }) => {
           <HeadingMd>The All In One Weightlifting Solution</HeadingMd>
         </CenterColumnFlex>
       }>
+      {' '}
       <LoginFormFactory onClose={onClose} />
-      <ModalFooter>
-        <TextSm textAlign="center" mr="5">
-          Please Login to Continue
-        </TextSm>
-      </ModalFooter>
-    </ModalBase>
+    </ModalDrawerForm>
   );
 };

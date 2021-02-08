@@ -3,7 +3,6 @@ import React from 'react';
 import theme from '../../theme';
 
 export const Card: React.FC<BoxProps> = ({ ...rest }) => {
-  const { colorMode } = useColorMode();
   return (
     <Box
       borderStyle="rd"
@@ -55,7 +54,6 @@ export const CardNoShadow: React.FC<BoxProps> = ({ ...rest }) => {
 
 export const ProgramExerciseCard: React.FC<BoxProps> = ({ ...rest }) => {
   const { colorMode } = useColorMode();
-  const border = { light: '1px solid #E7E7E7', dark: '1px solid grey.300' };
   return (
     <Box
       bg={theme.colors.cardColor[colorMode]}
@@ -63,10 +61,7 @@ export const ProgramExerciseCard: React.FC<BoxProps> = ({ ...rest }) => {
       alignContent="center"
       justifyContent="center"
       textAlign="center"
-      // rounded="lg"
       w="100%"
-      // borderBottom={border[colorMode]}
-      // borderTop={border[colorMode]}
       {...rest}
     />
   );

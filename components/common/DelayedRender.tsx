@@ -1,7 +1,7 @@
 import useDelayedRender from '../../hooks/util/useDelayedRender';
 
-const PbDelayedRender = ({ delay, children }: any) => {
+const DelayedRender = ({ delay, children }: any) => {
   return useDelayedRender(800 || delay)(() => children);
 };
 
-export default PbDelayedRender;
+export default DelayedRender;

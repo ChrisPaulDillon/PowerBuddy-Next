@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { Flex, Box, Button, Text } from '@chakra-ui/react';
 import { Card } from '../layout/Card';
 import { HeadingMd, TextSm, TextXs } from '../common/Texts';
@@ -11,8 +11,10 @@ interface Props {
 
 const ExerciseCardList: React.FC<Props> = ({ exercises }) => (
   <Flex flexDirection="row" flexWrap="wrap" justifyContent="center" alignItems="center" p="1">
-    {exercises.map((exercise) => (
-      <ExerciseCardSingle key={exercise.exerciseId!} {...exercise!} />
+    {exercises.map((exercise, key) => (
+      <Box key={key}>
+        <ExerciseCardSingle key={exercise?.exerciseId} {...exercise} />
+      </Box>
     ))}
   </Flex>
 );

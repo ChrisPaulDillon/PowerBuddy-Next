@@ -10,11 +10,10 @@ import { PageContent, PageHead } from '../../components/layout/Page';
 import axios from 'axios';
 import { GetAllExercisesUrl } from '../../api/public/exercise';
 import { IExercise } from 'powerbuddy-shared/lib';
+import useLoadExercises from '../../hooks/redux/useLoadExercises';
 
 const Index: NextPage = ({ exercises }: any) => {
-  // useLoadExercises();
-  // const { exercises } = useSelector((state: IAppState) => state.state);
-
+  useLoadExercises();
   const [searchTerm, setSearchTerm] = useState<string>('');
   const filteredExercises = useExerciseSearch(exercises, searchTerm);
 

@@ -1,23 +1,22 @@
 import React from 'react';
-import { Box, Badge, useDisclosure, Flex } from '@chakra-ui/react';
-import { HeadingMd, TextSm, TextXs } from '../common/Texts';
+import { Box, useDisclosure, Flex } from '@chakra-ui/react';
+import { HeadingMd, TextSm } from '../common/Texts';
 import moment from 'moment';
 import { CenterColumnFlex, CenterRowFlex } from '../layout/Flexes';
 import { PbStack } from '../common/Stacks';
-import { Card, CardSm } from '../layout/Card';
+import { CardSm } from '../layout/Card';
 import { CgArrowTopRight } from 'react-icons/all';
 import PbIconButton from '../common/IconButtons';
 import { TrashIconButton } from '../shared/IconButtons';
-import { PbModalDrawer } from '../common/ModalDrawer';
 import { DeleteLogModalDrawer } from '../shared/ModalDrawers';
 import { TagExerciseCount, TagProgramDaysCount, TagProgramWeeksCount } from '../shared/Tags';
 import { BadgeCompleted, BadgeInProgress } from '../shared/Badges';
 import { useRouter } from 'next/router';
 import { WORKOUT_DIARY_URL } from '../../InternalLinks';
-import { IWorkoutLog } from 'powerbuddy-shared';
+import { IWorkoutLogStat } from 'powerbuddy-shared';
 
 interface IProps {
-  workoutLogStats: IWorkoutLog[];
+  workoutLogStats: IWorkoutLogStat[];
 }
 
 const LogHistoryList: React.FC<IProps> = ({ workoutLogStats }) => {
@@ -25,18 +24,26 @@ const LogHistoryList: React.FC<IProps> = ({ workoutLogStats }) => {
 
   return (
     <CenterRowFlex p="4">
-      {workoutLogStats.map((pl) => (
-        <LogHistorySingle workoutLog={pl} />
+      {workoutLogStats.map((workoutLog) => (
+        <LogHistorySingle {...workoutLog} />
       ))}
     </CenterRowFlex>
   );
 };
 
-const LogHistorySingle = ({ workoutLog }: any) => {
+const LogHistorySingle: React.FC<IWorkoutLogStat> = ({
+  customName,
+  templateName,
+  startDate,
+  endDate,
+  noOfWeeks,
+  dayCount,
+  exerciseCount,
+  workoutLogId,
+}) => {
   const router = useRouter();
   const { isOpen: isDeleteLogOpen, onOpen: onDeleteLogOpen, onClose: onDeleteLogClose } = useDisclosure();
 
-  const { active, customName, templateName, startDate, endDate, noOfWeeks, dayCount, exerciseCount, workoutLogId } = workoutLog;
   return (
     <CardSm m="4">
       <PbStack>

@@ -1,13 +1,10 @@
 import React from 'react';
 import { Box, Flex, useColorMode, Stack, useDisclosure, Avatar, IconButton } from '@chakra-ui/react';
 import { Banner } from '../common/Texts';
-import { useSelector } from 'react-redux';
-import { IAppState } from '../../redux/store';
 import { MobileSideNav } from './LeftNav';
 import useScreenSizes from '../../hooks/useScreenSizes';
 import RightNav from './RightMenu';
-import { PbDrawerForm } from '../common/Drawers';
-import { LoginModal } from '../shared/Modals';
+import { DrawerForm } from '../common/Drawers';
 import MenuBase from '../common/Menus';
 import { MdMenu } from 'react-icons/all';
 import { IconType } from 'react-icons';
@@ -23,7 +20,7 @@ interface INavBarProps {
 }
 
 const NavBar: React.FC<INavBarProps> = ({}) => {
-  const { userName, isAuthenticated } = useUserContext();
+  const { userName } = useUserContext();
   const { colorMode } = useColorMode();
   const { SCREEN_MOBILE } = useScreenSizes();
 
@@ -67,9 +64,9 @@ const NavBar: React.FC<INavBarProps> = ({}) => {
           {SCREEN_MOBILE ? (
             <Box px={2}>
               <Avatar size="sm" name={userName} onClick={onMobileOpen} />
-              <PbDrawerForm isOpen={isMobileOpen} onClose={onMobileClose} size="full" title={userName}>
+              <DrawerForm isOpen={isMobileOpen} onClose={onMobileClose} size="full" title={userName}>
                 <RightNav userName={userName} onClose={onMobileClose} />
-              </PbDrawerForm>
+              </DrawerForm>
             </Box>
           ) : (
             <MenuBase button={<Avatar size="md" name={userName} />}>

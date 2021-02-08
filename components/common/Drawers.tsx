@@ -1,5 +1,5 @@
-import React from 'react';
-import { Box, Drawer, DrawerOverlay, DrawerContent, DrawerHeader, DrawerBody, Flex, IconButton, DrawerFooter } from '@chakra-ui/react';
+import React, { ReactNode } from 'react';
+import { Box, Drawer, DrawerOverlay, DrawerContent, DrawerHeader, DrawerBody, Flex, IconButton } from '@chakra-ui/react';
 import { IoIosExit } from 'react-icons/all';
 import { Banner, HeadingMd } from './Texts';
 import { CenterColumnFlex, CenterRowFlex } from '../layout/Flexes';
@@ -8,17 +8,20 @@ import { PbPrimaryButton } from './Buttons';
 interface IDrawerBaseProps {
   isOpen: boolean;
   onClose: () => void;
+  hasCloseButton?: boolean;
   children: any;
 }
 
-const DrawerBase: React.FC<IDrawerBaseProps> = ({ isOpen, onClose, children, ...rest }) => (
+const DrawerBase: React.FC<IDrawerBaseProps> = ({ isOpen, onClose, hasCloseButton = true, children, ...rest }) => (
   <Drawer placement="left" onClose={onClose} isOpen={isOpen} size="full" {...rest}>
     <DrawerOverlay />
     <DrawerContent>
       <DrawerHeader borderBottomWidth="1px" fontWeight="light" textAlign="center">
         <Flex>
           <CenterRowFlex>
-            <IconButton aria-label="" icon={<IoIosExit />} onClick={onClose} variant="ghost" size="md" isRound fontSize="1em" pt="1" />
+            {hasCloseButton && (
+              <IconButton aria-label="" icon={<IoIosExit />} onClick={onClose} variant="ghost" size="md" isRound fontSize="1em" pt="1" />
+            )}
             <Banner>PowerBuddy</Banner>
           </CenterRowFlex>
         </Flex>
@@ -29,7 +32,7 @@ const DrawerBase: React.FC<IDrawerBaseProps> = ({ isOpen, onClose, children, ...
 );
 
 interface IDrawerBasicProps extends IDrawerBaseProps {
-  title: string;
+  title: string | ReactNode;
   body?: string;
   actionText: string;
   actionColour?: string;
@@ -78,13 +81,14 @@ export const DrawerBasic: React.FC<IDrawerBasicProps> = ({
 };
 
 interface IDrawerFormProps extends IDrawerBaseProps {
-  title: string;
+  title: string | React.ReactNode;
   size: string;
+  hasCloseButton?: boolean;
 }
 
-export const PbDrawerForm: React.FC<IDrawerFormProps> = ({ title, isOpen, onClose, children, ...rest }) => {
+export const DrawerForm: React.FC<IDrawerFormProps> = ({ title, isOpen, onClose, hasCloseButton, children, ...rest }) => {
   return (
-    <DrawerBase isOpen={isOpen} onClose={onClose}>
+    <DrawerBase isOpen={isOpen} onClose={onClose} hasCloseButton={hasCloseButton}>
       <Flex flexDir="column">
         <CenterColumnFlex>
           <HeadingMd>{title}</HeadingMd>

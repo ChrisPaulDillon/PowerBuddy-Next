@@ -33,13 +33,13 @@ const Index: NextPage = () => {
           </Box>
           <Flex mb={4}>
             <Box px={1}>
-              <TagProgramLogsCount body={`${workoutLogStats!.lifetimeLogCount} Programs`} size="lg" />
+              <TagProgramLogsCount body={`${workoutLogStats?.lifetimeLogCount} Programs`} size="lg" />
             </Box>
             <Box px={1}>
-              <TagProgramDaysCount body={`${workoutLogStats!.lifetimeDayCount} Days`} size="lg" />
+              <TagProgramDaysCount body={`${workoutLogStats?.lifetimeDayCount} Days`} size="lg" />
             </Box>
             <Box px={1}>
-              <TagExerciseCount body={`${workoutLogStats!.lifetimeExerciseCount} Exercises`} size="lg" />
+              <TagExerciseCount body={`${workoutLogStats?.lifetimeExerciseCount} Exercises`} size="lg" />
             </Box>
           </Flex>
           <Tabs variant="enclosed-colored" colorScheme="purple" align="center" size="md" mt={4}>
@@ -49,7 +49,7 @@ const Index: NextPage = () => {
             </TabList>
             <TabPanels>
               <TabPanel>
-                {workoutLogStats && workoutLogStats.workoutLogStats && <LogHistoryList workoutLogStats={workoutLogStats!.workoutLogStats!} />}
+                {workoutLogStats && workoutLogStats?.workoutLogStats && <LogHistoryList workoutLogStats={workoutLogStats?.workoutLogStats} />}
               </TabPanel>
               <TabPanel>
                 {/* {workoutSummaries && (
