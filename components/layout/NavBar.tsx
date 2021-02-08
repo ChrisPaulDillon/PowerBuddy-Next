@@ -9,7 +9,6 @@ import MenuBase from '../common/Menus';
 import { MdMenu } from 'react-icons/all';
 import { IconType } from 'react-icons';
 import PbIconButton from '../common/IconButtons';
-import TemplateSearchBar from '../templatePrograms/TemplateSearchBar';
 import theme from '../../theme';
 import Link from 'next/link';
 import { useUserContext } from '../users/UserContext';
@@ -56,11 +55,11 @@ const NavBar: React.FC<INavBarProps> = ({}) => {
           </Banner>
         </Flex>
         <Flex>
-          {!SCREEN_MOBILE && (
+          {/* {!SCREEN_MOBILE && (
             <Box mt={2}>
               <TemplateSearchBar />
             </Box>
-          )}
+          )} */}
           {SCREEN_MOBILE ? (
             <Box px={2}>
               <Avatar size="sm" name={userName} onClick={onMobileOpen} />

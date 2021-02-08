@@ -25,25 +25,16 @@ const LogHistoryList: React.FC<IProps> = ({ workoutLogStats }) => {
   return (
     <CenterRowFlex p="4">
       {workoutLogStats.map((workoutLog) => (
-        <LogHistorySingle {...workoutLog} />
+        <LogHistorySingle workoutLog={workoutLog} />
       ))}
     </CenterRowFlex>
   );
 };
 
-const LogHistorySingle: React.FC<IWorkoutLogStat> = ({
-  customName,
-  templateName,
-  startDate,
-  endDate,
-  noOfWeeks,
-  dayCount,
-  exerciseCount,
-  workoutLogId,
-}) => {
+const LogHistorySingle = ({ workoutLog }) => {
   const router = useRouter();
   const { isOpen: isDeleteLogOpen, onOpen: onDeleteLogOpen, onClose: onDeleteLogClose } = useDisclosure();
-
+  const { customName, templateName, startDate, endDate, noOfWeeks, dayCount, exerciseCount, workoutLogId } = workoutLog;
   return (
     <CardSm m="4">
       <PbStack>
