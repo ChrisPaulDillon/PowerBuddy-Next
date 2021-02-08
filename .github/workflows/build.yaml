@@ -8,6 +8,10 @@ on:
     types: [opened, synchronize, reopened]
 name: Main Workflow
 jobs:
+  ts_lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: mooyoul/tslint-actions@v1.1.1
   sonarcloud:
     runs-on: ubuntu-latest
     steps:
