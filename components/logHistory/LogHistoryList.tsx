@@ -13,13 +13,8 @@ import { TagExerciseCount, TagProgramDaysCount, TagProgramWeeksCount } from '../
 import { BadgeCompleted, BadgeInProgress } from '../shared/Badges';
 import { useRouter } from 'next/router';
 import { WORKOUT_DIARY_URL } from '../../InternalLinks';
-import { IWorkoutLogStat } from 'powerbuddy-shared';
 
-interface IProps {
-  workoutLogStats: IWorkoutLogStat[];
-}
-
-const LogHistoryList: React.FC<IProps> = ({ workoutLogStats }) => {
+const LogHistoryList = ({ workoutLogStats }) => {
   if (workoutLogStats.length <= 0) return <TextSm>No individual templates found, have you created one yet?</TextSm>;
 
   return (
