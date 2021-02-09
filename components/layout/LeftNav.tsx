@@ -13,6 +13,7 @@ import PbIconButton from '../common/IconButtons';
 import { MenuItem } from '../common/Menus';
 import Link from 'next/link';
 import { useUserContext } from '../users/UserContext';
+import { DrawerForm } from '../common/Drawers';
 
 const sideMenu = {
   groups: [
@@ -59,23 +60,20 @@ export const MobileSideNav = ({ isOpen, onClose }) => {
   const { memberStatusId } = useUserContext();
 
   return (
-    <Box>
-      <Drawer placement="left" onClose={onClose} isOpen={isOpen} size="xs">
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerHeader borderBottomWidth="1px" fontWeight="normal">
-            {' '}
-            <Flex mt={1}>
-              <PbIconButton Icon={MdMenu} label="" onClick={onClose} color={theme.colors.iconColor[colorMode]} fontSize="1em" />
-              <Banner ml={2}>PowerBuddy</Banner>
-            </Flex>
-          </DrawerHeader>
-          <DrawerBody>
-            <LeftMenuItems menuOpen={isOpen} onClose={onClose} memberStatusId={memberStatusId} />
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
-    </Box>
+    <DrawerForm
+      isOpen={isOpen}
+      onClose={onClose}
+      placement="left"
+      size="xs"
+      hasCloseButton={false}
+      title={
+        <Flex mt={1}>
+          <PbIconButton Icon={MdMenu} label="" onClick={onClose} color={theme.colors.iconColor[colorMode]} fontSize="1em" />
+          <Banner ml={2}>PowerBuddy</Banner>
+        </Flex>
+      }>
+      <LeftMenuItems menuOpen={isOpen} onClose={onClose} memberStatusId={memberStatusId} />
+    </DrawerForm>
   );
 };
 

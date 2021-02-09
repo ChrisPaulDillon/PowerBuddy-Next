@@ -1,30 +1,27 @@
-import React, { ReactNode } from 'react';
-import { Box, Drawer, DrawerOverlay, DrawerContent, DrawerHeader, DrawerBody, Flex, IconButton } from '@chakra-ui/react';
-import { IoIosExit } from 'react-icons/all';
-import { Banner, HeadingMd } from './Texts';
-import { CenterColumnFlex, CenterRowFlex } from '../layout/Flexes';
+import React from 'react';
+import { Box, Drawer, DrawerOverlay, DrawerContent, DrawerHeader, DrawerBody, Flex } from '@chakra-ui/react';
+import { CenterColumnFlex } from '../layout/Flexes';
 import { PbPrimaryButton } from './Buttons';
+import { PlacementType, SizeType } from '../../types/unionTypes';
+import { DrawerCloseButton } from '@chakra-ui/react';
 
 interface IDrawerBaseProps {
+  title: string | React.ReactNode;
   isOpen: boolean;
   onClose: () => void;
   hasCloseButton?: boolean;
+  placement?: PlacementType;
+  size?: SizeType;
   children: any;
 }
 
-const DrawerBase: React.FC<IDrawerBaseProps> = ({ isOpen, onClose, hasCloseButton = true, children, ...rest }) => (
-  <Drawer placement="left" onClose={onClose} isOpen={isOpen} size="full" {...rest}>
+const DrawerBase: React.FC<IDrawerBaseProps> = ({ title, isOpen, onClose, hasCloseButton = true, size, placement, children, ...rest }) => (
+  <Drawer placement={placement ?? 'left'} onClose={onClose} isOpen={isOpen} size={size ?? 'full'} {...rest}>
     <DrawerOverlay />
     <DrawerContent>
-      <DrawerHeader borderBottomWidth="1px" fontWeight="light" textAlign="center">
-        <Flex>
-          <CenterRowFlex>
-            {hasCloseButton && (
-              <IconButton aria-label="" icon={<IoIosExit />} onClick={onClose} variant="ghost" size="md" isRound fontSize="1em" pt="1" />
-            )}
-            <Banner>PowerBuddy</Banner>
-          </CenterRowFlex>
-        </Flex>
+      {hasCloseButton && <DrawerCloseButton onClick={onClose} />}
+      <DrawerHeader fontWeight="light" textAlign="center">
+        {title}
       </DrawerHeader>
       <DrawerBody>{children}</DrawerBody>
     </DrawerContent>
@@ -32,11 +29,9 @@ const DrawerBase: React.FC<IDrawerBaseProps> = ({ isOpen, onClose, hasCloseButto
 );
 
 interface IDrawerBasicProps extends IDrawerBaseProps {
-  title: string | ReactNode;
   body?: string;
   actionText: string;
   actionColour?: string;
-  size: string;
   loading?: boolean;
   onClick: () => void;
 }
@@ -49,14 +44,15 @@ export const DrawerBasic: React.FC<IDrawerBasicProps> = ({
   onClick,
   actionText,
   actionColour,
+  placement,
+  size,
   loading,
   children,
   ...rest
 }) => {
   return (
-    <DrawerBase isOpen={isOpen} onClose={onClose}>
+    <DrawerBase isOpen={isOpen} onClose={onClose} placement={placement} size={size} title={title}>
       <CenterColumnFlex>
-        <HeadingMd>{title}</HeadingMd>
         <Box
           mt="2"
           overflowY="scroll"
@@ -82,17 +78,12 @@ export const DrawerBasic: React.FC<IDrawerBasicProps> = ({
 
 interface IDrawerFormProps extends IDrawerBaseProps {
   title: string | React.ReactNode;
-  size: string;
-  hasCloseButton?: boolean;
 }
 
-export const DrawerForm: React.FC<IDrawerFormProps> = ({ title, isOpen, onClose, hasCloseButton, children, ...rest }) => {
+export const DrawerForm: React.FC<IDrawerFormProps> = ({ title, isOpen, onClose, hasCloseButton, size, placement, children, ...rest }) => {
   return (
-    <DrawerBase isOpen={isOpen} onClose={onClose} hasCloseButton={hasCloseButton}>
+    <DrawerBase title={title} isOpen={isOpen} onClose={onClose} hasCloseButton={hasCloseButton} size={size} placement={placement}>
       <Flex flexDir="column">
-        <CenterColumnFlex>
-          <HeadingMd>{title}</HeadingMd>
-        </CenterColumnFlex>
         <Box
           mt="2"
           overflowY="scroll"
@@ -107,25 +98,5 @@ export const DrawerForm: React.FC<IDrawerFormProps> = ({ title, isOpen, onClose,
         </Box>
       </Flex>
     </DrawerBase>
-  );
-};
-
-export const PbDrawerHeaderless = ({ title, isOpen, onOpen, onClose, children, ...rest }: any) => {
-  return (
-    <Box overflowY="scroll">
-      <Drawer placement="left" onClose={onClose} isOpen={isOpen} {...rest} overflowY="scroll">
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerBody>
-            <Flex flexDir="column">
-              <CenterColumnFlex>
-                <HeadingMd>{title}</HeadingMd>
-              </CenterColumnFlex>
-              <Box mt="4">{children}</Box>
-            </Flex>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
-    </Box>
   );
 };

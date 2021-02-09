@@ -63,9 +63,6 @@ const NavBar: React.FC<INavBarProps> = ({}) => {
           {SCREEN_MOBILE ? (
             <Box px={2}>
               <Avatar size="sm" name={userName} onClick={onMobileOpen} />
-              <DrawerForm isOpen={isMobileOpen} onClose={onMobileClose} size="full" title={userName}>
-                <RightNav userName={userName} onClose={onMobileClose} />
-              </DrawerForm>
             </Box>
           ) : (
             <MenuBase button={<Avatar size="md" name={userName} />}>
@@ -75,6 +72,11 @@ const NavBar: React.FC<INavBarProps> = ({}) => {
         </Flex>
       </Stack>
       {isLeftNavOpen && <MobileSideNav isOpen={isLeftNavOpen} onClose={onLeftNavClose} />}
+      {isMobileOpen && (
+        <DrawerForm isOpen={isMobileOpen} onClose={onMobileClose} size="xs" placement="right" title={userName}>
+          <RightNav userName={userName} onClose={onMobileClose} />
+        </DrawerForm>
+      )}
     </Flex>
   );
 };
