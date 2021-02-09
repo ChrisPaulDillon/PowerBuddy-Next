@@ -8,7 +8,7 @@ import { SizeType } from '../../types/unionTypes';
 
 interface IUserAvatarProps {
   userName?: string;
-  size: SizeType;
+  size?: SizeType;
 }
 
 const UserAvatar: React.FC<IUserAvatarProps> = ({ userName, size, ...rest }) => {
