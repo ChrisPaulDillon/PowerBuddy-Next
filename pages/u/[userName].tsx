@@ -10,7 +10,11 @@ import MemberCrown from '../../components/shared/MemberCrown';
 import { PageContent, PageHead } from '../../components/layout/Page';
 import axios from 'axios';
 
-const UserProfile: NextPage = ({ publicUser }: any) => {
+interface IUserProfileProps {
+  publicUser: IPublicUser;
+}
+
+const UserProfile: NextPage<IUserProfileProps> = ({ publicUser }) => {
   return (
     <Box>
       <PageHead
@@ -19,7 +23,7 @@ const UserProfile: NextPage = ({ publicUser }: any) => {
       />
       <PageContent>
         <CenterColumnFlex>
-          <UserAvatar name={publicUser?.userName} size="lg" />
+          <UserAvatar userName={publicUser?.userName} size="lg" />
           <PageTitle>{publicUser?.userName}'s Profile </PageTitle>
           <MemberCrown memberStatusId={publicUser?.memberStatusId} />
           <CenterColumnFlex mt={2}>

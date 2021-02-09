@@ -114,7 +114,6 @@ export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
       {menuSection === MenuSection.Profile && <MenuDarkMode onClickBack={() => setMenuSection(MenuSection.Main)} />}
       {menuSection === MenuSection.Main && (
         <>
-          
           {userMenu.groups.map((group, idx) => (
             <Box key={idx}>
               {group.items.map((item: any) => {

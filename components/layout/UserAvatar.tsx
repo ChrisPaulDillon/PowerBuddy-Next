@@ -4,14 +4,19 @@ import { PbToolTip } from '../common/ToolTips';
 import { PROFILE_URL } from '../../InternalLinks';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { SizeType } from '../../types/unionTypes';
 
-const UserAvatar = ({ userName, ...rest }: any) => {
+interface IUserAvatarProps {
+  userName?: string;
+  size: SizeType;
+}
+
+const UserAvatar: React.FC<IUserAvatarProps> = ({ userName, size, ...rest }) => {
   const router = useRouter();
-  const profileLink = `${PROFILE_URL}/${userName}`;
   return (
-    <Link href={profileLink}>
+    <Link href={`${PROFILE_URL}/${userName}`}>
       <PbToolTip label={userName}>
-        <Avatar size="md" borderWidth={1} name={userName} {...rest} onClick={() => router.push(profileLink)} />
+        <Avatar size={size ?? 'md'} borderWidth={1} name={userName} {...rest} onClick={() => router.push(`${PROFILE_URL}/${userName}`)} />
       </PbToolTip>
     </Link>
   );
