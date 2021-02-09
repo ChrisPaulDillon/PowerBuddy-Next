@@ -36,7 +36,7 @@ export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
   const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
 
   const logoutUser = async () => {
-    const response = await axios.post(LogoutUserUrl(localStorage.getItem('refreshToken')));
+    await axios.post(LogoutUserUrl(localStorage.getItem('refreshToken')));
   };
 
   const userMenu = useMemo(

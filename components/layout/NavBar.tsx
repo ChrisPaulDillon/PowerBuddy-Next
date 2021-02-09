@@ -21,10 +21,10 @@ interface INavBarProps {
 const NavBar: React.FC<INavBarProps> = ({}) => {
   const { userName } = useUserContext();
   const { colorMode } = useColorMode();
-  const { SCREEN_MOBILE } = useScreenSizes();
+  const { SCREEN_MOBILE, SCREEN_DESKTOP } = useScreenSizes();
 
   const { isOpen: isLeftNavOpen, onOpen: onLeftNavOpen, onClose: onLeftNavClose } = useDisclosure();
-  const { isOpen: isMobileOpen, onOpen: onMobileOpen, onClose: onMobileClose } = useDisclosure();
+  const { onClose: onMobileClose } = useDisclosure();
 
   const handleBurgerMenuPress = () => {
     if (SCREEN_MOBILE) {
@@ -60,18 +60,9 @@ const NavBar: React.FC<INavBarProps> = ({}) => {
               <TemplateSearchBar />
             </Box>
           )} */}
-          {SCREEN_MOBILE ? (
-            <Box px={2}>
-              <Avatar size="sm" name={userName} onClick={onMobileOpen} />
-              <DrawerForm isOpen={isMobileOpen} onClose={onMobileClose} size="full" title={userName}>
-                <RightNav userName={userName} onClose={onMobileClose} />
-              </DrawerForm>
-            </Box>
-          ) : (
-            <MenuBase button={<Avatar size="md" name={userName} />}>
-              <RightNav userName={userName} onClose={onMobileClose} />
-            </MenuBase>
-          )}
+          <MenuBase button={<Avatar size={SCREEN_MOBILE ? 'sm' : 'md'} name={userName} />}>
+            <RightNav userName={userName} onClose={onMobileClose} />
+          </MenuBase>
         </Flex>
       </Stack>
       {isLeftNavOpen && <MobileSideNav isOpen={isLeftNavOpen} onClose={onLeftNavClose} />}
