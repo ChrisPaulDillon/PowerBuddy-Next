@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Select } from '@chakra-ui/react';
 import { CenterColumnFlex, CenterRowFlex } from '../../layout/Flexes';
 import { FormInput } from '../../common/Inputs';
 import { TextSm, TextXs } from '../../common/Texts';
@@ -12,6 +11,7 @@ import { validateInput } from '../../../util/formInputs';
 import { ITemplateProgram, ITemplateWeek } from 'powerbuddy-shared/lib';
 import ITemplateExercise from 'powerbuddy-shared/lib/interfaces/templates';
 import { Box, Flex } from '../../../chakra/Layout';
+import { Select } from '../../../chakra/Forms';
 
 const CreateTemplateProgram = () => {
   const [noOfWeeks, setNoOfWeeks] = useState<number>(0);

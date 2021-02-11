@@ -1,10 +1,10 @@
 import React from 'react';
 import { CenterColumnFlex } from '../../layout/Flexes';
 import { PbStack } from '../../common/Stacks';
-import { Checkbox } from '@chakra-ui/react';
 import { TextXs, TextSm } from '../../common/Texts';
 import moment from 'moment';
 import { Flex } from '../../../chakra/Layout';
+import { Checkbox } from '../../../chakra/Forms';
 
 interface IProps {
   selectedDate: Date;

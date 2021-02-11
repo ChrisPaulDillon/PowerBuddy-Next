@@ -1,8 +1,8 @@
 import React from 'react';
-import { IconButton } from '@chakra-ui/react';
 import { PbToolTip } from './ToolTips';
 import { IconType } from 'react-icons';
 import { SizeType } from '../../types/unionTypes';
+import { IconButton } from '../../chakra/Forms';
 
 interface IProps {
   label: string;

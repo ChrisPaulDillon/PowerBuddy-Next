@@ -1,8 +1,7 @@
-import { Flex } from '@chakra-ui/react';
 import moment from 'moment';
 import { ILiftingStat, ILiftingStatGrouped } from 'powerbuddy-shared';
 import React from 'react';
-import { Box } from '../../chakra/Layout';
+import { Box, Flex } from '../../chakra/Layout';
 import { PbStack } from '../common/Stacks';
 import { HeadingMd, TextSm } from '../common/Texts';
 

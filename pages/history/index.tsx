@@ -1,5 +1,4 @@
 import { NextPage } from 'next';
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 import React from 'react';
 import { HeadingMd, PageTitle } from '../../components/common/Texts';
 import { CenterColumnFlex } from '../../components/layout/Flexes';
@@ -13,6 +12,7 @@ import { ErrorMessage } from '../../components/common/Error';
 import { PageContent, PageHead } from '../../components/layout/Page';
 import { withAuthorized } from '../../util/authMiddleware';
 import { Box, Flex } from '../../chakra/Layout';
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from '../../chakra/Disclosure';
 
 const Index: NextPage = () => {
   const { loading, data: workoutLogStats, statusCode } = useAxios<IWorkoutLogStats>(GetAllWorkoutLogStatsUrl());

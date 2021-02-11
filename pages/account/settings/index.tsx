@@ -1,8 +1,8 @@
-import { Box } from '@chakra-ui/react';
 import { NextPage } from 'next';
 import { IUser } from 'powerbuddy-shared/lib';
 import React from 'react';
 import { GetLoggedInUsersProfileUrl } from '../../../api/account/user';
+import { Box } from '../../../chakra/Layout';
 import AccountSettings from '../../../components/account/settings/AccountSettings';
 import { CenterColumnFlex } from '../../../components/layout/Flexes';
 import { PageHead, PageContent } from '../../../components/layout/Page';

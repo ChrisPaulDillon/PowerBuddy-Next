@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { CenterColumnFlex } from '../layout/Flexes';
-import { TabList, TabPanels, TabPanel, Tabs, Tab, useDisclosure } from '@chakra-ui/react';
+import { useDisclosure } from '@chakra-ui/react';
 import ExerciseList from './ExerciseList';
 import AdminModalExerciseFactory, { AdminModalEnum } from './factories/AdminModalExerciseFactory';
 import { PrimaryButton } from '../common/Buttons';
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from '../../chakra/Disclosure';
 
 const AdminIndexPage = () => {
   const [modalOption, setModalOption] = useState<AdminModalEnum>(AdminModalEnum.None);

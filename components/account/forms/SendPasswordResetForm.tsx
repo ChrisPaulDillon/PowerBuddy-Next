@@ -1,10 +1,10 @@
-import { Link, useToast } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { MdAccountBox } from 'react-icons/md';
 import { TiArrowBack } from 'react-icons/ti';
 import { SendPasswordResetEmailRequest } from '../../../api/public/email';
-import { FormControl, FormErrorMessage } from '../../../chakra/Forms';
+import { FormControl, FormErrorMessage, Link } from '../../../chakra/Forms';
 import { Box, Flex } from '../../../chakra/Layout';
 import { validateEmailInput } from '../../../util/formInputs';
 import { PrimaryButton } from '../../common/Buttons';

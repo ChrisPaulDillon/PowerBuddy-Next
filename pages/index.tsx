@@ -1,4 +1,3 @@
-import { Box } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import { GetWorkoutWeekWithDateUrl } from '../api/account/workoutLog';
@@ -11,6 +10,7 @@ import { useAxios } from '../hooks/useAxios';
 import { IWorkoutWeekSummary } from 'powerbuddy-shared';
 import { NextPage } from 'next';
 import { withAuthorized } from '../util/authMiddleware';
+import { Box } from '../chakra/Layout';
 
 const Index: NextPage = () => {
   const router = useRouter();

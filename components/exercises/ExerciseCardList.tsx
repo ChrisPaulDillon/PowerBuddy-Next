@@ -1,5 +1,4 @@
 import React from 'react';
-import { Text } from '@chakra-ui/react';
 import { Card } from '../layout/Card';
 import { HeadingMd, TextSm, TextXs } from '../common/Texts';
 import { useRouter } from 'next/router';
@@ -31,7 +30,7 @@ const ExerciseCardSingle: React.FC<IExercise> = ({ exerciseId, exerciseName, exe
         </HeadingMd>
       </Box>
       <TextSm color="gray.600" fontSize="sm">
-        {exerciseTypeName && <Text>{exerciseTypeName} Exercise</Text>}
+        {exerciseTypeName && <TextSm>{exerciseTypeName} Exercise</TextSm>}
       </TextSm>
       <TextXs fontWeight="semibold" letterSpacing="wide" fontSize="xs" textTransform="uppercase" m="2"></TextXs>
       <Box pt="2">

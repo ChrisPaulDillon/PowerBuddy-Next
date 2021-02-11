@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useToast, LightMode } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { SelectSearchable } from '../../common/SearchSelect';
 import { PrimaryButton } from '../../common/Buttons';
@@ -16,6 +16,7 @@ import { ICreateWorkoutExercise } from 'powerbuddy-shared';
 import { ToastError, ToastSuccess } from '../../shared/Toasts';
 import { Box, Flex } from '../../../chakra/Layout';
 import { Button, FormControl, FormErrorMessage } from '../../../chakra/Forms';
+import { LightMode } from '../../../chakra/Misc';
 
 interface IProps {
   onClose: () => void;

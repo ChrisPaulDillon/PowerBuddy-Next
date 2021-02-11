@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useToast } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 import { TextSm } from '../common/Texts';
 import moment from 'moment';
 import { formatDate } from '../../util/dateHelper';
@@ -10,6 +10,7 @@ import { DeleteLiftingStatAuditUrl } from '../../api/account/liftingStats';
 import { ILiftFeed } from 'powerbuddy-shared';
 import { ToastSuccess } from '../shared/Toasts';
 import { Box, Flex } from '../../chakra/Layout';
+import { Link } from '../../chakra/Forms';
 
 interface IProps {
   liftFeed: ILiftFeed[];
@@ -36,7 +37,6 @@ const LiftFeedSingle: React.FC<ILiftFeedSingleProps> = ({ liftFeed }) => {
   const { repRange, dateChanged, weight, exerciseName, exerciseId, liftingStatAuditId } = liftFeed;
 
   const toast = useToast();
-  const onClick = () => `/personalBests/${exerciseId}`;
 
   const deletePersonalBestAudit = async () => {
     setLoading(true);
@@ -60,7 +60,7 @@ const LiftFeedSingle: React.FC<ILiftFeedSingleProps> = ({ liftFeed }) => {
     <Box p="2">
       <TextSm>
         {repRange}RM achieved at {weight}kg on{' '}
-        <Link to={onClick} color="teal.500">
+        <Link href={`/personalBests/${exerciseId}`} color="teal.500">
           {exerciseName}
         </Link>{' '}
         {moment(formatDate(dateChanged)).isSame(new Date(), 'day') ? '' : 'on'} {formatDate(dateChanged)}!

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Select, useToast } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 import { CenterColumnFlex } from '../../layout/Flexes';
 import { PrimaryButton } from '../../common/Buttons';
 import CalendarSelectFrom from './CalendarSelectForm';
@@ -16,7 +16,7 @@ import { CreateWorkoutLogFromScratchUrl } from '../../../api/account/workoutLog'
 import axios from 'axios';
 import { ToastError, ToastSuccess, ToastWarning } from '../../shared/Toasts';
 import { Box } from '../../../chakra/Layout';
-import { FormControl, FormErrorMessage } from '../../../chakra/Forms';
+import { FormControl, FormErrorMessage, Select } from '../../../chakra/Forms';
 
 export interface IWorkoutLogInputScratch {
   noOfWeeks: number;

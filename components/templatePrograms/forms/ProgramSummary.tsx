@@ -1,5 +1,5 @@
-import { Flex } from '@chakra-ui/react';
 import React from 'react';
+import { Flex } from '../../../chakra/Layout';
 import { FormInput } from '../../common/Inputs';
 import { TextXs } from '../../common/Texts';
 

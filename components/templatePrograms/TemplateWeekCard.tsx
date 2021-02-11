@@ -1,11 +1,10 @@
 import React from 'react';
-import { Flex } from '@chakra-ui/react';
 import { Card } from '../layout/Card';
 import { TextSm, TextXs, HeadingMdStatic } from '../common/Texts';
 import { TagTemplateRepScheme } from '../shared/Tags';
 import { ITemplateWeek, ITemplateDay, ITemplateRepScheme } from 'powerbuddy-shared/lib';
 import ITemplateExercise from 'powerbuddy-shared/lib/interfaces/templates';
-import { Box } from '../../chakra/Layout';
+import { Box, Flex } from '../../chakra/Layout';
 
 export const TemplateWeekCard: React.FC<ITemplateWeek> = ({ templateDays }) => {
   return (

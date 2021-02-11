@@ -1,9 +1,7 @@
-import { ModalFooter } from '@chakra-ui/react';
 import React from 'react';
 import LoginFormFactory from '../account/factories/LoginFormFactory';
 import { ModalDrawerForm } from '../common/ModalDrawers';
-import { ModalBase } from '../common/Modals';
-import { Banner, HeadingMd, TextSm } from '../common/Texts';
+import { Banner, HeadingMd } from '../common/Texts';
 import { CenterColumnFlex } from '../layout/Flexes';
 
 interface ILoginModalProps {

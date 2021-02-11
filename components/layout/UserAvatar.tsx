@@ -1,10 +1,10 @@
 import React from 'react';
-import { Avatar } from '@chakra-ui/react';
 import { PbToolTip } from '../common/ToolTips';
 import { PROFILE_URL } from '../../InternalLinks';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { SizeType } from '../../types/unionTypes';
+import { Avatar } from '../../chakra/Forms';
 
 interface IUserAvatarProps {
   userName?: string;

@@ -34,6 +34,7 @@ import {
   FormLabel as ChakraFormLabel,
   FormControl as ChakraFormControl,
   FormErrorMessage as ChakraFormErrorMessage,
+  Avatar as ChakraAvatar,
   IconProps,
   BoxProps,
   FormLabelProps,
@@ -46,6 +47,7 @@ import {
   InputGroupProps,
   FormErrorMessageProps,
   FormControlProps,
+  AvatarProps,
 } from '@chakra-ui/react';
 import { ElementType, FC } from 'react';
 
@@ -169,4 +171,8 @@ export const FormControl: React.FC<FormControlProps> = ({ ...rest }) => {
 
 export const FormErrorMessage: React.FC<FormErrorMessageProps> = ({ ...rest }) => {
   return <ChakraFormErrorMessage {...rest} />;
+};
+
+export const Avatar: React.FC<AvatarProps> = ({ ...rest }) => {
+  return <ChakraAvatar {...rest} />;
 };

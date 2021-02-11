@@ -1,6 +1,6 @@
-import { Select, Switch } from '@chakra-ui/react';
 import { IWeightInput } from 'powerbuddy-shared';
 import React, { useState } from 'react';
+import { Select, Switch } from '../../../chakra/Forms';
 import { Box, Flex } from '../../../chakra/Layout';
 import { FormWeightInput } from '../../common/Inputs';
 import { PbStack } from '../../common/Stacks';
@@ -21,7 +21,7 @@ const RepeatTemplateForm: React.FC<IProps> = ({ incrementalWeightInput, updateIn
     <CenterColumnFlex>
       <Flex>
         <TextSm pr="2">Repeat Program?</TextSm>
-        <Switch onChange={() => setRepeatEnabled(!repeatEnabled)}></Switch>
+        <Switch onChange={() => setRepeatEnabled(!repeatEnabled)} />
       </Flex>
       {repeatEnabled ? (
         <Box>

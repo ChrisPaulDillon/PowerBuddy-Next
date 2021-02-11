@@ -1,5 +1,6 @@
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, Box } from '@chakra-ui/react';
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody } from '@chakra-ui/react';
 import React from 'react';
+import { Box } from '../../chakra/Layout';
 import { CenterColumnFlex } from '../layout/Flexes';
 import { PrimaryButton, SecondaryButton } from './Buttons';
 import { PbStack } from './Stacks';
