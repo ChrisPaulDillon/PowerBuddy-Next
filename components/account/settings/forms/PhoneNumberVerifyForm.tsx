@@ -1,11 +1,12 @@
-import { Flex, FormControl, FormErrorMessage, Icon, useToast } from '@chakra-ui/react';
+import { FormControl, FormErrorMessage, useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import { IUser } from 'powerbuddy-shared/lib';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AiFillCheckCircle, ImBlocked } from 'react-icons/all';
 import { RequestSmsVerificationUrl, SendSmsVerificationUrl } from '../../../../api/account/auth';
-import { Box } from '../../../../chakra/Layout';
+import { Icon } from '../../../../chakra/Buttons';
+import { Box, Flex } from '../../../../chakra/Layout';
 import { validateInput } from '../../../../util/formInputs';
 import { PrimaryButton } from '../../../common/Buttons';
 import { FormInput } from '../../../common/Inputs';

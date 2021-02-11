@@ -1,4 +1,4 @@
-import { Flex, useColorMode, useDisclosure, useToast } from '@chakra-ui/react';
+import { useColorMode, useDisclosure, useToast } from '@chakra-ui/react';
 import moment from 'moment';
 import React, { useState } from 'react';
 import { CgArrowTopRight } from 'react-icons/cg';
@@ -20,7 +20,7 @@ import { LoginModal } from '../shared/Modals';
 import { IWorkoutWeekSummary, ICreateWorkoutDayOptions, IWorkoutDaySummary, IWorkoutExerciseSummary } from 'powerbuddy-shared/lib';
 import { CreateWorkoutDayUrl, GetWorkoutDayIdByDateUrl } from '../../api/account/workoutDay';
 import { ToastSuccess } from '../shared/Toasts';
-import { Box } from '../../chakra/Layout';
+import { Box, Flex } from '../../chakra/Layout';
 
 interface IProps {
   weekSummary: IWorkoutWeekSummary;

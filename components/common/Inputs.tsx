@@ -4,7 +4,6 @@ import {
   Input,
   InputRightElement,
   InputLeftElement,
-  Icon,
   Stack,
   NumberInput,
   BoxProps,
@@ -13,7 +12,7 @@ import {
   NumberIncrementStepper,
   NumberInputStepper,
 } from '@chakra-ui/react';
-import { Button } from '../../chakra/Buttons';
+import { Button, Icon } from '../../chakra/Buttons';
 
 interface IProps extends BoxProps {
   name?: string;

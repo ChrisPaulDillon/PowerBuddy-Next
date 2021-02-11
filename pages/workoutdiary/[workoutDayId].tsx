@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { Flex, useDisclosure, useToast } from '@chakra-ui/react';
+import { useDisclosure, useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { WORKOUT_DIARY_URL } from '../../InternalLinks';
@@ -34,7 +34,7 @@ import { PageContent, PageHead } from '../../components/layout/Page';
 import { ToastError, ToastSuccess } from '../../components/shared/Toasts';
 import { GiRun } from 'react-icons/all';
 import AddWorkoutTemplateForm from '../../components/workouts/forms/AddWorkoutTemplateForm';
-import { Box } from '../../chakra/Layout';
+import { Box, Flex } from '../../chakra/Layout';
 
 const WorkoutDay: NextPage = () => {
   const router = useRouter();

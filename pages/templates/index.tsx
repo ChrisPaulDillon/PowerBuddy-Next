@@ -1,6 +1,6 @@
 import { GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { Flex, useDisclosure } from '@chakra-ui/react';
+import { useDisclosure } from '@chakra-ui/react';
 import axios from 'axios';
 import React from 'react';
 import { GetAllTemplateProgramsUrl } from '../../api/public/template';
@@ -16,7 +16,7 @@ import TemplateProgramCardList from '../../components/templatePrograms/TemplateP
 import CreateProgramLogFromScratchForm from '../../components/templatePrograms/forms/CreateProgramLogFromScratchForm';
 import { PageContent, PageHead } from '../../components/layout/Page';
 import { useUserContext } from '../../components/users/UserContext';
-import { Box } from '../../chakra/Layout';
+import { Box, Flex } from '../../chakra/Layout';
 
 const Index: NextPage = ({ templates }: any) => {
   const router = useRouter();

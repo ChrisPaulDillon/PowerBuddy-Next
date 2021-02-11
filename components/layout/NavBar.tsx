@@ -1,10 +1,9 @@
 import React from 'react';
-import { Flex, useColorMode, Stack, useDisclosure, Avatar, IconButton } from '@chakra-ui/react';
+import { useColorMode, useDisclosure, Avatar, IconButton } from '@chakra-ui/react';
 import { Banner } from '../common/Texts';
 import { MobileSideNav } from './LeftNav';
 import useScreenSizes from '../../hooks/useScreenSizes';
 import RightNav from './RightMenu';
-import { DrawerForm } from '../common/Drawers';
 import MenuBase from '../common/Menus';
 import { MdMenu } from 'react-icons/all';
 import { IconType } from 'react-icons';
@@ -12,7 +11,7 @@ import TTIconButton from '../common/IconButtons';
 import theme from '../../theme';
 import Link from 'next/link';
 import { useUserContext } from '../users/UserContext';
-import { Box } from '../../chakra/Layout';
+import { Box, Flex, Stack } from '../../chakra/Layout';
 
 interface INavBarProps {
   menuOpen: boolean;
@@ -22,7 +21,7 @@ interface INavBarProps {
 const NavBar: React.FC<INavBarProps> = ({}) => {
   const { userName } = useUserContext();
   const { colorMode } = useColorMode();
-  const { SCREEN_MOBILE, SCREEN_DESKTOP } = useScreenSizes();
+  const { SCREEN_MOBILE } = useScreenSizes();
 
   const { isOpen: isLeftNavOpen, onOpen: onLeftNavOpen, onClose: onLeftNavClose } = useDisclosure();
   const { onClose: onMobileClose } = useDisclosure();

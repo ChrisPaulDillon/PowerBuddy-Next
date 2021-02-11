@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Flex, Link, useToast } from '@chakra-ui/react';
+import { Link, useToast } from '@chakra-ui/react';
 import { TextSm } from '../common/Texts';
 import moment from 'moment';
 import { formatDate } from '../../util/dateHelper';
@@ -9,7 +9,7 @@ import Axios from 'axios';
 import { DeleteLiftingStatAuditUrl } from '../../api/account/liftingStats';
 import { ILiftFeed } from 'powerbuddy-shared';
 import { ToastSuccess } from '../shared/Toasts';
-import { Box } from '../../chakra/Layout';
+import { Box, Flex } from '../../chakra/Layout';
 
 interface IProps {
   liftFeed: ILiftFeed[];

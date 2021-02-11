@@ -1,4 +1,4 @@
-import { Flex, FormControl, FormErrorMessage, InputGroup, InputRightElement, Link, useToast } from '@chakra-ui/react';
+import { FormControl, FormErrorMessage, InputGroup, InputRightElement, Link, useToast } from '@chakra-ui/react';
 import { IUser } from 'powerbuddy-shared/lib';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -6,7 +6,7 @@ import { MdAccountBox, TiArrowBack } from 'react-icons/all';
 import { RegisterUserRequest } from '../../../api/account/auth';
 import { SendEmailConfirmationRequest } from '../../../api/public/email';
 import { Button } from '../../../chakra/Buttons';
-import { Box } from '../../../chakra/Layout';
+import { Box, Flex } from '../../../chakra/Layout';
 import { validateEmailInput, validateInput, validatePassword } from '../../../util/formInputs';
 import { PrimaryButton } from '../../common/Buttons';
 import TTIconButton from '../../common/IconButtons';

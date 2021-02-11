@@ -1,4 +1,4 @@
-import { Accordion, Divider, Link, Stack, Switch, Text, useColorMode, useDisclosure, useToast } from '@chakra-ui/react';
+import { Accordion, Divider, Link, Switch, Text, useColorMode, useDisclosure, useToast } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useState } from 'react';
@@ -15,7 +15,7 @@ import axios from 'axios';
 import { LogoutUserUrl } from '../../api/account/auth';
 import { setAuthorizationToken } from '../../util/axiosUtils';
 import { ToastSuccess } from '../shared/Toasts';
-import { Box } from '../../chakra/Layout';
+import { Box, Stack } from '../../chakra/Layout';
 import { Button } from '../../chakra/Buttons';
 
 export enum MenuSection {
@@ -181,13 +181,14 @@ const MenuPageSingle = ({ title, description, onClickBack, children }: any) => {
 };
 
 export const MenuDarkMode = ({ onClickBack }: any) => {
-  const { toggleColorMode } = useColorMode();
+  const { colorMode, toggleColorMode } = useColorMode();
+
   return (
     <MainMenuContent>
       <MenuPageSingle title="Dark Mode" description="Switch between dark mode" onClickBack={onClickBack}>
         <Stack isInline align="center" justifyContent="space-between">
           <TextSm>Dark Mode Enabled:</TextSm>
-          <Switch onChange={toggleColorMode} defaultIsChecked={true}></Switch>
+          <Switch onChange={toggleColorMode} defaultIsChecked={colorMode === 'dark' ? true : false} />
         </Stack>
       </MenuPageSingle>
     </MainMenuContent>

@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { Badge, Flex, Tab, TabList, TabPanel, TabPanels, Tabs, useDisclosure } from '@chakra-ui/react';
+import { Badge, Tab, TabList, TabPanel, TabPanels, Tabs, useDisclosure } from '@chakra-ui/react';
 import React from 'react';
 import { GetAllTemplateProgramsUrl, GetTemplateProgramByIdUrl } from '../../api/public/template';
 import { ITemplateProgram, ITemplateProgramExtended } from 'powerbuddy-shared';
@@ -18,7 +18,7 @@ import { TemplateWeekCard } from '../../components/templatePrograms/TemplateWeek
 import { PageContent, PageHead } from '../../components/layout/Page';
 import { useUserContext } from '../../components/users/UserContext';
 import axios from 'axios';
-import { Box } from '../../chakra/Layout';
+import { Box, Flex } from '../../chakra/Layout';
 
 const TemplateProgramSingle: NextPage = ({ template }: any) => {
   const router = useRouter();

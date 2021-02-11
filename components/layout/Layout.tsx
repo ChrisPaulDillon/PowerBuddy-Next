@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import NavBar from './NavBar';
 import Page from './Page';
-import { Flex, useColorMode, useDisclosure } from '@chakra-ui/react';
+import { useColorMode, useDisclosure } from '@chakra-ui/react';
 import FirstVisitAlert from '../misc/FirstVisitAlert';
 import theme from '../../theme';
 import { useUserContext } from '../users/UserContext';
 import { ModalDrawerForm } from '../common/ModalDrawers';
 import useSignalR from '../../signalR/useSignalR';
+import { Flex } from '../../chakra/Layout';
 
 const Layout = ({ children }: any) => {
   const { colorMode } = useColorMode();

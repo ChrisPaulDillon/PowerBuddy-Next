@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, useColorMode, Stack, Divider } from '@chakra-ui/react';
+import { useColorMode, Divider } from '@chakra-ui/react';
 import { BsFillGrid3X3GapFill, BsCalendarFill } from 'react-icons/bs';
 import { RiAdminLine, FaHistory, FaUserFriends } from 'react-icons/all';
 import theme from '../../theme';
@@ -14,7 +14,7 @@ import { MenuItem } from '../common/Menus';
 import Link from 'next/link';
 import { useUserContext } from '../users/UserContext';
 import { DrawerForm } from '../common/Drawers';
-import { Box } from '../../chakra/Layout';
+import { Box, Flex } from '../../chakra/Layout';
 
 const sideMenu = {
   groups: [
