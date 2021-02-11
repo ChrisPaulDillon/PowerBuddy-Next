@@ -7,7 +7,7 @@ import { useWorkoutContext } from '../../workouts/WorkoutContext';
 import { DeleteWorkoutExerciseUrl } from '../../../api/account/workoutExercise';
 import { ToastError, ToastSuccess } from '../../shared/Toasts';
 import { Box } from '../../../chakra/Layout';
-import { Button } from '../../../chakra/Buttons';
+import { Button } from '../../../chakra/Forms';
 
 interface IProps {
   onClose: () => void;

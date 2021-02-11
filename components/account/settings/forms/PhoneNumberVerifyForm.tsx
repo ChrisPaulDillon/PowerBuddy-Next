@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AiFillCheckCircle, ImBlocked } from 'react-icons/all';
 import { RequestSmsVerificationUrl, SendSmsVerificationUrl } from '../../../../api/account/auth';
-import { Icon } from '../../../../chakra/Buttons';
+import { Icon } from '../../../../chakra/Forms';
 import { Box, Flex } from '../../../../chakra/Layout';
 import { validateInput } from '../../../../util/formInputs';
 import { PrimaryButton } from '../../../common/Buttons';

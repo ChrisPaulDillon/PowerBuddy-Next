@@ -5,7 +5,7 @@ import { HeadingMd, TextSm, TextXs } from '../common/Texts';
 import { useRouter } from 'next/router';
 import { IExercise } from 'powerbuddy-shared';
 import { Box, Flex } from '../../chakra/Layout';
-import { Button } from '../../chakra/Buttons';
+import { Button } from '../../chakra/Forms';
 
 interface Props {
   exercises: IExercise[];

@@ -8,7 +8,7 @@ import axios from 'axios';
 import { UpdateWorkoutExerciseNoteUrl } from '../../../api/account/workoutExercise';
 import { useWorkoutContext } from '../../workouts/WorkoutContext';
 import { ToastError, ToastSuccess } from '../../shared/Toasts';
-import { Button } from '../../../chakra/Buttons';
+import { Button } from '../../../chakra/Forms';
 
 interface IProps {
   onClose: () => void;

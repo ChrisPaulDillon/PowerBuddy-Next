@@ -16,7 +16,7 @@ import { LogoutUserUrl } from '../../api/account/auth';
 import { setAuthorizationToken } from '../../util/axiosUtils';
 import { ToastSuccess } from '../shared/Toasts';
 import { Box, Stack } from '../../chakra/Layout';
-import { Button } from '../../chakra/Buttons';
+import { Button } from '../../chakra/Forms';
 
 export enum MenuSection {
   Main,

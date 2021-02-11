@@ -7,7 +7,7 @@ import EditProfileForm from './forms/EditProfileForm';
 import SecurityGroup from './SecurityGroup';
 import { IUser } from 'powerbuddy-shared/lib';
 import { Box, Flex } from '../../../chakra/Layout';
-import { Button } from '../../../chakra/Buttons';
+import { Button } from '../../../chakra/Forms';
 
 export enum MenuSection {
   Profile,

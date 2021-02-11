@@ -9,7 +9,7 @@ import { UpdateWorkoutNoteUrl } from '../../../api/account/workoutDay';
 import { useWorkoutContext } from '../../workouts/WorkoutContext';
 import { ToastError, ToastSuccess } from '../../shared/Toasts';
 import { Box } from '../../../chakra/Layout';
-import { Button } from '../../../chakra/Buttons';
+import { Button } from '../../../chakra/Forms';
 
 interface IProps {
   onClose: () => void;

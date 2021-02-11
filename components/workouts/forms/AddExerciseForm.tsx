@@ -15,7 +15,7 @@ import useLoadExercises from '../../../hooks/redux/useLoadExercises';
 import { ICreateWorkoutExercise } from 'powerbuddy-shared';
 import { ToastError, ToastSuccess } from '../../shared/Toasts';
 import { Box, Flex } from '../../../chakra/Layout';
-import { Button } from '../../../chakra/Buttons';
+import { Button } from '../../../chakra/Forms';
 
 interface IProps {
   onClose: () => void;

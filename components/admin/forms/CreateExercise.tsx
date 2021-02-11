@@ -13,7 +13,7 @@ import { CreateExerciseUrl } from '../../../api/account/exercise';
 import axios from 'axios';
 import { ICExercise, IExerciseMuscleGroup } from 'powerbuddy-shared';
 import { ToastError, ToastSuccess } from '../../shared/Toasts';
-import { Button } from '../../../chakra/Buttons';
+import { Button } from '../../../chakra/Forms';
 
 interface IProps {}
 

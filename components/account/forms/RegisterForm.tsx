@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { MdAccountBox, TiArrowBack } from 'react-icons/all';
 import { RegisterUserRequest } from '../../../api/account/auth';
 import { SendEmailConfirmationRequest } from '../../../api/public/email';
-import { Button } from '../../../chakra/Buttons';
+import { Button } from '../../../chakra/Forms';
 import { Box, Flex } from '../../../chakra/Layout';
 import { validateEmailInput, validateInput, validatePassword } from '../../../util/formInputs';
 import { PrimaryButton } from '../../common/Buttons';

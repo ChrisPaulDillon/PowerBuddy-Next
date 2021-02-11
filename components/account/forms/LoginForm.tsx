@@ -18,7 +18,7 @@ import { ToastSuccess } from '../../shared/Toasts';
 import { LoginUserRequest } from '../../../api/account/auth';
 import { ACCOUNT_LOCKOUT, EMAIL_NOT_CONFIRMED, INVALID_CREDENTIALS, USER_NOT_FOUND } from '../../../responseCodes';
 import { Box, Flex } from '../../../chakra/Layout';
-import { Button } from '../../../chakra/Buttons';
+import { Button } from '../../../chakra/Forms';
 
 interface ILoginFormProps {
   onClose: () => void;

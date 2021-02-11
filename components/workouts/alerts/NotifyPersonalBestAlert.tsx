@@ -4,7 +4,7 @@ import { CenterColumnFlex } from '../../layout/Flexes';
 import { ILiftingStat } from 'powerbuddy-shared';
 import { useWorkoutContext } from '../WorkoutContext';
 import { Box } from '../../../chakra/Layout';
-import { Button } from '../../../chakra/Buttons';
+import { Button } from '../../../chakra/Forms';
 
 interface IProps {
   personalBests: ILiftingStat[];

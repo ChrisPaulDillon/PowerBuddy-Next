@@ -2,7 +2,7 @@ import { Button } from '@chakra-ui/react';
 import React from 'react';
 import { FaCrown, FaBan } from 'react-icons/fa';
 import { MdModeEdit } from 'react-icons/md';
-import { IconButton } from '../../../chakra/Buttons';
+import { IconButton } from '../../../chakra/Forms';
 import { Box } from '../../../chakra/Layout';
 import PbTag from '../../common/Tags';
 import { TextRep } from '../../common/Texts';

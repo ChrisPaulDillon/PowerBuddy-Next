@@ -10,7 +10,7 @@ import axios from 'axios';
 import { CreateFirstVisitStatsUrl } from '../../api/account/user';
 import { IClaimsValues, useUserContext } from '../users/UserContext';
 import { Box } from '../../chakra/Layout';
-import { Button } from '../../chakra/Buttons';
+import { Button } from '../../chakra/Forms';
 
 interface IProps {
   onClose: () => void;

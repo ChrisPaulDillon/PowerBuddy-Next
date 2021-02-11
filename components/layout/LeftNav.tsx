@@ -14,7 +14,7 @@ import { MenuItem } from '../common/Menus';
 import Link from 'next/link';
 import { useUserContext } from '../users/UserContext';
 import { DrawerForm } from '../common/Drawers';
-import { Box, Flex } from '../../chakra/Layout';
+import { Box, Flex, Stack } from '../../chakra/Layout';
 
 const sideMenu = {
   groups: [
