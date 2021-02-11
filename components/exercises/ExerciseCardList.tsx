@@ -1,10 +1,11 @@
 import React from 'react';
-import { Flex, Button, Text } from '@chakra-ui/react';
+import { Flex, Text } from '@chakra-ui/react';
 import { Card } from '../layout/Card';
 import { HeadingMd, TextSm, TextXs } from '../common/Texts';
 import { useRouter } from 'next/router';
 import { IExercise } from 'powerbuddy-shared';
 import { Box } from '../../chakra/Layout';
+import { Button } from '../../chakra/Buttons';
 
 interface Props {
   exercises: IExercise[];

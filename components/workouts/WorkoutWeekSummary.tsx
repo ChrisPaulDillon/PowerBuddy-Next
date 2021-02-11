@@ -2,7 +2,7 @@ import { Flex, useColorMode, useDisclosure, useToast } from '@chakra-ui/react';
 import moment from 'moment';
 import React, { useState } from 'react';
 import { CgArrowTopRight } from 'react-icons/cg';
-import PbIconButton from '../common/IconButtons';
+import TTIconButton from '../common/IconButtons';
 import { PbStack } from '../common/Stacks';
 import { HeadingMd, TextSm, TextXs } from '../common/Texts';
 import { CardSm } from '../layout/Card';
@@ -153,7 +153,7 @@ const WorkoutDaySummarySingle: React.FC<IWorkoutDaySummary> = ({
         <TextSm textAlign="left" isTruncated>
           {moment(date).format('DD/MM/YYYY')}
         </TextSm>
-        <PbIconButton Icon={CgArrowTopRight} label="Go to Workout" onClick={async () => await router.push(`${WORKOUT_DAY_URL}/${workoutDayId}`)} />
+        <TTIconButton Icon={CgArrowTopRight} label="Go to Workout" onClick={async () => await router.push(`${WORKOUT_DAY_URL}/${workoutDayId}`)} />
       </PbStack>
       {
         hasWorkoutData ? (

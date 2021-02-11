@@ -3,7 +3,7 @@ import React, { memo, useCallback, useEffect, useState } from 'react';
 import { FaRegCommentAlt } from 'react-icons/fa';
 import { MdDeleteForever } from 'react-icons/md';
 import { RiAddCircleLine } from 'react-icons/ri';
-import PbIconButton from '../common/IconButtons';
+import TTIconButton from '../common/IconButtons';
 import { ModalDrawerForm } from '../common/ModalDrawers';
 import { HeadingXs } from '../common/Texts';
 import { ProgramExerciseCard } from '../layout/Card';
@@ -61,7 +61,7 @@ export const WorkoutExercise: React.FC<IExerciseProps> = React.memo(({ workoutEx
             </HeadingXs>
           </Flex>
           <Box>
-            <PbIconButton
+            <TTIconButton
               label="Add a new set"
               Icon={RiAddCircleLine}
               color="green.500"
@@ -69,7 +69,7 @@ export const WorkoutExercise: React.FC<IExerciseProps> = React.memo(({ workoutEx
               onClick={onQuickAddOpen}
               isDisabled={contentDisabled}
             />
-            <PbIconButton
+            <TTIconButton
               label="Delete Exercise"
               Icon={MdDeleteForever}
               color="red.500"
@@ -77,7 +77,7 @@ export const WorkoutExercise: React.FC<IExerciseProps> = React.memo(({ workoutEx
               onClick={onDeleteExerciseOpen}
               isDisabled={contentDisabled}
             />
-            <PbIconButton
+            <TTIconButton
               Icon={FaRegCommentAlt}
               label="Comment"
               color={notesHighlighted ? 'green.500' : 'gray.500'}

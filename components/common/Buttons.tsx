@@ -1,5 +1,6 @@
-import { Button, LightMode } from '@chakra-ui/react';
+import { LightMode } from '@chakra-ui/react';
 import React from 'react';
+import { Button } from '../../chakra/Buttons';
 import { TextSm } from './Texts';
 
 interface IButtonProps {

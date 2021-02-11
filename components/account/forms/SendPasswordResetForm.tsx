@@ -7,7 +7,7 @@ import { SendPasswordResetEmailRequest } from '../../../api/public/email';
 import { Box } from '../../../chakra/Layout';
 import { validateEmailInput } from '../../../util/formInputs';
 import { PrimaryButton } from '../../common/Buttons';
-import PbIconButton from '../../common/IconButtons';
+import TTIconButton from '../../common/IconButtons';
 import { FormInput } from '../../common/Inputs';
 import { TextXs } from '../../common/Texts';
 import { CenterColumnFlex } from '../../layout/Flexes';
@@ -43,7 +43,7 @@ const SendPasswordResetForm = ({ onClose, setLoginState }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <CenterColumnFlex>
-        <PbIconButton Icon={TiArrowBack} onClick={() => setLoginState(LoginStateEnum.Login)} label="Return to Login" />
+        <TTIconButton Icon={TiArrowBack} onClick={() => setLoginState(LoginStateEnum.Login)} label="Return to Login" />
         <Box p="2">
           <FormControl isInvalid={errors.email}>
             <Box p="1">

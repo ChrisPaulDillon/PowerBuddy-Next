@@ -6,7 +6,7 @@ import { CenterColumnFlex, CenterRowFlex } from '../layout/Flexes';
 import { PbStack } from '../common/Stacks';
 import { CardSm } from '../layout/Card';
 import { CgArrowTopRight } from 'react-icons/all';
-import PbIconButton from '../common/IconButtons';
+import TTIconButton from '../common/IconButtons';
 import { TrashIconButton } from '../shared/IconButtons';
 import { DeleteLogModalDrawer } from '../shared/ModalDrawers';
 import { TagExerciseCount, TagProgramDaysCount, TagProgramWeeksCount } from '../shared/Tags';
@@ -38,7 +38,7 @@ const LogHistorySingle = ({ workoutLog }) => {
         <HeadingMd pt={1}>{customName ?? templateName}</HeadingMd>
         <Flex>
           <TrashIconButton label="Delete Diary" onClick={onDeleteLogOpen} isDisabled={false} />
-          <PbIconButton Icon={CgArrowTopRight} label="View This Program" onClick={() => router.push(`${WORKOUT_DIARY_URL}/${workoutLogId}`)} />
+          <TTIconButton Icon={CgArrowTopRight} label="View This Program" onClick={() => router.push(`${WORKOUT_DIARY_URL}/${workoutLogId}`)} />
         </Flex>
       </PbStack>
       <CenterColumnFlex>

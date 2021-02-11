@@ -1,8 +1,9 @@
 import React from 'react';
-import { Button, Menu, MenuButton, MenuList, Stack } from '@chakra-ui/react';
+import { Menu, MenuButton, MenuList, Stack } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
 import { TextXs } from './Texts';
 import { Box } from '../../chakra/Layout';
+import { Button } from '../../chakra/Buttons';
 
 interface IMenuProps {
   button: JSX.Element;

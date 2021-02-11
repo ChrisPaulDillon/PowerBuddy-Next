@@ -8,7 +8,7 @@ import { DrawerForm } from '../common/Drawers';
 import MenuBase from '../common/Menus';
 import { MdMenu } from 'react-icons/all';
 import { IconType } from 'react-icons';
-import PbIconButton from '../common/IconButtons';
+import TTIconButton from '../common/IconButtons';
 import theme from '../../theme';
 import Link from 'next/link';
 import { useUserContext } from '../users/UserContext';
@@ -89,7 +89,7 @@ export const LeftNavItem: React.FC<INavItemProps> = ({ Icon, link, tooltip, memb
       {userMemberStatusId >= memberStatusId && (
         <Stack spacing={1} isInline w="80%" py="0.5em" justify="space-between">
           <Link href={link}>
-            <PbIconButton Icon={Icon} size="sm" label={tooltip} color="gray.100" onClick={() => undefined} />
+            <TTIconButton Icon={Icon} size="sm" label={tooltip} color="gray.100" onClick={() => undefined} />
           </Link>
         </Stack>
       )}

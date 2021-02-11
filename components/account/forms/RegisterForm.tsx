@@ -1,14 +1,15 @@
-import { Button, Flex, FormControl, FormErrorMessage, InputGroup, InputRightElement, Link, useToast } from '@chakra-ui/react';
+import { Flex, FormControl, FormErrorMessage, InputGroup, InputRightElement, Link, useToast } from '@chakra-ui/react';
 import { IUser } from 'powerbuddy-shared/lib';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { MdAccountBox, TiArrowBack } from 'react-icons/all';
 import { RegisterUserRequest } from '../../../api/account/auth';
 import { SendEmailConfirmationRequest } from '../../../api/public/email';
+import { Button } from '../../../chakra/Buttons';
 import { Box } from '../../../chakra/Layout';
 import { validateEmailInput, validateInput, validatePassword } from '../../../util/formInputs';
 import { PrimaryButton } from '../../common/Buttons';
-import PbIconButton from '../../common/IconButtons';
+import TTIconButton from '../../common/IconButtons';
 import { FormInput } from '../../common/Inputs';
 import { TextXs, TextError } from '../../common/Texts';
 import { CenterColumnFlex } from '../../layout/Flexes';
@@ -64,7 +65,7 @@ const RegisterForm = ({ setLoginState }: any) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <CenterColumnFlex>
-        <PbIconButton Icon={TiArrowBack} onClick={() => setLoginState(LoginStateEnum.Login)} label="Return to Login" />
+        <TTIconButton Icon={TiArrowBack} onClick={() => setLoginState(LoginStateEnum.Login)} label="Return to Login" />
         <Box p="2">
           <FormControl isInvalid={errors.email}>
             <Box p="1">

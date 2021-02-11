@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormErrorMessage, FormControl, Button, Flex, InputGroup, InputRightElement, useToast, Link } from '@chakra-ui/react';
+import { FormErrorMessage, FormControl, Flex, InputGroup, InputRightElement, useToast, Link } from '@chakra-ui/react';
 import { FormInput } from '../../common/Inputs';
 import { CenterColumnFlex, CenterRowFlex } from '../../layout/Flexes';
 import { TextError, TextXs } from '../../common/Texts';
@@ -18,6 +18,7 @@ import { ToastSuccess } from '../../shared/Toasts';
 import { LoginUserRequest } from '../../../api/account/auth';
 import { ACCOUNT_LOCKOUT, EMAIL_NOT_CONFIRMED, INVALID_CREDENTIALS, USER_NOT_FOUND } from '../../../responseCodes';
 import { Box } from '../../../chakra/Layout';
+import { Button } from '../../../chakra/Buttons';
 
 interface ILoginFormProps {
   onClose: () => void;

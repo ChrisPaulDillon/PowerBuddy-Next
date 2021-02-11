@@ -4,7 +4,7 @@ import { TextSm } from '../common/Texts';
 import moment from 'moment';
 import { formatDate } from '../../util/dateHelper';
 import { MdDeleteForever } from 'react-icons/md';
-import PbIconButton from '../common/IconButtons';
+import TTIconButton from '../common/IconButtons';
 import Axios from 'axios';
 import { DeleteLiftingStatAuditUrl } from '../../api/account/liftingStats';
 import { ILiftFeed } from 'powerbuddy-shared';
@@ -64,7 +64,7 @@ const LiftFeedSingle: React.FC<ILiftFeedSingleProps> = ({ liftFeed }) => {
           {exerciseName}
         </Link>{' '}
         {moment(formatDate(dateChanged)).isSame(new Date(), 'day') ? '' : 'on'} {formatDate(dateChanged)}!
-        <PbIconButton
+        <TTIconButton
           label="Delete Personal Best"
           Icon={MdDeleteForever}
           color="red.500"

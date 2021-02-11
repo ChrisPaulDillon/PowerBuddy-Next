@@ -17,7 +17,7 @@ import { FaRegCommentAlt, FaCheckCircle } from 'react-icons/fa';
 import { MdWarning } from 'react-icons/md';
 import { GetWorkoutDayByIdUrl, UpdateWorkoutUrl } from '../../api/account/workoutDay';
 import { IBreadcrumbInput, BreadcrumbBase } from '../../components/common/Breadcrumbs';
-import PbIconButton from '../../components/common/IconButtons';
+import TTIconButton from '../../components/common/IconButtons';
 import MenuBase, { IMenuItem } from '../../components/common/Menus';
 import { ModalDrawerForm, PbModalDrawer } from '../../components/common/ModalDrawers';
 import { PbStack } from '../../components/common/Stacks';
@@ -136,7 +136,7 @@ const WorkoutDay: NextPage = () => {
             <PbStack mb={1} w="100%">
               <Flex justify={{ lg: 'left', md: 'left', sm: 'center' }} w="100%">
                 <CenterRowFlex justifyContent="center" ml={3}>
-                  <PbIconButton
+                  <TTIconButton
                     label="Complete Workout"
                     Icon={FaCheckCircle}
                     color={workoutDay.completed ? 'green.500' : 'gray.500'}
@@ -144,7 +144,7 @@ const WorkoutDay: NextPage = () => {
                     isLoading={loading}
                     isDisabled={dayEnabled || contentDisabled}
                   />
-                  <PbIconButton
+                  <TTIconButton
                     label="Add New Exercise"
                     Icon={BiDumbbell}
                     color="blue.500"
@@ -154,7 +154,7 @@ const WorkoutDay: NextPage = () => {
                   />
 
                   <MenuBase
-                    button={<PbIconButton label="Additional Options" Icon={AiOutlineMore} onClick={() => undefined} isDisabled={contentDisabled} />}
+                    button={<TTIconButton label="Additional Options" Icon={AiOutlineMore} onClick={() => undefined} isDisabled={contentDisabled} />}
                     menuItems={menuItems}
                   />
                 </CenterRowFlex>

@@ -1,9 +1,10 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import { Button, Box } from '@chakra-ui/react';
 import { TextSm, ITextSm } from '../../common/Texts';
 import { CenterColumnFlex } from '../../layout/Flexes';
 import { ILiftingStat } from 'powerbuddy-shared';
 import { useWorkoutContext } from '../WorkoutContext';
+import { Box } from '../../../chakra/Layout';
+import { Button } from '../../../chakra/Buttons';
 
 interface IProps {
   personalBests: ILiftingStat[];

@@ -1,4 +1,4 @@
-import { Accordion, Button, Divider, Link, Stack, Switch, Text, useColorMode, useDisclosure, useToast } from '@chakra-ui/react';
+import { Accordion, Divider, Link, Stack, Switch, Text, useColorMode, useDisclosure, useToast } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useState } from 'react';
@@ -16,6 +16,7 @@ import { LogoutUserUrl } from '../../api/account/auth';
 import { setAuthorizationToken } from '../../util/axiosUtils';
 import { ToastSuccess } from '../shared/Toasts';
 import { Box } from '../../chakra/Layout';
+import { Button } from '../../chakra/Buttons';
 
 export enum MenuSection {
   Main,

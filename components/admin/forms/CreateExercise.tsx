@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Button, FormErrorMessage, FormControl, useToast } from '@chakra-ui/react';
+import { FormErrorMessage, FormControl, useToast } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { IAppState } from '../../../redux/store';
 import { Select } from '@chakra-ui/react';
@@ -13,6 +13,7 @@ import { CreateExerciseUrl } from '../../../api/account/exercise';
 import axios from 'axios';
 import { ICExercise, IExerciseMuscleGroup } from 'powerbuddy-shared';
 import { ToastError, ToastSuccess } from '../../shared/Toasts';
+import { Button } from '../../../chakra/Buttons';
 
 interface IProps {}
 
