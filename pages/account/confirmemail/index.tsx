@@ -1,10 +1,11 @@
-import { Box, Flex, Link, useToast } from '@chakra-ui/react';
+import { Link, useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { VerifyEmailUrl } from '../../../api/account/auth';
 import { SendEmailConfirmationUrl } from '../../../api/public/email';
+import { Box, Flex } from '../../../chakra/Layout';
 import ProgressSpinner from '../../../components/common/ProgressSpinner';
 import { PageTitle, TextSm } from '../../../components/common/Texts';
 import { CenterColumnFlex } from '../../../components/layout/Flexes';

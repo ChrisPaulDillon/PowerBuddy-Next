@@ -1,13 +1,15 @@
-import { Box, Button, Flex, FormControl, FormErrorMessage, InputGroup, InputRightElement, Link, useToast } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 import { IUser } from 'powerbuddy-shared/lib';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { MdAccountBox, TiArrowBack } from 'react-icons/all';
-import { RegisterUserRequest } from '../../../apiCalls/Area/account/auth';
-import { SendEmailConfirmationRequest } from '../../../apiCalls/Area/public/email';
+import { RegisterUserRequest } from '../../../api/account/auth';
+import { SendEmailConfirmationRequest } from '../../../api/public/email';
+import { Button, FormControl, FormErrorMessage, InputGroup, InputRightElement, Link } from '../../../chakra/Forms';
+import { Box, Flex } from '../../../chakra/Layout';
 import { validateEmailInput, validateInput, validatePassword } from '../../../util/formInputs';
-import { PbPrimaryButton } from '../../common/Buttons';
-import PbIconButton from '../../common/IconButtons';
+import { PrimaryButton } from '../../common/Buttons';
+import TTIconButton from '../../common/IconButtons';
 import { FormInput } from '../../common/Inputs';
 import { TextXs, TextError } from '../../common/Texts';
 import { CenterColumnFlex } from '../../layout/Flexes';
@@ -63,7 +65,7 @@ const RegisterForm = ({ setLoginState }: any) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <CenterColumnFlex>
-        <PbIconButton Icon={TiArrowBack} onClick={() => setLoginState(LoginStateEnum.Login)} label="Return to Login" />
+        <TTIconButton Icon={TiArrowBack} onClick={() => setLoginState(LoginStateEnum.Login)} label="Return to Login" />
         <Box p="2">
           <FormControl isInvalid={errors.email}>
             <Box p="1">
@@ -103,9 +105,9 @@ const RegisterForm = ({ setLoginState }: any) => {
             Username or Email Already in use
           </TextError>
           <Flex mt="3" justifyContent="center">
-            <PbPrimaryButton type="submit" leftIcon={<MdAccountBox />} loading={formState.isSubmitting}>
+            <PrimaryButton type="submit" leftIcon={<MdAccountBox />} loading={formState.isSubmitting}>
               Register
-            </PbPrimaryButton>
+            </PrimaryButton>
           </Flex>
         </Box>
       </CenterColumnFlex>

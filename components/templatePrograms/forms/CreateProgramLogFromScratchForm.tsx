@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Box, FormControl, FormErrorMessage, Select, useToast } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 import { CenterColumnFlex } from '../../layout/Flexes';
-import { PbPrimaryButton } from '../../common/Buttons';
+import { PrimaryButton } from '../../common/Buttons';
 import CalendarSelectFrom from './CalendarSelectForm';
 import { staticNumberList } from '../../common/static';
 import { TextXs } from '../../common/Texts';
@@ -15,6 +15,8 @@ import { useUserContext } from '../../users/UserContext';
 import { CreateWorkoutLogFromScratchUrl } from '../../../api/account/workoutLog';
 import axios from 'axios';
 import { ToastError, ToastSuccess, ToastWarning } from '../../shared/Toasts';
+import { Box } from '../../../chakra/Layout';
+import { FormControl, FormErrorMessage, Select } from '../../../chakra/Forms';
 
 export interface IWorkoutLogInputScratch {
   noOfWeeks: number;
@@ -125,9 +127,9 @@ const CreateProgramLogFromScratchForm: React.FC<IProps> = ({ onClose, onCreateSu
       )}
 
       <CenterColumnFlex p="3" mt="2">
-        <PbPrimaryButton type="submit" loading={formState.isSubmitting}>
+        <PrimaryButton type="submit" loading={formState.isSubmitting}>
           {phase < 3 ? 'Continue' : 'Complete'}
-        </PbPrimaryButton>
+        </PrimaryButton>
       </CenterColumnFlex>
     </form>
   );

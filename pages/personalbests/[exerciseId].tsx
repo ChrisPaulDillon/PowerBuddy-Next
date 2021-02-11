@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import { Box, useDisclosure } from '@chakra-ui/react';
+import { useDisclosure } from '@chakra-ui/react';
 import { IPersonalBestDetailed } from 'powerbuddy-shared/lib';
 import { GetLiftingStatByIdUrl } from '../../api/account/liftingStats';
 import { useAxios } from '../../hooks/useAxios';
@@ -11,6 +11,7 @@ import { WORKOUT_DIARY_URL } from '../../InternalLinks';
 import { ModalBack } from '../../components/common/Modals';
 import PersonalBestDetailed from '../../components/liftingStats/PersonalBestDetailed';
 import { PageContent, PageHead } from '../../components/layout/Page';
+import { Box } from '../../chakra/Layout';
 
 const ExerciseSpecificPersonalBest: NextPage = () => {
   const router = useRouter();

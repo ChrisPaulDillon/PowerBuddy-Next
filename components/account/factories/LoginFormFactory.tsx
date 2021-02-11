@@ -1,5 +1,5 @@
-import { Box } from '@chakra-ui/react';
 import React, { useState } from 'react';
+import { Box } from '../../../chakra/Layout';
 import LoginForm from '../forms/LoginForm';
 import RegisterForm from '../forms/RegisterForm';
 import SendPasswordResetForm from '../forms/SendPasswordResetForm';

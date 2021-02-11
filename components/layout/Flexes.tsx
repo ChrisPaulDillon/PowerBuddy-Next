@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex } from '@chakra-ui/react';
+import { Flex } from '../../chakra/Layout';
 
 export const CenterColumnFlex = ({ children, ...rest }: any) => (
   <Flex flexDir="column" alignItems="center" justifyItems="center" alignContent="center" justify="center" {...rest}>

@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { Box, Flex, useDisclosure, useToast } from '@chakra-ui/react';
+import { useDisclosure, useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { WORKOUT_DIARY_URL } from '../../InternalLinks';
@@ -17,7 +17,7 @@ import { FaRegCommentAlt, FaCheckCircle } from 'react-icons/fa';
 import { MdWarning } from 'react-icons/md';
 import { GetWorkoutDayByIdUrl, UpdateWorkoutUrl } from '../../api/account/workoutDay';
 import { IBreadcrumbInput, BreadcrumbBase } from '../../components/common/Breadcrumbs';
-import PbIconButton from '../../components/common/IconButtons';
+import TTIconButton from '../../components/common/IconButtons';
 import MenuBase, { IMenuItem } from '../../components/common/Menus';
 import { ModalDrawerForm, PbModalDrawer } from '../../components/common/ModalDrawers';
 import { PbStack } from '../../components/common/Stacks';
@@ -34,6 +34,7 @@ import { PageContent, PageHead } from '../../components/layout/Page';
 import { ToastError, ToastSuccess } from '../../components/shared/Toasts';
 import { GiRun } from 'react-icons/all';
 import AddWorkoutTemplateForm from '../../components/workouts/forms/AddWorkoutTemplateForm';
+import { Box, Flex } from '../../chakra/Layout';
 
 const WorkoutDay: NextPage = () => {
   const router = useRouter();
@@ -135,7 +136,7 @@ const WorkoutDay: NextPage = () => {
             <PbStack mb={1} w="100%">
               <Flex justify={{ lg: 'left', md: 'left', sm: 'center' }} w="100%">
                 <CenterRowFlex justifyContent="center" ml={3}>
-                  <PbIconButton
+                  <TTIconButton
                     label="Complete Workout"
                     Icon={FaCheckCircle}
                     color={workoutDay.completed ? 'green.500' : 'gray.500'}
@@ -143,7 +144,7 @@ const WorkoutDay: NextPage = () => {
                     isLoading={loading}
                     isDisabled={dayEnabled || contentDisabled}
                   />
-                  <PbIconButton
+                  <TTIconButton
                     label="Add New Exercise"
                     Icon={BiDumbbell}
                     color="blue.500"
@@ -153,7 +154,7 @@ const WorkoutDay: NextPage = () => {
                   />
 
                   <MenuBase
-                    button={<PbIconButton label="Additional Options" Icon={AiOutlineMore} onClick={() => undefined} isDisabled={contentDisabled} />}
+                    button={<TTIconButton label="Additional Options" Icon={AiOutlineMore} onClick={() => undefined} isDisabled={contentDisabled} />}
                     menuItems={menuItems}
                   />
                 </CenterRowFlex>

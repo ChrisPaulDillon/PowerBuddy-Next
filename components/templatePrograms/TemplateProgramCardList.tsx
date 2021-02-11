@@ -1,12 +1,13 @@
 import React from 'react';
-import { Box, Badge } from '@chakra-ui/react';
+import { Badge } from '@chakra-ui/react';
 import { Card } from '../layout/Card';
 import { HeadingMd } from '../common/Texts';
-import { PbPrimaryButton } from '../common/Buttons';
+import { PrimaryButton } from '../common/Buttons';
 import { CenterRowFlex } from '../layout/Flexes';
 import { TEMPLATES_URL } from '../../InternalLinks';
 import Link from 'next/link';
 import { ITemplateProgram } from 'powerbuddy-shared';
+import { Box } from '../../chakra/Layout';
 
 interface ListProps {
   templates: ITemplateProgram[];
@@ -51,7 +52,7 @@ const TemplateProgramCard: React.FC<Props> = ({ template }) => (
             query: `program=${encodeURIComponent(template.name.replace(/\s+/g, '-'))}`,
             ...template,
           }}>
-          <PbPrimaryButton>View</PbPrimaryButton>
+          <PrimaryButton>View</PrimaryButton>
         </Link>
       </Box>
     </Box>

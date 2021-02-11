@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Box, Checkbox, Radio, RadioGroup, useToast } from '@chakra-ui/react';
+import { Checkbox, Radio, RadioGroup, useToast } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { CenterColumnFlex } from '../../../layout/Flexes';
-import { PbPrimaryButton } from '../../../common/Buttons';
+import { PrimaryButton } from '../../../common/Buttons';
 import { TextXs } from '../../../common/Texts';
 import { PbStack } from '../../../common/Stacks';
 import { FormInput, FormNumberInput } from '../../../common/Inputs';
@@ -11,6 +11,7 @@ import { EditProfileUrl } from '../../../../api/account/user';
 import { IUser } from 'powerbuddy-shared/lib';
 import { ToastError, ToastSuccess } from '../../../shared/Toasts';
 import { withAuthorized } from '../../../../util/authMiddleware';
+import { Box } from '../../../../chakra/Layout';
 
 interface IEditProfile {
   userId: string;
@@ -105,9 +106,9 @@ const EditProfileForm: React.FC<IProps> = ({ user }) => {
           </RadioGroup>
         </Box>
         <CenterColumnFlex mt={3}>
-          <PbPrimaryButton type="submit" loading={formState.isSubmitting}>
+          <PrimaryButton type="submit" loading={formState.isSubmitting}>
             Update
-          </PbPrimaryButton>
+          </PrimaryButton>
         </CenterColumnFlex>
       </CenterColumnFlex>
     </form>

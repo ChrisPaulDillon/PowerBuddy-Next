@@ -1,4 +1,3 @@
-import { Box, Divider } from '@chakra-ui/react';
 import React from 'react';
 import { GetAllExercisesUrl, GetExerciseByIdUrl } from '../../api/public/exercise';
 import { PageSubHeader, PageTitle, TextSm, TextXs } from '../../components/common/Texts';
@@ -7,6 +6,8 @@ import { PageContent, PageHead } from '../../components/layout/Page';
 import { IExercise } from 'powerbuddy-shared';
 import axios from 'axios';
 import { GetStaticPaths, GetStaticProps } from 'next';
+import { Box } from '../../chakra/Layout';
+import { Divider } from '../../chakra/DataDisplay';
 
 const ExerciseDetailed = ({ exercise }: any) => {
   return (

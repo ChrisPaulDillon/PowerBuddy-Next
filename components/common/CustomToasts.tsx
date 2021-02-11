@@ -1,10 +1,11 @@
-import { Box, useColorMode } from '@chakra-ui/react';
+import { useColorMode } from '@chakra-ui/react';
 import React from 'react';
 import UserAvatar from '../layout/UserAvatar';
 import { PbStack } from './Stacks';
 import { TextXs } from './Texts';
 import theme from '../../theme';
 import { CenterColumnFlex } from '../layout/Flexes';
+import { Box } from '../../chakra/Layout';
 
 interface IToastProps {
   description: string;

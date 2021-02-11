@@ -1,4 +1,4 @@
-import { Accordion, Box, Button, Divider, Link, Stack, Switch, Text, useColorMode, useDisclosure, useToast } from '@chakra-ui/react';
+import { Link, Text, useColorMode, useDisclosure, useToast } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useState } from 'react';
@@ -15,6 +15,10 @@ import axios from 'axios';
 import { LogoutUserUrl } from '../../api/account/auth';
 import { setAuthorizationToken } from '../../util/axiosUtils';
 import { ToastSuccess } from '../shared/Toasts';
+import { Box, Stack } from '../../chakra/Layout';
+import { Button, Switch } from '../../chakra/Forms';
+import { Divider } from '../../chakra/DataDisplay';
+import { Accordion } from '../../chakra/Disclosure';
 
 export enum MenuSection {
   Main,
@@ -132,7 +136,7 @@ export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
                     bg="transparent"
                     onClick={(e) => item.onClick(e, false)}>
                     <Stack isInline w="100%" px="1.5em" align="center" justify="center">
-                      <Box as={item.icon} size="1.25em"></Box>
+                      <Box as={item.icon} />
                       <Text ml="0.5em" fontWeight="normal">
                         {item.name}
                       </Text>
@@ -140,7 +144,7 @@ export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
                         <Text fontSize="0.75em" fontWeight="normal">
                           {item.value}
                         </Text>
-                        {item.showChevron && <Box as={MdChevronRight} size="1.5em" />}
+                        {item.showChevron && <Box as={MdChevronRight} />}
                       </Stack>
                     </Stack>
                   </Button>
@@ -163,7 +167,7 @@ const MenuPageSingle = ({ title, description, onClickBack, children }: any) => {
     <>
       <Stack isInline w="100%" justify="space-between" align="center" px="0.5em" mb="1em">
         <Link>
-          <Box as={MdArrowBack} size="1.25em" m="0.5em" onClick={onClickBack}></Box>
+          <Box as={MdArrowBack} m="0.5em" onClick={onClickBack} />
         </Link>
         <Text fontWeight="semibold">{title}</Text>
         <Box m="0.5em"></Box>
@@ -179,13 +183,14 @@ const MenuPageSingle = ({ title, description, onClickBack, children }: any) => {
 };
 
 export const MenuDarkMode = ({ onClickBack }: any) => {
-  const { toggleColorMode } = useColorMode();
+  const { colorMode, toggleColorMode } = useColorMode();
+
   return (
     <MainMenuContent>
       <MenuPageSingle title="Dark Mode" description="Switch between dark mode" onClickBack={onClickBack}>
         <Stack isInline align="center" justifyContent="space-between">
           <TextSm>Dark Mode Enabled:</TextSm>
-          <Switch onChange={toggleColorMode} defaultIsChecked={true}></Switch>
+          <Switch onChange={toggleColorMode} defaultIsChecked={colorMode === 'dark' ? true : false} />
         </Stack>
       </MenuPageSingle>
     </MainMenuContent>

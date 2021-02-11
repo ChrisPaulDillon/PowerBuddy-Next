@@ -1,4 +1,4 @@
-import { IErrorResponse } from './Area/IErrorResponse';
+import { IErrorResponse } from './IErrorResponse';
 
 
 export class ApiResponse<T> {

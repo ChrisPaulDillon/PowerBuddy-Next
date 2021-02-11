@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormErrorMessage, FormControl, Button, Flex, Box, InputGroup, InputRightElement, useToast, Link } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 import { FormInput } from '../../common/Inputs';
 import { CenterColumnFlex, CenterRowFlex } from '../../layout/Flexes';
 import { TextError, TextXs } from '../../common/Texts';
-import { PbPrimaryButton } from '../../common/Buttons';
+import { PrimaryButton } from '../../common/Buttons';
 import { MdAccountBox } from 'react-icons/md';
 import { validateInput } from '../../../util/formInputs';
 import axios from 'axios';
@@ -15,8 +15,10 @@ import { Facebook } from '../Facebook';
 import { SendEmailConfirmationUrl } from '../../../api/public/email';
 import { decodeJwtToken, handleAuthenticationTokens } from '../../../util/axiosUtils';
 import { ToastSuccess } from '../../shared/Toasts';
-import { LoginUserRequest } from '../../../apiCalls/Area/account/auth';
+import { LoginUserRequest } from '../../../api/account/auth';
 import { ACCOUNT_LOCKOUT, EMAIL_NOT_CONFIRMED, INVALID_CREDENTIALS, USER_NOT_FOUND } from '../../../responseCodes';
+import { Box, Flex } from '../../../chakra/Layout';
+import { Button, FormControl, FormErrorMessage, InputGroup, InputRightElement, Link } from '../../../chakra/Forms';
 
 interface ILoginFormProps {
   onClose: () => void;
@@ -136,9 +138,9 @@ const LoginForm: React.FC<ILoginFormProps> = ({ onClose, setLoginState }) => {
             </Link>
           </CenterRowFlex>
           <Flex py={5} justifyContent="center">
-            <PbPrimaryButton type="submit" leftIcon={<MdAccountBox />} loading={formState.isSubmitting}>
+            <PrimaryButton type="submit" leftIcon={<MdAccountBox />} loading={formState.isSubmitting}>
               Login
-            </PbPrimaryButton>
+            </PrimaryButton>
           </Flex>
           <Box>
             <CenterRowFlex justify="center">

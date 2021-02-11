@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Button, Box, RadioGroup, Radio, IconButton } from '@chakra-ui/react';
+import { RadioGroup, Radio } from '@chakra-ui/react';
 import { TextSm, ITextSm } from '../common/Texts';
 import { PbStack } from '../common/Stacks';
 import { GiMale, GiFemale, GiHelicopter } from 'react-icons/gi';
@@ -9,6 +9,8 @@ import { TextXs } from '../common/Texts';
 import axios from 'axios';
 import { CreateFirstVisitStatsUrl } from '../../api/account/user';
 import { IClaimsValues, useUserContext } from '../users/UserContext';
+import { Box } from '../../chakra/Layout';
+import { Button, IconButton } from '../../chakra/Forms';
 
 interface IProps {
   onClose: () => void;

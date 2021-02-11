@@ -1,9 +1,10 @@
 import React from 'react';
-import { Flex, Box, Button, Text } from '@chakra-ui/react';
 import { Card } from '../layout/Card';
 import { HeadingMd, TextSm, TextXs } from '../common/Texts';
 import { useRouter } from 'next/router';
 import { IExercise } from 'powerbuddy-shared';
+import { Box, Flex } from '../../chakra/Layout';
+import { Button } from '../../chakra/Forms';
 
 interface Props {
   exercises: IExercise[];
@@ -29,7 +30,7 @@ const ExerciseCardSingle: React.FC<IExercise> = ({ exerciseId, exerciseName, exe
         </HeadingMd>
       </Box>
       <TextSm color="gray.600" fontSize="sm">
-        {exerciseTypeName && <Text>{exerciseTypeName} Exercise</Text>}
+        {exerciseTypeName && <TextSm>{exerciseTypeName} Exercise</TextSm>}
       </TextSm>
       <TextXs fontWeight="semibold" letterSpacing="wide" fontSize="xs" textTransform="uppercase" m="2"></TextXs>
       <Box pt="2">

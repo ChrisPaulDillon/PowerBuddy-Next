@@ -1,8 +1,8 @@
 import React from 'react';
-import { IconButton } from '@chakra-ui/react';
 import { PbToolTip } from './ToolTips';
 import { IconType } from 'react-icons';
 import { SizeType } from '../../types/unionTypes';
+import { IconButton } from '../../chakra/Forms';
 
 interface IProps {
   label: string;
@@ -15,7 +15,7 @@ interface IProps {
   size?: SizeType;
 }
 
-const PbIconButton: React.FC<IProps> = ({ label, Icon, onClick, fontSize, color, isDisabled, isLoading, size, ...rest }) => {
+const TTIconButton: React.FC<IProps> = ({ label, Icon, onClick, fontSize, color, isDisabled, isLoading, size, ...rest }) => {
   return (
     <PbToolTip label={label}>
       <IconButton
@@ -35,4 +35,4 @@ const PbIconButton: React.FC<IProps> = ({ label, Icon, onClick, fontSize, color,
   );
 };
 
-export default PbIconButton;
+export default TTIconButton;

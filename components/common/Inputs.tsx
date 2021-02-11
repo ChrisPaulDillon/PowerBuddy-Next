@@ -1,19 +1,19 @@
 import React, { forwardRef } from 'react';
+import { BoxProps } from '@chakra-ui/react';
 import {
-  InputGroup,
-  Input,
-  InputRightElement,
   Button,
-  InputLeftElement,
   Icon,
-  Stack,
-  NumberInput,
-  BoxProps,
-  NumberInputField,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  InputRightElement,
   NumberDecrementStepper,
   NumberIncrementStepper,
+  NumberInput,
+  NumberInputField,
   NumberInputStepper,
-} from '@chakra-ui/react';
+} from '../../chakra/Forms';
+import { Stack } from '../../chakra/Layout';
 
 interface IProps extends BoxProps {
   name?: string;

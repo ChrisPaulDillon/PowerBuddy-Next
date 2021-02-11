@@ -1,9 +1,8 @@
-import { Box, useColorMode } from '@chakra-ui/react';
 import Head from 'next/head';
 import React from 'react';
+import { Box } from '../../chakra/Layout';
 
 const Page: React.FC = ({ children, ...rest }) => {
-  const { colorMode } = useColorMode();
   return (
     <Box
       position="relative"

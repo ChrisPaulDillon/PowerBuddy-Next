@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { CenterColumnFlex } from '../layout/Flexes';
-import { TabList, TabPanels, TabPanel, Tabs, Tab, useDisclosure } from '@chakra-ui/react';
+import { useDisclosure } from '@chakra-ui/react';
 import ExerciseList from './ExerciseList';
 import AdminModalExerciseFactory, { AdminModalEnum } from './factories/AdminModalExerciseFactory';
-import { PbPrimaryButton } from '../common/Buttons';
+import { PrimaryButton } from '../common/Buttons';
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from '../../chakra/Disclosure';
 
 const AdminIndexPage = () => {
   const [modalOption, setModalOption] = useState<AdminModalEnum>(AdminModalEnum.None);
@@ -24,12 +25,12 @@ const AdminIndexPage = () => {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <PbPrimaryButton onClick={() => openModal(AdminModalEnum.CreateExercise)}>Create Exercise</PbPrimaryButton>
+            <PrimaryButton onClick={() => openModal(AdminModalEnum.CreateExercise)}>Create Exercise</PrimaryButton>
             <ExerciseList />
           </TabPanel>
           <TabPanel>Not Yet Available</TabPanel>
           <TabPanel>
-            <PbPrimaryButton onClick={() => openModal(AdminModalEnum.CreateTemplate)}>Create Template</PbPrimaryButton>
+            <PrimaryButton onClick={() => openModal(AdminModalEnum.CreateTemplate)}>Create Template</PrimaryButton>
           </TabPanel>
         </TabPanels>
       </Tabs>

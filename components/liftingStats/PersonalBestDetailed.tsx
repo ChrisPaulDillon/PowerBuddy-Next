@@ -1,4 +1,4 @@
-import { Box, SimpleGrid } from '@chakra-ui/react';
+import { SimpleGrid } from '@chakra-ui/react';
 import React from 'react';
 import { PageTitle, TextSm } from '../common/Texts';
 import { CenterColumnFlex } from '../layout/Flexes';
@@ -6,6 +6,7 @@ import { WORKOUT_DIARY_URL } from '../../InternalLinks';
 import { BreadcrumbBase, IBreadcrumbInput } from '../common/Breadcrumbs';
 import { IPersonalBestDetailed } from 'powerbuddy-shared';
 import { useUserContext } from '../users/UserContext';
+import { Box } from '../../chakra/Layout';
 
 const PersonalBestDetailed: React.FC<IPersonalBestDetailed> = ({ exerciseName, lifeTimeTonnage, liftingStats }) => {
   const { weightType } = useUserContext();

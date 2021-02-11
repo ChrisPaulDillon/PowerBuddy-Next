@@ -1,5 +1,4 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import { Box } from '@chakra-ui/react';
 import { HeadingMd, PageTitle, TextSm } from '../../components/common/Texts';
 import React from 'react';
 import { GetAllActiveUserProfilesUrl, GetPublicUserProfileUrl } from '../../api/public/user';
@@ -9,6 +8,7 @@ import UserAvatar from '../../components/layout/UserAvatar';
 import MemberCrown from '../../components/shared/MemberCrown';
 import { PageContent, PageHead } from '../../components/layout/Page';
 import axios from 'axios';
+import { Box } from '../../chakra/Layout';
 
 interface IUserProfileProps {
   publicUser: IPublicUser;

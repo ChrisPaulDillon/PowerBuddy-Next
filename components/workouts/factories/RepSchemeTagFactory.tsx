@@ -1,7 +1,8 @@
-import { Box, Button, IconButton } from '@chakra-ui/react';
 import React from 'react';
 import { FaCrown, FaBan } from 'react-icons/fa';
 import { MdModeEdit } from 'react-icons/md';
+import { Button, IconButton } from '../../../chakra/Forms';
+import { Box } from '../../../chakra/Layout';
 import PbTag from '../../common/Tags';
 import { TextRep } from '../../common/Texts';
 import { PbToolTip } from '../../common/ToolTips';
@@ -55,7 +56,7 @@ const NormalRepSchemeTag = ({ setEditRepAlert, setRepsAchieved, weightLifted, no
   return (
     <PbTag rounded="full" maxH="25px">
       {!contentDisabled && (
-        <Box as={MdModeEdit} aria-label="" size="1em" onClick={() => (!contentDisabled ? setEditRepAlert(true) : null)} color="gray" />
+        <IconButton as={MdModeEdit} aria-label="" size="1em" onClick={() => (!contentDisabled ? setEditRepAlert(true) : null)} color="gray" />
       )}
       <TextRep
         minW={[
@@ -103,7 +104,7 @@ const DisabledRepSchemeTag = ({ setEditRepAlert, weightLifted, noOfReps }: any) 
 
   return (
     <PbTag rounded="full" maxH="25px">
-      <Box as={MdModeEdit} aria-label="" size="1em" onClick={() => setEditRepAlert(true)} />
+      <IconButton as={MdModeEdit} aria-label="" size="1em" onClick={() => setEditRepAlert(true)} />
       <TextRep
         minW={[
           '65px', // 0-30em

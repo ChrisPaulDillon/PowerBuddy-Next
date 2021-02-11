@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, useColorMode, Stack, DrawerOverlay, DrawerContent, DrawerHeader, DrawerBody, Drawer, Divider } from '@chakra-ui/react';
+import { useColorMode } from '@chakra-ui/react';
 import { BsFillGrid3X3GapFill, BsCalendarFill } from 'react-icons/bs';
 import { RiAdminLine, FaHistory, FaUserFriends } from 'react-icons/all';
 import theme from '../../theme';
@@ -9,11 +9,13 @@ import { Banner } from '../common/Texts';
 import { MdMenu } from 'react-icons/md';
 import useScreenSizes from '../../hooks/useScreenSizes';
 import { ADMIN_URL, USERS_URL, LOGHISTORY_URL, TEMPLATES_URL } from '../../InternalLinks';
-import PbIconButton from '../common/IconButtons';
+import TTIconButton from '../common/IconButtons';
 import { MenuItem } from '../common/Menus';
 import Link from 'next/link';
 import { useUserContext } from '../users/UserContext';
 import { DrawerForm } from '../common/Drawers';
+import { Box, Flex, Stack } from '../../chakra/Layout';
+import { Divider } from '../../chakra/DataDisplay';
 
 const sideMenu = {
   groups: [
@@ -68,7 +70,7 @@ export const MobileSideNav = ({ isOpen, onClose }) => {
       hasCloseButton={false}
       title={
         <Flex mt={1}>
-          <PbIconButton Icon={MdMenu} label="" onClick={onClose} color={theme.colors.iconColor[colorMode]} fontSize="1em" />
+          <TTIconButton Icon={MdMenu} label="" onClick={onClose} color={theme.colors.iconColor[colorMode]} fontSize="1em" />
           <Banner ml={2}>PowerBuddy</Banner>
         </Flex>
       }>
@@ -168,7 +170,7 @@ export const LeftNavItem: React.FC<INavItemProps> = ({ name, Icon, link, tooltip
           {userMemberStatusId >= memberStatusId && (
             <Stack spacing={1} isInline w="80%" py="0.5em" justify="space-between">
               <Link href={link}>
-                <PbIconButton Icon={Icon} size="sm" label={tooltip} color={theme.colors.navIconColor[colorMode]} onClick={() => undefined} />
+                <TTIconButton Icon={Icon} size="sm" label={tooltip} color={theme.colors.navIconColor[colorMode]} onClick={() => undefined} />
               </Link>
             </Stack>
           )}

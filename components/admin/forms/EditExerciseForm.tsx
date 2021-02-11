@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Box, Checkbox, Select } from '@chakra-ui/react';
-import { PbPrimaryButton } from '../../common/Buttons';
+import { Checkbox, Select } from '@chakra-ui/react';
+import { PrimaryButton } from '../../common/Buttons';
 import { useSelector } from 'react-redux';
 import { PbStack } from '../../common/Stacks';
 import { TextXs } from '../../common/Texts';
@@ -12,6 +12,7 @@ import { FormInput } from '../../common/Inputs';
 import axios from 'axios';
 import { UpdateExerciseAdminUrl } from '../../../api/admin/exercise';
 import { IExercise } from 'powerbuddy-shared/lib';
+import { Box } from '../../../chakra/Layout';
 
 interface IProps {
   exerciseId: number;
@@ -65,9 +66,9 @@ const EditExerciseForm: React.FC<IProps> = ({ exerciseId }) => {
           </Select>
         </PbStack>
         <CenterColumnFlex mt="3">
-          <PbPrimaryButton type="submit" loading={formState.isSubmitting}>
+          <PrimaryButton type="submit" loading={formState.isSubmitting}>
             UPDATE
-          </PbPrimaryButton>
+          </PrimaryButton>
         </CenterColumnFlex>
       </form>
     </Box>

@@ -1,7 +1,9 @@
 //@ts-nocheck
 import React from 'react';
-import { Box, BoxProps, Icon } from '@chakra-ui/react';
+import { BoxProps } from '@chakra-ui/react';
 import { FaCrown } from 'react-icons/fa';
+import { Box } from '../../chakra/Layout';
+import { Icon } from '../../chakra/Forms';
 
 interface IProps extends BoxProps {
   memberStatusId: number;

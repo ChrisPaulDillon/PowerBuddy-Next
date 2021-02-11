@@ -1,6 +1,5 @@
-import { Box, Flex } from '@chakra-ui/react';
-import React, { useState } from 'react';
-import { validateInput } from '../../../util/formInputs';
+import React from 'react';
+import { Flex } from '../../../chakra/Layout';
 import { FormInput } from '../../common/Inputs';
 import { TextXs } from '../../common/Texts';
 

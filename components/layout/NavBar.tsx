@@ -1,17 +1,18 @@
 import React from 'react';
-import { Box, Flex, useColorMode, Stack, useDisclosure, Avatar, IconButton } from '@chakra-ui/react';
+import { useColorMode, useDisclosure, Avatar } from '@chakra-ui/react';
 import { Banner } from '../common/Texts';
 import { MobileSideNav } from './LeftNav';
 import useScreenSizes from '../../hooks/useScreenSizes';
 import RightNav from './RightMenu';
-import { DrawerForm } from '../common/Drawers';
 import MenuBase from '../common/Menus';
 import { MdMenu } from 'react-icons/all';
 import { IconType } from 'react-icons';
-import PbIconButton from '../common/IconButtons';
+import TTIconButton from '../common/IconButtons';
 import theme from '../../theme';
 import Link from 'next/link';
 import { useUserContext } from '../users/UserContext';
+import { Box, Flex, Stack } from '../../chakra/Layout';
+import { IconButton } from '../../chakra/Forms';
 
 interface INavBarProps {
   menuOpen: boolean;
@@ -21,7 +22,7 @@ interface INavBarProps {
 const NavBar: React.FC<INavBarProps> = ({}) => {
   const { userName } = useUserContext();
   const { colorMode } = useColorMode();
-  const { SCREEN_MOBILE, SCREEN_DESKTOP } = useScreenSizes();
+  const { SCREEN_MOBILE } = useScreenSizes();
 
   const { isOpen: isLeftNavOpen, onOpen: onLeftNavOpen, onClose: onLeftNavClose } = useDisclosure();
   const { onClose: onMobileClose } = useDisclosure();
@@ -88,7 +89,7 @@ export const LeftNavItem: React.FC<INavItemProps> = ({ Icon, link, tooltip, memb
       {userMemberStatusId >= memberStatusId && (
         <Stack spacing={1} isInline w="80%" py="0.5em" justify="space-between">
           <Link href={link}>
-            <PbIconButton Icon={Icon} size="sm" label={tooltip} color="gray.100" onClick={() => undefined} />
+            <TTIconButton Icon={Icon} size="sm" label={tooltip} color="gray.100" onClick={() => undefined} />
           </Link>
         </Stack>
       )}

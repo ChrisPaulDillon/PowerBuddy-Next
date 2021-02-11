@@ -1,11 +1,11 @@
 import React from 'react';
-import { Box } from '@chakra-ui/react';
 import { TextSm, TextXs } from '../../common/Texts';
 import { CenterColumnFlex } from '../../layout/Flexes';
-import { FormInput, FormNumberInput, FormWeightInput } from '../../common/Inputs';
+import { FormWeightInput } from '../../common/Inputs';
 import { PbStack } from '../../common/Stacks';
 import { IWeightInput } from 'powerbuddy-shared';
 import { useUserContext } from '../../users/UserContext';
+import { Box } from '../../../chakra/Layout';
 
 interface IProps {
   weightProgressionType: string;

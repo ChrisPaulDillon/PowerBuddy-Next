@@ -1,8 +1,9 @@
-import { Box, useDisclosure } from '@chakra-ui/react';
+import { useDisclosure } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Box } from '../../chakra/Layout';
 import { IAppState } from '../../redux/store';
-import { PbPrimaryButton } from '../common/Buttons';
+import { PrimaryButton } from '../common/Buttons';
 import { ModalDrawerForm } from '../common/ModalDrawers';
 import { PbStack } from '../common/Stacks';
 import { TextSm, TextXs } from '../common/Texts';
@@ -32,7 +33,7 @@ const ExerciseList = () => {
           <TextXs>{x.exerciseName}</TextXs>
           <TextXs>{x.exerciseTypeName}</TextXs>
           <TextXs>{x.isMainExercise ? 'Yes' : 'No'}</TextXs>
-          <PbPrimaryButton onClick={() => handleEditClick(x.exerciseId)}>Edit</PbPrimaryButton>
+          <PrimaryButton onClick={() => handleEditClick(x.exerciseId)}>Edit</PrimaryButton>
         </PbStack>
       ))}
       <ModalDrawerForm title="Edit Exercise" isOpen={isOpen} onClose={onClose}>

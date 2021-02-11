@@ -1,12 +1,14 @@
-import { Box, Flex, FormControl, FormErrorMessage, Link, useToast } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { MdAccountBox } from 'react-icons/md';
 import { TiArrowBack } from 'react-icons/ti';
-import { SendPasswordResetEmailRequest } from '../../../apiCalls/Area/public/email';
+import { SendPasswordResetEmailRequest } from '../../../api/public/email';
+import { FormControl, FormErrorMessage, Link } from '../../../chakra/Forms';
+import { Box, Flex } from '../../../chakra/Layout';
 import { validateEmailInput } from '../../../util/formInputs';
-import { PbPrimaryButton } from '../../common/Buttons';
-import PbIconButton from '../../common/IconButtons';
+import { PrimaryButton } from '../../common/Buttons';
+import TTIconButton from '../../common/IconButtons';
 import { FormInput } from '../../common/Inputs';
 import { TextXs } from '../../common/Texts';
 import { CenterColumnFlex } from '../../layout/Flexes';
@@ -42,7 +44,7 @@ const SendPasswordResetForm = ({ onClose, setLoginState }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <CenterColumnFlex>
-        <PbIconButton Icon={TiArrowBack} onClick={() => setLoginState(LoginStateEnum.Login)} label="Return to Login" />
+        <TTIconButton Icon={TiArrowBack} onClick={() => setLoginState(LoginStateEnum.Login)} label="Return to Login" />
         <Box p="2">
           <FormControl isInvalid={errors.email}>
             <Box p="1">
@@ -58,9 +60,9 @@ const SendPasswordResetForm = ({ onClose, setLoginState }) => {
           </FormControl>
         </Box>
         <Flex mt="3" justifyContent="center">
-          <PbPrimaryButton type="submit" leftIcon={<MdAccountBox />} loading={formState.isSubmitting}>
+          <PrimaryButton type="submit" leftIcon={<MdAccountBox />} loading={formState.isSubmitting}>
             Submit
-          </PbPrimaryButton>
+          </PrimaryButton>
         </Flex>
       </CenterColumnFlex>
     </form>
