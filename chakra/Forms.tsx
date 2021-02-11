@@ -49,7 +49,7 @@ import {
   FormControlProps,
   AvatarProps,
 } from '@chakra-ui/react';
-import { ElementType, FC } from 'react';
+import { ElementType } from 'react';
 
 export const Button: React.FC<ButtonProps & { ref?: React.Ref<HTMLButtonElement> }> = forwardRef<
   ButtonProps & { ref: React.Ref<HTMLButtonElement> },
