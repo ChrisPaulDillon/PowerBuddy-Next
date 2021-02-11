@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { FormErrorMessage, FormControl, useToast } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 import { CenterColumnFlex } from '../../layout/Flexes';
 import { validateInput } from '../../../util/formInputs';
 import { FormInput } from '../../common/Inputs';
@@ -9,7 +9,7 @@ import { UpdateWorkoutNoteUrl } from '../../../api/account/workoutDay';
 import { useWorkoutContext } from '../../workouts/WorkoutContext';
 import { ToastError, ToastSuccess } from '../../shared/Toasts';
 import { Box } from '../../../chakra/Layout';
-import { Button } from '../../../chakra/Forms';
+import { Button, FormControl, FormErrorMessage } from '../../../chakra/Forms';
 
 interface IProps {
   onClose: () => void;

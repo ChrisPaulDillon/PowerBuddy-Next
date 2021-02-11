@@ -1,8 +1,9 @@
-import { FormControl, FormErrorMessage, useToast } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 import { IWorkoutDay, IWorkoutTemplate } from 'powerbuddy-shared/lib';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { CreateWorkoutTemplateRequest } from '../../../api/account/workoutTemplate';
+import { FormControl, FormErrorMessage } from '../../../chakra/Forms';
 import { Box } from '../../../chakra/Layout';
 import useLoadExercises from '../../../hooks/redux/useLoadExercises';
 import { validateInput } from '../../../util/formInputs';

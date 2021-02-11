@@ -32,6 +32,8 @@ import {
   TextareaProps,
   Icon as ChakraIcon,
   FormLabel as ChakraFormLabel,
+  FormControl as ChakraFormControl,
+  FormErrorMessage as ChakraFormErrorMessage,
   IconProps,
   BoxProps,
   FormLabelProps,
@@ -42,8 +44,10 @@ import {
   NumberDecrementStepperProps,
   NumberInputStepperProps,
   InputGroupProps,
+  FormErrorMessageProps,
+  FormControlProps,
 } from '@chakra-ui/react';
-import { ElementType } from 'react';
+import { ElementType, FC } from 'react';
 
 export const Button: React.FC<ButtonProps & { ref?: React.Ref<HTMLButtonElement> }> = forwardRef<
   ButtonProps & { ref: React.Ref<HTMLButtonElement> },
@@ -157,4 +161,12 @@ export const Icon: React.FC<IconProps & BoxProps> = ({ ...rest }) => {
 
 export const FormLabel: React.FC<FormLabelProps> = ({ ...rest }) => {
   return <ChakraFormLabel p="0" m="0" {...rest} />;
+};
+
+export const FormControl: React.FC<FormControlProps> = ({ ...rest }) => {
+  return <ChakraFormControl {...rest} />;
+};
+
+export const FormErrorMessage: React.FC<FormErrorMessageProps> = ({ ...rest }) => {
+  return <ChakraFormErrorMessage {...rest} />;
 };

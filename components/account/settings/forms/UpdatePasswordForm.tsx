@@ -1,9 +1,10 @@
-import { FormControl, FormErrorMessage, useToast } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import { IUser } from 'powerbuddy-shared/lib';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { UpdatePasswordUrl } from '../../../../api/account/auth';
+import { FormControl, FormErrorMessage } from '../../../../chakra/Forms';
 import { Box } from '../../../../chakra/Layout';
 import { INVALID_CREDENTIALS } from '../../../../responseCodes';
 import { validateInput } from '../../../../util/formInputs';
