@@ -1,7 +1,6 @@
-import * as React from 'react';
-import { Button, LightMode, useColorMode } from '@chakra-ui/react';
+import { Button, LightMode } from '@chakra-ui/react';
+import React from 'react';
 import { TextSm } from './Texts';
-import theme, { getColor } from '../../theme';
 
 interface IButtonProps {
   type?: any;
@@ -14,7 +13,7 @@ interface IButtonProps {
   onClick?: () => void;
 }
 
-export const PbPrimaryButton: React.FC<IButtonProps> = ({
+export const PrimaryButton: React.FC<IButtonProps> = ({
   type,
   leftIcon,
   loading,
@@ -26,7 +25,6 @@ export const PbPrimaryButton: React.FC<IButtonProps> = ({
   children,
   ...rest
 }) => {
-  const { colorMode } = useColorMode();
   return (
     <LightMode>
       <Button

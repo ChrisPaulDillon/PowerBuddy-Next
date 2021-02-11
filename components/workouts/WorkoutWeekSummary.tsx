@@ -1,4 +1,4 @@
-import { Box, Flex, useColorMode, useDisclosure, useToast } from '@chakra-ui/react';
+import { Flex, useColorMode, useDisclosure, useToast } from '@chakra-ui/react';
 import moment from 'moment';
 import React, { useState } from 'react';
 import { CgArrowTopRight } from 'react-icons/cg';
@@ -12,7 +12,7 @@ import theme from '../../theme';
 import { TEMPLATES_URL, WORKOUT_DAY_URL, WORKOUT_DIARY_URL } from '../../InternalLinks';
 import router, { useRouter } from 'next/router';
 import { isMobile } from 'react-device-detect';
-import { PbPrimaryButton } from '../common/Buttons';
+import { PrimaryButton } from '../common/Buttons';
 import useScreenSizes from '../../hooks/useScreenSizes';
 import axios from 'axios';
 import { ModalBackForward, ModalForward } from '../common/Modals';
@@ -20,6 +20,7 @@ import { LoginModal } from '../shared/Modals';
 import { IWorkoutWeekSummary, ICreateWorkoutDayOptions, IWorkoutDaySummary, IWorkoutExerciseSummary } from 'powerbuddy-shared/lib';
 import { CreateWorkoutDayUrl, GetWorkoutDayIdByDateUrl } from '../../api/account/workoutDay';
 import { ToastSuccess } from '../shared/Toasts';
+import { Box } from '../../chakra/Layout';
 
 interface IProps {
   weekSummary: IWorkoutWeekSummary;
@@ -95,13 +96,13 @@ const WorkoutWeekSummary: React.FC<IProps> = ({ weekSummary }) => {
       </CenterRowFlex>
       <CenterColumnFlex>
         <Box mt={2} mx={2}>
-          <PbPrimaryButton
+          <PrimaryButton
             size={isMobile || SCREEN_MOBILE ? 'xs' : 'sm'}
             variant="outline"
             onClick={async () => await doesUserHaveWorkoutToday()}
             loading={buttonLoading}>
             Todays Workout
-          </PbPrimaryButton>
+          </PrimaryButton>
         </Box>
       </CenterColumnFlex>
       {isLoginOpen && <LoginModal isOpen={isLoginOpen} onClose={onLoginClose} />}

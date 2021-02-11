@@ -1,12 +1,12 @@
 import { GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { Box, Flex, useDisclosure } from '@chakra-ui/react';
+import { Flex, useDisclosure } from '@chakra-ui/react';
 import axios from 'axios';
 import React from 'react';
 import { GetAllTemplateProgramsUrl } from '../../api/public/template';
 import { ITemplateProgram } from 'powerbuddy-shared';
 import { WORKOUT_DIARY_URL } from '../../InternalLinks';
-import { PbPrimaryButton } from '../../components/common/Buttons';
+import { PrimaryButton } from '../../components/common/Buttons';
 import { ModalDrawerForm } from '../../components/common/ModalDrawers';
 import { ModalForward } from '../../components/common/Modals';
 import { PageTitle } from '../../components/common/Texts';
@@ -16,6 +16,7 @@ import TemplateProgramCardList from '../../components/templatePrograms/TemplateP
 import CreateProgramLogFromScratchForm from '../../components/templatePrograms/forms/CreateProgramLogFromScratchForm';
 import { PageContent, PageHead } from '../../components/layout/Page';
 import { useUserContext } from '../../components/users/UserContext';
+import { Box } from '../../chakra/Layout';
 
 const Index: NextPage = ({ templates }: any) => {
   const router = useRouter();
@@ -37,9 +38,9 @@ const Index: NextPage = ({ templates }: any) => {
           <PageTitle>Weightlifting Programs</PageTitle>
           <Flex py={4} ml={3}>
             <Box mt={2} px={2}>
-              <PbPrimaryButton size="xs" onClick={isAuthenticated ? onCreateOpen : onLoginOpen}>
+              <PrimaryButton size="xs" onClick={isAuthenticated ? onCreateOpen : onLoginOpen}>
                 Or Start Fresh
-              </PbPrimaryButton>
+              </PrimaryButton>
             </Box>
           </Flex>
         </CenterColumnFlex>

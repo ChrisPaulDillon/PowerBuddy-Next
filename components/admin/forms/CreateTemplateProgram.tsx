@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Box, Flex, Select } from '@chakra-ui/react';
+import { Flex, Select } from '@chakra-ui/react';
 import { CenterColumnFlex, CenterRowFlex } from '../../layout/Flexes';
 import { FormInput } from '../../common/Inputs';
 import { TextSm, TextXs } from '../../common/Texts';
-import { PbPrimaryButton } from '../../common/Buttons';
+import { PrimaryButton } from '../../common/Buttons';
 import { staticNumberList } from '../../common/static';
 import { useSelector } from 'react-redux';
 import { IAppState } from '../../../redux/store';
 import { validateInput } from '../../../util/formInputs';
 import { ITemplateProgram, ITemplateWeek } from 'powerbuddy-shared/lib';
 import ITemplateExercise from 'powerbuddy-shared/lib/interfaces/templates';
+import { Box } from '../../../chakra/Layout';
 
 const CreateTemplateProgram = () => {
   const [noOfWeeks, setNoOfWeeks] = useState<number>(0);
@@ -55,7 +56,7 @@ const CreateTemplateProgram = () => {
         ))}
 
         <Flex p="1" mt="1" justifyContent="center">
-          <PbPrimaryButton type="submit">Create</PbPrimaryButton>
+          <PrimaryButton type="submit">Create</PrimaryButton>
         </Flex>
       </form>
     </Box>

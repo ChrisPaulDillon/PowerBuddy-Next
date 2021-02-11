@@ -1,9 +1,10 @@
 import React from 'react';
-import { Box, Drawer, DrawerOverlay, DrawerContent, DrawerHeader, DrawerBody, Flex } from '@chakra-ui/react';
+import { Drawer, DrawerOverlay, DrawerContent, DrawerHeader, DrawerBody, Flex } from '@chakra-ui/react';
 import { CenterColumnFlex } from '../layout/Flexes';
-import { PbPrimaryButton } from './Buttons';
+import { PrimaryButton } from './Buttons';
 import { PlacementType, SizeType } from '../../types/unionTypes';
 import { DrawerCloseButton } from '@chakra-ui/react';
+import { Box } from '../../chakra/Layout';
 
 interface IDrawerBaseProps {
   title: string | React.ReactNode;
@@ -67,9 +68,9 @@ export const DrawerBasic: React.FC<IDrawerBasicProps> = ({
           {children}
         </Box>
         <Box mt="5">
-          <PbPrimaryButton onClick={onClick} colorScheme={actionColour} loading={loading}>
+          <PrimaryButton onClick={onClick} colorScheme={actionColour} loading={loading}>
             {actionText}
-          </PbPrimaryButton>
+          </PrimaryButton>
         </Box>
       </CenterColumnFlex>
     </DrawerBase>

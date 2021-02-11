@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, useColorMode, Stack, useDisclosure, Avatar, IconButton } from '@chakra-ui/react';
+import { Flex, useColorMode, Stack, useDisclosure, Avatar, IconButton } from '@chakra-ui/react';
 import { Banner } from '../common/Texts';
 import { MobileSideNav } from './LeftNav';
 import useScreenSizes from '../../hooks/useScreenSizes';
@@ -12,6 +12,7 @@ import PbIconButton from '../common/IconButtons';
 import theme from '../../theme';
 import Link from 'next/link';
 import { useUserContext } from '../users/UserContext';
+import { Box } from '../../chakra/Layout';
 
 interface INavBarProps {
   menuOpen: boolean;

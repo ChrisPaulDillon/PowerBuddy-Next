@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Box, useToast } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 import { FormNumberInput } from '../../common/Inputs';
-import { PbPrimaryButton } from '../../common/Buttons';
+import { PrimaryButton } from '../../common/Buttons';
 import { PbStack } from '../../common/Stacks';
 import { TextSm } from '../../common/Texts';
 import { CenterColumnFlex } from '../../layout/Flexes';
@@ -11,6 +11,7 @@ import { DeleteWorkoutSetUrl, UpdateWorkoutSetUrl } from '../../../api/account/w
 import { useWorkoutContext } from '../../workouts/WorkoutContext';
 import { IWorkoutSet } from 'powerbuddy-shared';
 import { ToastError, ToastSuccess } from '../../shared/Toasts';
+import { Box } from '../../../chakra/Layout';
 
 interface IProps {
   workoutDayId: number;
@@ -79,15 +80,15 @@ const EditWorkoutSetForm: React.FC<IProps> = ({ workoutDayId, workoutSet, onClos
           <FormNumberInput name="weight" defaultValue={weightLifted} onChange={(e: number) => updateWeight(e)} />
         </PbStack>
         <CenterColumnFlex mt="3">
-          <PbPrimaryButton type="submit" loading={formState.isSubmitting}>
+          <PrimaryButton type="submit" loading={formState.isSubmitting}>
             UPDATE
-          </PbPrimaryButton>
+          </PrimaryButton>
         </CenterColumnFlex>
       </form>
       <form onSubmit={handleSubmit(onDeleteSubmit)}>
-        <PbPrimaryButton loading={formState.isSubmitting} colorScheme="red" type="submit">
+        <PrimaryButton loading={formState.isSubmitting} colorScheme="red" type="submit">
           DELETE
-        </PbPrimaryButton>
+        </PrimaryButton>
       </form>
     </Box>
   );

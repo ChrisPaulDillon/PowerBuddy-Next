@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Button, Box, useToast } from '@chakra-ui/react';
+import { Button, useToast } from '@chakra-ui/react';
 import { TextSm } from '../../common/Texts';
 import { CenterColumnFlex } from '../../layout/Flexes';
 import axios from 'axios';
 import { useWorkoutContext } from '../../workouts/WorkoutContext';
 import { DeleteWorkoutExerciseUrl } from '../../../api/account/workoutExercise';
 import { ToastError, ToastSuccess } from '../../shared/Toasts';
+import { Box } from '../../../chakra/Layout';
 
 interface IProps {
   onClose: () => void;

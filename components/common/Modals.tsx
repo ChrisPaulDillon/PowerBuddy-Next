@@ -1,7 +1,7 @@
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, Box } from '@chakra-ui/react';
 import React from 'react';
 import { CenterColumnFlex } from '../layout/Flexes';
-import { PbPrimaryButton, SecondaryButton } from './Buttons';
+import { PrimaryButton, SecondaryButton } from './Buttons';
 import { PbStack } from './Stacks';
 
 interface IModalProps {
@@ -41,9 +41,9 @@ export const ModalForward: React.FC<IModalForwardProps> = ({ isOpen, onClose, ti
       <CenterColumnFlex>
         <Box textAlign="center"> {body}</Box>
         <Box mt="5">
-          <PbPrimaryButton onClick={onClick} colorScheme={actionColour} loading={loading}>
+          <PrimaryButton onClick={onClick} colorScheme={actionColour} loading={loading}>
             {actionText}
-          </PbPrimaryButton>
+          </PrimaryButton>
         </Box>
       </CenterColumnFlex>
     </ModalBase>
@@ -99,9 +99,9 @@ export const ModalBackForward: React.FC<IModalBackForwardProps> = ({
                 {backText ?? 'Back'}
               </SecondaryButton>
             </Box>
-            <PbPrimaryButton onClick={onForwardClick} loading={loading}>
+            <PrimaryButton onClick={onForwardClick} loading={loading}>
               {forwardText ?? 'Submit'}
-            </PbPrimaryButton>
+            </PrimaryButton>
           </PbStack>
         </Box>
       </CenterColumnFlex>

@@ -35,6 +35,6 @@ export const setAuthorizationToken = (token: string | null) => {
       delete axios.defaults.headers.common['Authorization'];
       axios.defaults.headers.common['Content-Type'] = 'application/json';
     }
-    //axios.defaults.headers.common['Access-Control-Allow-Origin'] = "http://localhost:3000";
+    axios.defaults.headers.common['Access-Control-Allow-Origin'] = "https://webapp.powerbuddy.gg";
   };
   

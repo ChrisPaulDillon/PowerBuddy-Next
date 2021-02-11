@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import { useForm } from 'react-hook-form';
 import { CountDays } from '../../util/CountDays';
-import { Box, useToast } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 import CalendarSelectFrom from './CalendarSelectForm';
 import DayCheckboxForm from './DayCheckboxForm';
 import { CenterColumnFlex } from '../../layout/Flexes';
-import { PbPrimaryButton } from '../../common/Buttons';
+import { PrimaryButton } from '../../common/Buttons';
 import WeightSelectionForm from './WeightSelectionForm';
 import { GetPersonalBestsForTemplate } from '../../../api/account/liftingStats';
 import { useAxios } from '../../../hooks/useAxios';
@@ -18,6 +18,7 @@ import { useUserContext } from '../../users/UserContext';
 import axios from 'axios';
 import { CreateWorkoutLogFromTemplateUrl } from '../../../api/account/workoutLog';
 import { ToastError, ToastSuccess } from '../../shared/Toasts';
+import { Box } from '../../../chakra/Layout';
 
 interface IProps {
   onClose: () => void;
@@ -177,9 +178,9 @@ const CreateProgramLogFromTemplateForm: React.FC<IProps> = ({ onClose, template,
         />
       )}
       <CenterColumnFlex mt="4">
-        <PbPrimaryButton type="submit" loading={formState.isSubmitting}>
+        <PrimaryButton type="submit" loading={formState.isSubmitting}>
           {phase < 4 ? 'CONTINUE' : 'CREATE'}
-        </PbPrimaryButton>
+        </PrimaryButton>
       </CenterColumnFlex>
     </form>
   );

@@ -1,8 +1,9 @@
 import React from 'react';
 import UserAvatar from '../layout/UserAvatar';
-import { Box, Flex } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import { TextXs } from '../common/Texts';
 import { IUser } from 'powerbuddy-shared';
+import { Box } from '../../chakra/Layout';
 
 interface IProps {
   publicUsers: IUser[];

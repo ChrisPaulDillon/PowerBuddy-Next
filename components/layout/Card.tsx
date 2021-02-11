@@ -1,5 +1,6 @@
-import { Box, useColorMode, BoxProps } from '@chakra-ui/react';
+import { useColorMode, BoxProps } from '@chakra-ui/react';
 import React from 'react';
+import { Box } from '../../chakra/Layout';
 import theme from '../../theme';
 
 export const Card: React.FC<BoxProps> = ({ ...rest }) => {

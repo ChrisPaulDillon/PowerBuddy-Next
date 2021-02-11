@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, useDisclosure, Flex } from '@chakra-ui/react';
+import { useDisclosure, Flex } from '@chakra-ui/react';
 import { HeadingMd, TextSm } from '../common/Texts';
 import moment from 'moment';
 import { CenterColumnFlex, CenterRowFlex } from '../layout/Flexes';
@@ -13,6 +13,7 @@ import { TagExerciseCount, TagProgramDaysCount, TagProgramWeeksCount } from '../
 import { BadgeCompleted, BadgeInProgress } from '../shared/Badges';
 import { useRouter } from 'next/router';
 import { WORKOUT_DIARY_URL } from '../../InternalLinks';
+import { Box } from '../../chakra/Layout';
 
 const LogHistoryList = ({ workoutLogStats }) => {
   if (workoutLogStats.length <= 0) return <TextSm>No individual templates found, have you created one yet?</TextSm>;

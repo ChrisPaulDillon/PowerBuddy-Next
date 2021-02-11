@@ -1,4 +1,4 @@
-import { useColorMode, useDisclosure, Box, Divider, Flex, Stack } from '@chakra-ui/react';
+import { useColorMode, useDisclosure, Divider, Flex, Stack } from '@chakra-ui/react';
 import React, { memo, useCallback, useEffect, useState } from 'react';
 import { FaRegCommentAlt } from 'react-icons/fa';
 import { MdDeleteForever } from 'react-icons/md';
@@ -19,6 +19,7 @@ import QuickAddSetsForm from './forms/QuickAddSetsForm';
 import DeleteWorkoutExerciseAlert from './alerts/DeleteWorkoutExerciseAlert';
 import EditWorkoutSetForm from './forms/EditWorkoutSetForm';
 import { IWorkoutExercise, IWorkoutSet } from 'powerbuddy-shared';
+import { Box } from '../../chakra/Layout';
 
 interface IExerciseProps {
   key?: number;

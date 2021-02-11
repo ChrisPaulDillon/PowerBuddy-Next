@@ -1,7 +1,8 @@
 import React from 'react';
-import { Box, Button, Menu, MenuButton, MenuList, Stack } from '@chakra-ui/react';
+import { Button, Menu, MenuButton, MenuList, Stack } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
 import { TextXs } from './Texts';
+import { Box } from '../../chakra/Layout';
 
 interface IMenuProps {
   button: JSX.Element;
@@ -37,7 +38,7 @@ export const MenuItem: React.FC<IMenuItem> = ({ title, Icon, onClick, color, loa
   return (
     <Button as={'a'} isFullWidth borderRadius={0} justifyContent="left" p={0} bg="transparent" onClick={onClick} isLoading={loading} {...rest}>
       <Stack isInline w="100%" px="1em" align="center">
-        <Box as={Icon} size="1.25em" color={color} pr={1} />
+        <Box as={Icon} color={color} pr={1} />
         <TextXs fontWeight="light" minW="75px" fontSize={fontSize ?? 'sm'}>
           {title}
         </TextXs>

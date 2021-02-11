@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Button, Flex, Box, FormControl, FormErrorMessage, useToast, LightMode } from '@chakra-ui/react';
+import { Button, Flex, FormControl, FormErrorMessage, useToast, LightMode } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { SelectSearchable } from '../../common/SearchSelect';
-import { PbPrimaryButton } from '../../common/Buttons';
+import { PrimaryButton } from '../../common/Buttons';
 import { IAppState } from '../../../redux/store';
 import { FormWeightInput } from '../../common/Inputs';
 import { TextRep, TextLg } from '../../common/Texts';
@@ -14,6 +14,7 @@ import { useWorkoutContext } from '../../workouts/WorkoutContext';
 import useLoadExercises from '../../../hooks/redux/useLoadExercises';
 import { ICreateWorkoutExercise } from 'powerbuddy-shared';
 import { ToastError, ToastSuccess } from '../../shared/Toasts';
+import { Box } from '../../../chakra/Layout';
 
 interface IProps {
   onClose: () => void;
@@ -119,9 +120,9 @@ const AddExerciseForm: React.FC<IProps> = ({ onClose, workoutDayId }) => {
           {weightType}
         </TextLg>
         <Box mt="5">
-          <PbPrimaryButton type="submit" loading={formState.isSubmitting}>
+          <PrimaryButton type="submit" loading={formState.isSubmitting}>
             Create
-          </PbPrimaryButton>
+          </PrimaryButton>
         </Box>
       </CenterColumnFlex>
     </form>

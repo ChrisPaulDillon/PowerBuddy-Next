@@ -1,8 +1,9 @@
-import { Box, Flex, useToast } from '@chakra-ui/react';
+import { Flex, useToast } from '@chakra-ui/react';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { IChangePasswordBody, ResetPasswordViaEmailRequest } from '../../../apiCalls/Area/account/auth';
-import { PbPrimaryButton } from '../../common/Buttons';
+import { IChangePasswordBody, ResetPasswordViaEmailRequest } from '../../../api/account/auth';
+import { Box } from '../../../chakra/Layout';
+import { PrimaryButton } from '../../common/Buttons';
 import { FormInput } from '../../common/Inputs';
 import { TextXs } from '../../common/Texts';
 import { CenterColumnFlex } from '../../layout/Flexes';
@@ -46,9 +47,9 @@ const ResetPasswordForm: React.FC<IResetPasswordFormProps> = ({ userId, token })
           </Flex>
         </Box>
         <CenterColumnFlex pt={4}>
-          <PbPrimaryButton type="submit" loading={formState.isSubmitting}>
+          <PrimaryButton type="submit" loading={formState.isSubmitting}>
             Comfirm
-          </PbPrimaryButton>
+          </PrimaryButton>
         </CenterColumnFlex>
       </CenterColumnFlex>
     </form>

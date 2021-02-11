@@ -1,12 +1,13 @@
-import { Box, Flex, FormControl, FormErrorMessage, Icon, useToast } from '@chakra-ui/react';
+import { Flex, FormControl, FormErrorMessage, Icon, useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import { IUser } from 'powerbuddy-shared/lib';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AiFillCheckCircle, ImBlocked } from 'react-icons/all';
 import { RequestSmsVerificationUrl, SendSmsVerificationUrl } from '../../../../api/account/auth';
+import { Box } from '../../../../chakra/Layout';
 import { validateInput } from '../../../../util/formInputs';
-import { PbPrimaryButton } from '../../../common/Buttons';
+import { PrimaryButton } from '../../../common/Buttons';
 import { FormInput } from '../../../common/Inputs';
 import { PbStack } from '../../../common/Stacks';
 import { TextXs, TextSm } from '../../../common/Texts';
@@ -95,9 +96,9 @@ const PhoneNumberVerifyForm: React.FC<IProps> = ({ user }) => {
         )}
         {error && <TextSm color="red.500">Passwords do not match</TextSm>}
         <CenterColumnFlex mt="4">
-          <PbPrimaryButton type="submit" loading={formState.isSubmitting}>
+          <PrimaryButton type="submit" loading={formState.isSubmitting}>
             Verify
-          </PbPrimaryButton>
+          </PrimaryButton>
         </CenterColumnFlex>
       </CenterColumnFlex>
     </form>
