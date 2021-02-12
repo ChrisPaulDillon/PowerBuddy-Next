@@ -42,7 +42,6 @@ export const WorkoutExercise: React.FC<IExerciseProps> = React.memo(({ workoutEx
       <Divider />
       <Flex justify={{ lg: 'initial', md: 'left', sm: 'center' }} alignItems={{ lg: 'initial', md: 'left', sm: 'center' }} wrap="wrap">
         <CenterRowFlex
-          wrap="no-wrap"
           maxW="100vw"
           justify={{ lg: 'initial', md: 'left', sm: 'center' }}
           alignItems={{ lg: 'initial', md: 'left', sm: 'center' }}

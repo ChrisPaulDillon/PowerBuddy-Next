@@ -115,7 +115,7 @@ const TemplateDayInput: React.FC<IDayProps> = ({ control, dayNo }) => {
           ))}
         </Select>
       </Box>
-      <CenterRowFlex wrap="no-wrap">
+      <CenterRowFlex>
         {' '}
         {Array.from({ length: noOfExercises }, (_, i) => (
           <TemplateExerciseInput control={control} exerciseNo={++i} />
@@ -140,7 +140,7 @@ const TemplateExerciseInput: React.FC<IExerciseProps> = ({ exerciseNo }) => {
   }));
 
   return (
-    <CenterColumnFlex wrap="no-wrap" m="4">
+    <CenterColumnFlex m="4">
       <TextXs>Exercise {exerciseNo}</TextXs>
       <Box p="1" mt="1">
         {' '}
