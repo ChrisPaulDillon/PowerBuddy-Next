@@ -1,76 +1,36 @@
 import React from 'react';
-import { Button } from '../../chakra/Forms';
-import { LightMode } from '../../chakra/Misc';
+import { ButtonProps, LightMode } from '@chakra-ui/react';
 import { TextSm } from './Texts';
+import { Button } from '../../chakra/Forms';
+import { Box } from '../../chakra/Layout';
 
-interface IButtonProps {
-  type?: any;
-  loading?: boolean;
-  leftIcon?: React.ReactElement;
-  variant?: string;
-  size?: string;
-  isDisabled?: boolean;
-  colorScheme?: string;
-  onClick?: () => void;
-}
-
-export const PrimaryButton: React.FC<IButtonProps> = ({
-  type,
-  leftIcon,
-  loading,
-  variant,
-  size,
-  isDisabled,
-  colorScheme,
-  onClick,
-  children,
-  ...rest
-}) => {
+export const FormButton: React.FC<ButtonProps> = ({ children, ...rest }) => {
   return (
     <LightMode>
-      <Button
-        colorScheme={colorScheme ?? 'purple'}
-        fontStyle="Roboto"
-        type={type}
-        isLoading={loading}
-        leftIcon={leftIcon}
-        variant={variant}
-        size={size}
-        isDisabled={isDisabled}
-        onClick={onClick}
-        {...rest}>
-        <TextSm>{children}</TextSm>
+      <Box my={5}>
+        <Button colorScheme="whatsapp" type="submit" isFullWidth {...rest}>
+          <TextSm fontWeight="light">{children}</TextSm>
+        </Button>
+      </Box>
+    </LightMode>
+  );
+};
+
+export const PrimaryButton: React.FC<ButtonProps> = ({ children, ...rest }) => {
+  return (
+    <LightMode>
+      <Button colorScheme="whatsapp" {...rest}>
+        <TextSm fontWeight="light">{children}</TextSm>
       </Button>
     </LightMode>
   );
 };
 
-export const SecondaryButton: React.FC<IButtonProps> = ({
-  type,
-  leftIcon,
-  loading,
-  variant,
-  size,
-  isDisabled,
-  colorScheme,
-  onClick,
-  children,
-  ...rest
-}) => {
+export const SecondaryButton: React.FC<ButtonProps> = ({ children, ...rest }) => {
   return (
     <LightMode>
-      <Button
-        colorScheme={colorScheme ?? 'red'}
-        fontStyle="Roboto"
-        type={type}
-        isLoading={loading}
-        leftIcon={leftIcon}
-        variant={variant}
-        size={size}
-        isDisabled={isDisabled}
-        onClick={onClick}
-        {...rest}>
-        <TextSm>{children}</TextSm>
+      <Button colorScheme="red" {...rest}>
+        <TextSm fontWeight="light">{children}</TextSm>
       </Button>
     </LightMode>
   );

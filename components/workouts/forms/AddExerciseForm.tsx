@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useToast } from '@chakra-ui/react';
+import { LightMode, useToast } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { SelectSearchable } from '../../common/SearchSelect';
-import { PrimaryButton } from '../../common/Buttons';
+import { FormButton } from '../../common/Buttons';
 import { IAppState } from '../../../redux/store';
 import { FormWeightInput } from '../../common/Inputs';
 import { TextRep, TextLg } from '../../common/Texts';
@@ -16,7 +16,6 @@ import { ICreateWorkoutExercise } from 'powerbuddy-shared';
 import { ToastError, ToastSuccess } from '../../shared/Toasts';
 import { Box, Flex } from '../../../chakra/Layout';
 import { Button, FormControl, FormErrorMessage } from '../../../chakra/Forms';
-import { LightMode } from '../../../chakra/Misc';
 
 interface IProps {
   onClose: () => void;
@@ -103,7 +102,7 @@ const AddExerciseForm: React.FC<IProps> = ({ onClose, workoutDayId }) => {
         />
       </Box>
       <LightMode>
-        <Flex justify="center" mt="2">
+        <Flex justify="center" mt={2}>
           <Flex flexDir="column" px={3}>
             <Button size="md" rounded="100px" onClick={() => setSets(handleSetRepChange(sets))} colorScheme="blue">
               <TextRep>{sets} Sets</TextRep>
@@ -121,12 +120,10 @@ const AddExerciseForm: React.FC<IProps> = ({ onClose, workoutDayId }) => {
           {sets}x{reps}x{weight}
           {weightType}
         </TextLg>
-        <Box mt="5">
-          <PrimaryButton type="submit" loading={formState.isSubmitting}>
-            Create
-          </PrimaryButton>
-        </Box>
       </CenterColumnFlex>
+      <FormButton type="submit" isLoading={formState.isSubmitting}>
+        Create
+      </FormButton>
     </form>
   );
 };

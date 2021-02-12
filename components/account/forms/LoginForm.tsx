@@ -4,19 +4,18 @@ import { useToast } from '@chakra-ui/react';
 import { FormInput } from '../../common/Inputs';
 import { CenterColumnFlex, CenterRowFlex } from '../../layout/Flexes';
 import { TextError, TextXs } from '../../common/Texts';
-import { PrimaryButton } from '../../common/Buttons';
+import { FormButton } from '../../common/Buttons';
 import { MdAccountBox } from 'react-icons/md';
 import { validateInput } from '../../../util/formInputs';
 import axios from 'axios';
 import { IUser } from 'powerbuddy-shared';
 import { LoginStateEnum } from '../factories/LoginFormFactory';
 import { useUserContext } from '../../users/UserContext';
-import { Facebook } from '../Facebook';
 import { SendEmailConfirmationUrl } from '../../../api/public/email';
 import { decodeJwtToken, handleAuthenticationTokens } from '../../../util/axiosUtils';
 import { ToastSuccess } from '../../shared/Toasts';
 import { LoginUserRequest } from '../../../api/account/auth';
-import { ACCOUNT_LOCKOUT, EMAIL_NOT_CONFIRMED, INVALID_CREDENTIALS, USER_NOT_FOUND } from '../../../responseCodes';
+import { ACCOUNT_LOCKOUT, EMAIL_NOT_CONFIRMED, INVALID_CREDENTIALS, USER_NOT_FOUND } from '../../../api/apiResponseCodes';
 import { Box, Flex } from '../../../chakra/Layout';
 import { Button, FormControl, FormErrorMessage, InputGroup, InputRightElement, Link } from '../../../chakra/Forms';
 
@@ -137,11 +136,10 @@ const LoginForm: React.FC<ILoginFormProps> = ({ onClose, setLoginState }) => {
               <TextXs color="blue.500">Reset</TextXs>
             </Link>
           </CenterRowFlex>
-          <Flex py={5} justifyContent="center">
-            <PrimaryButton type="submit" leftIcon={<MdAccountBox />} loading={formState.isSubmitting}>
-              Login
-            </PrimaryButton>
-          </Flex>
+
+          <FormButton type="submit" leftIcon={<MdAccountBox />} isLoading={formState.isSubmitting}>
+            Login
+          </FormButton>
           <Box>
             <CenterRowFlex justify="center">
               <TextXs px={1}>Not Registered?</TextXs>
@@ -150,9 +148,7 @@ const LoginForm: React.FC<ILoginFormProps> = ({ onClose, setLoginState }) => {
               </Link>
             </CenterRowFlex>
           </Box>
-          <Box mt={2}>
-            <Facebook onClose={onClose} />
-          </Box>
+          <Box mt={2}>{/* <Facebook onClose={onClose} /> */}</Box>
         </Box>
       </CenterColumnFlex>
     </form>

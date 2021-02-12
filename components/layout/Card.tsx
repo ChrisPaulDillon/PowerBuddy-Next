@@ -47,7 +47,7 @@ export const CardNoShadow: React.FC<BoxProps> = ({ ...rest }) => {
       alignContent="center"
       justifyContent="center"
       rounded="lg"
-      minW={{ lg: '1200px', md: '800px', sm: '300px' }}
+      minW={{ lg: '1000px', md: '600px', sm: '300px' }}
       {...rest}
     />
   );

@@ -66,8 +66,8 @@ const EditExerciseForm: React.FC<IProps> = ({ exerciseId }) => {
           </Select>
         </PbStack>
         <CenterColumnFlex mt="3">
-          <PrimaryButton type="submit" loading={formState.isSubmitting}>
-            UPDATE
+          <PrimaryButton type="submit" isLoading={formState.isSubmitting}>
+            Update
           </PrimaryButton>
         </CenterColumnFlex>
       </form>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Checkbox, Radio, RadioGroup, useToast } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { CenterColumnFlex } from '../../../layout/Flexes';
-import { PrimaryButton } from '../../../common/Buttons';
+import { FormButton } from '../../../common/Buttons';
 import { TextXs } from '../../../common/Texts';
 import { PbStack } from '../../../common/Stacks';
 import { FormInput, FormNumberInput } from '../../../common/Inputs';
@@ -105,11 +105,7 @@ const EditProfileForm: React.FC<IProps> = ({ user }) => {
             </PbStack>
           </RadioGroup>
         </Box>
-        <CenterColumnFlex mt={3}>
-          <PrimaryButton type="submit" loading={formState.isSubmitting}>
-            Update
-          </PrimaryButton>
-        </CenterColumnFlex>
+        <FormButton isLoading={formState.isSubmitting}>Update</FormButton>
       </CenterColumnFlex>
     </form>
   );

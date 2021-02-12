@@ -6,9 +6,9 @@ import { useForm } from 'react-hook-form';
 import { UpdatePasswordUrl } from '../../../../api/account/auth';
 import { FormControl, FormErrorMessage } from '../../../../chakra/Forms';
 import { Box } from '../../../../chakra/Layout';
-import { INVALID_CREDENTIALS } from '../../../../responseCodes';
+import { INVALID_CREDENTIALS } from '../../../../api/apiResponseCodes';
 import { validateInput } from '../../../../util/formInputs';
-import { PrimaryButton } from '../../../common/Buttons';
+import { FormButton } from '../../../common/Buttons';
 import { FormInput } from '../../../common/Inputs';
 import { PbStack } from '../../../common/Stacks';
 import { TextSm, TextXs } from '../../../common/Texts';
@@ -99,11 +99,7 @@ const UpdatePasswordForm: React.FC<IProps> = ({ user }) => {
           </FormControl>
         </Box>
         {error && <TextSm color="red.500">Passwords do not match</TextSm>}
-        <CenterColumnFlex mt="4">
-          <PrimaryButton type="submit" loading={formState.isSubmitting}>
-            Update
-          </PrimaryButton>
-        </CenterColumnFlex>
+        <FormButton isLoading={formState.isSubmitting}>Update</FormButton>
       </CenterColumnFlex>
     </form>
   );

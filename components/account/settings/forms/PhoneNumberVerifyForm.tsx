@@ -9,7 +9,7 @@ import { SendSmsVerificationUrl } from '../../../../api/public/sms';
 import { FormControl, FormErrorMessage, Icon } from '../../../../chakra/Forms';
 import { Box, Flex } from '../../../../chakra/Layout';
 import { validateInput } from '../../../../util/formInputs';
-import { PrimaryButton } from '../../../common/Buttons';
+import { FormButton } from '../../../common/Buttons';
 import { FormInput } from '../../../common/Inputs';
 import { PbStack } from '../../../common/Stacks';
 import { TextXs, TextSm } from '../../../common/Texts';
@@ -97,11 +97,7 @@ const PhoneNumberVerifyForm: React.FC<IProps> = ({ user }) => {
           </Box>
         )}
         {error && <TextSm color="red.500">Passwords do not match</TextSm>}
-        <CenterColumnFlex mt="4">
-          <PrimaryButton type="submit" loading={formState.isSubmitting}>
-            Verify
-          </PrimaryButton>
-        </CenterColumnFlex>
+        <FormButton isLoading={formState.isSubmitting}>Verify</FormButton>
       </CenterColumnFlex>
     </form>
   );

@@ -7,7 +7,7 @@ import { SendPasswordResetEmailRequest } from '../../../api/public/email';
 import { FormControl, FormErrorMessage, Link } from '../../../chakra/Forms';
 import { Box, Flex } from '../../../chakra/Layout';
 import { validateEmailInput } from '../../../util/formInputs';
-import { PrimaryButton } from '../../common/Buttons';
+import { FormButton } from '../../common/Buttons';
 import TTIconButton from '../../common/IconButtons';
 import { FormInput } from '../../common/Inputs';
 import { TextXs } from '../../common/Texts';
@@ -59,11 +59,9 @@ const SendPasswordResetForm = ({ onClose, setLoginState }) => {
             <FormErrorMessage>{errors.email && errors.email.message}</FormErrorMessage>
           </FormControl>
         </Box>
-        <Flex mt="3" justifyContent="center">
-          <PrimaryButton type="submit" leftIcon={<MdAccountBox />} loading={formState.isSubmitting}>
-            Submit
-          </PrimaryButton>
-        </Flex>
+        <FormButton leftIcon={<MdAccountBox />} isLoading={formState.isSubmitting}>
+          Submit
+        </FormButton>
       </CenterColumnFlex>
     </form>
   );

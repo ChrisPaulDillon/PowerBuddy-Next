@@ -68,7 +68,7 @@ export const DrawerBasic: React.FC<IDrawerBasicProps> = ({
           {children}
         </Box>
         <Box mt="5">
-          <PrimaryButton onClick={onClick} colorScheme={actionColour} loading={loading}>
+          <PrimaryButton onClick={onClick} colorScheme={actionColour} isLoading={loading}>
             {actionText}
           </PrimaryButton>
         </Box>
