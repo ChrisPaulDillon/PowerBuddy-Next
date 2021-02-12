@@ -4,14 +4,14 @@ import { useForm } from 'react-hook-form';
 import { MdAccountBox } from 'react-icons/md';
 import { TiArrowBack } from 'react-icons/ti';
 import { SendPasswordResetEmailRequest } from '../../../api/public/email';
-import { FormControl, FormErrorMessage, Link } from '../../../chakra/Forms';
-import { Box, Flex } from '../../../chakra/Layout';
+import { FormControl, FormErrorMessage, FormLabel, Link } from '../../../chakra/Forms';
+import { Flex } from '../../../chakra/Layout';
 import { validateEmailInput } from '../../../util/formInputs';
 import { FormButton } from '../../common/Buttons';
 import TTIconButton from '../../common/IconButtons';
 import { FormInput } from '../../common/Inputs';
 import { TextXs } from '../../common/Texts';
-import { CenterColumnFlex } from '../../layout/Flexes';
+import { FormLayoutFlex } from '../../layout/Flexes';
 import { ToastSuccess } from '../../shared/Toasts';
 import { LoginStateEnum } from '../factories/LoginFormFactory';
 
@@ -43,26 +43,24 @@ const SendPasswordResetForm = ({ onClose, setLoginState }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <CenterColumnFlex>
+      <Flex justify="center">
         <TTIconButton Icon={TiArrowBack} onClick={() => setLoginState(LoginStateEnum.Login)} label="Return to Login" />
-        <Box p="2">
-          <FormControl isInvalid={errors.email}>
-            <Box p="1">
-              <TextXs>Email Address</TextXs>
-              <FormInput
-                name="email"
-                ref={register({ validate: validateEmailInput })}
-                placeholder="example@examplesite.com"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </Box>
-            <FormErrorMessage>{errors.email && errors.email.message}</FormErrorMessage>
-          </FormControl>
-        </Box>
-        <FormButton leftIcon={<MdAccountBox />} isLoading={formState.isSubmitting}>
-          Submit
-        </FormButton>
-      </CenterColumnFlex>
+      </Flex>
+      <FormControl isInvalid={errors.email}>
+        <FormLayoutFlex>
+          <FormLabel>Email Address</FormLabel>
+          <FormInput
+            name="email"
+            ref={register({ validate: validateEmailInput })}
+            placeholder="example@examplesite.com"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <FormErrorMessage>{errors.email && errors.email.message}</FormErrorMessage>
+        </FormLayoutFlex>
+      </FormControl>
+      <FormButton leftIcon={<MdAccountBox />} isLoading={formState.isSubmitting}>
+        Submit
+      </FormButton>
     </form>
   );
 };

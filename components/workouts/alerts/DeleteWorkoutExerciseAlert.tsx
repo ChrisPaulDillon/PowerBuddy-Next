@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useToast } from '@chakra-ui/react';
-import { TextSm } from '../../common/Texts';
-import { CenterColumnFlex } from '../../layout/Flexes';
+import { FormLayoutFlex } from '../../layout/Flexes';
 import axios from 'axios';
 import { useWorkoutContext } from '../../workouts/WorkoutContext';
 import { DeleteWorkoutExerciseUrl } from '../../../api/account/workoutExercise';
 import { ToastError, ToastSuccess } from '../../shared/Toasts';
-import { Box } from '../../../chakra/Layout';
 import { FormButton } from '../../common/Buttons';
+import { FormLabel } from '../../../chakra/Forms';
 
 interface IProps {
   onClose: () => void;
@@ -35,14 +34,12 @@ const DeleteWorkoutExerciseAlert: React.FC<IProps> = ({ onClose, workoutExercise
   };
 
   return (
-    <Box>
-      <CenterColumnFlex>
-        <TextSm>Are you sure? This cannot be undone</TextSm>
-        <FormButton colorScheme="red" onClick={async () => await deleteExercise()} ml={3} isLoading={loading}>
-          Delete
-        </FormButton>
-      </CenterColumnFlex>
-    </Box>
+    <FormLayoutFlex>
+      <FormLabel textAlign="center">Are you sure? This cannot be undone</FormLabel>
+      <FormButton colorScheme="red" onClick={async () => await deleteExercise()} ml={3} isLoading={loading}>
+        Delete
+      </FormButton>
+    </FormLayoutFlex>
   );
 };
 
