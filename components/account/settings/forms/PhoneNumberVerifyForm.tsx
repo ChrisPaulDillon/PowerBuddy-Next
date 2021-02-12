@@ -7,13 +7,12 @@ import { AiFillCheckCircle, ImBlocked } from 'react-icons/all';
 import { AcceptSmsConfirmationUrl } from '../../../../api/account/auth';
 import { SendSmsVerificationUrl } from '../../../../api/public/sms';
 import { FormControl, FormErrorMessage, FormLabel, Icon } from '../../../../chakra/Forms';
-import { Box, Flex } from '../../../../chakra/Layout';
+import { Box } from '../../../../chakra/Layout';
 import { validateInput } from '../../../../util/formInputs';
 import { FormButton } from '../../../common/Buttons';
 import { FormInput } from '../../../common/Inputs';
-import { PbStack } from '../../../common/Stacks';
-import { TextXs, TextSm } from '../../../common/Texts';
-import { CenterColumnFlex, FormLayoutFlex } from '../../../layout/Flexes';
+import { TextSm } from '../../../common/Texts';
+import { FormLayoutFlex } from '../../../layout/Flexes';
 import { ToastError, ToastSuccess } from '../../../shared/Toasts';
 
 interface IProps {

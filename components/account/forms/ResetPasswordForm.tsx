@@ -3,12 +3,10 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { IChangePasswordBody, ResetPasswordViaEmailRequest } from '../../../api/account/auth';
 import { FormControl, FormErrorMessage, FormLabel } from '../../../chakra/Forms';
-import { Box, Flex } from '../../../chakra/Layout';
 import { validateInput } from '../../../util/formInputs';
 import { FormButton } from '../../common/Buttons';
 import { FormInput } from '../../common/Inputs';
-import { TextXs } from '../../common/Texts';
-import { CenterColumnFlex, FormLayoutFlex } from '../../layout/Flexes';
+import { FormLayoutFlex } from '../../layout/Flexes';
 import { ToastError, ToastSuccess } from '../../shared/Toasts';
 
 interface IResetPasswordFormProps {

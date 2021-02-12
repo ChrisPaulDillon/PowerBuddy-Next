@@ -5,13 +5,13 @@ import { MdAccountBox } from 'react-icons/md';
 import { TiArrowBack } from 'react-icons/ti';
 import { SendPasswordResetEmailRequest } from '../../../api/public/email';
 import { FormControl, FormErrorMessage, FormLabel, Link } from '../../../chakra/Forms';
-import { Box, Flex } from '../../../chakra/Layout';
+import { Flex } from '../../../chakra/Layout';
 import { validateEmailInput } from '../../../util/formInputs';
 import { FormButton } from '../../common/Buttons';
 import TTIconButton from '../../common/IconButtons';
 import { FormInput } from '../../common/Inputs';
 import { TextXs } from '../../common/Texts';
-import { CenterColumnFlex, FormLayoutFlex } from '../../layout/Flexes';
+import { FormLayoutFlex } from '../../layout/Flexes';
 import { ToastSuccess } from '../../shared/Toasts';
 import { LoginStateEnum } from '../factories/LoginFormFactory';
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Checkbox, Radio, RadioGroup, useToast } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
-import { CenterColumnFlex, FormLayoutFlex } from '../../../layout/Flexes';
+import { FormLayoutFlex } from '../../../layout/Flexes';
 import { FormButton } from '../../../common/Buttons';
 import { TextXs } from '../../../common/Texts';
 import { PbStack } from '../../../common/Stacks';
@@ -11,7 +11,6 @@ import { EditProfileUrl } from '../../../../api/account/user';
 import { IUser } from 'powerbuddy-shared/lib';
 import { ToastError, ToastSuccess } from '../../../shared/Toasts';
 import { withAuthorized } from '../../../../util/authMiddleware';
-import { Box } from '../../../../chakra/Layout';
 import { FormControl, FormErrorMessage, FormLabel } from '../../../../chakra/Forms';
 import { validateInput } from '../../../../util/formInputs';
 

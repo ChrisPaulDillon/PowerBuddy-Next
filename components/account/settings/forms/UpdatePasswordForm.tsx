@@ -5,14 +5,12 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { UpdatePasswordUrl } from '../../../../api/account/auth';
 import { FormControl, FormErrorMessage, FormLabel } from '../../../../chakra/Forms';
-import { Box } from '../../../../chakra/Layout';
 import { INVALID_CREDENTIALS } from '../../../../api/apiResponseCodes';
 import { validateInput } from '../../../../util/formInputs';
 import { FormButton } from '../../../common/Buttons';
 import { FormInput } from '../../../common/Inputs';
-import { PbStack } from '../../../common/Stacks';
-import { TextSm, TextXs } from '../../../common/Texts';
-import { CenterColumnFlex, FormLayoutFlex } from '../../../layout/Flexes';
+import { TextSm } from '../../../common/Texts';
+import { FormLayoutFlex } from '../../../layout/Flexes';
 import { ToastError, ToastSuccess } from '../../../shared/Toasts';
 
 interface IUpdatePasswordInput {
@@ -24,7 +22,7 @@ interface IProps {
   user: IUser;
 }
 
-const UpdatePasswordForm: React.FC<IProps> = ({ user }) => {
+const UpdatePasswordForm: React.FC<IProps> = ({}) => {
   const toast = useToast();
 
   const [error, setError] = useState<boolean>(false);

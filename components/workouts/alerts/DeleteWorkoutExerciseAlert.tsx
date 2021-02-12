@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { useToast } from '@chakra-ui/react';
-import { TextSm } from '../../common/Texts';
-import { CenterColumnFlex, FormLayoutFlex } from '../../layout/Flexes';
+import { FormLayoutFlex } from '../../layout/Flexes';
 import axios from 'axios';
 import { useWorkoutContext } from '../../workouts/WorkoutContext';
 import { DeleteWorkoutExerciseUrl } from '../../../api/account/workoutExercise';
 import { ToastError, ToastSuccess } from '../../shared/Toasts';
-import { Box } from '../../../chakra/Layout';
 import { FormButton } from '../../common/Buttons';
 import { FormLabel } from '../../../chakra/Forms';
 

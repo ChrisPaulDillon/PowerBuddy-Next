@@ -6,13 +6,13 @@ import { MdAccountBox, TiArrowBack } from 'react-icons/all';
 import { RegisterUserRequest } from '../../../api/account/auth';
 import { SendEmailConfirmationRequest } from '../../../api/public/email';
 import { Button, FormControl, FormErrorMessage, FormLabel, InputGroup, InputRightElement, Link } from '../../../chakra/Forms';
-import { Box, Flex } from '../../../chakra/Layout';
+import { Flex } from '../../../chakra/Layout';
 import { validateEmailInput, validateInput, validatePassword } from '../../../util/formInputs';
 import { FormButton } from '../../common/Buttons';
 import TTIconButton from '../../common/IconButtons';
 import { FormInput } from '../../common/Inputs';
 import { TextXs, TextError } from '../../common/Texts';
-import { CenterColumnFlex, FormLayoutFlex } from '../../layout/Flexes';
+import { FormLayoutFlex } from '../../layout/Flexes';
 import { ToastSuccess } from '../../shared/Toasts';
 import { LoginStateEnum } from '../factories/LoginFormFactory';
 
