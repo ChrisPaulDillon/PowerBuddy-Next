@@ -23,7 +23,7 @@ interface IProps {
 const QuickAddSetsForm: React.FC<IProps> = ({ workoutExercise, suggestedReps, suggestedWeight, totalSets, onClose }) => {
   const toast = useToast();
   const { handleSubmit, formState } = useForm();
-  const { weightType } = useUserContext();
+  const { weightType } = useWorkoutContext();
 
   const [noOfSets, setNoOfSets] = useState<number>(1);
   const [noOfReps, setNoOfReps] = useState<number>(suggestedReps);
