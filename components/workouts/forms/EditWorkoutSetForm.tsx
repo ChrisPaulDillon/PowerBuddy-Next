@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useToast } from '@chakra-ui/react';
 import { FormNumberInput } from '../../common/Inputs';
-import { PrimaryButton } from '../../common/Buttons';
+import { FormButton } from '../../common/Buttons';
 import { PbStack } from '../../common/Stacks';
 import { TextSm } from '../../common/Texts';
-import { CenterColumnFlex } from '../../layout/Flexes';
 import axios from 'axios';
 import { DeleteWorkoutSetUrl, UpdateWorkoutSetUrl } from '../../../api/account/workoutSet';
 import { useWorkoutContext } from '../../workouts/WorkoutContext';
@@ -79,16 +78,12 @@ const EditWorkoutSetForm: React.FC<IProps> = ({ workoutDayId, workoutSet, onClos
           <TextSm minW="100px">Weight ({weightType})</TextSm>
           <FormNumberInput name="weight" defaultValue={weightLifted} onChange={(e: number) => updateWeight(e)} />
         </PbStack>
-        <CenterColumnFlex mt="3">
-          <PrimaryButton type="submit" loading={formState.isSubmitting}>
-            UPDATE
-          </PrimaryButton>
-        </CenterColumnFlex>
+        <FormButton isLoading={formState.isSubmitting}>Update</FormButton>
       </form>
       <form onSubmit={handleSubmit(onDeleteSubmit)}>
-        <PrimaryButton loading={formState.isSubmitting} colorScheme="red" type="submit">
-          DELETE
-        </PrimaryButton>
+        <FormButton isLoading={formState.isSubmitting} colorScheme="red" type="submit">
+          Delete
+        </FormButton>
       </form>
     </Box>
   );

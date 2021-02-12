@@ -1,8 +1,8 @@
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody } from '@chakra-ui/react';
 import React from 'react';
 import { Box } from '../../chakra/Layout';
+import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay } from '../../chakra/Overlay';
 import { CenterColumnFlex } from '../layout/Flexes';
-import { PrimaryButton, SecondaryButton } from './Buttons';
+import { FormButton, PrimaryButton, SecondaryButton } from './Buttons';
 import { PbStack } from './Stacks';
 
 interface IModalProps {
@@ -17,14 +17,12 @@ interface IModalProps {
 export const ModalBase: React.FC<IModalProps> = ({ isOpen, onClose, title, hasCloseButton = true, children }) => (
   <Modal onClose={onClose} isOpen={isOpen} isCentered scrollBehavior="outside" colorScheme="blue.500">
     <ModalOverlay>
-      <ModalContent pb={5}>
-        <ModalHeader textAlign="center" fontWeight="lighter">
+      <ModalContent>
+        <ModalHeader textAlign="center" fontWeight="light">
           {title}
         </ModalHeader>
         {hasCloseButton && <ModalCloseButton />}
-        <ModalBody>
-          <Box p={4}>{children}</Box>
-        </ModalBody>
+        <ModalBody>{children}</ModalBody>
       </ModalContent>
     </ModalOverlay>
   </Modal>
@@ -39,14 +37,10 @@ interface IModalForwardProps extends IModalProps {
 export const ModalForward: React.FC<IModalForwardProps> = ({ isOpen, onClose, title, body, onClick, actionText, actionColour, loading }) => {
   return (
     <ModalBase isOpen={isOpen} onClose={onClose} title={title}>
-      <CenterColumnFlex>
-        <Box textAlign="center"> {body}</Box>
-        <Box mt="5">
-          <PrimaryButton onClick={onClick} colorScheme={actionColour} loading={loading}>
-            {actionText}
-          </PrimaryButton>
-        </Box>
-      </CenterColumnFlex>
+      <Box textAlign="center"> {body}</Box>
+      <FormButton onClick={onClick} colorScheme={actionColour} isLoading={loading}>
+        {actionText}
+      </FormButton>
     </ModalBase>
   );
 };
@@ -62,7 +56,7 @@ export const ModalBack: React.FC<IModalBackProps> = ({ isOpen, onClose, title, b
       <CenterColumnFlex>
         <Box> {body}</Box>
         <Box mt="5">
-          <SecondaryButton onClick={onClick} loading={loading}>
+          <SecondaryButton onClick={onClick} isLoading={loading}>
             {actionText}
           </SecondaryButton>
         </Box>
@@ -96,11 +90,11 @@ export const ModalBackForward: React.FC<IModalBackForwardProps> = ({
         <Box mt="5">
           <PbStack>
             <Box mr={5}>
-              <SecondaryButton onClick={onBackClick} loading={loading}>
+              <SecondaryButton onClick={onBackClick} isLoading={loading}>
                 {backText ?? 'Back'}
               </SecondaryButton>
             </Box>
-            <PrimaryButton onClick={onForwardClick} loading={loading}>
+            <PrimaryButton onClick={onForwardClick} isLoading={loading}>
               {forwardText ?? 'Submit'}
             </PrimaryButton>
           </PbStack>

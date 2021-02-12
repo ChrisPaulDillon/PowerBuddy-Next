@@ -9,7 +9,7 @@ import { CardSm } from '../layout/Card';
 import { CenterColumnFlex, CenterRowFlex } from '../layout/Flexes';
 import { BadgeWeekNo, BadgeWorkoutName } from '../shared/Badges';
 import theme from '../../theme';
-import { TEMPLATES_URL, WORKOUT_DAY_URL, WORKOUT_DIARY_URL } from '../../InternalLinks';
+import { TEMPLATES_URL, WORKOUT_DAY_URL } from '../../InternalLinks';
 import router, { useRouter } from 'next/router';
 import { isMobile } from 'react-device-detect';
 import { PrimaryButton } from '../common/Buttons';
@@ -44,7 +44,7 @@ const WorkoutWeekSummary: React.FC<IProps> = ({ weekSummary }) => {
     try {
       const result = await axios.get(GetWorkoutDayIdByDateUrl());
       if (result.data.workoutDayId !== 0) {
-        router.push(`${WORKOUT_DIARY_URL}/${result.data.workoutDayId}`);
+        router.push(`${WORKOUT_DAY_URL}/${result.data.workoutDayId}`);
       } else if (!result.data.workoutLogId) {
         onTodayWorkoutOpen(); //No workout log was found, give options of fresh create
       } else {
@@ -70,7 +70,7 @@ const WorkoutWeekSummary: React.FC<IProps> = ({ weekSummary }) => {
     try {
       const result = await axios.post(CreateWorkoutDayUrl(), workoutOptions);
       if (result.data !== 0) {
-        router.push(`${WORKOUT_DIARY_URL}/${result.data.workoutDayId}`);
+        router.push(`${WORKOUT_DAY_URL}/${result.data.workoutDayId}`);
         toast(ToastSuccess('Success', 'Successfully created todays workout!'));
       }
     } catch (error) {
@@ -94,17 +94,11 @@ const WorkoutWeekSummary: React.FC<IProps> = ({ weekSummary }) => {
             </Flex>
           ))}
       </CenterRowFlex>
-      <CenterColumnFlex>
-        <Box mt={2} mx={2}>
-          <PrimaryButton
-            size={isMobile || SCREEN_MOBILE ? 'xs' : 'sm'}
-            variant="outline"
-            onClick={async () => await doesUserHaveWorkoutToday()}
-            loading={buttonLoading}>
-            Todays Workout
-          </PrimaryButton>
-        </Box>
-      </CenterColumnFlex>
+      <Box m={2}>
+        <PrimaryButton onClick={async () => await doesUserHaveWorkoutToday()} isLoading={buttonLoading} isFullWidth>
+          Todays Workout
+        </PrimaryButton>
+      </Box>
       {isLoginOpen && <LoginModal isOpen={isLoginOpen} onClose={onLoginClose} />}
       {isTodayWorkoutOpen && (
         <ModalBackForward
@@ -148,7 +142,12 @@ const WorkoutDaySummarySingle: React.FC<IWorkoutDaySummary> = ({
   const router = useRouter();
   const { colorMode } = useColorMode();
   return (
-    <CardSm m={2} bg={moment(date).isSame(new Date(), 'day') ? 'gray.500' : theme.colors.cardColor[colorMode]} minW="180px" maxW="250px" minH="sm">
+    <CardSm
+      m={2}
+      bg={moment(date).isSame(new Date(), 'day') ? theme.colors.cardHighlightColor[colorMode] : theme.colors.cardColor[colorMode]}
+      minW="180px"
+      maxW="250px"
+      minH="sm">
       <PbStack>
         <TextSm textAlign="left" isTruncated>
           {moment(date).format('DD/MM/YYYY')}

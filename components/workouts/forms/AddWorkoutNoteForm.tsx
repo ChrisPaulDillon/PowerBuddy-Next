@@ -10,6 +10,7 @@ import { useWorkoutContext } from '../../workouts/WorkoutContext';
 import { ToastError, ToastSuccess } from '../../shared/Toasts';
 import { Box } from '../../../chakra/Layout';
 import { Button, FormControl, FormErrorMessage } from '../../../chakra/Forms';
+import { FormButton } from '../../common/Buttons';
 
 interface IProps {
   onClose: () => void;
@@ -41,11 +42,7 @@ const AddWorkoutNoteForm: React.FC<IProps> = ({ note, workoutDayId, onClose }) =
           <FormInput ref={register({ validate: validateInput })} name="notes" defaultValue={note} />
           <FormErrorMessage>{errors.notes && errors.notes.message}</FormErrorMessage>
         </FormControl>
-        <Box mt="3">
-          <Button colorScheme="green" type="submit" ml={3} isLoading={formState.isSubmitting}>
-            Add
-          </Button>
-        </Box>
+        <FormButton isLoading={formState.isSubmitting}>Add</FormButton>
       </CenterColumnFlex>
     </form>
   );

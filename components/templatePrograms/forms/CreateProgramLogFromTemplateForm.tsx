@@ -5,8 +5,7 @@ import { CountDays } from '../../util/CountDays';
 import { useToast } from '@chakra-ui/react';
 import CalendarSelectFrom from './CalendarSelectForm';
 import DayCheckboxForm from './DayCheckboxForm';
-import { CenterColumnFlex } from '../../layout/Flexes';
-import { PrimaryButton } from '../../common/Buttons';
+import { FormButton } from '../../common/Buttons';
 import WeightSelectionForm from './WeightSelectionForm';
 import { GetPersonalBestsForTemplate } from '../../../api/account/liftingStats';
 import { useAxios } from '../../../hooks/useAxios';
@@ -177,11 +176,7 @@ const CreateProgramLogFromTemplateForm: React.FC<IProps> = ({ onClose, template,
           updateRepeatProgramCount={updateRepeatProgramCount}
         />
       )}
-      <CenterColumnFlex mt="4">
-        <PrimaryButton type="submit" loading={formState.isSubmitting}>
-          {phase < 4 ? 'CONTINUE' : 'CREATE'}
-        </PrimaryButton>
-      </CenterColumnFlex>
+      <FormButton isLoading={formState.isSubmitting}>{phase < 4 ? 'CONTINUE' : 'CREATE'}</FormButton>
     </form>
   );
 };

@@ -51,18 +51,15 @@ import {
 } from '@chakra-ui/react';
 import { ElementType } from 'react';
 
-export const Button: React.FC<ButtonProps & { ref?: React.Ref<HTMLButtonElement> }> = forwardRef<
-  ButtonProps & { ref: React.Ref<HTMLButtonElement> },
-  ElementType<HTMLButtonElement>
->(({ ...rest }, ref) => {
-  return <ChakraButton ref={ref} {...rest} />;
-});
+export const Button: React.FC<ButtonProps> = ({ ...rest }) => {
+  return <ChakraButton isRound={false} fontStyle="Roboto" {...rest} />;
+};
 
 export const IconButton: React.FC<IconButtonProps & { ref?: React.Ref<HTMLButtonElement> }> = forwardRef<
   IconButtonProps & { ref: React.Ref<HTMLButtonElement> },
   ElementType<HTMLButtonElement>
 >(({ ...rest }, ref) => {
-  return <ChakraIconButton ref={ref} aria-label="" variant="ghost" {...rest} />;
+  return <ChakraIconButton ref={ref} aria-label="" variant="ghost" borderRadius="0px" {...rest} />;
 });
 
 export const Input: React.FC<InputProps & { ref?: React.Ref<HTMLInputElement> }> = forwardRef<
@@ -133,7 +130,7 @@ export const Image: React.FC<ImageProps & { ref?: React.Ref<HTMLImageElement> }>
   ImageProps & { ref: React.Ref<HTMLImageElement> },
   ElementType<HTMLImageElement>
 >(({ ...rest }, ref) => {
-  return <ChakraImage w={150} h={125} fallbackSrc={'/static/images/AW_placeholder.svg'} ref={ref} layerStyle="control" {...rest} />;
+  return <ChakraImage w={150} h={125} ref={ref} layerStyle="control" {...rest} />;
 });
 
 export const Link: React.FC<LinkProps & { ref?: React.Ref<HTMLAnchorElement> }> = forwardRef<

@@ -7,7 +7,7 @@ import { useWorkoutContext } from '../../workouts/WorkoutContext';
 import { DeleteWorkoutExerciseUrl } from '../../../api/account/workoutExercise';
 import { ToastError, ToastSuccess } from '../../shared/Toasts';
 import { Box } from '../../../chakra/Layout';
-import { Button } from '../../../chakra/Forms';
+import { FormButton } from '../../common/Buttons';
 
 interface IProps {
   onClose: () => void;
@@ -38,9 +38,9 @@ const DeleteWorkoutExerciseAlert: React.FC<IProps> = ({ onClose, workoutExercise
     <Box>
       <CenterColumnFlex>
         <TextSm>Are you sure? This cannot be undone</TextSm>
-        <Button mt="4" colorScheme="red" onClick={async () => await deleteExercise()} ml={3} isLoading={loading}>
+        <FormButton colorScheme="red" onClick={async () => await deleteExercise()} ml={3} isLoading={loading}>
           Delete
-        </Button>
+        </FormButton>
       </CenterColumnFlex>
     </Box>
   );

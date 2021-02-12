@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useToast } from '@chakra-ui/react';
 import { CenterColumnFlex } from '../../layout/Flexes';
-import { PrimaryButton } from '../../common/Buttons';
+import { FormButton } from '../../common/Buttons';
 import CalendarSelectFrom from './CalendarSelectForm';
 import { staticNumberList } from '../../common/static';
 import { TextXs } from '../../common/Texts';
@@ -126,11 +126,7 @@ const CreateProgramLogFromScratchForm: React.FC<IProps> = ({ onClose, onCreateSu
         <Box />
       )}
 
-      <CenterColumnFlex p="3" mt="2">
-        <PrimaryButton type="submit" loading={formState.isSubmitting}>
-          {phase < 3 ? 'Continue' : 'Complete'}
-        </PrimaryButton>
-      </CenterColumnFlex>
+      <FormButton isLoading={formState.isSubmitting}>{phase < 3 ? 'Continue' : 'Complete'}</FormButton>
     </form>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useToast } from '@chakra-ui/react';
-import { PrimaryButton } from '../../common/Buttons';
+import { FormButton } from '../../common/Buttons';
 import { PbStack } from '../../common/Stacks';
 import { TextSm } from '../../common/Texts';
 import { FormNumberInput } from '../../common/Inputs';
@@ -11,7 +11,6 @@ import Axios from 'axios';
 import { IWorkoutExercise, IWorkoutSet } from 'powerbuddy-shared';
 import { useUserContext } from '../../users/UserContext';
 import { ToastError, ToastSuccess } from '../../shared/Toasts';
-import { Flex } from '../../../chakra/Layout';
 
 interface IProps {
   workoutExercise: IWorkoutExercise;
@@ -81,11 +80,7 @@ const QuickAddSetsForm: React.FC<IProps> = ({ workoutExercise, suggestedReps, su
         <TextSm minW="60px">Weight ({weightType})</TextSm>
         <FormNumberInput defaultValue={suggestedWeight} maxW="250px" onChange={(e: number) => setWeight(e)} />
       </PbStack>
-      <Flex p="1" mt="1" justifyContent="center">
-        <PrimaryButton type="submit" loading={formState.isSubmitting}>
-          Add
-        </PrimaryButton>
-      </Flex>
+      <FormButton isLoading={formState.isSubmitting}>Add</FormButton>
     </form>
   );
 };

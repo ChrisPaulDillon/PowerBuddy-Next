@@ -59,6 +59,8 @@ const iconColor = { light: 'gray.500', dark: 'gray.100' };
 const background = { light: 'gray.100', dark: 'gray.800' };
 
 const cardColor = { light: 'gray.50', dark: 'gray.700' };
+const cardHighlightColor = { light: 'gray.300', dark: 'gray.600' };
+
 const navIconColor = { light: 'red.600', dark: 'red.700' };
 const bannerColor = { light: 'gray.750', dark: 'gray.50' };
 const textColor = { light: 'gray.750', dark: 'gray.50' };
@@ -90,6 +92,7 @@ const colors = {
   greenWeight,
   borderColor,
   cardColor,
+  cardHighlightColor,
   selectColor,
   selectColorTemp,
   hoverSelectColor,

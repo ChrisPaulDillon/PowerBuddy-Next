@@ -3,7 +3,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { IChangePasswordBody, ResetPasswordViaEmailRequest } from '../../../api/account/auth';
 import { Box, Flex } from '../../../chakra/Layout';
-import { PrimaryButton } from '../../common/Buttons';
+import { FormButton } from '../../common/Buttons';
 import { FormInput } from '../../common/Inputs';
 import { TextXs } from '../../common/Texts';
 import { CenterColumnFlex } from '../../layout/Flexes';
@@ -46,11 +46,7 @@ const ResetPasswordForm: React.FC<IResetPasswordFormProps> = ({ userId, token })
             <FormInput name="password2" ref={register} size="sm" type="password" />
           </Flex>
         </Box>
-        <CenterColumnFlex pt={4}>
-          <PrimaryButton type="submit" loading={formState.isSubmitting}>
-            Comfirm
-          </PrimaryButton>
-        </CenterColumnFlex>
+        <FormButton isLoading={formState.isSubmitting}>Comfirm</FormButton>
       </CenterColumnFlex>
     </form>
   );

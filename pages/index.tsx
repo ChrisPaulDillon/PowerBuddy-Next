@@ -36,7 +36,7 @@ const Index: NextPage = () => {
           <CenterColumnFlex pb={4}>
             <MCalendar selectedDate={selectedDate} handleDateChange={handleDateChange} />
           </CenterColumnFlex>
-          <WorkoutWeekSummary weekSummary={weekData!} />
+          <WorkoutWeekSummary weekSummary={weekData} />
           {/* {workoutWeek && workoutWeek.map((x) => <WorkoutDay workoutDay={x} />)} */}
           {/* {SCREEN_MOBILE && Object.keys(programLogWeek).length !== 0 && (
             <ProgramLogWeek weekNo={weekNo} onLeftClick={handleWeekNoLeftClick} onRightClick={handleWeekNoRightClick}>

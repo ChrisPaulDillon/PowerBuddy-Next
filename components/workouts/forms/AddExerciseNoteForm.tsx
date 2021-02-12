@@ -9,6 +9,7 @@ import { UpdateWorkoutExerciseNoteUrl } from '../../../api/account/workoutExerci
 import { useWorkoutContext } from '../../workouts/WorkoutContext';
 import { ToastError, ToastSuccess } from '../../shared/Toasts';
 import { Button, FormControl, FormErrorMessage } from '../../../chakra/Forms';
+import { FormButton } from '../../common/Buttons';
 
 interface IProps {
   onClose: () => void;
@@ -36,15 +37,11 @@ const AddExerciseNoteForm: React.FC<IProps> = ({ onClose, workoutExerciseId, not
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <CenterColumnFlex>
-        <FormControl isInvalid={errors.notes}>
-          <FormInput ref={register({ validate: validateInput })} name="notes" defaultValue={note} />
-          <FormErrorMessage>{errors.notes && errors.notes.message}</FormErrorMessage>
-        </FormControl>
-        <Button colorScheme="green" type="submit" ml={3} isLoading={formState.isSubmitting} mt="4">
-          Add
-        </Button>
-      </CenterColumnFlex>
+      <FormControl isInvalid={errors.notes}>
+        <FormInput ref={register({ validate: validateInput })} name="notes" defaultValue={note} />
+        <FormErrorMessage>{errors.notes && errors.notes.message}</FormErrorMessage>
+      </FormControl>
+      <FormButton isLoading={formState.isSubmitting}>Add</FormButton>
     </form>
   );
 };

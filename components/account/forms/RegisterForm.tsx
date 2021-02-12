@@ -8,7 +8,7 @@ import { SendEmailConfirmationRequest } from '../../../api/public/email';
 import { Button, FormControl, FormErrorMessage, InputGroup, InputRightElement, Link } from '../../../chakra/Forms';
 import { Box, Flex } from '../../../chakra/Layout';
 import { validateEmailInput, validateInput, validatePassword } from '../../../util/formInputs';
-import { PrimaryButton } from '../../common/Buttons';
+import { FormButton } from '../../common/Buttons';
 import TTIconButton from '../../common/IconButtons';
 import { FormInput } from '../../common/Inputs';
 import { TextXs, TextError } from '../../common/Texts';
@@ -104,11 +104,9 @@ const RegisterForm = ({ setLoginState }: any) => {
           <TextError textAlign="center" visibility={error ? 'visible' : 'hidden'}>
             Username or Email Already in use
           </TextError>
-          <Flex mt="3" justifyContent="center">
-            <PrimaryButton type="submit" leftIcon={<MdAccountBox />} loading={formState.isSubmitting}>
-              Register
-            </PrimaryButton>
-          </Flex>
+          <FormButton type="submit" leftIcon={<MdAccountBox />} isLoading={formState.isSubmitting}>
+            Register
+          </FormButton>
         </Box>
       </CenterColumnFlex>
     </form>
