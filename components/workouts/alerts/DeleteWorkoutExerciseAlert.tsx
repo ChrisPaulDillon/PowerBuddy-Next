@@ -36,7 +36,7 @@ const DeleteWorkoutExerciseAlert: React.FC<IProps> = ({ onClose, workoutExercise
   return (
     <FormLayoutFlex>
       <FormLabel textAlign="center">Are you sure? This cannot be undone</FormLabel>
-      <FormButton colorScheme="red" onClick={async () => await deleteExercise()} ml={3} isLoading={loading}>
+      <FormButton colorScheme="red" onClick={async () => await deleteExercise()} isLoading={loading}>
         Delete
       </FormButton>
     </FormLayoutFlex>
