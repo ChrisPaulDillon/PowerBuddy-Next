@@ -9,7 +9,7 @@ import { SendSmsVerificationUrl } from '../../../../api/public/sms';
 import { FormControl, FormErrorMessage, Icon } from '../../../../chakra/Forms';
 import { Box, Flex } from '../../../../chakra/Layout';
 import { validateInput } from '../../../../util/formInputs';
-import { FormButton, PrimaryButton } from '../../../common/Buttons';
+import { FormButton } from '../../../common/Buttons';
 import { FormInput } from '../../../common/Inputs';
 import { PbStack } from '../../../common/Stacks';
 import { TextXs, TextSm } from '../../../common/Texts';

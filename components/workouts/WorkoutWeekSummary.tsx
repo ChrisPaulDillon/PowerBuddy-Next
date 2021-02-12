@@ -11,9 +11,7 @@ import { BadgeWeekNo, BadgeWorkoutName } from '../shared/Badges';
 import theme from '../../theme';
 import { TEMPLATES_URL, WORKOUT_DAY_URL } from '../../InternalLinks';
 import router, { useRouter } from 'next/router';
-import { isMobile } from 'react-device-detect';
 import { PrimaryButton } from '../common/Buttons';
-import useScreenSizes from '../../hooks/useScreenSizes';
 import axios from 'axios';
 import { ModalBackForward, ModalForward } from '../common/Modals';
 import { LoginModal } from '../shared/Modals';
@@ -30,8 +28,6 @@ const WorkoutWeekSummary: React.FC<IProps> = ({ weekSummary }) => {
   const [buttonLoading, setButtonLoading] = useState<boolean>(false);
   const [programText, setProgramText] = useState<string>();
   const [workoutOptions, setWorkoutOptions] = useState<ICreateWorkoutDayOptions>({ workoutDate: new Date() } as ICreateWorkoutDayOptions);
-
-  const { SCREEN_MOBILE } = useScreenSizes();
 
   const toast = useToast();
 
