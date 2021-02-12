@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useToast } from '@chakra-ui/react';
-import { CenterColumnFlex } from '../../layout/Flexes';
+import { FormLayoutFlex } from '../../layout/Flexes';
 import { FormButton } from '../../common/Buttons';
 import CalendarSelectFrom from './CalendarSelectForm';
 import { staticNumberList } from '../../common/static';
-import { TextXs } from '../../common/Texts';
 import { validateInput } from '../../../util/formInputs';
 import moment from 'moment';
 import ProgramSummary from './ProgramSummary';
@@ -16,7 +15,7 @@ import { CreateWorkoutLogFromScratchUrl } from '../../../api/account/workoutLog'
 import axios from 'axios';
 import { ToastError, ToastSuccess, ToastWarning } from '../../shared/Toasts';
 import { Box } from '../../../chakra/Layout';
-import { FormControl, FormErrorMessage, Select } from '../../../chakra/Forms';
+import { FormControl, FormErrorMessage, FormLabel, Select } from '../../../chakra/Forms';
 
 export interface IWorkoutLogInputScratch {
   noOfWeeks: number;
@@ -89,10 +88,8 @@ const CreateProgramLogFromScratchForm: React.FC<IProps> = ({ onClose, onCreateSu
       {phase === 1 ? (
         <Box display={phase === 1 ? 'inline' : 'none'}>
           <FormControl isInvalid={errors.noOfWeeks}>
-            <CenterColumnFlex mb="2">
-              <TextXs p="1" mb="1">
-                Select Program Start Date & Number of Weeks
-              </TextXs>
+            <FormLayoutFlex>
+              <FormLabel>Select Program Start Date & Number of Weeks</FormLabel>
               <Select
                 placeholder="No Of Weeks..."
                 ref={register({ validate: validateInput })}
@@ -106,13 +103,13 @@ const CreateProgramLogFromScratchForm: React.FC<IProps> = ({ onClose, onCreateSu
                 ))}
               </Select>
               <FormErrorMessage>{errors.noOfWeeks && errors.noOfWeeks.message}</FormErrorMessage>
-            </CenterColumnFlex>
+            </FormLayoutFlex>
           </FormControl>
           <CalendarSelectFrom
             selectedDate={selectedDate}
             calendarDate={calendarDate}
             setCalendarDate={setCalendarDate}
-            // workoutDates={calendarData?.workoutDates!}
+            // workoutDates={calendarData?.workoutDates}
           />
         </Box>
       ) : (

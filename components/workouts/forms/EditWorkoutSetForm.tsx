@@ -3,14 +3,14 @@ import { useForm } from 'react-hook-form';
 import { useToast } from '@chakra-ui/react';
 import { FormNumberInput } from '../../common/Inputs';
 import { FormButton } from '../../common/Buttons';
-import { PbStack } from '../../common/Stacks';
-import { TextSm } from '../../common/Texts';
 import axios from 'axios';
 import { DeleteWorkoutSetUrl, UpdateWorkoutSetUrl } from '../../../api/account/workoutSet';
 import { useWorkoutContext } from '../../workouts/WorkoutContext';
 import { IWorkoutSet } from 'powerbuddy-shared';
 import { ToastError, ToastSuccess } from '../../shared/Toasts';
 import { Box } from '../../../chakra/Layout';
+import { FormLayoutFlex } from '../../layout/Flexes';
+import { FormLabel } from '../../../chakra/Forms';
 
 interface IProps {
   workoutDayId: number;
@@ -70,14 +70,14 @@ const EditWorkoutSetForm: React.FC<IProps> = ({ workoutDayId, workoutSet, onClos
   return (
     <Box>
       <form onSubmit={handleSubmit(onEditSubmit)}>
-        <PbStack>
-          <TextSm minW="100px">Reps</TextSm>
+        <FormLayoutFlex>
+          <FormLabel minW="100px">Reps</FormLabel>
           <FormNumberInput name="reps" defaultValue={noOfReps} onChange={(e: number) => updateReps(e)} />
-        </PbStack>
-        <PbStack>
-          <TextSm minW="100px">Weight ({weightType})</TextSm>
+        </FormLayoutFlex>
+        <FormLayoutFlex>
+          <FormLabel minW="100px">Weight ({weightType})</FormLabel>
           <FormNumberInput name="weight" defaultValue={weightLifted} onChange={(e: number) => updateWeight(e)} />
-        </PbStack>
+        </FormLayoutFlex>
         <FormButton isLoading={formState.isSubmitting}>Update</FormButton>
       </form>
       <form onSubmit={handleSubmit(onDeleteSubmit)}>

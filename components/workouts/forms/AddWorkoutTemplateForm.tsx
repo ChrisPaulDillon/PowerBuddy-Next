@@ -10,6 +10,7 @@ import { validateInput } from '../../../util/formInputs';
 import { FormButton } from '../../common/Buttons';
 import { FormInput } from '../../common/Inputs';
 import { TextXs } from '../../common/Texts';
+import { FormLayoutFlex } from '../../layout/Flexes';
 import { ToastSuccess } from '../../shared/Toasts';
 import { useUserContext } from '../../users/UserContext';
 
@@ -50,17 +51,17 @@ const AddWorkoutTemplateForm: React.FC<IProps> = ({ onClose, workoutDay }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <FormControl isInvalid={errors.templateName}>
-        <Box p={2}>
+        <FormLayoutFlex>
           <FormInput name="templateName" ref={register({ validate: validateInput })} w="100%" />
           <FormErrorMessage>{errors.templateName && errors.templateName.message}</FormErrorMessage>
-        </Box>
+        </FormLayoutFlex>
       </FormControl>
-      <Box p={2}>
+      <FormLayoutFlex>
         <TextXs textAlign="center">Save this workout as a template to be used in future workouts</TextXs>
-      </Box>
+      </FormLayoutFlex>
       <FormButton isLoading={formState.isSubmitting}>Add Template</FormButton>
       <Box mt={5}>
-        <TextXs>Note: You cannot have two workout templates with the same name</TextXs>
+        <TextXs textAlign="center">Note: You cannot have two workout templates with the same name</TextXs>
       </Box>
     </form>
   );
