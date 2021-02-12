@@ -17,20 +17,17 @@ export const LogoutUserUrl = (refreshToken: string) => `${baseUrl}/Logout/${refr
 
 export const RefreshTokenUrl = () => `${baseUrl}/Refresh`;
 
-export const ResetPasswordViaEmailUrl = (userId: string) => 
-`${baseUrl}/ResetPassword/Token/${userId}`;
-
 export const UpdatePasswordUrl = () => 
 `${baseUrl}/UpdatePassword`;
 
-export const VerifyEmailUrl = (userId: string) => 
-`${baseUrl}/VerifyEmail/${userId}`;
+export const AcceptResetPasswordViaEmailUrl = (userId: string) => 
+`${baseUrl}/Email/Accept/ResetPassword/Token/${userId}`;
 
-export const RequestSmsVerificationUrl = () => 
-`${baseUrl}/Sms/RequestVerification`;
+export const AcceptEmailVerificationUrl = (userId: string) => 
+`${baseUrl}/Email/Accept/ConfirmEmail/${userId}`;
 
-export const SendSmsVerificationUrl = () => 
-`${baseUrl}/Sms/SendVerification`;
+export const AcceptSmsConfirmationUrl = () => 
+`${baseUrl}/Sms/Accept/ConfirmSms`;
 
 
 
@@ -72,7 +69,7 @@ export const RefreshRequest = async (refreshToken: string, SetValues: (claimsVal
   
   export const ResetPasswordViaEmailRequest = async (userId: string, changePasswordBody: IChangePasswordBody ) => {
       try {
-          const response = await axios.post(ResetPasswordViaEmailUrl(userId), changePasswordBody);
+          const response = await axios.post(AcceptResetPasswordViaEmailUrl(userId), changePasswordBody);
           return response.data;
       }
       catch(err) {

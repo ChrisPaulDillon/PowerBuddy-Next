@@ -5,7 +5,7 @@ import { API_BASE } from "../../redux/actionTypes";
 const baseUrl = `${API_BASE}Public/Email`;
 
 export const SendEmailConfirmationUrl = (userId: string) =>
-  `${baseUrl}/ConfirmEmail/${userId}`;
+  `${baseUrl}/Send/Confirm/${userId}`;
 
 export const SendEmailConfirmationRequest = async (userId: string) => {
     try {
@@ -18,7 +18,7 @@ export const SendEmailConfirmationRequest = async (userId: string) => {
 }
 
 export const SendPasswordResetUrl = (emailAddress: string) =>
-  `${baseUrl}/ResetPassword/${emailAddress}`;
+  `${baseUrl}/Send/ResetPassword/${emailAddress}`;
 
 
 export const SendPasswordResetEmailRequest = async (email: string) => {

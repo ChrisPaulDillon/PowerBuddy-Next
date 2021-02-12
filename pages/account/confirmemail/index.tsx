@@ -3,7 +3,7 @@ import axios from 'axios';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { VerifyEmailUrl } from '../../../api/account/auth';
+import { AcceptEmailVerificationUrl } from '../../../api/account/auth';
 import { SendEmailConfirmationUrl } from '../../../api/public/email';
 import { Box, Flex } from '../../../chakra/Layout';
 import ProgressSpinner from '../../../components/common/ProgressSpinner';
@@ -26,7 +26,7 @@ const Index: NextPage = () => {
     const verifyEmail = async (): Promise<void> => {
       if (userId && token) {
         try {
-          const response = await axios.post(VerifyEmailUrl(userId! as string), { token: token.toString().replace(/\s+/g, '+') });
+          const response = await axios.post(AcceptEmailVerificationUrl(userId as string), { token: token.toString().replace(/\s+/g, '+') });
           if (response.data) {
             setResponse(true);
           }

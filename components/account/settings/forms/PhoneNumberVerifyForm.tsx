@@ -4,7 +4,8 @@ import { IUser } from 'powerbuddy-shared/lib';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AiFillCheckCircle, ImBlocked } from 'react-icons/all';
-import { RequestSmsVerificationUrl, SendSmsVerificationUrl } from '../../../../api/account/auth';
+import { AcceptSmsConfirmationUrl } from '../../../../api/account/auth';
+import { SendSmsVerificationUrl } from '../../../../api/public/sms';
 import { FormControl, FormErrorMessage, Icon } from '../../../../chakra/Forms';
 import { Box, Flex } from '../../../../chakra/Layout';
 import { validateInput } from '../../../../util/formInputs';
@@ -30,7 +31,7 @@ const PhoneNumberVerifyForm: React.FC<IProps> = ({ user }) => {
   const onSubmit = async ({ phoneNumber, code }: any) => {
     if (smsSent) {
       try {
-        const response = await axios.post(SendSmsVerificationUrl(), { phoneNumber: phoneNumber as string, code: code as string });
+        const response = await axios.post(AcceptSmsConfirmationUrl(), { phoneNumber: phoneNumber as string, code: code as string });
         if (response && response.data) {
           toast(ToastSuccess('Success', 'Phone Number Successfully Verified'));
           setSmsSent(false);
@@ -46,7 +47,7 @@ const PhoneNumberVerifyForm: React.FC<IProps> = ({ user }) => {
       setError(false);
 
       try {
-        const response = await axios.post(RequestSmsVerificationUrl(), { phoneNumber: phoneNumber as string });
+        const response = await axios.post(SendSmsVerificationUrl(), { phoneNumber: phoneNumber as string });
         if (response && response.data) {
           toast(ToastSuccess('Success', 'Successfully Sent Sms, Check Your Phone'));
           setSmsSent(true);
