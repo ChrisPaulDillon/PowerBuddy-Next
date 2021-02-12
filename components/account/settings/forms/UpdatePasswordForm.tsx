@@ -4,7 +4,7 @@ import { IUser } from 'powerbuddy-shared/lib';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { UpdatePasswordUrl } from '../../../../api/account/auth';
-import { FormControl, FormErrorMessage } from '../../../../chakra/Forms';
+import { FormControl, FormErrorMessage, FormLabel } from '../../../../chakra/Forms';
 import { Box } from '../../../../chakra/Layout';
 import { INVALID_CREDENTIALS } from '../../../../api/apiResponseCodes';
 import { validateInput } from '../../../../util/formInputs';
@@ -12,7 +12,7 @@ import { FormButton } from '../../../common/Buttons';
 import { FormInput } from '../../../common/Inputs';
 import { PbStack } from '../../../common/Stacks';
 import { TextSm, TextXs } from '../../../common/Texts';
-import { CenterColumnFlex } from '../../../layout/Flexes';
+import { CenterColumnFlex, FormLayoutFlex } from '../../../layout/Flexes';
 import { ToastError, ToastSuccess } from '../../../shared/Toasts';
 
 interface IUpdatePasswordInput {
@@ -64,43 +64,29 @@ const UpdatePasswordForm: React.FC<IProps> = ({ user }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <CenterColumnFlex mt="4">
-        <Box m="1">
-          <FormControl isInvalid={errors.oldPassword}>
-            <PbStack>
-              <TextXs pt="3" pr="1" minW="110px">
-                Current Password
-              </TextXs>
-              <FormInput name="oldPassword" ref={register({ validate: validateInput })} size="sm" type="password" />
-            </PbStack>
-            <FormErrorMessage>{errors.oldPassword && errors.oldPassword.message}</FormErrorMessage>
-          </FormControl>
-        </Box>
-        <Box m="1" pt={3}>
-          <FormControl isInvalid={errors.password1}>
-            <PbStack>
-              <TextXs pt="3" pr="1" minW="110px">
-                New Password
-              </TextXs>
-              <FormInput name="password1" ref={register({ validate: validateInput })} size="sm" type="password" />
-            </PbStack>
-            <FormErrorMessage>{errors.password1 && errors.password1.message}</FormErrorMessage>
-          </FormControl>
-        </Box>
-        <Box m="1">
-          <FormControl isInvalid={errors.password2}>
-            <PbStack>
-              <TextXs pt="3" pr="1" minW="110px">
-                Confirm Password
-              </TextXs>
-              <FormInput name="password2" ref={register({ validate: validateInput })} size="sm" type="password" />
-            </PbStack>
-            <FormErrorMessage>{errors.password2 && errors.password2.message}</FormErrorMessage>
-          </FormControl>
-        </Box>
-        {error && <TextSm color="red.500">Passwords do not match</TextSm>}
-        <FormButton isLoading={formState.isSubmitting}>Update</FormButton>
-      </CenterColumnFlex>
+      <FormControl isInvalid={errors.oldPassword}>
+        <FormLayoutFlex>
+          <FormLabel minW="110px">Current Password</FormLabel>
+          <FormInput name="oldPassword" ref={register({ validate: validateInput })} size="sm" type="password" />
+          <FormErrorMessage>{errors.oldPassword && errors.oldPassword.message}</FormErrorMessage>
+        </FormLayoutFlex>
+      </FormControl>
+      <FormControl isInvalid={errors.password1}>
+        <FormLayoutFlex>
+          <FormLabel minW="110px">New Password</FormLabel>
+          <FormInput name="password1" ref={register({ validate: validateInput })} size="sm" type="password" />
+          <FormErrorMessage>{errors.password1 && errors.password1.message}</FormErrorMessage>
+        </FormLayoutFlex>
+      </FormControl>
+      <FormControl isInvalid={errors.password2}>
+        <FormLayoutFlex>
+          <FormLabel minW="110px">Confirm Password</FormLabel>
+          <FormInput name="password2" ref={register({ validate: validateInput })} size="sm" type="password" />
+          <FormErrorMessage>{errors.password2 && errors.password2.message}</FormErrorMessage>
+        </FormLayoutFlex>
+      </FormControl>
+      {error && <TextSm color="red.500">Passwords do not match</TextSm>}
+      <FormButton isLoading={formState.isSubmitting}>Update</FormButton>
     </form>
   );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useToast } from '@chakra-ui/react';
-import { CenterColumnFlex } from '../../layout/Flexes';
+import { FormLayoutFlex } from '../../layout/Flexes';
 import { validateInput } from '../../../util/formInputs';
 import { FormInput } from '../../common/Inputs';
 import axios from 'axios';
@@ -36,13 +36,13 @@ const AddWorkoutNoteForm: React.FC<IProps> = ({ note, workoutDayId, onClose }) =
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <CenterColumnFlex p="1" mt="1" justifyContent="center">
-        <FormControl isInvalid={errors.notes}>
+      <FormControl isInvalid={errors.notes}>
+        <FormLayoutFlex>
           <FormInput ref={register({ validate: validateInput })} name="notes" defaultValue={note} />
           <FormErrorMessage>{errors.notes && errors.notes.message}</FormErrorMessage>
-        </FormControl>
-        <FormButton isLoading={formState.isSubmitting}>Add</FormButton>
-      </CenterColumnFlex>
+        </FormLayoutFlex>
+      </FormControl>
+      <FormButton isLoading={formState.isSubmitting}>Add</FormButton>
     </form>
   );
 };

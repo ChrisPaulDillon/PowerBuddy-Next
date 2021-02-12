@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useToast } from '@chakra-ui/react';
+import { useColorMode, useToast } from '@chakra-ui/react';
 import { FormInput } from '../../common/Inputs';
-import { CenterColumnFlex, CenterRowFlex } from '../../layout/Flexes';
+import { FormLayoutFlex } from '../../layout/Flexes';
 import { TextError, TextXs } from '../../common/Texts';
 import { FormButton } from '../../common/Buttons';
 import { MdAccountBox } from 'react-icons/md';
@@ -16,9 +16,9 @@ import { decodeJwtToken, handleAuthenticationTokens } from '../../../util/axiosU
 import { ToastSuccess } from '../../shared/Toasts';
 import { LoginUserRequest } from '../../../api/account/auth';
 import { ACCOUNT_LOCKOUT, EMAIL_NOT_CONFIRMED, INVALID_CREDENTIALS, USER_NOT_FOUND } from '../../../api/apiResponseCodes';
-import { Box, Flex } from '../../../chakra/Layout';
-import { Button, FormControl, FormErrorMessage, InputGroup, InputRightElement, Link } from '../../../chakra/Forms';
-
+import { Flex } from '../../../chakra/Layout';
+import { Button, FormControl, FormErrorMessage, FormLabel, InputGroup, InputRightElement, Link } from '../../../chakra/Forms';
+import theme from '../../../theme';
 interface ILoginFormProps {
   onClose: () => void;
   setLoginState: any;
@@ -33,6 +33,7 @@ const LoginForm: React.FC<ILoginFormProps> = ({ onClose, setLoginState }) => {
 
   const { SetValues } = useUserContext();
 
+  const { colorMode } = useColorMode();
   const toast = useToast();
 
   const { register, handleSubmit, errors, formState } = useForm();
@@ -94,63 +95,55 @@ const LoginForm: React.FC<ILoginFormProps> = ({ onClose, setLoginState }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <CenterColumnFlex>
-        <Box p="2">
-          <FormControl isInvalid={errors.email}>
-            <Box p="1">
-              <TextXs>Email or Username</TextXs>
-              <FormInput name="email" ref={register({ validate: validateInput })} placeholder="example@examplesite.com" />
-            </Box>
-            <FormErrorMessage>{errors.email && errors.email.message}</FormErrorMessage>
-          </FormControl>
-          <Box p="1">
-            <FormControl isInvalid={errors.password}>
-              <TextXs>Password</TextXs>
-              <InputGroup size="md">
-                <FormInput
-                  pr="4.5rem"
-                  type={showPW ? 'text' : 'password'}
-                  placeholder="Enter password"
-                  name="password"
-                  ref={register({ validate: validateInput })}
-                />
-                <InputRightElement width="4.5rem">
-                  <Button h="1.75rem" size="sm" onClick={handleClick}>
-                    {showPW ? 'Hide' : 'Show'}
-                  </Button>
-                </InputRightElement>
-              </InputGroup>
-              <FormErrorMessage>{errors.password && errors.password.message}</FormErrorMessage>
-            </FormControl>
-          </Box>
-          {showError && (
-            <TextError textAlign="center" py={2}>
-              {errorMessage}
-            </TextError>
-          )}
-          <CenterRowFlex pt={1}>
-            <TextXs px={1} color="gray.500">
-              Forgot Password?{' '}
-            </TextXs>
-            <Link onClick={() => setLoginState(LoginStateEnum.PasswordReset)}>
-              <TextXs color="blue.500">Reset</TextXs>
-            </Link>
-          </CenterRowFlex>
-
-          <FormButton type="submit" leftIcon={<MdAccountBox />} isLoading={formState.isSubmitting}>
-            Login
-          </FormButton>
-          <Box>
-            <CenterRowFlex justify="center">
-              <TextXs px={1}>Not Registered?</TextXs>
-              <Link onClick={() => setLoginState(LoginStateEnum.Register)}>
-                <TextXs color="blue.500">Register</TextXs>
-              </Link>
-            </CenterRowFlex>
-          </Box>
-          <Box mt={2}>{/* <Facebook onClose={onClose} /> */}</Box>
-        </Box>
-      </CenterColumnFlex>
+      <FormControl isInvalid={errors.email}>
+        <FormLayoutFlex>
+          <FormLabel>Email or Username</FormLabel>
+          <FormInput name="email" ref={register({ validate: validateInput })} placeholder="example@examplesite.com" />
+          <FormErrorMessage>{errors.email && errors.email.message}</FormErrorMessage>
+        </FormLayoutFlex>
+      </FormControl>
+      <FormControl isInvalid={errors.password}>
+        <FormLayoutFlex>
+          <FormLabel>Password</FormLabel>
+          <InputGroup size="md">
+            <FormInput
+              pr="4.5rem"
+              type={showPW ? 'text' : 'password'}
+              placeholder="Enter password"
+              name="password"
+              ref={register({ validate: validateInput })}
+            />
+            <InputRightElement width="4.5rem">
+              <Button h="1.75rem" size="sm" onClick={handleClick}>
+                {showPW ? 'Hide' : 'Show'}
+              </Button>
+            </InputRightElement>
+          </InputGroup>
+          <FormErrorMessage>{errors.password && errors.password.message}</FormErrorMessage>
+        </FormLayoutFlex>
+      </FormControl>
+      {showError && (
+        <TextError textAlign="center" py={2}>
+          {errorMessage}
+        </TextError>
+      )}
+      <Flex>
+        <TextXs pr={1} color="gray.500">
+          Forgot Password?{' '}
+        </TextXs>
+        <Link onClick={() => setLoginState(LoginStateEnum.PasswordReset)}>
+          <TextXs color="blue.500">Reset</TextXs>
+        </Link>
+      </Flex>
+      <FormButton type="submit" leftIcon={<MdAccountBox />} isLoading={formState.isSubmitting}>
+        Login
+      </FormButton>
+      <Flex justify="center">
+        <TextXs pr={1}>Not Registered? </TextXs>{' '}
+        <Link onClick={() => setLoginState(LoginStateEnum.Register)}>
+          <TextXs color={theme.colors.hyperLink[colorMode]}>Register</TextXs>
+        </Link>
+      </Flex>
     </form>
   );
 };

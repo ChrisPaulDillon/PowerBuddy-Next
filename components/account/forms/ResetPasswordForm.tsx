@@ -2,11 +2,13 @@ import { useToast } from '@chakra-ui/react';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { IChangePasswordBody, ResetPasswordViaEmailRequest } from '../../../api/account/auth';
+import { FormControl, FormErrorMessage, FormLabel } from '../../../chakra/Forms';
 import { Box, Flex } from '../../../chakra/Layout';
+import { validateInput } from '../../../util/formInputs';
 import { FormButton } from '../../common/Buttons';
 import { FormInput } from '../../common/Inputs';
 import { TextXs } from '../../common/Texts';
-import { CenterColumnFlex } from '../../layout/Flexes';
+import { CenterColumnFlex, FormLayoutFlex } from '../../layout/Flexes';
 import { ToastError, ToastSuccess } from '../../shared/Toasts';
 
 interface IResetPasswordFormProps {
@@ -16,7 +18,6 @@ interface IResetPasswordFormProps {
 
 const ResetPasswordForm: React.FC<IResetPasswordFormProps> = ({ userId, token }) => {
   const toast = useToast();
-  const { handleSubmit, formState, register } = useForm();
 
   const onSubmit = async ({ password }: any) => {
     const changePasswordBody: IChangePasswordBody = {
@@ -31,23 +32,25 @@ const ResetPasswordForm: React.FC<IResetPasswordFormProps> = ({ userId, token })
     }
   };
 
+  const { handleSubmit, formState, register, errors } = useForm();
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <CenterColumnFlex mt={2}>
-        <Box m="1">
-          <Flex flexDir="column">
-            <TextXs pt="3">Password</TextXs>
-            <FormInput name="password" ref={register} size="sm" type="password" />
-          </Flex>
-        </Box>
-        <Box m="1">
-          <Flex flexDir="column">
-            <TextXs pt="3">Confirm Password</TextXs>
-            <FormInput name="password2" ref={register} size="sm" type="password" />
-          </Flex>
-        </Box>
-        <FormButton isLoading={formState.isSubmitting}>Comfirm</FormButton>
-      </CenterColumnFlex>
+      <FormControl isInvalid={errors.password}>
+        <FormLayoutFlex>
+          <FormLabel>Password</FormLabel>
+          <FormInput name="password" ref={register({ validate: validateInput })} size="sm" type="password" />
+          <FormErrorMessage>{errors.password && errors.password.message}</FormErrorMessage>
+        </FormLayoutFlex>
+      </FormControl>
+      <FormControl isInvalid={errors.password2}>
+        <FormLayoutFlex>
+          <FormLabel>Confirm Password</FormLabel>
+          <FormInput name="password2" ref={register({ validate: validateInput })} size="sm" type="password" />
+          <FormErrorMessage>{errors.password2 && errors.password2.message}</FormErrorMessage>
+        </FormLayoutFlex>
+      </FormControl>
+      <FormButton isLoading={formState.isSubmitting}>Comfirm</FormButton>
     </form>
   );
 };

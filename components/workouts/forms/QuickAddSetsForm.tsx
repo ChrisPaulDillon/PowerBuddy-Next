@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useToast } from '@chakra-ui/react';
 import { FormButton } from '../../common/Buttons';
-import { PbStack } from '../../common/Stacks';
-import { TextSm } from '../../common/Texts';
 import { FormNumberInput } from '../../common/Inputs';
 import { CreateWorkoutSetCollectionUrl } from '../../../api/account/workoutSet';
 import { useWorkoutContext } from '../../workouts/WorkoutContext';
@@ -11,6 +9,8 @@ import Axios from 'axios';
 import { IWorkoutExercise, IWorkoutSet } from 'powerbuddy-shared';
 import { useUserContext } from '../../users/UserContext';
 import { ToastError, ToastSuccess } from '../../shared/Toasts';
+import { FormLayoutFlex } from '../../layout/Flexes';
+import { FormLabel } from '../../../chakra/Forms';
 
 interface IProps {
   workoutExercise: IWorkoutExercise;
@@ -68,18 +68,18 @@ const QuickAddSetsForm: React.FC<IProps> = ({ workoutExercise, suggestedReps, su
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <PbStack>
-        <TextSm minW="60px">Sets</TextSm>
+      <FormLayoutFlex>
+        <FormLabel minW="60px">Sets</FormLabel>
         <FormNumberInput defaultValue={1} maxW="250px" onChange={(e: number) => setNoOfSets(e)} />
-      </PbStack>
-      <PbStack>
-        <TextSm minW="60px">Reps</TextSm>
+      </FormLayoutFlex>
+      <FormLayoutFlex>
+        <FormLabel minW="60px">Reps</FormLabel>
         <FormNumberInput defaultValue={suggestedReps} maxW="250px" onChange={(e: number) => setNoOfReps(e)} />
-      </PbStack>
-      <PbStack>
-        <TextSm minW="60px">Weight ({weightType})</TextSm>
+      </FormLayoutFlex>
+      <FormLayoutFlex>
+        <FormLabel minW="60px">Weight ({weightType})</FormLabel>
         <FormNumberInput defaultValue={suggestedWeight} maxW="250px" onChange={(e: number) => setWeight(e)} />
-      </PbStack>
+      </FormLayoutFlex>
       <FormButton isLoading={formState.isSubmitting}>Add</FormButton>
     </form>
   );

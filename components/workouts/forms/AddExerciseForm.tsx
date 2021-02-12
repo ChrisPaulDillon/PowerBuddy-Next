@@ -7,14 +7,14 @@ import { FormButton } from '../../common/Buttons';
 import { IAppState } from '../../../redux/store';
 import { FormWeightInput } from '../../common/Inputs';
 import { TextRep, TextLg } from '../../common/Texts';
-import { CenterColumnFlex } from '../../layout/Flexes';
+import { FormLayoutFlex } from '../../layout/Flexes';
 import axios from 'axios';
 import { CreateWorkoutExerciseUrl } from '../../../api/account/workoutExercise';
 import { useWorkoutContext } from '../../workouts/WorkoutContext';
 import useLoadExercises from '../../../hooks/redux/useLoadExercises';
 import { ICreateWorkoutExercise } from 'powerbuddy-shared';
 import { ToastError, ToastSuccess } from '../../shared/Toasts';
-import { Box, Flex } from '../../../chakra/Layout';
+import { Box, Flex, Stack } from '../../../chakra/Layout';
 import { Button, FormControl, FormErrorMessage } from '../../../chakra/Forms';
 
 interface IProps {
@@ -79,7 +79,7 @@ const AddExerciseForm: React.FC<IProps> = ({ onClose, workoutDayId }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <FormControl isInvalid={errors.selectExercise}>
-        <Box p={2}>
+        <FormLayoutFlex>
           <SelectSearchable
             options={exerciseList}
             defaultValue={{
@@ -89,9 +89,9 @@ const AddExerciseForm: React.FC<IProps> = ({ onClose, workoutDayId }) => {
             onChange={handleExerciseSelection}
           />
           <FormErrorMessage>{errors.selectExercise && errors.selectExercise.message}</FormErrorMessage>
-        </Box>
+        </FormLayoutFlex>
       </FormControl>
-      <Box p={2}>
+      <FormLayoutFlex>
         <FormWeightInput
           name="weight"
           placeholder={`Enter weight...(${weightType})`}
@@ -100,30 +100,26 @@ const AddExerciseForm: React.FC<IProps> = ({ onClose, workoutDayId }) => {
           defaultValue={0}
           max={1000}
         />
-      </Box>
+      </FormLayoutFlex>
       <LightMode>
-        <Flex justify="center" mt={2}>
-          <Flex flexDir="column" px={3}>
-            <Button size="md" rounded="100px" onClick={() => setSets(handleSetRepChange(sets))} colorScheme="blue">
-              <TextRep>{sets} Sets</TextRep>
-            </Button>
-          </Flex>
-          <Flex flexDir="column" px={3}>
-            <Button size="md" rounded="100px" onClick={() => setReps(handleSetRepChange(reps))} colorScheme="blue">
-              <TextRep>{reps} Reps</TextRep>
-            </Button>
-          </Flex>
+        <Flex justify="center">
+          <Button size="md" rounded="100px" onClick={() => setSets(handleSetRepChange(sets))} colorScheme="blue">
+            <TextRep>{sets} Sets</TextRep>
+          </Button>
+          <Button size="md" rounded="100px" onClick={() => setReps(handleSetRepChange(reps))} colorScheme="blue">
+            <TextRep>{reps} Reps</TextRep>
+          </Button>
         </Flex>
       </LightMode>
-      <CenterColumnFlex pt="3">
-        <TextLg>
+      <Box mt={4}>
+        <TextLg textAlign="center">
           {sets}x{reps}x{weight}
           {weightType}
         </TextLg>
-      </CenterColumnFlex>
-      <FormButton type="submit" isLoading={formState.isSubmitting}>
-        Create
-      </FormButton>
+        <FormButton type="submit" isLoading={formState.isSubmitting}>
+          Create
+        </FormButton>
+      </Box>
     </form>
   );
 };

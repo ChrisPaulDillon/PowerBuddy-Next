@@ -6,14 +6,14 @@ import { useForm } from 'react-hook-form';
 import { AiFillCheckCircle, ImBlocked } from 'react-icons/all';
 import { AcceptSmsConfirmationUrl } from '../../../../api/account/auth';
 import { SendSmsVerificationUrl } from '../../../../api/public/sms';
-import { FormControl, FormErrorMessage, Icon } from '../../../../chakra/Forms';
+import { FormControl, FormErrorMessage, FormLabel, Icon } from '../../../../chakra/Forms';
 import { Box, Flex } from '../../../../chakra/Layout';
 import { validateInput } from '../../../../util/formInputs';
 import { FormButton } from '../../../common/Buttons';
 import { FormInput } from '../../../common/Inputs';
 import { PbStack } from '../../../common/Stacks';
 import { TextXs, TextSm } from '../../../common/Texts';
-import { CenterColumnFlex } from '../../../layout/Flexes';
+import { CenterColumnFlex, FormLayoutFlex } from '../../../layout/Flexes';
 import { ToastError, ToastSuccess } from '../../../shared/Toasts';
 
 interface IProps {
@@ -60,45 +60,33 @@ const PhoneNumberVerifyForm: React.FC<IProps> = ({ user }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <CenterColumnFlex mt="4">
-        <Box m="1">
-          <FormControl isInvalid={errors.phoneNumber}>
-            <Flex>
-              <PbStack>
-                <TextXs pt="3" pr="1" minW="110px">
-                  Phone Number
-                </TextXs>
-                <FormInput name="phoneNumber" ref={register({ validate: validateInput })} size="sm" defaultValue={user?.phoneNumber} />
-              </PbStack>
-              <Box ml={1}>
-                {user?.phoneNumberConfirmed ? (
-                  <Icon as={AiFillCheckCircle} color="green.500" fontSize="20px" mt={2} />
-                ) : (
-                  <Icon as={ImBlocked} color="red.500" fontSize="20px" mt={2} />
-                )}
-              </Box>
-            </Flex>
-            <FormErrorMessage>{errors.phoneNumber && errors.phoneNumber.message}</FormErrorMessage>
-          </FormControl>
-        </Box>
-        {smsSent && (
-          <Box m="1">
-            <FormControl isInvalid={errors.code}>
-              <Flex>
-                <PbStack>
-                  <TextXs pt="3" pr="1" minW="110px">
-                    Enter Code
-                  </TextXs>
-                  <FormInput name="code" ref={register} size="sm" />
-                </PbStack>
-              </Flex>
-              <FormErrorMessage>{errors.code && errors.code.message}</FormErrorMessage>
-            </FormControl>
+      <FormControl isInvalid={errors.phoneNumber}>
+        <FormLayoutFlex>
+          <FormLabel minW="110px">Phone Number</FormLabel>
+          <FormInput name="phoneNumber" ref={register({ validate: validateInput })} size="sm" defaultValue={user?.phoneNumber} />
+
+          <Box ml={1}>
+            {user?.phoneNumberConfirmed ? (
+              <Icon as={AiFillCheckCircle} color="green.500" fontSize="20px" mt={2} />
+            ) : (
+              <Icon as={ImBlocked} color="red.500" fontSize="20px" mt={2} />
+            )}
           </Box>
-        )}
-        {error && <TextSm color="red.500">Passwords do not match</TextSm>}
-        <FormButton isLoading={formState.isSubmitting}>Verify</FormButton>
-      </CenterColumnFlex>
+          <FormErrorMessage>{errors.phoneNumber && errors.phoneNumber.message}</FormErrorMessage>
+        </FormLayoutFlex>
+      </FormControl>
+      {smsSent && (
+        <FormControl isInvalid={errors.code}>
+          <FormLayoutFlex>
+            <FormLabel minW="110px">Enter Code</FormLabel>
+            <FormInput name="code" ref={register} size="sm" />
+
+            <FormErrorMessage>{errors.code && errors.code.message}</FormErrorMessage>
+          </FormLayoutFlex>
+        </FormControl>
+      )}
+      {error && <TextSm color="red.500">Passwords do not match</TextSm>}
+      <FormButton isLoading={formState.isSubmitting}>Verify</FormButton>
     </form>
   );
 };
