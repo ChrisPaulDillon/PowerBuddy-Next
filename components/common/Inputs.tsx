@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { BoxProps } from '@chakra-ui/react';
+import { InputProps, NumberInputProps } from '@chakra-ui/react';
 import {
   Button,
   Icon,
@@ -15,56 +15,18 @@ import {
 } from '../../chakra/Forms';
 import { Stack } from '../../chakra/Layout';
 
-interface IProps extends BoxProps {
-  name?: string;
-  ref?: any;
-  placeholder?: string;
-  onChange?: any;
-  value?: any;
-  w?: any;
-  type?: string;
-  defaultValue?: any;
-  min?: any;
-  max?: any;
-  size?: any;
-  pr?: any;
-  maxW?: any;
+interface IFormInputProps extends InputProps {
+  ref: any;
 }
 
-export const FormInput: React.FC<IProps> = forwardRef(
-  ({ name, placeholder, onChange, value, w, type, size, pr, maxW, defaultValue }, ref, ...rest: any) => (
-    <Input
-      name={name}
-      ref={ref}
-      placeholder={placeholder}
-      size={size ?? 'md'}
-      onChange={onChange}
-      value={value}
-      w={w}
-      type={type}
-      variant="flushed"
-      pr={pr}
-      maxW={maxW}
-      defaultValue={defaultValue}
-      borderColor="blue.300"
-      {...rest}
-    />
-  )
-);
+interface IFormNumberInputProps extends NumberInputProps {
+  ref: any;
+}
 
-export const FormNumberInput: React.FC<IProps> = forwardRef(({ name, placeholder, onChange, value, w, size, defaultValue, min, max }, ref: any) => (
-  <NumberInput
-    name={name}
-    ref={ref}
-    placeholder={placeholder}
-    size={size ?? 'md'}
-    onChange={onChange}
-    value={value}
-    w={w}
-    defaultValue={defaultValue}
-    variant="flushed"
-    min={min ?? 0}
-    max={max}>
+export const FormInput: React.FC<IFormInputProps> = forwardRef(({ ...rest }, ref: any) => <Input ref={ref} {...rest} />);
+
+export const FormNumberInput: React.FC<IFormNumberInputProps> = forwardRef(({ ...rest }, ref: any) => (
+  <NumberInput ref={ref} {...rest}>
     {' '}
     <NumberInputField />
     <NumberInputStepper>
@@ -74,21 +36,8 @@ export const FormNumberInput: React.FC<IProps> = forwardRef(({ name, placeholder
   </NumberInput>
 ));
 
-export const FormWeightInput: React.FC<IProps> = forwardRef(({ name, placeholder, onChange, value, w, size, defaultValue, min, max }, ref: any) => (
-  <NumberInput
-    name={name}
-    ref={ref}
-    step={0.25}
-    placeholder={placeholder}
-    size={size ?? 'md'}
-    onChange={onChange}
-    value={value}
-    w={w}
-    defaultValue={defaultValue}
-    variant="flushed"
-    min={min ?? 0}
-    max={max}>
-    {' '}
+export const FormWeightInput: React.FC<IFormNumberInputProps> = forwardRef(({ ...rest }, ref: any) => (
+  <NumberInput ref={ref} step={0.25} {...rest}>
     <NumberInputField />
     <NumberInputStepper>
       <NumberIncrementStepper />
@@ -97,25 +46,25 @@ export const FormWeightInput: React.FC<IProps> = forwardRef(({ name, placeholder
   </NumberInput>
 ));
 
-export const EmailInput: React.FC<IProps> = forwardRef(({ name }, ref: any) => {
+export const EmailInput: React.FC<IFormInputProps> = forwardRef(({ ...rest }, ref: any) => {
   return (
     <Stack spacing={4}>
       <InputGroup size="md" w="100%" p="2">
         <InputLeftElement children={<Icon name="phone" color="gray.300" />} />
-        <Input name={name} type="email" placeholder="Enter Email" ref={ref} />
+        <Input type="email" placeholder="Enter Email" ref={ref} {...rest} />
       </InputGroup>
     </Stack>
   );
 });
 
-export const PasswordInput: React.FC<IProps> = forwardRef(({ name }, ref: any) => {
+export const PasswordInput: React.FC<IFormInputProps> = forwardRef(({ ...rest }, ref: any) => {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
 
   return (
     <InputGroup size="md" w="100%" p="2">
       <InputLeftElement children={<Icon name="phone" color="gray.300" />} />
-      <Input name={name} type={show ? 'text' : 'password'} placeholder="Enter password" ref={ref} />
+      <Input type={show ? 'text' : 'password'} placeholder="Enter password" ref={ref} {...rest} />
       <InputRightElement width="4.5rem">
         <Button h="1.75rem" size="sm" onClick={handleClick}>
           {show ? 'Hide' : 'Show'}

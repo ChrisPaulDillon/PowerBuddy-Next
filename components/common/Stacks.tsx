@@ -1,7 +1,7 @@
 import React from 'react';
-import { Stack } from '@chakra-ui/react';
+import { Stack, StackProps } from '@chakra-ui/react';
 
-export const PbStack = ({ children, ...rest }: any) => (
+export const PbStack: React.FC<StackProps> = ({ children, ...rest }) => (
   <Stack
     isInline
     justify="space-between"
@@ -10,6 +10,12 @@ export const PbStack = ({ children, ...rest }: any) => (
     mb="1em"
     w="100%"
     {...rest}>
+    {children}
+  </Stack>
+);
+
+export const FormStack: React.FC<StackProps> = ({ children, ...rest }) => (
+  <Stack isInline justify="space-between" align="center" my={1} w="100%" {...rest}>
     {children}
   </Stack>
 );

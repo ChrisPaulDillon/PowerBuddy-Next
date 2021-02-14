@@ -14,8 +14,8 @@ export const CenterRowFlex: React.FC<FlexProps> = ({ children, ...rest }) => (
   </Flex>
 );
 
-export const FormLayoutFlex = ({ children }) => (
-  <Flex flexDir="column" justify="space-between" my={2}>
+export const FormLayoutFlex: React.FC<FlexProps> = ({ children, ...rest }) => (
+  <Flex flexDir="column" justify="space-between" my={3} {...rest}>
     {children}
   </Flex>
 );

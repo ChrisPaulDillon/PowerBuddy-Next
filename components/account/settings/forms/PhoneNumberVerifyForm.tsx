@@ -11,6 +11,7 @@ import { Box } from '../../../../chakra/Layout';
 import { validateInput } from '../../../../util/formInputs';
 import { FormButton } from '../../../common/Buttons';
 import { FormInput } from '../../../common/Inputs';
+import { FormStack } from '../../../common/Stacks';
 import { TextSm } from '../../../common/Texts';
 import { FormLayoutFlex } from '../../../layout/Flexes';
 import { ToastError, ToastSuccess } from '../../../shared/Toasts';
@@ -61,31 +62,34 @@ const PhoneNumberVerifyForm: React.FC<IProps> = ({ user }) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <FormControl isInvalid={errors.phoneNumber}>
         <FormLayoutFlex>
-          <FormLabel minW="110px">Phone Number</FormLabel>
-          <FormInput name="phoneNumber" ref={register({ validate: validateInput })} size="sm" defaultValue={user?.phoneNumber} />
-
-          <Box ml={1}>
-            {user?.phoneNumberConfirmed ? (
-              <Icon as={AiFillCheckCircle} color="green.500" fontSize="20px" mt={2} />
-            ) : (
-              <Icon as={ImBlocked} color="red.500" fontSize="20px" mt={2} />
+          <FormLabel>Phone Number</FormLabel>
+          <FormStack>
+            {!user?.phoneNumberConfirmed && (
+              <FormInput name="phoneNumber" ref={register({ validate: validateInput })} size="sm" defaultValue={user?.phoneNumber} />
             )}
-          </Box>
+            {user?.phoneNumberConfirmed && <TextSm>{user?.phoneNumber}</TextSm>}
+            <Box ml={1}>
+              {user?.phoneNumberConfirmed ? (
+                <Icon as={AiFillCheckCircle} color="green.500" fontSize="20px" mt={2} />
+              ) : (
+                <Icon as={ImBlocked} color="red.500" fontSize="20px" mt={2} />
+              )}
+            </Box>
+          </FormStack>
           <FormErrorMessage>{errors.phoneNumber && errors.phoneNumber.message}</FormErrorMessage>
         </FormLayoutFlex>
       </FormControl>
       {smsSent && (
         <FormControl isInvalid={errors.code}>
           <FormLayoutFlex>
-            <FormLabel minW="110px">Enter Code</FormLabel>
+            <FormLabel>Enter Code</FormLabel>
             <FormInput name="code" ref={register} size="sm" />
-
             <FormErrorMessage>{errors.code && errors.code.message}</FormErrorMessage>
           </FormLayoutFlex>
         </FormControl>
       )}
       {error && <TextSm color="red.500">Passwords do not match</TextSm>}
-      <FormButton isLoading={formState.isSubmitting}>Verify</FormButton>
+      {!user?.phoneNumberConfirmed && <FormButton isLoading={formState.isSubmitting}>Verify</FormButton>}
     </form>
   );
 };

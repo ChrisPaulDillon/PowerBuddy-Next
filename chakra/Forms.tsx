@@ -66,7 +66,7 @@ export const Input: React.FC<InputProps & { ref?: React.Ref<HTMLInputElement> }>
   InputProps & { ref: React.Ref<HTMLInputElement> },
   ElementType<HTMLInputElement>
 >(({ ...rest }, ref) => {
-  return <ChakraInput ref={ref} {...rest} />;
+  return <ChakraInput size="md" variant="flushed" borderColor="blue.300" ref={ref} {...rest} />;
 });
 
 export const InputLeftAddon: React.FC<InputAddonProps> = ({ ...rest }) => {
@@ -89,7 +89,7 @@ export const NumberInput: React.FC<NumberInputProps & { ref?: React.Ref<HTMLInpu
   NumberInputProps & { ref: React.Ref<HTMLInputElement> },
   ElementType<HTMLInputElement>
 >(({ ...rest }, ref) => {
-  return <ChakraNumberInput ref={ref} {...rest} />;
+  return <ChakraNumberInput size="md" variant="flushed" borderColor="blue.300" ref={ref} {...rest} />;
 });
 
 export const NumberInputField: React.FC<NumberInputFieldProps> = ({ ...rest }) => {

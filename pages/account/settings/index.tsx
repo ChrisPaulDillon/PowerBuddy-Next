@@ -17,6 +17,8 @@ const Index: NextPage = () => {
     setUserData(user);
   }, [user]);
 
+  console.log(user);
+
   return (
     <Box>
       <PageHead title="Settings" description="PowerBuddy modify your settings, switch from kilogram to pounds and update personal info" />

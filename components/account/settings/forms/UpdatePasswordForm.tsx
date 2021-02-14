@@ -64,21 +64,21 @@ const UpdatePasswordForm: React.FC<IProps> = ({}) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <FormControl isInvalid={errors.oldPassword}>
         <FormLayoutFlex>
-          <FormLabel minW="110px">Current Password</FormLabel>
+          <FormLabel>Current Password</FormLabel>
           <FormInput name="oldPassword" ref={register({ validate: validateInput })} size="sm" type="password" />
           <FormErrorMessage>{errors.oldPassword && errors.oldPassword.message}</FormErrorMessage>
         </FormLayoutFlex>
       </FormControl>
       <FormControl isInvalid={errors.password1}>
         <FormLayoutFlex>
-          <FormLabel minW="110px">New Password</FormLabel>
+          <FormLabel>New Password</FormLabel>
           <FormInput name="password1" ref={register({ validate: validateInput })} size="sm" type="password" />
           <FormErrorMessage>{errors.password1 && errors.password1.message}</FormErrorMessage>
         </FormLayoutFlex>
       </FormControl>
       <FormControl isInvalid={errors.password2}>
         <FormLayoutFlex>
-          <FormLabel minW="110px">Confirm Password</FormLabel>
+          <FormLabel>Confirm Password</FormLabel>
           <FormInput name="password2" ref={register({ validate: validateInput })} size="sm" type="password" />
           <FormErrorMessage>{errors.password2 && errors.password2.message}</FormErrorMessage>
         </FormLayoutFlex>
