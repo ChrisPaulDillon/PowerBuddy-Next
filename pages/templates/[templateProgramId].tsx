@@ -94,7 +94,7 @@ const TemplateProgramSingle: NextPage = ({ template }: any) => {
             </Box>
             {isAddProgramOpen && (
               <ModalDrawerForm title="Create a New Program Log" isOpen={isAddProgramOpen} onClose={onAddProgramClose}>
-                <CreateProgramLogFromTemplateForm onClose={onAddProgramClose} template={template!} onCreateSuccessOpen={onCreateSuccessOpen} />
+                <CreateProgramLogFromTemplateForm onClose={onAddProgramClose} template={template} onCreateSuccessOpen={onCreateSuccessOpen} />
               </ModalDrawerForm>
             )}
             {isLoginOpen && <LoginModal isOpen={isLoginOpen} onClose={onLoginClose} />}
