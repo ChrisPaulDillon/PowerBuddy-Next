@@ -2,7 +2,7 @@ import React from 'react';
 import { PbToolTip } from './ToolTips';
 import { IconType } from 'react-icons';
 import { SizeType } from '../../types/unionTypes';
-import { IconButton } from '../../chakra/Forms';
+import { Icon, IconButton } from '../../chakra/Forms';
 
 interface IProps {
   label: string;
@@ -31,6 +31,14 @@ const TTIconButton: React.FC<IProps> = ({ label, Icon, onClick, fontSize, color,
         isLoading={isLoading ?? false}
         {...rest}
       />
+    </PbToolTip>
+  );
+};
+
+export const TTIcon = ({ label, ...rest }) => {
+  return (
+    <PbToolTip label={label}>
+      <Icon aria-label="" fontSize="20px" {...rest} />
     </PbToolTip>
   );
 };

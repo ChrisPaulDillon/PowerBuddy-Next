@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
-import { Checkbox, Radio, RadioGroup, useToast } from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
+import { Radio, RadioGroup, useToast } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { FormLayoutFlex } from '../../../layout/Flexes';
 import { FormButton } from '../../../common/Buttons';
 import { TextXs } from '../../../common/Texts';
-import { PbStack } from '../../../common/Stacks';
+import { FormStack } from '../../../common/Stacks';
 import { FormInput, FormNumberInput } from '../../../common/Inputs';
 import axios from 'axios';
 import { EditProfileUrl } from '../../../../api/account/user';
 import { IUser } from 'powerbuddy-shared/lib';
 import { ToastError, ToastSuccess } from '../../../shared/Toasts';
 import { withAuthorized } from '../../../../util/authMiddleware';
-import { FormControl, FormErrorMessage, FormLabel } from '../../../../chakra/Forms';
+import { Checkbox, FormControl, FormErrorMessage, FormLabel } from '../../../../chakra/Forms';
 import { validateInput } from '../../../../util/formInputs';
+import { useUserContext } from '../../../users/UserContext';
 
 interface IEditProfile {
   userId: string;
@@ -28,10 +29,24 @@ interface IProps {
 }
 
 const EditProfileForm: React.FC<IProps> = ({ user }) => {
-  const [bodyWeight, setBodyWeight] = useState<number>(user?.bodyWeight!);
+  const [bodyWeight, setBodyWeight] = useState<number>(user?.bodyWeight);
   const [usingMetric, setUsingMetric] = useState(user?.usingMetric ? '1' : '2');
 
+  const { weightType } = useUserContext();
+
   const toast = useToast();
+
+  useEffect(() => {
+    if (user?.usingMetric) {
+      setUsingMetric(user?.usingMetric ? '1' : '2');
+    }
+  }, [user?.usingMetric]);
+
+  useEffect(() => {
+    if (user?.bodyWeight) {
+      setBodyWeight(user?.bodyWeight);
+    }
+  }, [user?.bodyWeight]);
 
   const updateBodyWeight = (e) => {
     if (e) {
@@ -41,7 +56,7 @@ const EditProfileForm: React.FC<IProps> = ({ user }) => {
 
   const onSubmit = async ({ firstName, lastName, quotesEnabled }: any) => {
     const profile: IEditProfile = {
-      userId: user?.userId!,
+      userId: user?.userId,
       firstName: firstName,
       lastName: lastName,
       quotesEnabled: quotesEnabled,
@@ -65,7 +80,7 @@ const EditProfileForm: React.FC<IProps> = ({ user }) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <FormControl isInvalid={errors.firstName}>
         <FormLayoutFlex>
-          <FormLabel minW="80px">First Name</FormLabel>
+          <FormLabel>First Name</FormLabel>
           <FormInput name="firstName" defaultValue={user?.firstName} ref={register({ validate: validateInput })} size="sm" />
           <FormErrorMessage>{errors.firstName && errors.firstName.message}</FormErrorMessage>
         </FormLayoutFlex>
@@ -73,7 +88,7 @@ const EditProfileForm: React.FC<IProps> = ({ user }) => {
 
       <FormControl isInvalid={errors.lastName}>
         <FormLayoutFlex>
-          <FormLabel minW="80px">Last Name</FormLabel>
+          <FormLabel>Last Name</FormLabel>
           <FormInput name="lastName" defaultValue={user?.lastName} ref={register({ validate: validateInput })} size="sm" />
           <FormErrorMessage>{errors.lastName && errors.lastName.message}</FormErrorMessage>
         </FormLayoutFlex>
@@ -81,7 +96,7 @@ const EditProfileForm: React.FC<IProps> = ({ user }) => {
 
       <FormControl isInvalid={errors.weight}>
         <FormLayoutFlex>
-          <FormLabel minW="80px">Weight</FormLabel>
+          <FormLabel>Weight ({weightType})</FormLabel>
           <FormNumberInput
             name="weight"
             defaultValue={user?.bodyWeight}
@@ -94,21 +109,21 @@ const EditProfileForm: React.FC<IProps> = ({ user }) => {
       </FormControl>
 
       <FormControl>
-        <FormLayoutFlex>
-          <FormLabel minW="80px">Quotes Enabled?</FormLabel>
+        <FormStack>
+          <FormLabel>Quotes Enabled</FormLabel>
           <Checkbox name="quotesEnabled" color="green.500" defaultIsChecked={user?.quotesEnabled} ref={register} />
-        </FormLayoutFlex>
+        </FormStack>
       </FormControl>
 
       <RadioGroup onChange={(e) => setUsingMetric(e.toString())} value={usingMetric}>
-        <PbStack>
+        <FormStack mt={5}>
           <Radio value="1">
             <TextXs mr={2}>Metric</TextXs>
           </Radio>
           <Radio value="2">
             <TextXs>Pounds</TextXs>
           </Radio>
-        </PbStack>
+        </FormStack>
       </RadioGroup>
       <FormButton isLoading={formState.isSubmitting}>Update</FormButton>
     </form>
