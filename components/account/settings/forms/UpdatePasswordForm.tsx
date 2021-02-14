@@ -18,11 +18,7 @@ interface IUpdatePasswordInput {
   newPassword: string;
 }
 
-interface IProps {
-  user: IUser;
-}
-
-const UpdatePasswordForm: React.FC<IProps> = ({}) => {
+const UpdatePasswordForm = () => {
   const toast = useToast();
 
   const [error, setError] = useState<boolean>(false);

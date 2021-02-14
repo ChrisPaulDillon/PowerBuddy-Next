@@ -12,7 +12,7 @@ interface IProps {
 const SecurityGroup: React.FC<IProps> = ({ user }) => {
   return (
     <Box>
-      <UpdatePasswordForm user={user} />
+      <UpdatePasswordForm />
       <Box p={2}>
         <Divider />
       </Box>

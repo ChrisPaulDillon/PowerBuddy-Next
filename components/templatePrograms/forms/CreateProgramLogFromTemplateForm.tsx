@@ -70,12 +70,12 @@ const CreateProgramLogFromTemplateForm: React.FC<IProps> = ({ onClose, template,
     );
   }, [template.templateExerciseCollection]);
 
-  const updateWeightInput = (exerciseId: number, weightInput: number): void => {
-    setCurWeightInputs(curWeightInputs.map((x) => (x.exerciseId === exerciseId ? { ...x, weight: weightInput } : x)));
+  const updateWeightInput = (exerciseId: number, updatedWeightInput: number): void => {
+    setCurWeightInputs(curWeightInputs.map((x) => (x.exerciseId === exerciseId ? { ...x, weight: updatedWeightInput } : x)));
   };
 
-  const updateIncrementalWeightInput = (exerciseId: number, weightInput: number): void => {
-    setIncrementalWeightInput(incrementalWeightInput.map((x) => (x.exerciseId === exerciseId ? { ...x, weight: weightInput } : x)));
+  const updateIncrementalWeightInput = (exerciseId: number, updatedWeightInput: number): void => {
+    setIncrementalWeightInput(incrementalWeightInput.map((x) => (x.exerciseId === exerciseId ? { ...x, weight: updatedWeightInput } : x)));
   };
 
   const updateRepeatProgramCount = (times: number) => {
