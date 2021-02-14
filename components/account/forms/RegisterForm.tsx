@@ -104,7 +104,7 @@ const RegisterForm = ({ setLoginState }: any) => {
       <TextError textAlign="center" visibility={error ? 'visible' : 'hidden'}>
         Username or Email Already in use
       </TextError>
-      <FormButton type="submit" leftIcon={<MdAccountBox />} isLoading={formState.isSubmitting}>
+      <FormButton colorScheme='blue' isLoading={formState.isSubmitting}>
         Register
       </FormButton>
     </form>

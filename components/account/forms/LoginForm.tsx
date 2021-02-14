@@ -5,7 +5,6 @@ import { FormInput } from '../../common/Inputs';
 import { FormLayoutFlex } from '../../layout/Flexes';
 import { TextError, TextXs } from '../../common/Texts';
 import { FormButton } from '../../common/Buttons';
-import { MdAccountBox } from 'react-icons/md';
 import { validateInput } from '../../../util/formInputs';
 import axios from 'axios';
 import { IUser } from 'powerbuddy-shared';
@@ -19,6 +18,7 @@ import { ACCOUNT_LOCKOUT, EMAIL_NOT_CONFIRMED, INVALID_CREDENTIALS, USER_NOT_FOU
 import { Flex } from '../../../chakra/Layout';
 import { Button, FormControl, FormErrorMessage, FormLabel, InputGroup, InputRightElement, Link } from '../../../chakra/Forms';
 import theme from '../../../theme';
+
 interface ILoginFormProps {
   onClose: () => void;
   setLoginState: any;
@@ -127,22 +127,16 @@ const LoginForm: React.FC<ILoginFormProps> = ({ onClose, setLoginState }) => {
           {errorMessage}
         </TextError>
       )}
-      <Flex>
-        <TextXs pr={1} color="gray.500">
-          Forgot Password?{' '}
-        </TextXs>
-        <Link onClick={() => setLoginState(LoginStateEnum.PasswordReset)}>
-          <TextXs color="blue.500">Reset</TextXs>
-        </Link>
-      </Flex>
-      <FormButton type="submit" leftIcon={<MdAccountBox />} isLoading={formState.isSubmitting}>
+      <FormButton isLoading={formState.isSubmitting}>
         Login
       </FormButton>
-      <Flex justify="center">
-        <TextXs pr={1}>Not Registered? </TextXs>{' '}
-        <Link onClick={() => setLoginState(LoginStateEnum.Register)}>
-          <TextXs color={theme.colors.hyperLink[colorMode]}>Register</TextXs>
+        <Link onClick={() => setLoginState(LoginStateEnum.PasswordReset)}>
+          <TextXs color={theme.colors.hyperLink[colorMode]} textAlign='center'>Forgot Password?</TextXs>
         </Link>
+        <Flex justify='center'>
+      <FormButton colorScheme="blue" isFullWidth={false} onClick={() => setLoginState(LoginStateEnum.Register)}>
+        Create New Account
+      </FormButton>
       </Flex>
     </form>
   );

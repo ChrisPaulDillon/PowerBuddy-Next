@@ -71,7 +71,7 @@ const selectColor = { light: 'gray.50', dark: 'gray.700' };
 const selectColorTemp = { light: 'gray.50', dark: 'gray.500' };
 const hoverSelectColor = { light: 'gray.700', dark: 'gray.100' };
 
-const hyperLink = { light: 'blue.500', dark: 'blue.500' };
+const hyperLink = { light: 'blue.500', dark: 'blue.100' };
 
 const colors = {
   ...theme.colors,

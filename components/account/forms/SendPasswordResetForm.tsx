@@ -58,7 +58,7 @@ const SendPasswordResetForm = ({ onClose, setLoginState }) => {
           <FormErrorMessage>{errors.email && errors.email.message}</FormErrorMessage>
         </FormLayoutFlex>
       </FormControl>
-      <FormButton leftIcon={<MdAccountBox />} isLoading={formState.isSubmitting}>
+      <FormButton colorScheme='red' isLoading={formState.isSubmitting}>
         Submit
       </FormButton>
     </form>
