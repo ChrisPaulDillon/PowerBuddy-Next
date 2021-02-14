@@ -2,7 +2,7 @@ import React from 'react';
 import { Card } from '../layout/Card';
 import { TextSm, TextXs, HeadingMdStatic } from '../common/Texts';
 import { TagTemplateRepScheme } from '../shared/Tags';
-import { ITemplateWeek, ITemplateDay, ITemplateRepScheme, ITemplateExercise } from 'powerbuddy-shared/lib';
+import { ITemplateWeek, ITemplateDay, ITemplateRepScheme, ITemplateExercise } from 'powerbuddy-shared';
 import { Box, Flex } from '../../chakra/Layout';
 
 export const TemplateWeekCard: React.FC<ITemplateWeek> = ({ templateDays }) => {
