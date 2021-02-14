@@ -33,7 +33,7 @@ const RepeatTemplateForm: React.FC<IProps> = ({ incrementalWeightInput, updateIn
                 name={x.exerciseId!.toString()}
                 defaultValue={x.weight ?? 0}
                 maxW="100px"
-                onChange={(e) => updateIncrementalWeightInput(x.exerciseId, e)}
+                onChange={(e) => updateIncrementalWeightInput(x.exerciseId, parseInt(e))}
               />
               kg
             </PbStack>

@@ -21,6 +21,7 @@ interface IFormInputProps extends InputProps {
 
 interface IFormNumberInputProps extends NumberInputProps {
   ref?: any;
+  onChange: any;
 }
 
 export const FormInput: React.FC<IFormInputProps> = forwardRef(({ ...rest }, ref: any) => <Input ref={ref} {...rest} />);
