@@ -8,8 +8,7 @@ import { staticNumberList } from '../../common/static';
 import { useSelector } from 'react-redux';
 import { IAppState } from '../../../redux/store';
 import { validateInput } from '../../../util/formInputs';
-import { ITemplateProgram, ITemplateWeek } from 'powerbuddy-shared/lib';
-import ITemplateExercise from 'powerbuddy-shared/lib/interfaces/templates';
+import { ITemplateExercise, ITemplateProgram, ITemplateWeek } from 'powerbuddy-shared/lib';
 import { Box, Flex } from '../../../chakra/Layout';
 import { Select } from '../../../chakra/Forms';
 
