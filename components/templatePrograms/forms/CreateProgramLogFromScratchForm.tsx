@@ -69,7 +69,7 @@ const CreateProgramLogFromScratchForm: React.FC<IProps> = ({ onClose, onCreateSu
           noOfWeeks: noOfWeeks,
           customName: customName,
         };
-        const response = await axios.post(CreateWorkoutLogFromScratchUrl(), workoutLogInput);
+        await axios.post(CreateWorkoutLogFromScratchUrl(), workoutLogInput);
         toast(ToastSuccess('Success', 'Diary successfully created, visit the diary section to begin tracking'));
         onCreateSuccessOpen();
       } catch (error) {

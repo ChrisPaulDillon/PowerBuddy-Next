@@ -7,11 +7,8 @@ import CalendarSelectFrom from './CalendarSelectForm';
 import DayCheckboxForm from './DayCheckboxForm';
 import { FormButton } from '../../common/Buttons';
 import WeightSelectionForm from './WeightSelectionForm';
-import { GetPersonalBestsForTemplate } from '../../../api/account/liftingStats';
-import { useAxios } from '../../../hooks/useAxios';
 import { DayValue } from 'react-modern-calendar-datepicker';
 import RepeatTemplateForm from './RepeatTemplateForm';
-import ProgressSpinner from '../../common/ProgressSpinner';
 import { ITemplateProgramExtended, IWeightInput, IWorkoutLogTemplateInput } from 'powerbuddy-shared';
 import { useUserContext } from '../../users/UserContext';
 import axios from 'axios';
@@ -28,7 +25,7 @@ interface IProps {
 const CreateProgramLogFromTemplateForm: React.FC<IProps> = ({ onClose, template, onCreateSuccessOpen }) => {
   const { userId } = useUserContext();
   // const { data: calendarData, loading: calendarLoading } = useAxios<IProgramLogCalendarStats>(GetAllProgramLogCalendarStatsQueryUrl());
-  const { data: weightInput, loading: weightInputLoading } = useAxios<IWeightInput[]>(GetPersonalBestsForTemplate(template.templateProgramId!));
+  const [weightInput, setWeightInputs] = useState<IWeightInput[]>();
   const [curWeightInputs, setCurWeightInputs] = useState<IWeightInput[]>([]);
   const [calendarDate, setCalendarDate] = useState<DayValue>();
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
@@ -56,7 +53,7 @@ const CreateProgramLogFromTemplateForm: React.FC<IProps> = ({ onClose, template,
       moment(momentDate).day() === 4 ? setThuChecked(true) : setThuChecked(false);
       moment(momentDate).day() === 5 ? setFriChecked(true) : setFriChecked(false);
       moment(momentDate).day() === 6 ? setSatChecked(true) : setSatChecked(false);
-      moment(momentDate).day() === 7 ? setSunChecked(true) : setSunChecked(false);
+      moment(momentDate).day() === 0 ? setSunChecked(true) : setSunChecked(false);
     }
   }, [calendarDate]);
 
@@ -64,6 +61,14 @@ const CreateProgramLogFromTemplateForm: React.FC<IProps> = ({ onClose, template,
     weightInput && setCurWeightInputs(weightInput);
     weightInput && setIncrementalWeightInput(weightInput);
   }, [weightInput]);
+
+  useEffect(() => {
+    setWeightInputs(
+      template?.templateExerciseCollection.map<IWeightInput>((tec) => {
+        return { exerciseId: tec.exerciseId, exerciseName: tec.exerciseName, weight: 0 };
+      })
+    );
+  }, [template.templateExerciseCollection]);
 
   const updateWeightInput = (exerciseId: number, weightInput: number) => {
     setCurWeightInputs(curWeightInputs.map((x) => (x.exerciseId === exerciseId ? { ...x, weight: weightInput } : x)));
@@ -95,7 +100,7 @@ const CreateProgramLogFromTemplateForm: React.FC<IProps> = ({ onClose, template,
     } else {
       try {
         const workoutLog: IWorkoutLogTemplateInput = {
-          userId: userId!,
+          userId: userId,
           templateProgramId: template?.templateProgramId,
           startDate: selectedDate,
           monday: monChecked,
@@ -108,7 +113,7 @@ const CreateProgramLogFromTemplateForm: React.FC<IProps> = ({ onClose, template,
           dayCount: dayCount,
           weightInputs: curWeightInputs,
         };
-        const response = await axios.post(CreateWorkoutLogFromTemplateUrl(template?.templateProgramId), workoutLog);
+        await axios.post(CreateWorkoutLogFromTemplateUrl(template?.templateProgramId), workoutLog);
         toast(ToastSuccess('Success', 'Diary successfully created, visit the diary section to begin tracking'));
         onClose();
         onCreateSuccessOpen();
@@ -121,8 +126,6 @@ const CreateProgramLogFromTemplateForm: React.FC<IProps> = ({ onClose, template,
       }
     }
   };
-
-  if (weightInputLoading) return <ProgressSpinner />;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -176,7 +179,7 @@ const CreateProgramLogFromTemplateForm: React.FC<IProps> = ({ onClose, template,
           updateRepeatProgramCount={updateRepeatProgramCount}
         />
       )}
-      <FormButton isLoading={formState.isSubmitting}>{phase < 4 ? 'CONTINUE' : 'CREATE'}</FormButton>
+      <FormButton isLoading={formState.isSubmitting}>{phase < 4 ? 'Continue' : 'Create'}</FormButton>
     </form>
   );
 };
