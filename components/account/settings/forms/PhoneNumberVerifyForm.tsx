@@ -10,6 +10,7 @@ import { FormControl, FormErrorMessage, FormLabel, Icon } from '../../../../chak
 import { Box } from '../../../../chakra/Layout';
 import { validateInput } from '../../../../util/formInputs';
 import { FormButton } from '../../../common/Buttons';
+import TTIconButton, { TTIcon } from '../../../common/IconButtons';
 import { FormInput } from '../../../common/Inputs';
 import { FormStack } from '../../../common/Stacks';
 import { TextSm } from '../../../common/Texts';
@@ -70,9 +71,9 @@ const PhoneNumberVerifyForm: React.FC<IProps> = ({ user }) => {
             {user?.phoneNumberConfirmed && <TextSm>{user?.phoneNumber}</TextSm>}
             <Box ml={1}>
               {user?.phoneNumberConfirmed ? (
-                <Icon as={AiFillCheckCircle} color="green.500" fontSize="20px" mt={2} />
+                <TTIcon as={AiFillCheckCircle} color="green.500" fontSize="20px" label="Verified Phone Number" />
               ) : (
-                <Icon as={ImBlocked} color="red.500" fontSize="20px" mt={2} />
+                <TTIcon as={ImBlocked} color="red.500" fontSize="20px" label="Number Not Verified" />
               )}
             </Box>
           </FormStack>

@@ -16,11 +16,11 @@ import {
 import { Stack } from '../../chakra/Layout';
 
 interface IFormInputProps extends InputProps {
-  ref: any;
+  ref?: any;
 }
 
 interface IFormNumberInputProps extends NumberInputProps {
-  ref: any;
+  ref?: any;
 }
 
 export const FormInput: React.FC<IFormInputProps> = forwardRef(({ ...rest }, ref: any) => <Input ref={ref} {...rest} />);
