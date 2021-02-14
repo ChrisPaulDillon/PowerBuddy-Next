@@ -97,20 +97,19 @@ const LoginForm: React.FC<ILoginFormProps> = ({ onClose, setLoginState }) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <FormControl isInvalid={errors.email}>
         <FormLayoutFlex>
-          <FormLabel>Email or Username</FormLabel>
-          <FormInput name="email" ref={register({ validate: validateInput })} placeholder="example@examplesite.com" />
+          <FormInput name="email" ref={register({ validate: validateInput })} placeholder="Email or Username" />
           <FormErrorMessage>{errors.email && errors.email.message}</FormErrorMessage>
         </FormLayoutFlex>
       </FormControl>
       <FormControl isInvalid={errors.password}>
         <FormLayoutFlex>
-          <FormLabel>Password</FormLabel>
           <InputGroup size="md">
             <FormInput
               pr="4.5rem"
               type={showPW ? 'text' : 'password'}
-              placeholder="Enter password"
+              placeholder="Password"
               name="password"
+              variant="flushed"
               ref={register({ validate: validateInput })}
             />
             <InputRightElement width="4.5rem">
@@ -127,16 +126,16 @@ const LoginForm: React.FC<ILoginFormProps> = ({ onClose, setLoginState }) => {
           {errorMessage}
         </TextError>
       )}
-      <FormButton isLoading={formState.isSubmitting}>
-        Login
-      </FormButton>
-        <Link onClick={() => setLoginState(LoginStateEnum.PasswordReset)}>
-          <TextXs color={theme.colors.hyperLink[colorMode]} textAlign='center'>Forgot Password?</TextXs>
-        </Link>
-        <Flex justify='center'>
-      <FormButton colorScheme="blue" isFullWidth={false} onClick={() => setLoginState(LoginStateEnum.Register)}>
-        Create New Account
-      </FormButton>
+      <FormButton isLoading={formState.isSubmitting}>Login</FormButton>
+      <Link onClick={() => setLoginState(LoginStateEnum.PasswordReset)}>
+        <TextXs color={theme.colors.hyperLink[colorMode]} textAlign="center">
+          Forgot Password?
+        </TextXs>
+      </Link>
+      <Flex justify="center">
+        <FormButton colorScheme="blue" isFullWidth={false} onClick={() => setLoginState(LoginStateEnum.Register)}>
+          Create New Account
+        </FormButton>
       </Flex>
     </form>
   );
