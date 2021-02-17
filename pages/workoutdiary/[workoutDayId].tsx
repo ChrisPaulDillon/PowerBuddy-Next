@@ -1,10 +1,10 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { useDisclosure, useToast } from '@chakra-ui/react';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { WORKOUT_DIARY_URL } from '../../InternalLinks';
 import { HeadingMd, TextXs } from '../../components/common/Texts';
-import { CenterColumnFlex, CenterRowFlex } from '../../components/layout/Flexes';
+import { CenterColumnFlex } from '../../components/layout/Flexes';
 import { DeleteWorkoutLogUrl } from '../../api/account/workoutLog';
 import { IWorkoutDay } from 'powerbuddy-shared';
 import moment from 'moment';
@@ -40,15 +40,12 @@ interface IProps {
 
 const WorkoutDay: NextPage<IProps> = ({ workoutDayData }) => {
   const { userId } = useUserContext();
-  console.log(userId);
-
   // const { loading: dayLoading, data: dayData, statusCode: dayCode } = useAxios<IWorkoutDay>(GetWorkoutDayByIdUrl(parseInt(workoutDayId as string)));
   const [loading, setLoading] = useState<boolean>(false);
   const [workoutDay, setWorkoutDay] = useState<IWorkoutDay>(workoutDayData);
   const [dayEnabled] = useState<boolean>(moment(workoutDayData?.date).isAfter(new Date()) ? true : false);
   const [dateHighlighted, setDateHighlighted] = useState<boolean>(moment(workoutDayData?.date).isSame(new Date(), 'day') ? true : false);
   const [personalBests, setPersonalBests] = useState<ILiftingStat[]>([]);
-  const [menuItems, setMenuItems] = useState<IMenuItem[]>([]);
   const [deleteLogLoading, setDeleteLogLoading] = useState<boolean>(false);
   const [noteLoading] = useState<boolean>(false);
   const [notesHighlighted] = useState<boolean>(workoutDayData?.comment != null ? true : false);
@@ -78,29 +75,6 @@ const WorkoutDay: NextPage<IProps> = ({ workoutDayData }) => {
     }
   }, [workoutDayData, userId]);
 
-  useEffect(() => {
-    setMenuItems([
-      {
-        title: 'Delete Diary Log',
-        Icon: MdWarning,
-        onClick: onDeleteLogOpen,
-        loading: deleteLogLoading,
-      },
-      {
-        title: 'Add Workout Note',
-        Icon: FaRegCommentAlt,
-        onClick: onAddWorkoutNoteOpen,
-        loading: noteLoading,
-      },
-      {
-        title: 'Create Workout Template',
-        Icon: GiRun,
-        onClick: onAddWorkoutTemplateOpen,
-        loading: noteLoading,
-      },
-    ]);
-  }, []);
-
   const deleteLog = async () => {
     setDeleteLogLoading(true);
     try {
@@ -129,10 +103,63 @@ const WorkoutDay: NextPage<IProps> = ({ workoutDayData }) => {
     setLoading(false);
   };
 
+  const menuItems = useMemo(
+    (): IMenuItem[] => [
+      {
+        title: 'Delete Diary Log',
+        Icon: MdWarning,
+        onClick: onDeleteLogOpen,
+        loading: deleteLogLoading,
+      },
+      {
+        title: 'Add Workout Note',
+        Icon: FaRegCommentAlt,
+        onClick: onAddWorkoutNoteOpen,
+        loading: noteLoading,
+      },
+      {
+        title: 'Create Workout Template',
+        Icon: GiRun,
+        onClick: onAddWorkoutTemplateOpen,
+        loading: noteLoading,
+      },
+    ],
+    []
+  );
+
   var breadcrumbInput: IBreadcrumbInput[] = [
     { href: WORKOUT_DIARY_URL, name: 'Workout Diary' },
     { href: '#', name: dateHighlighted ? 'Todays Workout' : moment(workoutDay.date).format('dddd Do MMM') },
   ];
+
+  const workoutDayBar: React.ReactNode = useMemo(
+    () => (
+      <Flex>
+        {' '}
+        <TTIconButton
+          label="Complete Workout"
+          Icon={FcCheckmark}
+          color={workoutDay?.completed ? 'green.500' : 'gray.500'}
+          onClick={() => updateWorkoutDay()}
+          isLoading={loading}
+          isDisabled={dayEnabled || contentDisabled}
+        />
+        <TTIconButton
+          label="Add New Exercise"
+          Icon={BiDumbbell}
+          color="blue.500"
+          fontSize="25px"
+          onClick={onAddExerciseOpen}
+          isDisabled={contentDisabled}
+        />
+        <MenuBase
+          button={<TTIconButton label="Additional Options" Icon={AiOutlineMore} onClick={() => undefined} isDisabled={contentDisabled} />}
+          menuItems={menuItems}
+        />
+      </Flex>
+    ),
+    [contentDisabled]
+  );
 
   return (
     <Box w="100%" mt={3}>
@@ -140,34 +167,14 @@ const WorkoutDay: NextPage<IProps> = ({ workoutDayData }) => {
       <WorkoutProvider workoutDay={workoutDay} setWorkoutDay={setWorkoutDay} contentDisabled={contentDisabled}>
         <PageContent>
           <BreadcrumbBase values={breadcrumbInput} />
-          <HeadingMd textAlign="center">{workoutDay?.userName}'s Diary</HeadingMd>
+          {workoutDay?.userName && (
+            <HeadingMd textAlign="center" mt={[4, 3, 2, 1]}>
+              {workoutDay?.userName}'s Diary
+            </HeadingMd>
+          )}
           <CardNoShadow borderWidth="0.5px" minH="250px" w="100%" p="2" my="5">
             <PbStack mb={1} w="100%">
-              <Flex justify={{ lg: 'left', md: 'left', sm: 'center' }} w="100%">
-                <CenterRowFlex justifyContent="center" ml={3}>
-                  <TTIconButton
-                    label="Complete Workout"
-                    Icon={FcCheckmark}
-                    color={workoutDay?.completed ? 'green.500' : 'gray.500'}
-                    onClick={() => updateWorkoutDay()}
-                    isLoading={loading}
-                    isDisabled={dayEnabled || contentDisabled}
-                  />
-                  <TTIconButton
-                    label="Add New Exercise"
-                    Icon={BiDumbbell}
-                    color="blue.500"
-                    fontSize="25px"
-                    onClick={onAddExerciseOpen}
-                    isDisabled={contentDisabled}
-                  />
-
-                  <MenuBase
-                    button={<TTIconButton label="Additional Options" Icon={AiOutlineMore} onClick={() => undefined} isDisabled={contentDisabled} />}
-                    menuItems={menuItems}
-                  />
-                </CenterRowFlex>
-              </Flex>
+              {workoutDayBar}
               <BadgeWorkoutName body={workoutDay?.templateName} />
             </PbStack>
 

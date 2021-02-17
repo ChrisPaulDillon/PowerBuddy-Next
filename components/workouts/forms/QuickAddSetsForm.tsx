@@ -7,7 +7,6 @@ import { CreateWorkoutSetCollectionUrl } from '../../../api/account/workoutSet';
 import { useWorkoutContext } from '../../workouts/WorkoutContext';
 import Axios from 'axios';
 import { IWorkoutExercise, IWorkoutSet } from 'powerbuddy-shared';
-import { useUserContext } from '../../users/UserContext';
 import { ToastError, ToastSuccess } from '../../shared/Toasts';
 import { FormLayoutFlex } from '../../layout/Flexes';
 import { FormLabel } from '../../../chakra/Forms';
@@ -60,25 +59,25 @@ const QuickAddSetsForm: React.FC<IProps> = ({ workoutExercise, suggestedReps, su
       const response = await Axios.post(CreateWorkoutSetCollectionUrl(), workoutSets);
       QuickAddSetsToExercise(response.data, workoutExercise.workoutExerciseId);
       toast(ToastSuccess('Success', 'Successfully added sets'));
+      onClose();
     } catch (ex) {
       toast(ToastError('Error', 'Could not add sets!'));
     }
-    onClose();
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <FormLayoutFlex>
-        <FormLabel minW="60px">Sets</FormLabel>
-        <FormNumberInput defaultValue={1} maxW="250px" onChange={(e: number) => setNoOfSets(e)} />
+        <FormLabel>Sets</FormLabel>
+        <FormNumberInput defaultValue={1} onChange={(e: number) => setNoOfSets(e)} />
       </FormLayoutFlex>
       <FormLayoutFlex>
-        <FormLabel minW="60px">Reps</FormLabel>
-        <FormNumberInput defaultValue={suggestedReps} maxW="250px" onChange={(e: number) => setNoOfReps(e)} />
+        <FormLabel>Reps</FormLabel>
+        <FormNumberInput defaultValue={suggestedReps} onChange={(e: number) => setNoOfReps(e)} />
       </FormLayoutFlex>
       <FormLayoutFlex>
-        <FormLabel minW="60px">Weight ({weightType})</FormLabel>
-        <FormNumberInput defaultValue={suggestedWeight} maxW="250px" onChange={(e: number) => setWeight(e)} />
+        <FormLabel>Weight ({weightType})</FormLabel>
+        <FormNumberInput defaultValue={suggestedWeight} onChange={(e: number) => setWeight(e)} />
       </FormLayoutFlex>
       <FormButton isLoading={formState.isSubmitting}>Add</FormButton>
     </form>

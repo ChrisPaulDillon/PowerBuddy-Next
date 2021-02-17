@@ -44,15 +44,15 @@ const EditWorkoutSetForm: React.FC<IProps> = ({ workoutDayId, workoutSet, onClos
   };
 
   const onDeleteSubmit = async () => {
-    const { workoutExerciseId, workoutSetId } = workoutSet!;
+    const { workoutExerciseId, workoutSetId } = workoutSet;
     try {
-      await axios.delete(DeleteWorkoutSetUrl(workoutSetId!));
+      await axios.delete(DeleteWorkoutSetUrl(workoutSetId));
       DeleteSet(workoutSetId, workoutExerciseId);
       toast(ToastSuccess('Success', 'Successfully Deleted Set'));
+      onClose();
     } catch (ex) {
       toast(ToastError('Error', 'Could not delete set, please try again later'));
     }
-    onClose();
   };
 
   const updateWeight = (e: number) => {
