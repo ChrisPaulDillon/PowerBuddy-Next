@@ -5,7 +5,7 @@ import { Banner } from '../common/Texts';
 
 const Footer = () => {
   return (
-    <Box as="footer" role="contentinfo" py="6" bottom={0} position="absolute">
+    <Box as="footer" role="contentinfo" py="6" bottom={0} position="relative">
       <Flex direction={{ base: 'column', md: 'row' }} maxW={{ base: 'xl', md: '7xl' }} mx="auto" px={{ base: '6', md: '8' }} align="center">
         {/* <a aria-current="page" aria-label="Back to Home page" href="/" rel="home">
           <Logo h="6" iconColor="blue.600" />

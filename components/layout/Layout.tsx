@@ -8,6 +8,7 @@ import { useUserContext } from '../users/UserContext';
 import { ModalDrawerForm } from '../common/ModalDrawers';
 import useSignalR from '../../signalR/useSignalR';
 import { Flex } from '../../chakra/Layout';
+import Footer from './Footer';
 
 const Layout = ({ children }: any) => {
   const { colorMode } = useColorMode();
@@ -35,6 +36,7 @@ const Layout = ({ children }: any) => {
         )}
         <Page>{children}</Page>
       </Flex>
+      <Footer />
     </Flex>
   );
 };
