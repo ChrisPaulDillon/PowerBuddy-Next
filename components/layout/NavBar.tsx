@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useColorMode, useDisclosure, Avatar } from '@chakra-ui/react';
 import { Banner } from '../common/Texts';
 import { MobileSideNav } from './LeftNav';
@@ -35,6 +35,15 @@ const NavBar: React.FC<INavBarProps> = ({}) => {
     }
   };
 
+  const navAvatar: React.ReactNode = useMemo(
+    () => (
+      <MenuBase button={<Avatar size={SCREEN_MOBILE ? 'sm' : 'md'} name={userName} />}>
+        <RightNav userName={userName} onClose={onMobileClose} />
+      </MenuBase>
+    ),
+    [userName]
+  );
+
   return (
     <Flex as="nav" w="100%" justifyContent="flex" alignItems="space-between" minH="6vh" position="relative" rounded="lg" top={0}>
       <Stack isInline w="100%" justify="space-between" align="center">
@@ -60,10 +69,9 @@ const NavBar: React.FC<INavBarProps> = ({}) => {
             <Box mt={2}>
               <TemplateSearchBar />
             </Box>
+            
           )} */}
-          <MenuBase button={<Avatar size={SCREEN_MOBILE ? 'sm' : 'md'} name={userName} />}>
-            <RightNav userName={userName} onClose={onMobileClose} />
-          </MenuBase>
+          {navAvatar}
         </Flex>
       </Stack>
       {isLeftNavOpen && <MobileSideNav isOpen={isLeftNavOpen} onClose={onLeftNavClose} />}

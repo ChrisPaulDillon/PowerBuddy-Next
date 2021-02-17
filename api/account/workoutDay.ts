@@ -2,12 +2,6 @@ import { API_BASE } from '../../redux/actionTypes';
 
 const baseUrl = `${API_BASE}Account/WorkoutDay`;
 
-export const GetWorkoutDayByIdUrl = (workoutDayId: number) => {
-if(workoutDayId) {
-    return `${baseUrl}/${workoutDayId}`;
-}
-}
-
 export const CreateWorkoutDayUrl = () => `${baseUrl}`;
 
 export const GetWorkoutDayIdByDateUrl = () => `${baseUrl}/Today`;

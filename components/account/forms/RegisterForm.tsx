@@ -2,7 +2,7 @@ import { useToast } from '@chakra-ui/react';
 import { IUser } from 'powerbuddy-shared/lib';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { MdAccountBox, TiArrowBack } from 'react-icons/all';
+import { TiArrowBack } from 'react-icons/all';
 import { RegisterUserRequest } from '../../../api/account/auth';
 import { SendEmailConfirmationRequest } from '../../../api/public/email';
 import { Button, FormControl, FormErrorMessage, FormLabel, InputGroup, InputRightElement, Link } from '../../../chakra/Forms';
@@ -104,7 +104,7 @@ const RegisterForm = ({ setLoginState }: any) => {
       <TextError textAlign="center" visibility={error ? 'visible' : 'hidden'}>
         Username or Email Already in use
       </TextError>
-      <FormButton colorScheme='blue' isLoading={formState.isSubmitting}>
+      <FormButton colorScheme="blue" isLoading={formState.isSubmitting}>
         Register
       </FormButton>
     </form>

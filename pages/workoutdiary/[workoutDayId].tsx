@@ -1,21 +1,18 @@
-import { NextPage } from 'next';
-import { useRouter } from 'next/router';
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { useDisclosure, useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { WORKOUT_DIARY_URL } from '../../InternalLinks';
-import { TextXs } from '../../components/common/Texts';
+import { HeadingMd, TextXs } from '../../components/common/Texts';
 import { CenterColumnFlex, CenterRowFlex } from '../../components/layout/Flexes';
 import { DeleteWorkoutLogUrl } from '../../api/account/workoutLog';
-import { useAxios } from '../../hooks/useAxios';
 import { IWorkoutDay } from 'powerbuddy-shared';
-import ProgressSpinner from '../../components/common/ProgressSpinner';
 import moment from 'moment';
 import { AiOutlineMore } from 'react-icons/ai';
 import { BiDumbbell } from 'react-icons/bi';
-import { FaRegCommentAlt, FaCheckCircle } from 'react-icons/fa';
+import { FaRegCommentAlt, FcCheckmark } from 'react-icons/all';
 import { MdWarning } from 'react-icons/md';
-import { GetWorkoutDayByIdUrl, UpdateWorkoutUrl } from '../../api/account/workoutDay';
+import { UpdateWorkoutUrl } from '../../api/account/workoutDay';
 import { IBreadcrumbInput, BreadcrumbBase } from '../../components/common/Breadcrumbs';
 import TTIconButton from '../../components/common/IconButtons';
 import MenuBase, { IMenuItem } from '../../components/common/Menus';
@@ -26,7 +23,6 @@ import { BadgeWorkoutName } from '../../components/shared/Badges';
 import WorkoutProvider from '../../components/workouts/WorkoutContext';
 import WorkoutExercise from '../../components/workouts/WorkoutExercise';
 import { ILiftingStat } from 'powerbuddy-shared';
-import { ErrorMessage } from '../../components/common/Error';
 import AddWorkoutNoteForm from '../../components/workouts/forms/AddWorkoutNoteForm';
 import NotifiyPersonalBestAlert from '../../components/workouts/alerts/NotifyPersonalBestAlert';
 import AddExerciseForm from '../../components/workouts/forms/AddExerciseForm';
@@ -35,21 +31,28 @@ import { ToastError, ToastSuccess } from '../../components/shared/Toasts';
 import { GiRun } from 'react-icons/all';
 import AddWorkoutTemplateForm from '../../components/workouts/forms/AddWorkoutTemplateForm';
 import { Box, Flex } from '../../chakra/Layout';
+import { GetAllPublicWorkoutIdsRequest, GetWorkoutDayByIdRequest } from '../../api/public/workoutDay';
+import { useUserContext } from '../../components/users/UserContext';
 
-const WorkoutDay: NextPage = () => {
-  const router = useRouter();
-  const { workoutDayId } = router.query;
-  const { loading: dayLoading, data: dayData, statusCode: dayCode } = useAxios<IWorkoutDay>(GetWorkoutDayByIdUrl(parseInt(workoutDayId as string)));
-  const [workoutDay, setWorkoutDay] = useState<IWorkoutDay>({} as IWorkoutDay);
+interface IProps {
+  workoutDayData: IWorkoutDay;
+}
+
+const WorkoutDay: NextPage<IProps> = ({ workoutDayData }) => {
+  const { userId } = useUserContext();
+  console.log(userId);
+
+  // const { loading: dayLoading, data: dayData, statusCode: dayCode } = useAxios<IWorkoutDay>(GetWorkoutDayByIdUrl(parseInt(workoutDayId as string)));
   const [loading, setLoading] = useState<boolean>(false);
-  const [dayEnabled] = useState<boolean>(moment(workoutDay.date).isAfter(new Date()) ? true : false);
-  const [dateHighlighted, setDateHighlighted] = useState<boolean>(moment(workoutDay.date).isSame(new Date(), 'day') ? true : false);
+  const [workoutDay, setWorkoutDay] = useState<IWorkoutDay>(workoutDayData);
+  const [dayEnabled] = useState<boolean>(moment(workoutDayData?.date).isAfter(new Date()) ? true : false);
+  const [dateHighlighted, setDateHighlighted] = useState<boolean>(moment(workoutDayData?.date).isSame(new Date(), 'day') ? true : false);
   const [personalBests, setPersonalBests] = useState<ILiftingStat[]>([]);
   const [menuItems, setMenuItems] = useState<IMenuItem[]>([]);
   const [deleteLogLoading, setDeleteLogLoading] = useState<boolean>(false);
   const [noteLoading] = useState<boolean>(false);
-  const [notesHighlighted] = useState<boolean>(workoutDay.comment != null ? true : false);
-  const [contentDisabled] = useState<boolean>(false);
+  const [notesHighlighted] = useState<boolean>(workoutDayData?.comment != null ? true : false);
+  const [contentDisabled, setContentDisabled] = useState<boolean>(false);
 
   const { isOpen: isAddExerciseOpen, onOpen: onAddExerciseOpen, onClose: onAddExerciseClose } = useDisclosure();
   const { isOpen: isDeleteLogOpen, onOpen: onDeleteLogOpen, onClose: onDeleteLogClose } = useDisclosure();
@@ -59,11 +62,21 @@ const WorkoutDay: NextPage = () => {
   const toast = useToast();
 
   useEffect(() => {
-    if (dayData) {
-      setWorkoutDay(dayData);
-      setDateHighlighted(moment(dayData.date).isSame(new Date(), 'day') ? true : false);
+    if (workoutDayData) {
+      setWorkoutDay(workoutDayData);
+      setDateHighlighted(moment(workoutDayData.date).isSame(new Date(), 'day') ? true : false);
     }
-  }, [dayData]);
+  }, [workoutDayData]);
+
+  useEffect(() => {
+    if (workoutDayData) {
+      if (workoutDayData?.userId !== userId) {
+        setContentDisabled(true);
+      } else {
+        setContentDisabled(false);
+      }
+    }
+  }, [workoutDayData, userId]);
 
   useEffect(() => {
     setMenuItems([
@@ -121,25 +134,21 @@ const WorkoutDay: NextPage = () => {
     { href: '#', name: dateHighlighted ? 'Todays Workout' : moment(workoutDay.date).format('dddd Do MMM') },
   ];
 
-  if (dayLoading) return <ProgressSpinner />;
-
-  if (dayCode === 404 && !dayLoading)
-    return <ErrorMessage title="No Workout Found" description="Have you followed a broken link?" statusCode={404} />;
-
   return (
     <Box w="100%" mt={3}>
       <PageHead title="Workout" description="PowerBuddy Workout Diary, track personal bests and powerlifting progress" />
       <WorkoutProvider workoutDay={workoutDay} setWorkoutDay={setWorkoutDay} contentDisabled={contentDisabled}>
         <PageContent>
           <BreadcrumbBase values={breadcrumbInput} />
+          <HeadingMd textAlign="center">{workoutDay?.userName}'s Diary</HeadingMd>
           <CardNoShadow borderWidth="0.5px" minH="250px" w="100%" p="2" my="5">
             <PbStack mb={1} w="100%">
               <Flex justify={{ lg: 'left', md: 'left', sm: 'center' }} w="100%">
                 <CenterRowFlex justifyContent="center" ml={3}>
                   <TTIconButton
                     label="Complete Workout"
-                    Icon={FaCheckCircle}
-                    color={workoutDay.completed ? 'green.500' : 'gray.500'}
+                    Icon={FcCheckmark}
+                    color={workoutDay?.completed ? 'green.500' : 'gray.500'}
                     onClick={() => updateWorkoutDay()}
                     isLoading={loading}
                     isDisabled={dayEnabled || contentDisabled}
@@ -159,7 +168,7 @@ const WorkoutDay: NextPage = () => {
                   />
                 </CenterRowFlex>
               </Flex>
-              <BadgeWorkoutName body={workoutDay.templateName!} />
+              <BadgeWorkoutName body={workoutDay?.templateName} />
             </PbStack>
 
             <Box p="2">
@@ -168,7 +177,7 @@ const WorkoutDay: NextPage = () => {
                   <TextXs>No exercises found, click the weight icon to get started!</TextXs>
                 </CenterColumnFlex>
               ) : (
-                workoutDay.workoutExercises!.map((we, idx) => (
+                workoutDay?.workoutExercises.map((we, idx) => (
                   <Box key={idx}>
                     <WorkoutExercise workoutExercise={we} date={workoutDay.date} />
                   </Box>
@@ -212,4 +221,22 @@ const WorkoutDay: NextPage = () => {
     </Box>
   );
 };
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const res = await GetAllPublicWorkoutIdsRequest();
+
+  const paths = res?.data.map((workoutDayId) => ({
+    params: { workoutDayId: workoutDayId.toString() },
+  }));
+
+  return { paths, fallback: false };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const workoutDayId = params.workoutDayId as string;
+  const res = await GetWorkoutDayByIdRequest(parseInt(workoutDayId));
+
+  return { props: { workoutDayData: res.data } };
+};
+
 export default WorkoutDay;
