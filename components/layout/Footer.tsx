@@ -8,7 +8,7 @@ const Footer = () => {
     <Box as="footer" role="contentinfo" py="6">
       <Flex
         direction={{ base: 'column', md: 'row' }}
-        minW={{ base: '7xl', md: '5xl', sm: 'md' }}
+        minW={{ base: 'xs', lg: '7xl', md: 'xl', sm: 'xs' }}
         mx="auto"
         px={{ base: '6', md: '8' }}
         align="center">
