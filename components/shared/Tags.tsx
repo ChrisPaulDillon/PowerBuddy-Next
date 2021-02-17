@@ -60,11 +60,11 @@ export const TagExerciseCount: React.FC<ITagProps> = ({ body, size }) => (
 );
 
 export const TagTemplateRepScheme: React.FC<ITagProps> = ({ body, size }) => (
-  <Tag variant="solid" borderRadius="full" colorScheme="red" size={size ?? 'md'} minW="90px">
+  <Tag variant="solid" borderRadius="full" colorScheme="red" size={size ?? 'md'} minW="90px" alignContent="center">
     {' '}
     <TagLeftIcon boxSize="12px" as={BiDumbbell} />
     <TagLabel>
-      <TextSm>{body}</TextSm>
+      <TextSm textAlign="center">{body}</TextSm>
     </TagLabel>
   </Tag>
 );

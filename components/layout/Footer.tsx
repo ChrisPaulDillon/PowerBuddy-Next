@@ -5,12 +5,14 @@ import { Banner } from '../common/Texts';
 
 const Footer = () => {
   return (
-    <Box as="footer" role="contentinfo" py="6" bottom={0} position="relative">
-      <Flex direction={{ base: 'column', md: 'row' }} maxW={{ base: 'xl', md: '7xl' }} mx="auto" px={{ base: '6', md: '8' }} align="center">
-        {/* <a aria-current="page" aria-label="Back to Home page" href="/" rel="home">
-          <Logo h="6" iconColor="blue.600" />
-        </a> */}
-        <Banner>PowerBuddy</Banner>
+    <Box as="footer" role="contentinfo" py="6">
+      <Flex
+        direction={{ base: 'column', md: 'row' }}
+        minW={{ base: '7xl', md: '5xl', sm: 'md' }}
+        mx="auto"
+        px={{ base: '6', md: '8' }}
+        align="center">
+        <a aria-current="page" aria-label="Back to Home page" href="/" rel="home"></a>
         <Stack
           my={{ base: '6', md: 0 }}
           direction={{ base: 'column', md: 'row' }}
@@ -23,9 +25,9 @@ const Footer = () => {
           <Link>Terms and Conditions</Link>
         </Stack>
         <ButtonGroup marginStart={{ md: 'auto' }} color="gray.600" variant="ghost">
-          <IconButton as="a" href="www.google.com" aria-label="LinkedIn" icon={<FaLinkedin />} />
-          <IconButton as="a" href="www.google.com" aria-label="Github" icon={<FaGithub />} />
-          <IconButton as="a" href="www.google.com" aria-label="Twitter" icon={<FaTwitter />} />
+          <IconButton as="a" aria-label="LinkedIn" icon={<FaLinkedin />} />
+          <IconButton as="a" aria-label="LinkedIn" icon={<FaGithub />} />
+          <IconButton as="a" aria-label="LinkedIn" icon={<FaTwitter />} />
         </ButtonGroup>
       </Flex>
     </Box>

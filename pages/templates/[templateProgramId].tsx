@@ -20,6 +20,7 @@ import { useUserContext } from '../../components/users/UserContext';
 import axios from 'axios';
 import { Box, Flex } from '../../chakra/Layout';
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '../../chakra/Disclosure';
+import useScreenSizes from '../../hooks/useScreenSizes';
 
 const TemplateProgramSingle: NextPage = ({ template }: any) => {
   const router = useRouter();
@@ -33,6 +34,8 @@ const TemplateProgramSingle: NextPage = ({ template }: any) => {
     { href: TEMPLATES_URL, name: 'Program Templates' },
     { href: '#', name: template?.name },
   ];
+
+  const { SCREEN_MOBILE } = useScreenSizes();
 
   return (
     <Box>
@@ -75,7 +78,13 @@ const TemplateProgramSingle: NextPage = ({ template }: any) => {
               )}
             </CenterColumnFlex>
             <Box pt={['8', '5', '4', '4']}>
-              <Tabs variant="enclosed-colored" colorScheme="purple" align="center" size="md" isFitted>
+              <Tabs
+                variant="soft-rounded"
+                colorScheme="green"
+                align={SCREEN_MOBILE ? 'start' : 'center'}
+                size="sm"
+                isTruncated
+                orientation={SCREEN_MOBILE ? 'vertical' : 'horizontal'}>
                 <TabList>
                   {template?.templateWeeks.map((tw) => {
                     return <Tab>Week {tw.weekNo}</Tab>;

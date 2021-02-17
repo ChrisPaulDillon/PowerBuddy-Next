@@ -4,6 +4,7 @@ import { TextSm, TextXs, HeadingMdStatic } from '../common/Texts';
 import { TagTemplateRepScheme } from '../shared/Tags';
 import { ITemplateWeek, ITemplateDay, ITemplateRepScheme, ITemplateExercise } from 'powerbuddy-shared';
 import { Box, Flex } from '../../chakra/Layout';
+import { CenterColumnFlex } from '../layout/Flexes';
 
 export const TemplateWeekCard: React.FC<ITemplateWeek> = ({ templateDays }) => {
   return (
@@ -19,7 +20,9 @@ export const TemplateWeekCard: React.FC<ITemplateWeek> = ({ templateDays }) => {
 
 const TemplateDay: React.FC<ITemplateDay> = ({ dayNo, templateExercises }) => (
   <Box minW="20em" py={[8, 4, 4, 4]}>
-    <HeadingMdStatic mb={2}>Day {dayNo}</HeadingMdStatic>
+    <HeadingMdStatic mb={2} textAlign="center">
+      Day {dayNo}
+    </HeadingMdStatic>
     {templateExercises.map((te) => {
       return <TemplateExercise key={te.templateExerciseId} {...te} />;
     })}
@@ -38,11 +41,21 @@ const TemplateExercise: React.FC<ITemplateExercise> = ({
 
   return (
     <Box py={2}>
-      <TextSm pb={2}>
+      <TextSm pb={2} textAlign="center">
         {exerciseName} {repSchemeFormat} {repSchemeType === 'Fixed' && exercisePercentage}
       </TextSm>
-      {repSchemeType !== 'Fixed' && templateRepSchemes.map((trs) => <TemplateRepScheme key={trs.templateRepSchemeId} {...trs} />)}
-      <TextXs>{hasBackOffSets && 'Back Off Sets ' + backOffSetFormat}</TextXs>
+      <Box>
+        {repSchemeType !== 'Fixed' && (
+          <CenterColumnFlex>
+            {templateRepSchemes.map((trs, idx) => (
+              <Box key={idx}>
+                <TemplateRepScheme key={trs.templateRepSchemeId} {...trs} />
+              </Box>
+            ))}
+          </CenterColumnFlex>
+        )}
+      </Box>
+      <TextXs textAlign="center">{hasBackOffSets && 'Back Off Sets ' + backOffSetFormat}</TextXs>
     </Box>
   );
 };

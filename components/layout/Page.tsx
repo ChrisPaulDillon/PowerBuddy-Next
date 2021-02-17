@@ -6,7 +6,7 @@ const Page: React.FC = ({ children, ...rest }) => {
   return (
     <Box
       position="relative"
-      height="100vh"
+      height="85vh"
       alignContent="center"
       justifyContent="center"
       alignItems="center"

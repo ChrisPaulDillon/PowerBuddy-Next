@@ -64,15 +64,7 @@ const NavBar: React.FC<INavBarProps> = ({}) => {
             PowerBuddy
           </Banner>
         </Flex>
-        <Flex>
-          {/* {!SCREEN_MOBILE && (
-            <Box mt={2}>
-              <TemplateSearchBar />
-            </Box>
-            
-          )} */}
-          {navAvatar}
-        </Flex>
+        <Flex>{navAvatar}</Flex>
       </Stack>
       {isLeftNavOpen && <MobileSideNav isOpen={isLeftNavOpen} onClose={onLeftNavClose} />}
     </Flex>

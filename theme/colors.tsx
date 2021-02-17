@@ -61,7 +61,7 @@ const background = { light: 'gray.100', dark: 'gray.800' };
 const cardColor = { light: 'gray.50', dark: 'gray.700' };
 const cardHighlightColor = { light: 'gray.300', dark: 'gray.600' };
 
-const navIconColor = { light: 'red.600', dark: 'red.700' };
+const navIconColor = { light: 'gray.600', dark: 'gray.700' };
 const bannerColor = { light: 'gray.750', dark: 'gray.50' };
 const textColor = { light: 'gray.750', dark: 'gray.50' };
 const quoteColor = { light: 'gray.500', dark: 'gray.50' };
