@@ -48,6 +48,15 @@ const LoginForm: React.FC<ILoginFormProps> = ({ onClose, setLoginState }) => {
     };
     setShowError(false);
     const response = await LoginUserRequest(user);
+
+    if (response?.data) {
+      toast(ToastSuccess('Success', 'Successfully Signed In'));
+      handleAuthenticationTokens(response.data.accessToken, response.data.refreshToken);
+      const claimsValues = decodeJwtToken(response.data.accessToken);
+      SetValues(claimsValues);
+      onClose();
+    }
+
     if (response?.code) {
       switch (response?.code) {
         case EMAIL_NOT_CONFIRMED:
@@ -65,12 +74,6 @@ const LoginForm: React.FC<ILoginFormProps> = ({ onClose, setLoginState }) => {
           break;
       }
       setShowError(true);
-    } else {
-      toast(ToastSuccess('Success', 'Successfully Signed In'));
-      handleAuthenticationTokens(response.accessToken, response.refreshToken);
-      const claimsValues = decodeJwtToken(response.accessToken);
-      SetValues(claimsValues);
-      onClose();
     }
   };
 

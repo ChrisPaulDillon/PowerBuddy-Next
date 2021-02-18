@@ -47,9 +47,9 @@ export const RefreshRequest = async (refreshToken: string, SetValues: (claimsVal
   export const LoginUserRequest = async (user: IUser) => {
       try {
         const response = await axios.post(LoginUserUrl(), user);
-        return response.data;
+        return response;
       } catch (err) {
-        return err?.response?.data as IErrorResponse;
+        return err?.response?.data;
     }
   }
   

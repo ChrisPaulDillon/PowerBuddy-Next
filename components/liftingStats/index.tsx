@@ -9,7 +9,6 @@ import LiftFeed from './LiftFeed';
 import LiftingStatList from './LiftingStatList';
 import { useDisclosure } from '@chakra-ui/react';
 import { ModalForward } from '../common/Modals';
-import { LoginModal } from '../shared/Modals';
 import { WORKOUT_DIARY_URL } from '../../InternalLinks';
 import { useRouter } from 'next/router';
 import { PageTitle } from '../common/Texts';
@@ -24,13 +23,8 @@ const LiftingStatsIndexPage = () => {
   const [liftFeed, setLiftFeed] = useState<ILiftFeed[]>([]);
   const [, setSearchTerm] = useState<string>('');
 
-  const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
   const { isOpen: isNoStatsOpen, onOpen: onNoStatsOpen, onClose: onNoStatsClose } = useDisclosure();
   //const filteredStats = useLiftingStatSearch(liftingStats, searchTerm);
-
-  useEffect(() => {
-    if (statCode === 401) onLoginOpen();
-  }, [statCode]);
 
   useEffect(() => {
     if (liftingStats === undefined && !loading) {
@@ -52,7 +46,6 @@ const LiftingStatsIndexPage = () => {
       <SearchBar onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search personal bests..." />
       <LiftFeed liftFeed={liftFeed} />
       <LiftingStatList />
-      {isLoginOpen && <LoginModal isOpen={isLoginOpen} onClose={onLoginClose} />}
       {isNoStatsOpen && (
         <ModalForward
           isOpen={isNoStatsOpen}

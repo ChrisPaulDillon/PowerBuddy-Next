@@ -14,7 +14,6 @@ import router, { useRouter } from 'next/router';
 import { PrimaryButton } from '../common/Buttons';
 import axios from 'axios';
 import { ModalBackForward, ModalForward } from '../common/Modals';
-import { LoginModal } from '../shared/Modals';
 import { IWorkoutWeekSummary, ICreateWorkoutDayOptions, IWorkoutDaySummary, IWorkoutExerciseSummary } from 'powerbuddy-shared/lib';
 import { CreateWorkoutDayUrl, GetWorkoutDayIdByDateUrl } from '../../api/account/workoutDay';
 import { ToastSuccess } from '../shared/Toasts';
@@ -33,7 +32,6 @@ const WorkoutWeekSummary: React.FC<IProps> = ({ weekSummary }) => {
 
   const { isOpen: isCreateWorkoutOpen, onOpen: onCreateWorkoutOpen, onClose: onCreateWorkoutClose } = useDisclosure();
   const { isOpen: isTodayWorkoutOpen, onOpen: onTodayWorkoutOpen, onClose: onTodayWorkoutClose } = useDisclosure();
-  const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
 
   const doesUserHaveWorkoutToday = async () => {
     setButtonLoading(true);
@@ -69,11 +67,7 @@ const WorkoutWeekSummary: React.FC<IProps> = ({ weekSummary }) => {
         router.push(`${WORKOUT_DIARY_URL}/${result.data.workoutDayId}`);
         toast(ToastSuccess('Success', 'Successfully created todays workout!'));
       }
-    } catch (error) {
-      if (error?.response?.status === 401) {
-        onLoginOpen();
-      }
-    }
+    } catch (error) {}
     setButtonLoading(false);
     onTodayWorkoutClose();
     onCreateWorkoutClose();
@@ -95,7 +89,6 @@ const WorkoutWeekSummary: React.FC<IProps> = ({ weekSummary }) => {
           Todays Workout
         </PrimaryButton>
       </Box>
-      {isLoginOpen && <LoginModal isOpen={isLoginOpen} onClose={onLoginClose} />}
       {isTodayWorkoutOpen && (
         <ModalBackForward
           isOpen={isTodayWorkoutOpen}
