@@ -1,8 +1,6 @@
 import { Link, useColorMode, useDisclosure, useToast } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import React from 'react';
-import { useState } from 'react';
-import { useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { FaMoon } from 'react-icons/fa';
 import { IoIosLogIn, IoIosLogOut } from 'react-icons/io';
 import { MdArrowBack, MdChevronRight, MdPersonPin } from 'react-icons/md';
@@ -35,8 +33,6 @@ export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
   const [menuSection, setMenuSection] = useState<MenuSection | undefined>(MenuSection.Main);
   const toast = useToast();
   const { isAuthenticated } = useUserContext();
-
-  const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
 
   const { colorMode } = useColorMode();
 

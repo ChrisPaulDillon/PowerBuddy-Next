@@ -51,11 +51,7 @@ const WorkoutWeekSummary: React.FC<IProps> = ({ weekSummary }) => {
         setProgramText(result?.data?.templateName);
         onCreateWorkoutOpen(); //Workout log was found, give the option to create a workout day for that log
       }
-    } catch (error) {
-      if (error?.response?.status === 401) {
-        onLoginOpen();
-      }
-    }
+    } catch (error) {}
     setButtonLoading(false);
   };
 
@@ -85,7 +81,7 @@ const WorkoutWeekSummary: React.FC<IProps> = ({ weekSummary }) => {
           ))}
       </CenterRowFlex>
       <Box m={2}>
-        <PrimaryButton onClick={async () => await doesUserHaveWorkoutToday()} isLoading={buttonLoading} isFullWidth>
+        <PrimaryButton onClick={async () => doesUserHaveWorkoutToday()} isLoading={buttonLoading} isFullWidth>
           Todays Workout
         </PrimaryButton>
       </Box>
@@ -98,7 +94,7 @@ const WorkoutWeekSummary: React.FC<IProps> = ({ weekSummary }) => {
           body="Create one using a weightlifting program or a one off workout"
           title="No Workout Detected"
           loading={buttonLoading}
-          onForwardClick={async () => await createWorkoutDay()}
+          onForwardClick={async () => createWorkoutDay()}
           onBackClick={() => {
             router.push(TEMPLATES_URL);
             onTodayWorkoutClose();
@@ -113,7 +109,7 @@ const WorkoutWeekSummary: React.FC<IProps> = ({ weekSummary }) => {
           body={`You are currently running the program ${programText}, add this workout to this program?`}
           title="No Workout Detected"
           loading={buttonLoading}
-          onClick={async () => await createWorkoutDay()}
+          onClick={async () => createWorkoutDay()}
         />
       )}
     </Box>

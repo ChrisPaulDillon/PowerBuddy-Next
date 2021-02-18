@@ -14,7 +14,6 @@ interface IProps {
 
 const WorkoutDayById: NextPage<IProps> = ({ workoutDayData }) => {
   const { userId } = useUserContext();
-  // const { loading: dayLoading, data: dayData, statusCode: dayCode } = useAxios<IWorkoutDay>(GetWorkoutDayByIdUrl(parseInt(workoutDayId as string)));
   const [workoutDay, setWorkoutDay] = useState<IWorkoutDay>(workoutDayData);
   const [contentDisabled, setContentDisabled] = useState<boolean>(false);
 

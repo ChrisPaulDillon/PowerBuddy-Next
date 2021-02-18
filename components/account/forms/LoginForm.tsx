@@ -89,7 +89,7 @@ const LoginForm: React.FC<ILoginFormProps> = ({ onClose, setLoginState }) => {
       <Flex justify="center">
         <TextXs textAlign="center">
           Email Not Confirmed. You must confirm your email address before proceeding.{' '}
-          <Link onClick={async () => await sendEmailConfirmation()}>
+          <Link onClick={async () => sendEmailConfirmation()}>
             <TextXs color="blue.500">Send Again</TextXs>
           </Link>
         </TextXs>

@@ -181,7 +181,7 @@ const WorkoutDay: React.FC<IProps> = ({ workoutDay }) => {
           isOpen={isDeleteLogOpen}
           body="Are you sure? This cannot be undone"
           onClose={onDeleteLogClose}
-          onClick={async () => await deleteLog()}
+          onClick={async () => deleteLog()}
           actionText="Delete"
           loading={deleteLogLoading}
         />

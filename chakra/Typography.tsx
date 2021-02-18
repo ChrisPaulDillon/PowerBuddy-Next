@@ -1,4 +1,4 @@
-import { Text as ChakraText, Heading as ChakraHeading, TextProps, ChakraProps, useColorMode, HeadingProps } from '@chakra-ui/react';
+import { Text as ChakraText, Heading as ChakraHeading, TextProps, useColorMode, HeadingProps } from '@chakra-ui/react';
 import theme from '../theme';
 
 export const Text: React.FC<TextProps> = ({ ...rest }) => {

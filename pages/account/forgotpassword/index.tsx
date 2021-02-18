@@ -1,4 +1,4 @@
-import { Flex, Link, useToast } from '@chakra-ui/react';
+import { Link, useToast } from '@chakra-ui/react';
 import { NextPage } from 'next';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -26,7 +26,7 @@ const Index: NextPage = () => {
     return (
       <TextXs textAlign="center" justifyContent="center">
         Password reset link successfully sent. Please check your inbox. Didn't receive an email?{' '}
-        <Link onClick={async () => await onSubmit({ email })}>
+        <Link onClick={async () => onSubmit({ email })}>
           <TextXs color="blue.500">Send Again</TextXs>
         </Link>
       </TextXs>

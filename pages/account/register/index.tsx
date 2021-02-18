@@ -54,7 +54,7 @@ const Index: NextPage = () => {
       <Flex justify="center">
         <TextXs textAlign="center">
           Check Your Inbox to Verify Your Account. Can't Find The Email?
-          <Link onClick={async () => await sendEmailConfirmation()}>
+          <Link onClick={async () => sendEmailConfirmation()}>
             <TextXs color="blue.500">Send Again</TextXs>
           </Link>
         </TextXs>

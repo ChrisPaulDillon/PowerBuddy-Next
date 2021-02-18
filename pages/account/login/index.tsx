@@ -17,7 +17,6 @@ import { handleAuthenticationTokens, decodeJwtToken } from '../../../util/axiosU
 
 const Index: NextPage = () => {
   const router = useRouter();
-  const [showError, setShowError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [emailNotVerified, setEmailNotVerified] = useState<boolean>(false);
   const [userId, setUserId] = useState<string>('');
@@ -34,7 +33,6 @@ const Index: NextPage = () => {
       userName: email,
       password: password,
     };
-    setShowError(false);
     const response = await LoginUserRequest(user);
     if (response?.data) {
       toast(ToastSuccess('Success', 'Successfully Signed In'));
@@ -61,11 +59,10 @@ const Index: NextPage = () => {
           setErrorMessage('Too many login attempts. Please wait 10 minutes before proceeding');
           break;
       }
-      setShowError(true);
     }
   };
 
-  const { register, handleSubmit, errors, formState } = useForm();
+  const { register, handleSubmit, formState } = useForm();
 
   const sendEmailConfirmation = async () => {
     try {
@@ -79,7 +76,7 @@ const Index: NextPage = () => {
       <Flex justify="center">
         <TextXs textAlign="center">
           Email Not Confirmed. You must confirm your email address before proceeding.{' '}
-          <Link onClick={async () => await sendEmailConfirmation()}>
+          <Link onClick={async () => sendEmailConfirmation()}>
             <TextXs color="blue.500">Send Again</TextXs>
           </Link>
         </TextXs>
