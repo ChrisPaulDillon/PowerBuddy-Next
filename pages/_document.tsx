@@ -14,9 +14,9 @@ class MyDocument extends Document {
         <Head>
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
-          <link rel="manifest" href="manifest.json" />
-          <link rel="icon" href="icons/favicon.ico" />
-          <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+          <link rel="manifest" href="/manifest.json" />
+          <link rel="icon" href="/icons/favicon.ico" />
+          <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
           <meta name="mobile-web-app-capable" content="yes" />
           <meta name="apple-touch-fullscreen" content="yes" />
           <meta name="apple-mobile-web-app-title" content="Expo" />
