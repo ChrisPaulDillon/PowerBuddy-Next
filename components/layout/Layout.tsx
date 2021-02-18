@@ -26,7 +26,7 @@ const Layout = ({ children }: any) => {
   }, [firstVisit]);
 
   return (
-    <Flex direction="column" align="center" m="0 auto" bgColor={theme.colors.background[colorMode]} mx={2}>
+    <Flex direction="column" m="0 auto" bgColor={theme.colors.background[colorMode]} mx={2}>
       <NavBar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       <Flex flexDir="row">
         {!firstVisit && isAuthenticated && (

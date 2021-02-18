@@ -12,6 +12,7 @@ const Page: React.FC = ({ children, ...rest }) => {
       alignItems="center"
       overflowY="scroll"
       p={1}
+      w="100%"
       css={{
         scrollSnapType: 'x mandatory',
         '::-webkit-scrollbar': { width: 0 },

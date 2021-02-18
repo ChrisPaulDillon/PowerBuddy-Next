@@ -47,78 +47,76 @@ const TemplateProgramSingle: NextPage = ({ template }: any) => {
         <Box>
           <BreadcrumbBase values={breadcrumbInput} />
         </Box>
-        <CenterColumnFlex>
-          <Box mt="2">
-            <CenterColumnFlex flexDir="column">
-              <PageTitle>{template?.name}</PageTitle>
-              <Flex pt={2}>
-                <Box pr={2}>
-                  <Badge colorScheme="green" fontSize="0.8em">
-                    {template?.noOfWeeks} Weeks
-                  </Badge>
-                </Box>
-                <Box>
-                  <Badge colorScheme="pink" fontSize="0.8em">
-                    {template?.difficulty}
-                  </Badge>
-                </Box>
-              </Flex>
-              <Box mt={5}>
-                <PrimaryButton onClick={isAuthenticated ? onAddProgramOpen : onLoginOpen} leftIcon={<FaRunning />}>
-                  Create Program
-                </PrimaryButton>
+        <Box mt={[3, 3, 7, 7]}>
+          <PageTitle>{template?.name}</PageTitle>
+          <CenterColumnFlex>
+            <Flex pt={2}>
+              <Box pr={2}>
+                <Badge colorScheme="green" fontSize="0.8em">
+                  {template?.noOfWeeks} Weeks
+                </Badge>
               </Box>
-              {template?.activeUsersCount !== 0 && (
-                <TextXsFade py={[4, 4, 2, 2]}>
-                  {template?.activeUsersCount} users are currently using this program{' '}
-                  <span role="img" aria-label="fire emoji">
-                    🔥
-                  </span>
-                </TextXsFade>
-              )}
-            </CenterColumnFlex>
-            <Box pt={['8', '5', '4', '4']}>
-              <Tabs
-                variant="soft-rounded"
-                colorScheme="green"
-                align={SCREEN_MOBILE ? 'start' : 'center'}
-                size="sm"
-                isTruncated
-                orientation={SCREEN_MOBILE ? 'vertical' : 'horizontal'}>
-                <TabList>
-                  {template?.templateWeeks.map((tw) => {
-                    return <Tab>Week {tw.weekNo}</Tab>;
-                  })}
-                </TabList>
-                <TabPanels>
-                  {template?.templateWeeks.map((tw) => {
-                    return (
-                      <TabPanel>
-                        <TemplateWeekCard key={tw.templateWeekId} {...tw} />
-                      </TabPanel>
-                    );
-                  })}
-                </TabPanels>
-              </Tabs>
+              <Box>
+                <Badge colorScheme="pink" fontSize="0.8em">
+                  {template?.difficulty}
+                </Badge>
+              </Box>
+            </Flex>
+            <Box mt={5}>
+              <PrimaryButton onClick={isAuthenticated ? onAddProgramOpen : onLoginOpen} leftIcon={<FaRunning />}>
+                Create Program
+              </PrimaryButton>
             </Box>
-            {isAddProgramOpen && (
-              <ModalDrawerForm title="Create a New Program Log" isOpen={isAddProgramOpen} onClose={onAddProgramClose}>
-                <CreateProgramLogFromTemplateForm onClose={onAddProgramClose} template={template} onCreateSuccessOpen={onCreateSuccessOpen} />
-              </ModalDrawerForm>
-            )}
-            {isLoginOpen && <LoginModal isOpen={isLoginOpen} onClose={onLoginClose} />}
-            {isCreateSuccessOpen && (
-              <ModalForward
-                isOpen={isCreateSuccessOpen}
-                onClose={onCreateSuccessClose}
-                onClick={() => router.push(WORKOUT_DIARY_URL)}
-                body="Successfully created program using template, go to diary?"
-                title="Success! 🎉🎉"
-                actionText="Go to Diary"
-              />
-            )}
+          </CenterColumnFlex>
+          {template?.activeUsersCount !== 0 && (
+            <TextXsFade py={[4, 4, 2, 2]}>
+              {template?.activeUsersCount} users are currently using this program{' '}
+              <span role="img" aria-label="fire emoji">
+                🔥
+              </span>
+            </TextXsFade>
+          )}
+          <Box pt={['8', '5', '4', '4']}>
+            <Tabs
+              variant="soft-rounded"
+              colorScheme="green"
+              align={SCREEN_MOBILE ? 'start' : 'center'}
+              size="sm"
+              isTruncated
+              orientation={SCREEN_MOBILE ? 'vertical' : 'horizontal'}>
+              <TabList>
+                {template?.templateWeeks.map((tw) => {
+                  return <Tab>Week {tw.weekNo}</Tab>;
+                })}
+              </TabList>
+              <TabPanels>
+                {template?.templateWeeks.map((tw) => {
+                  return (
+                    <TabPanel>
+                      <TemplateWeekCard key={tw.templateWeekId} {...tw} />
+                    </TabPanel>
+                  );
+                })}
+              </TabPanels>
+            </Tabs>
           </Box>
-        </CenterColumnFlex>
+          {isAddProgramOpen && (
+            <ModalDrawerForm title="Create a New Program Log" isOpen={isAddProgramOpen} onClose={onAddProgramClose}>
+              <CreateProgramLogFromTemplateForm onClose={onAddProgramClose} template={template} onCreateSuccessOpen={onCreateSuccessOpen} />
+            </ModalDrawerForm>
+          )}
+          {isLoginOpen && <LoginModal isOpen={isLoginOpen} onClose={onLoginClose} />}
+          {isCreateSuccessOpen && (
+            <ModalForward
+              isOpen={isCreateSuccessOpen}
+              onClose={onCreateSuccessClose}
+              onClick={() => router.push(WORKOUT_DIARY_URL)}
+              body="Successfully created program using template, go to diary?"
+              title="Success! 🎉🎉"
+              actionText="Go to Diary"
+            />
+          )}
+        </Box>
       </PageContent>
     </Box>
   );
