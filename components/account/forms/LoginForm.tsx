@@ -16,7 +16,7 @@ import { ToastSuccess } from '../../shared/Toasts';
 import { LoginUserRequest } from '../../../api/account/auth';
 import { ACCOUNT_LOCKOUT, EMAIL_NOT_CONFIRMED, INVALID_CREDENTIALS, USER_NOT_FOUND } from '../../../api/apiResponseCodes';
 import { Flex } from '../../../chakra/Layout';
-import { Button, FormControl, FormErrorMessage, FormLabel, InputGroup, InputRightElement, Link } from '../../../chakra/Forms';
+import { Button, FormControl, FormErrorMessage, InputGroup, InputRightElement, Link } from '../../../chakra/Forms';
 import theme from '../../../theme';
 
 interface ILoginFormProps {
@@ -48,6 +48,15 @@ const LoginForm: React.FC<ILoginFormProps> = ({ onClose, setLoginState }) => {
     };
     setShowError(false);
     const response = await LoginUserRequest(user);
+
+    if (response?.data) {
+      toast(ToastSuccess('Success', 'Successfully Signed In'));
+      handleAuthenticationTokens(response.data.accessToken, response.data.refreshToken);
+      const claimsValues = decodeJwtToken(response.data.accessToken);
+      SetValues(claimsValues);
+      onClose();
+    }
+
     if (response?.code) {
       switch (response?.code) {
         case EMAIL_NOT_CONFIRMED:
@@ -65,12 +74,6 @@ const LoginForm: React.FC<ILoginFormProps> = ({ onClose, setLoginState }) => {
           break;
       }
       setShowError(true);
-    } else {
-      toast(ToastSuccess('Success', 'Successfully Signed In'));
-      handleAuthenticationTokens(response.accessToken, response.refreshToken);
-      const claimsValues = decodeJwtToken(response.accessToken);
-      SetValues(claimsValues);
-      onClose();
     }
   };
 
@@ -86,7 +89,7 @@ const LoginForm: React.FC<ILoginFormProps> = ({ onClose, setLoginState }) => {
       <Flex justify="center">
         <TextXs textAlign="center">
           Email Not Confirmed. You must confirm your email address before proceeding.{' '}
-          <Link onClick={async () => await sendEmailConfirmation()}>
+          <Link onClick={async () => sendEmailConfirmation()}>
             <TextXs color="blue.500">Send Again</TextXs>
           </Link>
         </TextXs>

@@ -46,19 +46,17 @@ export const RefreshRequest = async (refreshToken: string, SetValues: (claimsVal
   
   export const LoginUserRequest = async (user: IUser) => {
       try {
-        const response = await axios.post(LoginUserUrl(), user);
-        return response.data;
+        return await axios.post(LoginUserUrl(), user);
       } catch (err) {
-        return err?.response?.data as IErrorResponse;
+        return err?.response?.data;
     }
   }
   
   export const RegisterUserRequest = async (user: IUser) => {
       try {
-          const response = await axios.post(RegisterUserUrl(), user);
-          return response.data;
+          return await axios.post(RegisterUserUrl(), user);
       } catch (err) {
-          return err?.response?.data as IErrorResponse;
+          return err?.response?.data;
       }
   }
   

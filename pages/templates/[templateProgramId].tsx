@@ -4,13 +4,12 @@ import { Badge, useDisclosure } from '@chakra-ui/react';
 import React from 'react';
 import { GetAllTemplateProgramsUrl, GetTemplateProgramByIdUrl } from '../../api/public/template';
 import { ITemplateProgram, ITemplateProgramExtended } from 'powerbuddy-shared';
-import { HOME_URL, WORKOUT_DIARY_URL } from '../../InternalLinks';
+import { HOME_URL, LOGIN_URL, WORKOUT_DIARY_URL } from '../../InternalLinks';
 import { PrimaryButton } from '../../components/common/Buttons';
 import { ModalDrawerForm } from '../../components/common/ModalDrawers';
 import { ModalForward } from '../../components/common/Modals';
 import { PageTitle, TextXsFade } from '../../components/common/Texts';
 import { CenterColumnFlex } from '../../components/layout/Flexes';
-import { LoginModal } from '../../components/shared/Modals';
 import { BreadcrumbBase, IBreadcrumbInput } from '../../components/common/Breadcrumbs';
 import CreateProgramLogFromTemplateForm from '../../components/templatePrograms/forms/CreateProgramLogFromTemplateForm';
 import { FaRunning } from 'react-icons/all';
@@ -27,7 +26,6 @@ const TemplateProgramSingle: NextPage = ({ template }: any) => {
   const { isAuthenticated } = useUserContext();
 
   const { isOpen: isAddProgramOpen, onOpen: onAddProgramOpen, onClose: onAddProgramClose } = useDisclosure();
-  const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
   const { isOpen: isCreateSuccessOpen, onOpen: onCreateSuccessOpen, onClose: onCreateSuccessClose } = useDisclosure();
 
   var breadcrumbInput: IBreadcrumbInput[] = [
@@ -64,7 +62,7 @@ const TemplateProgramSingle: NextPage = ({ template }: any) => {
               </Box>
             </Flex>
             <Box mt={5}>
-              <PrimaryButton onClick={isAuthenticated ? onAddProgramOpen : onLoginOpen} leftIcon={<FaRunning />}>
+              <PrimaryButton onClick={isAuthenticated ? onAddProgramOpen : () => router.push(LOGIN_URL)} leftIcon={<FaRunning />}>
                 Create Program
               </PrimaryButton>
             </Box>
@@ -106,7 +104,6 @@ const TemplateProgramSingle: NextPage = ({ template }: any) => {
               <CreateProgramLogFromTemplateForm onClose={onAddProgramClose} template={template} onCreateSuccessOpen={onCreateSuccessOpen} />
             </ModalDrawerForm>
           )}
-          {isLoginOpen && <LoginModal isOpen={isLoginOpen} onClose={onLoginClose} />}
           {isCreateSuccessOpen && (
             <ModalForward
               isOpen={isCreateSuccessOpen}

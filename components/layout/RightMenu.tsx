@@ -1,15 +1,12 @@
 import { Link, useColorMode, useDisclosure, useToast } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import React from 'react';
-import { useState } from 'react';
-import { useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { FaMoon } from 'react-icons/fa';
 import { IoIosLogIn, IoIosLogOut } from 'react-icons/io';
 import { MdArrowBack, MdChevronRight, MdPersonPin } from 'react-icons/md';
-import { PROFILE_URL, SETTINGS_URL } from '../../InternalLinks';
+import { LOGIN_URL, PROFILE_URL, SETTINGS_URL } from '../../InternalLinks';
 import { FcSettings } from 'react-icons/fc';
 import { useUserContext } from '../users/UserContext';
-import { LoginModal } from '../shared/Modals';
 import axios from 'axios';
 import { LogoutUserUrl } from '../../api/account/auth';
 import { setAuthorizationToken } from '../../util/axiosUtils';
@@ -36,8 +33,6 @@ export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
   const [menuSection, setMenuSection] = useState<MenuSection | undefined>(MenuSection.Main);
   const toast = useToast();
   const { isAuthenticated } = useUserContext();
-
-  const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
 
   const { colorMode } = useColorMode();
 
@@ -103,7 +98,7 @@ export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
                     window.location.reload();
                   }, 1000);
                 } else {
-                  onLoginOpen();
+                  router.push(LOGIN_URL);
                 }
               },
             },
@@ -157,7 +152,6 @@ export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
           ))}
         </>
       )}
-      {isLoginOpen && <LoginModal isOpen={isLoginOpen} onClose={onLoginClose} />}
     </MainMenuContent>
   );
 };
