@@ -48,9 +48,7 @@ const TemplateSearchBar = () => {
             });
             callback(tempArray);
           })
-          .catch((error) => {
-            console.log(error, 'catch the hoop');
-          });
+          .catch((error) => {});
       });
     }
   };

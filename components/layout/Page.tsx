@@ -14,12 +14,12 @@ const Page: React.FC = ({ children, ...rest }) => {
       overflowY="scroll"
       p={1}
       w="100%"
-      css={{
-        scrollSnapType: 'x mandatory',
-        '::-webkit-scrollbar': { width: 0 },
-        '-msOverflowStyle': 'none',
-        scrollbarWidth: 'none',
-      }}
+      // css={{
+      //   scrollSnapType: 'x mandatory',
+      //   '::-webkit-scrollbar': { width: 0 },
+      //   '-msOverflowStyle': 'none',
+      //   scrollbarWidth: 'none',
+      // }}
       {...rest}>
       {children}
     </Box>

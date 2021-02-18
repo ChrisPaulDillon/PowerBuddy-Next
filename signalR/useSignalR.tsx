@@ -22,8 +22,6 @@ const useSignalR = () => {
   useEffect(() => {
     if (connection) {
       connection.on(MESSAGE_METHOD_ALL, (message: IUserMessage) => {
-        console.log(message);
-
         toast({
           position: 'top-left',
           render: () => <ToastAvatar userName={message?.userName} description={message?.body} />,

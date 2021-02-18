@@ -7,7 +7,7 @@ const Footer = () => {
   const { colorMode } = useColorMode();
 
   return (
-    <Box as="footer" role="contentinfo" py="1" borderTop="1px" borderColor={theme.colors.borderColor[colorMode]}>
+    <Box as="footer" role="contentinfo" py="1" borderTop="1px" borderColor={theme.colors.borderColor[colorMode]} position="relative">
       <Flex
         direction={{ base: 'column', md: 'row' }}
         minW={{ base: 'xs', lg: '7xl', md: 'xl', sm: 'xs' }}

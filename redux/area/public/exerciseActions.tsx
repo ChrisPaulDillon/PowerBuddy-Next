@@ -39,9 +39,7 @@ export const loadExerciseMuscleGroups: ActionCreator<ThunkAction<Promise<any>, I
         exerciseMuscleGroups: response.data,
       });
       localStorage.setItem('exerciseMuscleGroups', JSON.stringify(response.data));
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 };
 
