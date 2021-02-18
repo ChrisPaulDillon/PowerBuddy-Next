@@ -5,13 +5,12 @@ import axios from 'axios';
 import React from 'react';
 import { GetAllTemplateProgramsUrl } from '../api/public/template';
 import { ITemplateProgram } from 'powerbuddy-shared';
-import { WORKOUT_DIARY_URL } from '../InternalLinks';
+import { LOGIN_URL, WORKOUT_DIARY_URL } from '../InternalLinks';
 import { PrimaryButton } from '../components/common/Buttons';
 import { ModalDrawerForm } from '../components/common/ModalDrawers';
 import { ModalForward } from '../components/common/Modals';
 import { PageTitle } from '../components/common/Texts';
 import { CenterColumnFlex } from '../components/layout/Flexes';
-import { LoginModal } from '../components/shared/Modals';
 import TemplateProgramCardList from '../components/templatePrograms/TemplateProgramCardList';
 import CreateProgramLogFromScratchForm from '../components/templatePrograms/forms/CreateProgramLogFromScratchForm';
 import { PageContent, PageHead } from '../components/layout/Page';
@@ -24,7 +23,6 @@ const Index: NextPage = ({ templates }: any) => {
   const { isAuthenticated } = useUserContext();
 
   const { isOpen: isCreateOpen, onOpen: onCreateOpen, onClose: onCreateClose } = useDisclosure();
-  const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
   const { isOpen: isCreateSuccessOpen, onClose: onCreateSuccessClose } = useDisclosure();
 
   return (
@@ -39,7 +37,7 @@ const Index: NextPage = ({ templates }: any) => {
           <PageTitle>Weightlifting Programs</PageTitle>
           <Flex py={4} ml={3}>
             <Box mt={2} px={2}>
-              <PrimaryButton size="xs" onClick={isAuthenticated ? onCreateOpen : onLoginOpen}>
+              <PrimaryButton size="xs" onClick={isAuthenticated ? onCreateOpen : () => router.push(LOGIN_URL)}>
                 Or Start Fresh
               </PrimaryButton>
             </Box>
@@ -55,7 +53,6 @@ const Index: NextPage = ({ templates }: any) => {
             />
           </ModalDrawerForm>
         )}
-        {isLoginOpen && <LoginModal isOpen={isLoginOpen} onClose={onLoginClose} />}
         {isCreateSuccessOpen && (
           <ModalForward
             isOpen={isCreateSuccessOpen}

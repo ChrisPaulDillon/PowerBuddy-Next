@@ -14,7 +14,6 @@ import router, { useRouter } from 'next/router';
 import { PrimaryButton } from '../common/Buttons';
 import axios from 'axios';
 import { ModalBackForward, ModalForward } from '../common/Modals';
-import { LoginModal } from '../shared/Modals';
 import { IWorkoutWeekSummary, ICreateWorkoutDayOptions, IWorkoutDaySummary, IWorkoutExerciseSummary } from 'powerbuddy-shared/lib';
 import { CreateWorkoutDayUrl, GetWorkoutDayIdByDateUrl } from '../../api/account/workoutDay';
 import { ToastSuccess } from '../shared/Toasts';
@@ -33,7 +32,6 @@ const WorkoutWeekSummary: React.FC<IProps> = ({ weekSummary }) => {
 
   const { isOpen: isCreateWorkoutOpen, onOpen: onCreateWorkoutOpen, onClose: onCreateWorkoutClose } = useDisclosure();
   const { isOpen: isTodayWorkoutOpen, onOpen: onTodayWorkoutOpen, onClose: onTodayWorkoutClose } = useDisclosure();
-  const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
 
   const doesUserHaveWorkoutToday = async () => {
     setButtonLoading(true);
@@ -53,11 +51,7 @@ const WorkoutWeekSummary: React.FC<IProps> = ({ weekSummary }) => {
         setProgramText(result?.data?.templateName);
         onCreateWorkoutOpen(); //Workout log was found, give the option to create a workout day for that log
       }
-    } catch (error) {
-      if (error?.response?.status === 401) {
-        onLoginOpen();
-      }
-    }
+    } catch (error) {}
     setButtonLoading(false);
   };
 
@@ -69,11 +63,7 @@ const WorkoutWeekSummary: React.FC<IProps> = ({ weekSummary }) => {
         router.push(`${WORKOUT_DIARY_URL}/${result.data.workoutDayId}`);
         toast(ToastSuccess('Success', 'Successfully created todays workout!'));
       }
-    } catch (error) {
-      if (error?.response?.status === 401) {
-        onLoginOpen();
-      }
-    }
+    } catch (error) {}
     setButtonLoading(false);
     onTodayWorkoutClose();
     onCreateWorkoutClose();
@@ -91,11 +81,10 @@ const WorkoutWeekSummary: React.FC<IProps> = ({ weekSummary }) => {
           ))}
       </CenterRowFlex>
       <Box m={2}>
-        <PrimaryButton onClick={async () => await doesUserHaveWorkoutToday()} isLoading={buttonLoading} isFullWidth>
+        <PrimaryButton onClick={async () => doesUserHaveWorkoutToday()} isLoading={buttonLoading} isFullWidth>
           Todays Workout
         </PrimaryButton>
       </Box>
-      {isLoginOpen && <LoginModal isOpen={isLoginOpen} onClose={onLoginClose} />}
       {isTodayWorkoutOpen && (
         <ModalBackForward
           isOpen={isTodayWorkoutOpen}
@@ -105,7 +94,7 @@ const WorkoutWeekSummary: React.FC<IProps> = ({ weekSummary }) => {
           body="Create one using a weightlifting program or a one off workout"
           title="No Workout Detected"
           loading={buttonLoading}
-          onForwardClick={async () => await createWorkoutDay()}
+          onForwardClick={async () => createWorkoutDay()}
           onBackClick={() => {
             router.push(TEMPLATES_URL);
             onTodayWorkoutClose();
@@ -120,7 +109,7 @@ const WorkoutWeekSummary: React.FC<IProps> = ({ weekSummary }) => {
           body={`You are currently running the program ${programText}, add this workout to this program?`}
           title="No Workout Detected"
           loading={buttonLoading}
-          onClick={async () => await createWorkoutDay()}
+          onClick={async () => createWorkoutDay()}
         />
       )}
     </Box>

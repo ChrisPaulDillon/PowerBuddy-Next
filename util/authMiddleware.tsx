@@ -1,31 +1,21 @@
 import { useUserContext } from '../components/users/UserContext';
-import React, { useEffect, useState } from 'react';
-import { LoginModal } from '../components/shared/Modals';
-import { Box } from '../chakra/Layout';
+import React, { useEffect } from 'react';
+import { LOGIN_URL } from '../InternalLinks';
+import { useRouter } from 'next/router';
 
 export const withAuthorized = (WrappedComponent) => {
   const Wrapper = (props) => {
     const { isAuthenticated } = useUserContext();
-    const [promptLogin, setPromptLogin] = useState<boolean>(false);
+    const router = useRouter();
 
     useEffect(() => {
       setTimeout(() => {
         if (!isAuthenticated) {
-          setPromptLogin(true);
-        } else {
-          setPromptLogin(false);
+          router.push(LOGIN_URL);
         }
       }, 1500);
     }, [isAuthenticated]);
 
-    if (!isAuthenticated) {
-      return (
-        <Box>
-          <LoginModal isOpen={promptLogin} onClose={() => {}} />
-          <WrappedComponent {...props} />
-        </Box>
-      );
-    }
     return <WrappedComponent {...props} />;
   };
 
