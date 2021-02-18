@@ -7,20 +7,20 @@ const dev = process.env.NODE_ENV !==  'production';
 const app =  next({ dev });
 const handle = app.getRequestHandler();
 
-// sitemap({
-//   //   alternateUrls: {
-//   //     en: 'https://example.en',
-//   //     es: 'https://example.es',
-//   //     ja: 'https://example.jp',
-//   //     fr: 'https://example.fr',
-//   //   },
-//     baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
-//     ignoredPaths: ['admin', 'templates/[templateProgramId]', 'u/[userName]', 'personalbests/[exerciseId]', 'exercises/[exerciseId]', 'workoutdiary/[workoutDayId]'],
-//     pagesDirectory: __dirname + "/.next/serverless/pages",
-//     targetDirectory : 'public/',
-//     sitemapFilename: 'sitemap.xml',
-//     nextConfigPath: __dirname + "\\next.config.js"
-//   });
+sitemap({
+  //   alternateUrls: {
+  //     en: 'https://example.en',
+  //     es: 'https://example.es',
+  //     ja: 'https://example.jp',
+  //     fr: 'https://example.fr',
+  //   },
+    baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
+    ignoredPaths: ['admin', 'templates/[templateProgramId]', 'u/[userName]', 'personalbests/[exerciseId]', 'exercises/[exerciseId]', 'workoutdiary/[workoutDayId]', 'workoutdiary', '404', 'account/changepassword', 'account/confirmemail', 'account/settings', 'history'],
+    pagesDirectory: __dirname + "/.next/serverless/pages",
+    targetDirectory : 'public/',
+    sitemapFilename: 'sitemap.xml',
+    nextConfigPath: __dirname + "\\next.config.js"
+  });
 
 app.prepare().then(()  =>  {
   createServer((req, res)  =>  {

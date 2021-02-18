@@ -8,7 +8,7 @@ import { IconType } from 'react-icons/lib';
 import { Banner } from '../common/Texts';
 import { MdMenu } from 'react-icons/md';
 import useScreenSizes from '../../hooks/useScreenSizes';
-import { ADMIN_URL, USERS_URL, LOGHISTORY_URL, TEMPLATES_URL } from '../../InternalLinks';
+import { ADMIN_URL, USERS_URL, LOGHISTORY_URL, TEMPLATES_URL, WORKOUT_DIARY_URL, HOME_URL } from '../../InternalLinks';
 import TTIconButton from '../common/IconButtons';
 import { MenuItem } from '../common/Menus';
 import Link from 'next/link';
@@ -21,17 +21,17 @@ import TemplateSearchBar from '../templatePrograms/TemplateSearchBar';
 const sideMenu = {
   groups: [
     {
-      name: 'Diary',
-      icon: BsCalendarFill,
-      link: '/',
-      tooltip: 'View Your Program Log',
+      name: 'Templates',
+      icon: BsFillGrid3X3GapFill,
+      link: HOME_URL,
+      tooltip: 'View Program Templates',
       memberStatusId: 0,
     },
     {
-      name: 'Templates',
-      icon: BsFillGrid3X3GapFill,
-      link: TEMPLATES_URL,
-      tooltip: 'View Program Templates',
+      name: 'Diary',
+      icon: BsCalendarFill,
+      link: WORKOUT_DIARY_URL,
+      tooltip: 'View Your Diary',
       memberStatusId: 0,
     },
     {
@@ -48,13 +48,13 @@ const sideMenu = {
       tooltip: 'View Active Users',
       memberStatusId: 0,
     },
-    {
-      name: 'Admin',
-      icon: RiAdminLine,
-      link: ADMIN_URL,
-      tooltip: 'Admin Panel',
-      memberStatusId: 4,
-    },
+    // {
+    //   name: 'Admin',
+    //   icon: RiAdminLine,
+    //   link: ADMIN_URL,
+    //   tooltip: 'Admin Panel',
+    //   memberStatusId: 4,
+    // },
   ],
 };
 
@@ -98,7 +98,6 @@ const LeftNav: React.FC<ISideNavProps> = ({ menuOpen, ...props }) => {
         <Flex
           as="nav"
           position="relative"
-          zIndex={999}
           top={0}
           left="0%"
           bg={theme.colors.navBackground[colorMode]}
@@ -136,7 +135,7 @@ const LeftMenuItems: React.FC<ILeftMenuItemsProps> = ({ menuOpen, onClose, membe
             onClose={onClose}
             idx={idx}
           />
-          {idx !== sideMenu.groups.length - 2 && menuOpen && <Divider />}
+          {idx !== sideMenu.groups.length - 1 && menuOpen && <Divider />}
         </Box>
       ))}
     </Box>

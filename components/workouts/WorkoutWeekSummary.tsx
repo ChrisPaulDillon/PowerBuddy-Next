@@ -9,7 +9,7 @@ import { CardSm } from '../layout/Card';
 import { CenterColumnFlex, CenterRowFlex } from '../layout/Flexes';
 import { BadgeWeekNo, BadgeWorkoutName } from '../shared/Badges';
 import theme from '../../theme';
-import { TEMPLATES_URL, WORKOUT_DAY_URL } from '../../InternalLinks';
+import { TEMPLATES_URL, WORKOUT_DIARY_URL } from '../../InternalLinks';
 import router, { useRouter } from 'next/router';
 import { PrimaryButton } from '../common/Buttons';
 import axios from 'axios';
@@ -40,7 +40,7 @@ const WorkoutWeekSummary: React.FC<IProps> = ({ weekSummary }) => {
     try {
       const result = await axios.get(GetWorkoutDayIdByDateUrl());
       if (result.data.workoutDayId !== 0) {
-        router.push(`${WORKOUT_DAY_URL}/${result.data.workoutDayId}`);
+        router.push(`${WORKOUT_DIARY_URL}/${result.data.workoutDayId}`);
       } else if (!result.data.workoutLogId) {
         onTodayWorkoutOpen(); //No workout log was found, give options of fresh create
       } else {
@@ -66,7 +66,7 @@ const WorkoutWeekSummary: React.FC<IProps> = ({ weekSummary }) => {
     try {
       const result = await axios.post(CreateWorkoutDayUrl(), workoutOptions);
       if (result.data !== 0) {
-        router.push(`${WORKOUT_DAY_URL}/${result.data.workoutDayId}`);
+        router.push(`${WORKOUT_DIARY_URL}/${result.data.workoutDayId}`);
         toast(ToastSuccess('Success', 'Successfully created todays workout!'));
       }
     } catch (error) {
@@ -148,7 +148,7 @@ const WorkoutDaySummarySingle: React.FC<IWorkoutDaySummary> = ({
         <TextSm textAlign="left" isTruncated>
           {moment(date).format('DD/MM/YYYY')}
         </TextSm>
-        <TTIconButton Icon={CgArrowTopRight} label="Go to Workout" onClick={async () => await router.push(`${WORKOUT_DAY_URL}/${workoutDayId}`)} />
+        <TTIconButton Icon={CgArrowTopRight} label="Go to Workout" onClick={async () => await router.push(`${WORKOUT_DIARY_URL}/${workoutDayId}`)} />
       </PbStack>
       {
         hasWorkoutData ? (

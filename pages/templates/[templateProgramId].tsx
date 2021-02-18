@@ -4,7 +4,7 @@ import { Badge, useDisclosure } from '@chakra-ui/react';
 import React from 'react';
 import { GetAllTemplateProgramsUrl, GetTemplateProgramByIdUrl } from '../../api/public/template';
 import { ITemplateProgram, ITemplateProgramExtended } from 'powerbuddy-shared';
-import { TEMPLATES_URL, WORKOUT_DIARY_URL } from '../../InternalLinks';
+import { HOME_URL, WORKOUT_DIARY_URL } from '../../InternalLinks';
 import { PrimaryButton } from '../../components/common/Buttons';
 import { ModalDrawerForm } from '../../components/common/ModalDrawers';
 import { ModalForward } from '../../components/common/Modals';
@@ -31,7 +31,7 @@ const TemplateProgramSingle: NextPage = ({ template }: any) => {
   const { isOpen: isCreateSuccessOpen, onOpen: onCreateSuccessOpen, onClose: onCreateSuccessClose } = useDisclosure();
 
   var breadcrumbInput: IBreadcrumbInput[] = [
-    { href: TEMPLATES_URL, name: 'Program Templates' },
+    { href: HOME_URL, name: 'Weightlifting Programs' },
     { href: '#', name: template?.name },
   ];
 

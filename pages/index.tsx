@@ -1,80 +1,83 @@
+import { GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
-import React, { useState, useEffect } from 'react';
-import { GetWorkoutWeekWithDateUrl } from '../api/account/workoutLog';
-import MCalendar from '../components/common/MCalendar';
-import ProgressSpinner from '../components/common/ProgressSpinner';
+import { useDisclosure } from '@chakra-ui/react';
+import axios from 'axios';
+import React from 'react';
+import { GetAllTemplateProgramsUrl } from '../api/public/template';
+import { ITemplateProgram } from 'powerbuddy-shared';
+import { WORKOUT_DIARY_URL } from '../InternalLinks';
+import { PrimaryButton } from '../components/common/Buttons';
+import { ModalDrawerForm } from '../components/common/ModalDrawers';
+import { ModalForward } from '../components/common/Modals';
+import { PageTitle } from '../components/common/Texts';
 import { CenterColumnFlex } from '../components/layout/Flexes';
+import { LoginModal } from '../components/shared/Modals';
+import TemplateProgramCardList from '../components/templatePrograms/TemplateProgramCardList';
+import CreateProgramLogFromScratchForm from '../components/templatePrograms/forms/CreateProgramLogFromScratchForm';
 import { PageContent, PageHead } from '../components/layout/Page';
-import WorkoutWeekSummary from '../components/workouts/WorkoutWeekSummary';
-import { useAxios } from '../hooks/useAxios';
-import { IWorkoutWeekSummary } from 'powerbuddy-shared';
-import { NextPage } from 'next';
-import { withAuthorized } from '../util/authMiddleware';
-import { Box } from '../chakra/Layout';
+import { useUserContext } from '../components/users/UserContext';
+import { Box, Flex } from '../chakra/Layout';
 
-const Index: NextPage = () => {
+const Index: NextPage = ({ templates }: any) => {
   const router = useRouter();
-  const { date } = router.query;
 
-  const { data: weekData, loading: weekLoading } = useAxios<IWorkoutWeekSummary>(GetWorkoutWeekWithDateUrl(date as string));
+  const { isAuthenticated } = useUserContext();
 
-  const [selectedDate, handleDateChange] = useState(new Date());
-
-  useEffect(() => {
-    router.push(`?date=${selectedDate.toISOString()}`);
-  }, [selectedDate]);
-
-  if (weekLoading) return <ProgressSpinner />;
+  const { isOpen: isCreateOpen, onOpen: onCreateOpen, onClose: onCreateClose } = useDisclosure();
+  const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
+  const { isOpen: isCreateSuccessOpen, onClose: onCreateSuccessClose } = useDisclosure();
 
   return (
     <Box>
-      <PageHead title="Diary" description="PowerBuddy's workout diary for powerlifters, weightlifters and gym enthusiasts">
-        Diary
-      </PageHead>
+      <PageHead
+        title="Weightlifting Programs"
+        description="View PowerBuddy Weightlifting Powerlifting programs, training templates such as 5/3/1 boring but big"
+      />
       <PageContent>
-        <Box mt={5} w="100%">
-          <CenterColumnFlex pb={4}>
-            <MCalendar selectedDate={selectedDate} handleDateChange={handleDateChange} />
-          </CenterColumnFlex>
-          <WorkoutWeekSummary weekSummary={weekData} />
-          {/* {workoutWeek && workoutWeek.map((x) => <WorkoutDay workoutDay={x} />)} */}
-          {/* {SCREEN_MOBILE && Object.keys(programLogWeek).length !== 0 && (
-            <ProgramLogWeek weekNo={weekNo} onLeftClick={handleWeekNoLeftClick} onRightClick={handleWeekNoRightClick}>
-              <Swiper effect="cube">
-                {programLogWeek.programLogDays.map((pld) => (
-                  <SwiperSlide key={pld.programLogDayId!}>
-                    <ProgramLogDay key={pld.programLogDayId} programLogDay={pld} />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </ProgramLogWeek>
-          )}
-          {SCREEN_DESKTOP && programLogWeek?.programLogDays && (
-            <ProgramLogWeekTab
-              programLogDays={programLogWeek?.programLogDays!}
-              weekNo={weekNo}
-              onLeftClick={handleWeekNoLeftClick}
-              onRightClick={handleWeekNoRightClick}
+        <CenterColumnFlex>
+          <PageTitle>Weightlifting Programs</PageTitle>
+          <Flex py={4} ml={3}>
+            <Box mt={2} px={2}>
+              <PrimaryButton size="xs" onClick={isAuthenticated ? onCreateOpen : onLoginOpen}>
+                Or Start Fresh
+              </PrimaryButton>
+            </Box>
+          </Flex>
+        </CenterColumnFlex>
+        <TemplateProgramCardList templates={templates} />
+        {isCreateOpen && (
+          <ModalDrawerForm title="Create a New Diary Log" isOpen={isCreateOpen} onClose={onCreateClose}>
+            <CreateProgramLogFromScratchForm
+              onClose={onCreateClose}
+              // workoutDates={calendarData!.workoutDates!}
+              onCreateSuccessOpen={onCreateSuccessClose}
             />
-          )} */}
-        </Box>
-        {/* {isExtendOpen && (
-        <ModalBackForward
-          isOpen={isExtendOpen}
-          onClose={onExtendClose}
-          title="End of Program Reached"
-          body="Would you like to extend this program another week?"
-          onBackClick={onExtendClose}
-          onForwardClick={() => (())}
-          //onForwardClick={handleModalForwardClick}
-          backText="Return to Diary"
-          forwardText="Add Week"
-          loading={addWeekLoading}
-        />
-      )} */}
+          </ModalDrawerForm>
+        )}
+        {isLoginOpen && <LoginModal isOpen={isLoginOpen} onClose={onLoginClose} />}
+        {isCreateSuccessOpen && (
+          <ModalForward
+            isOpen={isCreateSuccessOpen}
+            onClose={onCreateSuccessClose}
+            onClick={() => router.push(WORKOUT_DIARY_URL)}
+            body="Successfully created custom program, go to diary?"
+            title="Success! 🎉🎉"
+            actionText="Go to Diary"
+          />
+        )}
       </PageContent>
     </Box>
   );
 };
 
-export default withAuthorized(Index);
+export const getStaticProps: GetStaticProps = async () => {
+  const response = await axios.get<ITemplateProgram[]>(GetAllTemplateProgramsUrl());
+
+  return {
+    props: {
+      templates: response.data,
+    },
+  };
+};
+
+export default Index;
