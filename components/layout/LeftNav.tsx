@@ -71,7 +71,7 @@ export const MobileSideNav = ({ isOpen, onClose }) => {
       hasCloseButton={false}
       title={
         <Flex>
-          <TTIconButton Icon={MdMenu} label="" onClick={onClose} color={theme.colors.iconColor[colorMode]} fontSize="1em" />
+          <TTIconButton Icon={MdMenu} label="" onClick={onClose} color={theme.colors.iconColor[colorMode]} fontSize="1em" mt={2} />
           <Banner ml={2}>PowerBuddy</Banner>
         </Flex>
       }>

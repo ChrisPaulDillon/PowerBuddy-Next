@@ -13,9 +13,10 @@ interface IProps {
   isDisabled?: boolean;
   isLoading?: boolean;
   size?: SizeType;
+  mt?: number;
 }
 
-const TTIconButton: React.FC<IProps> = ({ label, Icon, onClick, fontSize, color, isDisabled, isLoading, size, ...rest }) => {
+const TTIconButton: React.FC<IProps> = ({ label, Icon, onClick, fontSize, color, isDisabled, isLoading, size, mt, ...rest }) => {
   return (
     <PbToolTip label={label}>
       <IconButton
@@ -29,6 +30,7 @@ const TTIconButton: React.FC<IProps> = ({ label, Icon, onClick, fontSize, color,
         color={color}
         isDisabled={isDisabled ?? false}
         isLoading={isLoading ?? false}
+        mt={mt}
         {...rest}
       />
     </PbToolTip>

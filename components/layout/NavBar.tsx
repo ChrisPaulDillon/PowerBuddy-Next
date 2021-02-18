@@ -45,25 +45,32 @@ const NavBar: React.FC<INavBarProps> = ({}) => {
   );
 
   return (
-    <Flex as="nav" w="100%" justifyContent="flex" alignItems="space-between" minH="6vh" position="relative" rounded="lg" top={0}>
+    <Flex
+      as="nav"
+      w="100%"
+      justifyContent="flex"
+      alignItems="space-between"
+      minH="6vh"
+      position="relative"
+      top={0}
+      borderBottom="1px"
+      color={theme.colors.borderColor[colorMode]}>
       <Stack isInline w="100%" justify="space-between" align="center">
-        <Flex ml="1">
-          <Box mt={1}>
-            <IconButton
-              icon={<MdMenu />}
-              size="md"
-              onClick={handleBurgerMenuPress}
-              color={theme.colors.iconColor[colorMode]}
-              aria-label=""
-              isRound
-              fontSize="1.25em"
-              variant="ghost"
-            />
-          </Box>
-          <Banner mx={2} mt={1}>
-            PowerBuddy
-          </Banner>
-        </Flex>
+        <Box mt={1}>
+          <IconButton
+            icon={<MdMenu />}
+            size="md"
+            onClick={handleBurgerMenuPress}
+            color={theme.colors.iconColor[colorMode]}
+            aria-label=""
+            isRound
+            fontSize="1.25em"
+            variant="ghost"
+          />
+        </Box>
+        <Banner mx={2} mt={1} textAlign={{ base: 'start', lg: 'start', md: 'start', sm: 'center' }}>
+          PowerBuddy
+        </Banner>
         <Flex>{navAvatar}</Flex>
       </Stack>
       {isLeftNavOpen && <MobileSideNav isOpen={isLeftNavOpen} onClose={onLeftNavClose} />}

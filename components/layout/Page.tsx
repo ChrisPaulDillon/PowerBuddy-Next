@@ -5,6 +5,7 @@ import { Box } from '../../chakra/Layout';
 const Page: React.FC = ({ children, ...rest }) => {
   return (
     <Box
+      mt={2}
       position="relative"
       height="85vh"
       alignContent="center"

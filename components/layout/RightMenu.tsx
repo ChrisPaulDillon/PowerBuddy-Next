@@ -1,4 +1,4 @@
-import { Link, Text, useColorMode, useDisclosure, useToast } from '@chakra-ui/react';
+import { Link, useColorMode, useDisclosure, useToast } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useState } from 'react';
@@ -6,7 +6,6 @@ import { useMemo } from 'react';
 import { FaMoon } from 'react-icons/fa';
 import { IoIosLogIn, IoIosLogOut } from 'react-icons/io';
 import { MdArrowBack, MdChevronRight, MdPersonPin } from 'react-icons/md';
-import { TextSm } from '../common/Texts';
 import { PROFILE_URL, SETTINGS_URL } from '../../InternalLinks';
 import { FcSettings } from 'react-icons/fc';
 import { useUserContext } from '../users/UserContext';
@@ -17,8 +16,9 @@ import { setAuthorizationToken } from '../../util/axiosUtils';
 import { ToastSuccess } from '../shared/Toasts';
 import { Box, Stack } from '../../chakra/Layout';
 import { Button, Switch } from '../../chakra/Forms';
-import { Divider } from '../../chakra/DataDisplay';
+import { Text } from '../../chakra/Typography';
 import { Accordion } from '../../chakra/Disclosure';
+import theme from '../../theme';
 
 export enum MenuSection {
   Main,
@@ -38,6 +38,8 @@ export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
   const { isAuthenticated } = useUserContext();
 
   const { isOpen: isLoginOpen, onOpen: onLoginOpen, onClose: onLoginClose } = useDisclosure();
+
+  const { colorMode } = useColorMode();
 
   const logoutUser = async () => {
     await axios.post(LogoutUserUrl(localStorage.getItem('refreshToken')));
@@ -136,12 +138,12 @@ export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
                     bg="transparent"
                     onClick={(e) => item.onClick(e, false)}>
                     <Stack isInline w="100%" px="1.5em" align="center" justify="center">
-                      <Box as={item.icon} />
-                      <Text ml="0.5em" fontWeight="normal">
+                      <Box as={item.icon} color={theme.colors.textColor[colorMode]} />
+                      <Text ml="0.5em" fontWeight="normal" color={theme.colors.textColor[colorMode]}>
                         {item.name}
                       </Text>
                       <Stack isInline ml="auto" align="center" justify="center">
-                        <Text fontSize="0.75em" fontWeight="normal">
+                        <Text fontSize="0.75em" fontWeight="normal" color={theme.colors.textColor[colorMode]}>
                           {item.value}
                         </Text>
                         {item.showChevron && <Box as={MdChevronRight} />}
@@ -150,7 +152,7 @@ export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
                   </Button>
                 );
               })}
-              {idx !== userMenu.groups.length - 1 && <Divider />}
+              {/* {idx !== userMenu.groups.length - 1 && <Divider />} */}
             </Box>
           ))}
         </>
@@ -163,11 +165,12 @@ export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
 export const MainMenuContent = (props: any) => <Accordion className="hide-scrollbar" allowToggle h="100%" {...props} />;
 
 const MenuPageSingle = ({ title, description, onClickBack, children }: any) => {
+  const { colorMode } = useColorMode();
   return (
     <>
       <Stack isInline w="100%" justify="space-between" align="center" px="0.5em" mb="1em">
         <Link>
-          <Box as={MdArrowBack} m="0.5em" onClick={onClickBack} />
+          <Box as={MdArrowBack} m="0.5em" onClick={onClickBack} color={theme.colors.textColor[colorMode]} />
         </Link>
         <Text fontWeight="semibold">{title}</Text>
         <Box m="0.5em"></Box>
@@ -189,7 +192,7 @@ export const MenuDarkMode = ({ onClickBack }: any) => {
     <MainMenuContent>
       <MenuPageSingle title="Dark Mode" description="Switch between dark mode" onClickBack={onClickBack}>
         <Stack isInline align="center" justifyContent="space-between">
-          <TextSm>Dark Mode Enabled:</TextSm>
+          <Text>Dark Mode Enabled</Text>
           <Switch onChange={toggleColorMode} defaultIsChecked={colorMode === 'dark' ? true : false} />
         </Stack>
       </MenuPageSingle>

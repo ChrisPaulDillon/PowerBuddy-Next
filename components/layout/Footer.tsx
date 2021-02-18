@@ -1,11 +1,13 @@
-import { Box, ButtonGroup, Flex, IconButton, Link, Stack, Text } from '@chakra-ui/react';
+import { Box, ButtonGroup, Flex, IconButton, Link, Stack, Text, useColorMode } from '@chakra-ui/react';
 import * as React from 'react';
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
-import { Banner } from '../common/Texts';
+import theme from '../../theme';
 
 const Footer = () => {
+  const { colorMode } = useColorMode();
+
   return (
-    <Box as="footer" role="contentinfo" py="6">
+    <Box as="footer" role="contentinfo" py="1" borderTop="1px" borderColor={theme.colors.borderColor[colorMode]}>
       <Flex
         direction={{ base: 'column', md: 'row' }}
         minW={{ base: 'xs', lg: '7xl', md: 'xl', sm: 'xs' }}

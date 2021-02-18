@@ -4,7 +4,7 @@ import theme from '../../theme';
 
 export const PageTitle: React.FC<BoxProps> = ({ ...rest }) => {
   const { colorMode } = useColorMode();
-  return <Heading mb={1} as="h1" color={theme.colors.textColor[colorMode]} size="lg" fontFamily="'Roboto', serif;" textAlign="center" {...rest} />;
+  return <Text m={1} color={theme.colors.textColor[colorMode]} fontSize="2xl" fontFamily="'Roboto', serif;" textAlign="center" {...rest} />;
 };
 
 export const PageSubHeader: React.FC<BoxProps> = ({ ...rest }) => {
@@ -19,9 +19,9 @@ export const PageSubHeader: React.FC<BoxProps> = ({ ...rest }) => {
   );
 };
 
-export const PageHeaderStatic: React.FC<BoxProps> = ({ ...rest }) => {
+export const Banner: React.FC<BoxProps> = ({ ...rest }) => {
   const { colorMode } = useColorMode();
-  return <Text color={theme.colors.textColor[colorMode]} fontSize="3xl" fontFamily="'Roboto', serif;" {...rest}></Text>;
+  return <Text fontWeight="bold" color="whatsapp.500" fontSize="3xl" {...rest}></Text>;
 };
 
 export const HeadingMd: React.FC<BoxProps> = ({ ...rest }) => {
@@ -93,8 +93,4 @@ export const TextAuthorQuote: React.FC<BoxProps> = ({ ...rest }) => {
 export const TextNavItem: React.FC<BoxProps> = ({ ...rest }) => {
   const { colorMode } = useColorMode();
   return <Text color={theme.colors.textColor[colorMode]} fontSize="1xs" fontFamily="'Roboto', serif;" {...rest}></Text>;
-};
-
-export const Banner: React.FC<BoxProps> = ({ ...rest }) => {
-  return <Heading as="h1" size="lg" fontWeight="bold" color="blue.500" {...rest}></Heading>;
 };

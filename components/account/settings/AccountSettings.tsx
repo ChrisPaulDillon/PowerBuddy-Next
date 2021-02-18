@@ -64,7 +64,7 @@ const AccountSettings: React.FC<IProps> = ({ user }) => {
 
   return (
     <Box minW={{ xl: '1000px' }} maxW={{ xl: '1000px' }}>
-      <Flex justify="center" flexDir="column" align="center" py={2} pb={[5, 3, 2, 1]}>
+      <Flex justify="center" flexDir="column" align="center" py={2} pb={[3, 3, 2, 1]}>
         <UserAvatar userName={user?.userName} />
         <PageTitle>{user?.userName}</PageTitle>
       </Flex>
@@ -75,7 +75,7 @@ const AccountSettings: React.FC<IProps> = ({ user }) => {
               {group.items.map((item: any) => (
                 <SettingItem name={item.name} onClick={item.onClick} menuItem={item.menuItem} selectedItem={selectedItem} />
               ))}
-              {idx !== settings.groups.length - 1 && <Divider />}
+              {/* {idx !== settings.groups.length - 1 && <Divider />} */}
             </Box>
           ))}
         </Box>
