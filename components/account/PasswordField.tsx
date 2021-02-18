@@ -12,8 +12,10 @@ import {
   useMergeRefs,
   useColorModeValue as mode,
 } from '@chakra-ui/react';
+import Link from 'next/link';
 import * as React from 'react';
 import { HiEye, HiEyeOff } from 'react-icons/hi';
+import { FORGOT_PASSWORD_URL } from '../../InternalLinks';
 
 export const PasswordField = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const { isOpen, onToggle } = useDisclosure();
@@ -38,7 +40,7 @@ export const PasswordField = React.forwardRef<HTMLInputElement, InputProps>((pro
       <Flex justify="space-between">
         <FormLabel>Password</FormLabel>
         <Box as="a" color={mode('blue.600', 'blue.200')} fontWeight="semibold" fontSize="sm">
-          Forgot Password?
+          <Link href={FORGOT_PASSWORD_URL}>Forgot Password?</Link>
         </Box>
       </Flex>
       <InputGroup>

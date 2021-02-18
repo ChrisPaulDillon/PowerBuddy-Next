@@ -1,4 +1,5 @@
-import { useToast } from '@chakra-ui/react';
+import { Flex, Link, useToast } from '@chakra-ui/react';
+import axios from 'axios';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { IUser } from 'powerbuddy-shared/lib';
@@ -6,7 +7,9 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { LoginUserRequest } from '../../../api/account/auth';
 import { EMAIL_NOT_CONFIRMED, INVALID_CREDENTIALS, USER_NOT_FOUND, ACCOUNT_LOCKOUT } from '../../../api/apiResponseCodes';
+import { SendEmailConfirmationUrl } from '../../../api/public/email';
 import NewLoginForm from '../../../components/account/forms/NewLoginForm';
+import { TextXs } from '../../../components/common/Texts';
 import { ToastSuccess } from '../../../components/shared/Toasts';
 import { useUserContext } from '../../../components/users/UserContext';
 import { HOME_URL } from '../../../InternalLinks';
@@ -63,6 +66,25 @@ const Index: NextPage = () => {
   };
 
   const { register, handleSubmit, errors, formState } = useForm();
+
+  const sendEmailConfirmation = async () => {
+    try {
+      toast(ToastSuccess('Success', 'Confirmation Email Sent Successfully. Please check your inbox'));
+      await axios.post(SendEmailConfirmationUrl(userId));
+    } catch (error) {}
+  };
+
+  if (emailNotVerified)
+    return (
+      <Flex justify="center">
+        <TextXs textAlign="center">
+          Email Not Confirmed. You must confirm your email address before proceeding.{' '}
+          <Link onClick={async () => await sendEmailConfirmation()}>
+            <TextXs color="blue.500">Send Again</TextXs>
+          </Link>
+        </TextXs>
+      </Flex>
+    );
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
