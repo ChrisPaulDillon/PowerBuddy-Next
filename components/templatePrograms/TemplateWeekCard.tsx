@@ -5,13 +5,18 @@ import { TagTemplateRepScheme } from '../shared/Tags';
 import { ITemplateWeek, ITemplateDay, ITemplateRepScheme, ITemplateExercise } from 'powerbuddy-shared';
 import { Box, Flex } from '../../chakra/Layout';
 import { CenterColumnFlex } from '../layout/Flexes';
+import { Divider } from '../../chakra/DataDisplay';
 
 export const TemplateWeekCard: React.FC<ITemplateWeek> = ({ templateDays }) => {
   return (
-    <Card p={0}>
+    <Card minW={{ lg: 'sm', md: 'sm', sm: '0px' }}>
       <Flex flexDir={{ lg: 'row', md: 'row', sm: 'column' }} flexWrap="wrap" justifyContent="center">
-        {templateDays.map((td) => {
-          return <TemplateDay key={td.templateDayId} {...td} />;
+        {templateDays.map((td, idx) => {
+          return (
+            <Box key={idx}>
+              <TemplateDay key={td.templateDayId} {...td} />{' '}
+            </Box>
+          );
         })}
       </Flex>
     </Card>
@@ -19,12 +24,17 @@ export const TemplateWeekCard: React.FC<ITemplateWeek> = ({ templateDays }) => {
 };
 
 const TemplateDay: React.FC<ITemplateDay> = ({ dayNo, templateExercises }) => (
-  <Box minW="20em" py={[8, 4, 4, 4]}>
+  <Box minW={{ lg: 'sm', md: 'sm', sm: '0px' }} pb={[4, 4, 4, 4]}>
     <HeadingMdStatic mb={2} textAlign="center">
       Day {dayNo}
     </HeadingMdStatic>
-    {templateExercises.map((te) => {
-      return <TemplateExercise key={te.templateExerciseId} {...te} />;
+    {templateExercises.map((te, idx) => {
+      return (
+        <Box key={idx}>
+          <TemplateExercise key={te.templateExerciseId} {...te} />
+          {idx !== templateExercises.length - 1 && <Divider />}
+        </Box>
+      );
     })}
   </Box>
 );

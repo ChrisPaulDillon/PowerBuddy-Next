@@ -42,12 +42,13 @@ const TemplateProgramSingle: NextPage = ({ template }: any) => {
       <PageHead
         title={template?.name}
         description={`Automatically generate program using the ${template.name} template. Calculate your stats for weightlifters, powerlifters and olympic weightlifters for free `}
+        keywords={`${template.name}, Workout Diary, PowerBuddy, Weightlifting App, Strong App, Intensity App, Powerlifting Weightlifting Templates, Liftvault Workout Program Spreadsheets, Powerlifting Routine, Olympic Weightlifting Template`}
       />
       <PageContent>
         <Box>
           <BreadcrumbBase values={breadcrumbInput} />
         </Box>
-        <Box mt={[3, 3, 7, 7]}>
+        <Box mt={[3, 3, 3, 3]}>
           <PageTitle>{template?.name}</PageTitle>
           <CenterColumnFlex>
             <Flex pt={2}>
@@ -76,7 +77,7 @@ const TemplateProgramSingle: NextPage = ({ template }: any) => {
               </span>
             </TextXsFade>
           )}
-          <Box pt={['8', '5', '4', '4']}>
+          <Box mt={['8', '5', '4', '4']}>
             <Tabs
               variant="soft-rounded"
               colorScheme="green"
@@ -85,15 +86,15 @@ const TemplateProgramSingle: NextPage = ({ template }: any) => {
               isTruncated
               orientation={SCREEN_MOBILE ? 'vertical' : 'horizontal'}>
               <TabList>
-                {template?.templateWeeks.map((tw) => {
-                  return <Tab>Week {tw.weekNo}</Tab>;
+                {template?.templateWeeks.map((tw, idx) => {
+                  return <Tab key={idx}>Week {tw.weekNo}</Tab>;
                 })}
               </TabList>
               <TabPanels>
-                {template?.templateWeeks.map((tw) => {
+                {template?.templateWeeks.map((tw, idx) => {
                   return (
-                    <TabPanel>
-                      <TemplateWeekCard key={tw.templateWeekId} {...tw} />
+                    <TabPanel key={idx}>
+                      <TemplateWeekCard {...tw} />
                     </TabPanel>
                   );
                 })}

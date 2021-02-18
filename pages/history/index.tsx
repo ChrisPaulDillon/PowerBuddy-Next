@@ -25,7 +25,11 @@ const Index: NextPage = () => {
 
   return (
     <Box>
-      <PageHead title="Workout History" description="View workout history and personal bests for powerlifters and weightlifters" />
+      <PageHead
+        title="Workout History"
+        description="View workout history and personal bests for powerlifters and weightlifters"
+        keywords={`Workout Diary History, Workout Diary, PowerBuddy, Weightlifting App, Strong App, Intensity App, Powerlifting Weightlifting Templates, Liftvault Workout Program Spreadsheets, Powerlifting Routine, Olympic Weightlifting Template`}
+      />
       <PageContent>
         <CenterColumnFlex>
           <PageTitle>Workout History</PageTitle>

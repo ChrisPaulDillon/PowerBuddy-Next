@@ -21,7 +21,11 @@ const Index: NextPage = () => {
 
   return (
     <Box>
-      <PageHead title="Settings" description="PowerBuddy modify your settings, switch from kilogram to pounds and update personal info" />
+      <PageHead
+        title="Settings"
+        description="PowerBuddy modify your settings, switch from kilogram to pounds and update personal info"
+        keywords={`Workout Diary, PowerBuddy, Weightlifting App, Strong App, Intensity App, Powerlifting Weightlifting Templates, Liftvault Workout Program Spreadsheets, Powerlifting Routine, Olympic Weightlifting Template`}
+      />
       <PageContent>
         <CenterColumnFlex>
           <AccountSettings user={userData} />

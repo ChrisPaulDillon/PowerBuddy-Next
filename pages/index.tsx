@@ -32,6 +32,7 @@ const Index: NextPage = ({ templates }: any) => {
       <PageHead
         title="Weightlifting Programs"
         description="View PowerBuddy Weightlifting Powerlifting programs, training templates such as 5/3/1 boring but big"
+        keywords={`Weightlifting Programs, Powerlifting Spreadsheets, Powerlifting Exercises, Workout Diary, PowerBuddy, Weightlifting App, Strong App, Intensity App, Powerlifting Weightlifting Templates, Liftvault Workout Program Spreadsheets, Powerlifting Routine, Olympic Weightlifting Template`}
       />
       <PageContent>
         <CenterColumnFlex>

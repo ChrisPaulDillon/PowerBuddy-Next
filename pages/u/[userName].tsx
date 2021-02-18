@@ -20,6 +20,7 @@ const UserProfile: NextPage<IUserProfileProps> = ({ publicUser }) => {
       <PageHead
         title={publicUser?.userName}
         description={`View ${publicUser?.userName} on PowerBuddy, the best App for Weightlifting & PowerLifting`}
+        keywords={`${publicUser?.userName}, Workout Diary, PowerBuddy, Weightlifting App, Strong App, Intensity App, Powerlifting Weightlifting Templates, Liftvault Workout Program Spreadsheets, Powerlifting Routine, Olympic Weightlifting Template`}
       />
       <PageContent>
         <CenterColumnFlex>

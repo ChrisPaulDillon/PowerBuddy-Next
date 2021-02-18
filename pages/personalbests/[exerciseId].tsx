@@ -27,7 +27,11 @@ const ExerciseSpecificPersonalBest: NextPage = () => {
 
   return (
     <Box>
-      <PageHead title="Weighlifting Exercise" description="View personal bests which are automatically recorded when tracking workouts" />
+      <PageHead
+        title="Weighlifting Exercise"
+        description="View personal bests which are automatically recorded when tracking workouts"
+        keywords={`Personal Bests, Personal Record, PowerBuddy, Weightlifting App, Strong App, Intensity App, Powerlifting Weightlifting Templates, Liftvault Workout Program Spreadsheets, Powerlifting Routine, Olympic Weightlifting Template`}
+      />
       <PageContent>
         <PersonalBestDetailed {...liftingStatDetailed} />
         {isBackOpen && (

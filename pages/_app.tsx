@@ -42,7 +42,11 @@ const MyApp: NextComponentType<AppContext, ModifiedAppInitialProps, ExtendedAppP
       <UserProvider>
         <ChakraProvider resetCSS theme={customTheme}>
           <Layout>
-            <PageHead title="Home" description="PowerBuddy helps weightlifters and powerlifters reach their goals and track personal bests" />
+            <PageHead
+              title="Home"
+              description="PowerBuddy helps weightlifters and powerlifters reach their goals and track personal bests"
+              keywords="PowerBuddy, Weightlifting App, Strong App, Intensity App, Powerlifting Weightlifting Templates, Liftvault Workout Program Spreadsheets, Powerlifting Routine, Olympic Weightlifting Template"
+            />
             <Component {...appProps} {...pageProps} />
           </Layout>
         </ChakraProvider>

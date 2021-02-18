@@ -19,7 +19,11 @@ const Index: NextPage = ({ exercises }: any) => {
 
   return (
     <Box>
-      <PageHead title="Exercises" description="View a host of weightlifting exercises for powerlifters, weightlifters and casual gym goers alike!" />
+      <PageHead
+        title="Exercises"
+        description="View a host of weightlifting exercises for powerlifters, weightlifters and casual gym goers alike!"
+        keywords={`Weightlifting Exercises, Powerlifting Exercises, Workout Diary, PowerBuddy, Weightlifting App, Strong App, Intensity App, Powerlifting Weightlifting Templates, Liftvault Workout Program Spreadsheets, Powerlifting Routine, Olympic Weightlifting Template`}
+      />
       <PageContent>
         <CenterColumnFlex>
           <PageTitle>Exercise Repository</PageTitle>

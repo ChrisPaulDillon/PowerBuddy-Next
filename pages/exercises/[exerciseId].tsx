@@ -12,7 +12,11 @@ import { Divider } from '../../chakra/DataDisplay';
 const ExerciseDetailed = ({ exercise }: any) => {
   return (
     <Box>
-      <PageHead title={exercise?.exerciseName} description="View weightlifting exercises on PowerBuddy" />
+      <PageHead
+        title={exercise?.exerciseName}
+        description={`View weightlifting exercises on PowerBuddy. View ${exercise?.exerciseName} on PowerBuddy. Get exercise muscle group breakdown for ${exercise?.exerciseName}`}
+        keywords={`${exercise?.exerciseName}, Weightlifting Exercises, Powerlifting Exercises, Workout Diary, PowerBuddy, Weightlifting App, Strong App, Intensity App, Powerlifting Weightlifting Templates, Liftvault Workout Program Spreadsheets, Powerlifting Routine, Olympic Weightlifting Template`}
+      />
       <PageContent>
         <CenterColumnFlex>
           <PageTitle>{exercise?.exerciseName}</PageTitle>

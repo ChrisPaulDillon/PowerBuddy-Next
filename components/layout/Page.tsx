@@ -29,15 +29,17 @@ const Page: React.FC = ({ children, ...rest }) => {
 interface IPageHeaderProps {
   title: string;
   description: string;
+  keywords: string;
 }
 
-export const PageHead: React.FC<IPageHeaderProps> = ({ title, description }) => {
+export const PageHead: React.FC<IPageHeaderProps> = ({ title, description, keywords }) => {
   return (
     <Head>
       <meta name="description" content={description} />
       <title>
         {title} | {process.env.NEXT_PUBLIC_SITE_NAME}
       </title>
+      <meta name="keywords" content={keywords} />
       <link rel="icon" href="/icons/favicon.ico" />
     </Head>
   );

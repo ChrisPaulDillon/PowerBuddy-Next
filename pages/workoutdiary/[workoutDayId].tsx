@@ -163,7 +163,11 @@ const WorkoutDay: NextPage<IProps> = ({ workoutDayData }) => {
 
   return (
     <Box w="100%" mt={3}>
-      <PageHead title="Workout" description="PowerBuddy Workout Diary, track personal bests and powerlifting progress" />
+      <PageHead
+        title="Workout"
+        description={`${workoutDay?.userName}'s workout diary. View ${workoutDay?.userName}'s workout for this date`}
+        keywords={`${workoutDay?.userName}, Workout Diary, PowerBuddy, Weightlifting App, Strong App, Intensity App, Powerlifting Weightlifting Templates, Liftvault Workout Program Spreadsheets, Powerlifting Routine, Olympic Weightlifting Template`}
+      />
       <WorkoutProvider workoutDay={workoutDay} setWorkoutDay={setWorkoutDay} contentDisabled={contentDisabled}>
         <PageContent>
           <BreadcrumbBase values={breadcrumbInput} />

@@ -51,7 +51,11 @@ const Index: NextPage = () => {
   if (userId == null || token == null)
     return (
       <Box>
-        <PageHead title="Confirm Email" description="Confirm your email address to grant full access to your account" />
+        <PageHead
+          title="Confirm Email"
+          description="Confirm your email address to grant full access to your account"
+          keywords={`Weightlifting Exercises, Powerlifting Exercises, Workout Diary, PowerBuddy, Weightlifting App, Strong App, Intensity App, Powerlifting Weightlifting Templates, Liftvault Workout Program Spreadsheets, Powerlifting Routine, Olympic Weightlifting Template`}
+        />
         <PageContent>
           <CenterColumnFlex>
             <PageTitle>Error. You have followed an invalid link</PageTitle>
@@ -63,7 +67,11 @@ const Index: NextPage = () => {
   if (response)
     return (
       <Box>
-        <PageHead title="Confirm Email" description="Confirm your email address to grant full access to your account" />
+        <PageHead
+          title="Confirm Email"
+          description="Confirm your email address to grant full access to your account"
+          keywords={`Weightlifting Exercises, Powerlifting Exercises, Workout Diary, PowerBuddy, Weightlifting App, Strong App, Intensity App, Powerlifting Weightlifting Templates, Liftvault Workout Program Spreadsheets, Powerlifting Routine, Olympic Weightlifting Template`}
+        />
         <PageContent>
           <CenterColumnFlex>
             <PageTitle>Email Successfully Confirmed</PageTitle>
@@ -77,7 +85,11 @@ const Index: NextPage = () => {
 
   return (
     <Box>
-      <PageHead title="Confirm Email" description="Confirm your email address to grant full access to your account" />
+      <PageHead
+        title="Confirm Email"
+        description="Confirm your email address to grant full access to your account"
+        keywords={`Weightlifting Exercises, Powerlifting Exercises, Workout Diary, PowerBuddy, Weightlifting App, Strong App, Intensity App, Powerlifting Weightlifting Templates, Liftvault Workout Program Spreadsheets, Powerlifting Routine, Olympic Weightlifting Template`}
+      />
       <PageContent>
         <CenterColumnFlex>
           <PageTitle>Error! Token has expired!</PageTitle>

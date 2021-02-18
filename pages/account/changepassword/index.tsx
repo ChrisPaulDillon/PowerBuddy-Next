@@ -13,7 +13,11 @@ const Index: NextPage = () => {
 
   return (
     <Box>
-      <PageHead title="Change Password" description="Change your password for PowerBuddy" />
+      <PageHead
+        title="Change Password"
+        description="Change your password for PowerBuddy"
+        keywords={`Weightlifting Exercises, Powerlifting Exercises, Workout Diary, PowerBuddy, Weightlifting App, Strong App, Intensity App, Powerlifting Weightlifting Templates, Liftvault Workout Program Spreadsheets, Powerlifting Routine, Olympic Weightlifting Template`}
+      />
       <PageContent>
         <CenterColumnFlex>
           <PageTitle>Change Password</PageTitle>

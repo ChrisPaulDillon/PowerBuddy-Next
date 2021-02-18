@@ -8,10 +8,18 @@ import UserList from '../../components/users/UserList';
 import { IUser } from 'powerbuddy-shared';
 import axios from 'axios';
 
-const Index: NextPage = ({ users }: any) => {
+interface IProps {
+  users: IUser[];
+}
+
+const Index: NextPage<IProps> = ({ users }) => {
   return (
     <Box>
-      <PageHead title="Active Users" description="View PowerBuddy powerlifting members and view personal bests" />
+      <PageHead
+        title="Active Users"
+        description="View PowerBuddy powerlifting members and view personal bests"
+        keywords={`PowerBuddy Diary, Workout Diary, PowerBuddy, Weightlifting App, Strong App, Intensity App, Powerlifting Weightlifting Templates, Liftvault Workout Program Spreadsheets, Powerlifting Routine, Olympic Weightlifting Template`}
+      />
       <PageContent>
         <PageTitle>Users</PageTitle>
         <UserList publicUsers={users} />
