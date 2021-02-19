@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useToast } from '@chakra-ui/react';
 import { FormButton } from '../../common/Buttons';
 import { FormNumberInput } from '../../common/Inputs';
 import { CreateWorkoutSetCollectionUrl } from '../../../api/account/workoutSet';
 import { useWorkoutContext } from '../../workouts/WorkoutContext';
 import Axios from 'axios';
 import { IWorkoutExercise, IWorkoutSet } from 'powerbuddy-shared';
-import { ToastError, ToastSuccess } from '../../shared/Toasts';
 import { FormLayoutFlex } from '../../layout/Flexes';
 import { FormLabel } from '../../../chakra/Forms';
-import { ToastCustomSuccess } from '../../common/CustomToasts';
+import useFireToast from '../../../hooks/useFireToast';
 
 interface IProps {
   workoutExercise: IWorkoutExercise;
@@ -21,7 +19,7 @@ interface IProps {
 }
 
 const QuickAddSetsForm: React.FC<IProps> = ({ workoutExercise, suggestedReps, suggestedWeight, totalSets, onClose }) => {
-  const toast = useToast();
+  const toast = useFireToast();
   const { handleSubmit, formState } = useForm();
   const { weightType } = useWorkoutContext();
 
@@ -34,14 +32,7 @@ const QuickAddSetsForm: React.FC<IProps> = ({ workoutExercise, suggestedReps, su
   const onSubmit = async () => {
     let newTotalSets = Number(noOfSets) + Number(totalSets);
     if (newTotalSets > 15) {
-      toast({
-        title: 'Warning',
-        description: 'Only a maximum of 15 sets can be added to an exercise',
-        status: 'warning',
-        duration: 2000,
-        isClosable: true,
-        position: 'top-right',
-      });
+      toast.Warning('Only a maximum of 15 sets can be added to an exercise');
       return;
     }
 
@@ -59,13 +50,10 @@ const QuickAddSetsForm: React.FC<IProps> = ({ workoutExercise, suggestedReps, su
     try {
       const response = await Axios.post(CreateWorkoutSetCollectionUrl(), workoutSets);
       QuickAddSetsToExercise(response.data, workoutExercise.workoutExerciseId);
-      toast({
-        position: 'top-left',
-        render: () => <ToastCustomSuccess description="Successfully added sets" />,
-      });
+      toast.Success('Successfully added set');
       onClose();
     } catch (ex) {
-      toast(ToastError('Error', 'Could not add sets!'));
+      toast.Error('Could not add sets');
     }
   };
 

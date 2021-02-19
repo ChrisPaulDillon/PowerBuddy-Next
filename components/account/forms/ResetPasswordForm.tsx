@@ -1,13 +1,12 @@
-import { useToast } from '@chakra-ui/react';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { IChangePasswordBody, ResetPasswordViaEmailRequest } from '../../../api/account/auth';
 import { FormControl, FormErrorMessage, FormLabel } from '../../../chakra/Forms';
+import useFireToast from '../../../hooks/useFireToast';
 import { validateInput } from '../../../util/formInputs';
 import { FormButton } from '../../common/Buttons';
 import { FormInput } from '../../common/Inputs';
 import { FormLayoutFlex } from '../../layout/Flexes';
-import { ToastError, ToastSuccess } from '../../shared/Toasts';
 
 interface IResetPasswordFormProps {
   userId: string;
@@ -15,7 +14,7 @@ interface IResetPasswordFormProps {
 }
 
 const ResetPasswordForm: React.FC<IResetPasswordFormProps> = ({ userId, token }) => {
-  const toast = useToast();
+  const toast = useFireToast();
 
   const onSubmit = async ({ password }: any) => {
     const changePasswordBody: IChangePasswordBody = {
@@ -24,9 +23,9 @@ const ResetPasswordForm: React.FC<IResetPasswordFormProps> = ({ userId, token })
     };
     const response = await ResetPasswordViaEmailRequest(userId, changePasswordBody);
     if (response?.code) {
-      toast(ToastError('Error', 'Password not changed, token has expired'));
+      toast.Error('Password not changed, token has expired');
     } else {
-      toast(ToastSuccess('Success', 'Password Successfully Changed'));
+      toast.Success('Password Successfully Changed');
     }
   };
 

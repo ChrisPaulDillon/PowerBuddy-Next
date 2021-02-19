@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { LightMode, useToast } from '@chakra-ui/react';
+import { LightMode } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { SelectSearchable } from '../../common/SearchSelect';
 import { FormButton } from '../../common/Buttons';
@@ -13,9 +13,9 @@ import { CreateWorkoutExerciseUrl } from '../../../api/account/workoutExercise';
 import { useWorkoutContext } from '../../workouts/WorkoutContext';
 import useLoadExercises from '../../../hooks/redux/useLoadExercises';
 import { ICreateWorkoutExercise } from 'powerbuddy-shared';
-import { ToastError, ToastSuccess } from '../../shared/Toasts';
 import { Box, Flex } from '../../../chakra/Layout';
 import { Button, FormControl, FormErrorMessage } from '../../../chakra/Forms';
+import useFireToast from '../../../hooks/useFireToast';
 
 interface IProps {
   onClose: () => void;
@@ -30,7 +30,7 @@ const AddExerciseForm: React.FC<IProps> = ({ onClose, workoutDayId }) => {
   const [weight, setWeight] = useState<number>(0);
   const [exerciseIdSelected, setExerciseIdSelected] = useState<number>();
   const { CreateExercise, weightType } = useWorkoutContext();
-  const toast = useToast();
+  const toast = useFireToast();
 
   const exerciseList = exercises.map((x) => ({
     value: x.exerciseId,
@@ -57,13 +57,13 @@ const AddExerciseForm: React.FC<IProps> = ({ onClose, workoutDayId }) => {
     try {
       const response = await axios.post(CreateWorkoutExerciseUrl(), workoutExercise);
       CreateExercise(response.data);
-      toast(ToastSuccess('Success', 'Successfully added new exercise'));
+      toast.Success('Successfully added new exercise');
       onClose();
     } catch (error) {
       if (error?.response?.status === 400) {
-        toast(ToastError('Error', 'A valid exercise must be provided'));
+        toast.Error('A valid exercise must be provided');
       } else {
-        toast(ToastError('Error', 'Could not add new exercise. Do you already have this exercise for the given day?'));
+        toast.Error('Could not add new exercise. Do you already have this exercise for the given day?');
       }
     }
   };

@@ -1,4 +1,4 @@
-import { Link, useToast } from '@chakra-ui/react';
+import { Link } from '@chakra-ui/react';
 import axios from 'axios';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
@@ -10,7 +10,7 @@ import ProgressSpinner from '../../../components/common/ProgressSpinner';
 import { PageTitle, TextSm } from '../../../components/common/Texts';
 import { CenterColumnFlex } from '../../../components/layout/Flexes';
 import { PageContent, PageHead } from '../../../components/layout/Page';
-import { ToastSuccess } from '../../../components/shared/Toasts';
+import useFireToast from '../../../hooks/useFireToast';
 
 const Index: NextPage = () => {
   const router = useRouter();
@@ -19,7 +19,7 @@ const Index: NextPage = () => {
   const [response, setResponse] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const toast = useToast();
+  const toast = useFireToast();
 
   useEffect(() => {
     setLoading(true);
@@ -41,8 +41,8 @@ const Index: NextPage = () => {
 
   const sendEmailConfirmation = async () => {
     try {
-      const response = await axios.post(SendEmailConfirmationUrl(userId! as string));
-      toast(ToastSuccess('Success', 'Successfully Sent Email. Please Check Your Inbox'));
+      await axios.post(SendEmailConfirmationUrl(userId! as string));
+      toast.Success('Successfully Sent Email. Please Check Your Inbox');
     } catch (error) {}
   };
 

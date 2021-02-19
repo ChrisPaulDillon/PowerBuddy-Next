@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Radio, RadioGroup, useToast } from '@chakra-ui/react';
+import { Radio, RadioGroup } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { FormLayoutFlex } from '../../../layout/Flexes';
 import { FormButton } from '../../../common/Buttons';
@@ -9,11 +9,11 @@ import { FormInput, FormNumberInput } from '../../../common/Inputs';
 import axios from 'axios';
 import { EditProfileUrl } from '../../../../api/account/user';
 import { IUser } from 'powerbuddy-shared/lib';
-import { ToastError, ToastSuccess } from '../../../shared/Toasts';
 import { withAuthorized } from '../../../../util/authMiddleware';
 import { Checkbox, FormControl, FormErrorMessage, FormLabel } from '../../../../chakra/Forms';
 import { validateInput } from '../../../../util/formInputs';
 import { useUserContext } from '../../../users/UserContext';
+import useFireToast from '../../../../hooks/useFireToast';
 
 interface IEditProfile {
   userId: string;
@@ -34,7 +34,7 @@ const EditProfileForm: React.FC<IProps> = ({ user }) => {
 
   const { weightType } = useUserContext();
 
-  const toast = useToast();
+  const toast = useFireToast();
 
   useEffect(() => {
     if (user?.usingMetric) {
@@ -67,10 +67,10 @@ const EditProfileForm: React.FC<IProps> = ({ user }) => {
     try {
       const response = await axios.put(EditProfileUrl(), profile);
       if (response && response.data) {
-        toast(ToastSuccess('Success', 'Successfully Updated Profile'));
+        toast.Success('Successfully Updated Profile');
       }
     } catch (error) {
-      toast(ToastError('Error', 'Profile Could Not Be Updated'));
+      toast.Error('Profile Could Not Be Updated');
     }
   };
 

@@ -1,4 +1,3 @@
-import { useToast } from '@chakra-ui/react';
 import { IWorkoutDay, IWorkoutTemplate } from 'powerbuddy-shared/lib';
 import React from 'react';
 import { useForm } from 'react-hook-form';
@@ -6,12 +5,12 @@ import { CreateWorkoutTemplateRequest } from '../../../api/account/workoutTempla
 import { FormControl, FormErrorMessage } from '../../../chakra/Forms';
 import { Box } from '../../../chakra/Layout';
 import useLoadExercises from '../../../hooks/redux/useLoadExercises';
+import useFireToast from '../../../hooks/useFireToast';
 import { validateInput } from '../../../util/formInputs';
 import { FormButton } from '../../common/Buttons';
 import { FormInput } from '../../common/Inputs';
 import { TextXs } from '../../common/Texts';
 import { FormLayoutFlex } from '../../layout/Flexes';
-import { ToastSuccess } from '../../shared/Toasts';
 import { useUserContext } from '../../users/UserContext';
 
 interface IProps {
@@ -21,7 +20,7 @@ interface IProps {
 
 const AddWorkoutTemplateForm: React.FC<IProps> = ({ onClose, workoutDay }) => {
   useLoadExercises();
-  const toast = useToast();
+  const toast = useFireToast();
 
   const { userId } = useUserContext();
 
@@ -42,7 +41,7 @@ const AddWorkoutTemplateForm: React.FC<IProps> = ({ onClose, workoutDay }) => {
       //     break;
       // }
     } else {
-      toast(ToastSuccess('Success', 'Workout Template has been added'));
+      toast.Success('Workout Template has been added');
     }
   };
 

@@ -1,4 +1,4 @@
-import { useColorMode, useDisclosure, useToast } from '@chakra-ui/react';
+import { useColorMode, useDisclosure } from '@chakra-ui/react';
 import moment from 'moment';
 import React, { useState } from 'react';
 import { CgArrowTopRight } from 'react-icons/cg';
@@ -16,8 +16,8 @@ import axios from 'axios';
 import { ModalBackForward, ModalForward } from '../common/Modals';
 import { IWorkoutWeekSummary, ICreateWorkoutDayOptions, IWorkoutDaySummary, IWorkoutExerciseSummary } from 'powerbuddy-shared/lib';
 import { CreateWorkoutDayUrl, GetWorkoutDayIdByDateUrl } from '../../api/account/workoutDay';
-import { ToastSuccess } from '../shared/Toasts';
 import { Box, Flex } from '../../chakra/Layout';
+import useFireToast from '../../hooks/useFireToast';
 
 interface IProps {
   weekSummary: IWorkoutWeekSummary;
@@ -28,7 +28,7 @@ const WorkoutWeekSummary: React.FC<IProps> = ({ weekSummary }) => {
   const [programText, setProgramText] = useState<string>();
   const [workoutOptions, setWorkoutOptions] = useState<ICreateWorkoutDayOptions>({ workoutDate: new Date() } as ICreateWorkoutDayOptions);
 
-  const toast = useToast();
+  const toast = useFireToast();
 
   const { isOpen: isCreateWorkoutOpen, onOpen: onCreateWorkoutOpen, onClose: onCreateWorkoutClose } = useDisclosure();
   const { isOpen: isTodayWorkoutOpen, onOpen: onTodayWorkoutOpen, onClose: onTodayWorkoutClose } = useDisclosure();
@@ -61,7 +61,7 @@ const WorkoutWeekSummary: React.FC<IProps> = ({ weekSummary }) => {
       const result = await axios.post(CreateWorkoutDayUrl(), workoutOptions);
       if (result.data !== 0) {
         router.push(`${WORKOUT_DIARY_URL}/${result.data.workoutDayId}`);
-        toast(ToastSuccess('Success', 'Successfully created todays workout!'));
+        toast.Success('Successfully created todays workout!');
       }
     } catch (error) {}
     setButtonLoading(false);

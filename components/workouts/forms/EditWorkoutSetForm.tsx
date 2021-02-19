@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useToast } from '@chakra-ui/react';
 import { FormNumberInput } from '../../common/Inputs';
 import { FormButton } from '../../common/Buttons';
 import axios from 'axios';
 import { DeleteWorkoutSetUrl, UpdateWorkoutSetUrl } from '../../../api/account/workoutSet';
 import { useWorkoutContext } from '../../workouts/WorkoutContext';
 import { IWorkoutSet } from 'powerbuddy-shared';
-import { ToastError, ToastSuccess } from '../../shared/Toasts';
 import { Box } from '../../../chakra/Layout';
 import { FormLayoutFlex } from '../../layout/Flexes';
 import { FormLabel } from '../../../chakra/Forms';
+import useFireToast from '../../../hooks/useFireToast';
 
 interface IProps {
   workoutDayId: number;
@@ -20,7 +19,7 @@ interface IProps {
 
 const EditWorkoutSetForm: React.FC<IProps> = ({ workoutDayId, workoutSet, onClose }) => {
   const { weightLifted, noOfReps } = workoutSet;
-  const toast = useToast();
+  const toast = useFireToast();
 
   const [noOfRepsUpdated, setNoOfRepsUpdated] = useState<number>(noOfReps!);
   const [weightUpdated, setWeightUpdated] = useState<number>(weightLifted!);
@@ -36,9 +35,9 @@ const EditWorkoutSetForm: React.FC<IProps> = ({ workoutDayId, workoutSet, onClos
     try {
       await axios.put(UpdateWorkoutSetUrl(workoutDayId), workoutSet);
       EditSet(workoutSet, workoutSet.workoutExerciseId);
-      toast(ToastSuccess('Success', 'Successfully Updated Set'));
+      toast.Success('Successfully Updated Set');
     } catch (ex) {
-      toast(ToastError('Error', 'Could not update set, please try again later'));
+      toast.Error('Could not update set, please try again later');
     }
     onClose();
   };
@@ -48,10 +47,10 @@ const EditWorkoutSetForm: React.FC<IProps> = ({ workoutDayId, workoutSet, onClos
     try {
       await axios.delete(DeleteWorkoutSetUrl(workoutSetId));
       DeleteSet(workoutSetId, workoutExerciseId);
-      toast(ToastSuccess('Success', 'Successfully Deleted Set'));
+      toast.Success('Successfully deleted set');
       onClose();
     } catch (ex) {
-      toast(ToastError('Error', 'Could not delete set, please try again later'));
+      toast.Error('Could not delete set, please try again later');
     }
   };
 

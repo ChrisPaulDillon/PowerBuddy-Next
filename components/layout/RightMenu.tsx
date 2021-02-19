@@ -1,4 +1,4 @@
-import { Link, useColorMode, useDisclosure, useToast } from '@chakra-ui/react';
+import { Link, useColorMode } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React, { useState, useMemo } from 'react';
 import { FaMoon } from 'react-icons/fa';
@@ -10,12 +10,12 @@ import { useUserContext } from '../users/UserContext';
 import axios from 'axios';
 import { LogoutUserUrl } from '../../api/account/auth';
 import { setAuthorizationToken } from '../../util/axiosUtils';
-import { ToastSuccess } from '../shared/Toasts';
 import { Box, Stack } from '../../chakra/Layout';
 import { Button, Switch } from '../../chakra/Forms';
 import { Text } from '../../chakra/Typography';
 import { Accordion } from '../../chakra/Disclosure';
 import theme from '../../theme';
+import useFireToast from '../../hooks/useFireToast';
 
 export enum MenuSection {
   Main,
@@ -31,7 +31,7 @@ interface IRightNavProps {
 export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
   const router = useRouter();
   const [menuSection, setMenuSection] = useState<MenuSection | undefined>(MenuSection.Main);
-  const toast = useToast();
+  const toast = useFireToast();
   const { isAuthenticated } = useUserContext();
 
   const { colorMode } = useColorMode();
@@ -93,7 +93,7 @@ export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
                   logoutUser();
                   localStorage.removeItem('refreshToken');
                   setAuthorizationToken(null);
-                  toast(ToastSuccess('Success', 'Successfully Logged Out'));
+                  toast.Success('Successfully Logged Out');
                   setTimeout(function () {
                     window.location.reload();
                   }, 1000);

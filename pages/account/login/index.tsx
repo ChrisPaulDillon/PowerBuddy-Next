@@ -1,4 +1,4 @@
-import { Flex, Link, useToast } from '@chakra-ui/react';
+import { Flex, Link } from '@chakra-ui/react';
 import axios from 'axios';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
@@ -10,8 +10,8 @@ import { EMAIL_NOT_CONFIRMED, INVALID_CREDENTIALS, USER_NOT_FOUND, ACCOUNT_LOCKO
 import { SendEmailConfirmationUrl } from '../../../api/public/email';
 import NewLoginForm from '../../../components/account/forms/NewLoginForm';
 import { TextXs } from '../../../components/common/Texts';
-import { ToastSuccess } from '../../../components/shared/Toasts';
 import { useUserContext } from '../../../components/users/UserContext';
+import useFireToast from '../../../hooks/useFireToast';
 import { HOME_URL } from '../../../InternalLinks';
 import { handleAuthenticationTokens, decodeJwtToken } from '../../../util/axiosUtils';
 
@@ -23,7 +23,7 @@ const Index: NextPage = () => {
 
   const { SetValues } = useUserContext();
 
-  const toast = useToast();
+  const toast = useFireToast();
 
   const onSubmit = async ({ email, password }: any) => {
     setErrorMessage('');
@@ -35,7 +35,7 @@ const Index: NextPage = () => {
     };
     const response = await LoginUserRequest(user);
     if (response?.data) {
-      toast(ToastSuccess('Success', 'Successfully Signed In'));
+      toast.Success('Successfully Signed In');
       handleAuthenticationTokens(response.data.accessToken, response.data.refreshToken);
       const claimsValues = decodeJwtToken(response.data.accessToken);
       SetValues(claimsValues);
@@ -66,7 +66,7 @@ const Index: NextPage = () => {
 
   const sendEmailConfirmation = async () => {
     try {
-      toast(ToastSuccess('Success', 'Confirmation Email Sent Successfully. Please check your inbox'));
+      toast.Success('Confirmation Email Sent Successfully. Please check your inbox');
       await axios.post(SendEmailConfirmationUrl(userId));
     } catch (error) {}
   };

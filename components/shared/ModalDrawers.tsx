@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { PbModalDrawer } from '../common/ModalDrawers';
-import { useToast } from '@chakra-ui/react';
+
 import Axios from 'axios';
 import { DeleteWorkoutLogUrl } from '../../api/account/workoutLog';
 import { useWorkoutContext } from '../workouts/WorkoutContext';
-import { ToastError, ToastSuccess } from './Toasts';
+import useFireToast from '../../hooks/useFireToast';
 
 interface IModalDrawerProps {
   isOpen: boolean;
@@ -18,16 +18,16 @@ interface IDeleteLogModalDrawerProps extends IModalDrawerProps {
 export const DeleteLogModalDrawer: React.FC<IDeleteLogModalDrawerProps> = ({ isOpen, onClose, workoutLogId }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const { DeleteDay } = useWorkoutContext();
-  const toast = useToast();
+  const toast = useFireToast();
 
   const deleteLog = async () => {
     setLoading(true);
     const response = await Axios.delete(DeleteWorkoutLogUrl(workoutLogId));
     try {
-      toast(ToastSuccess('Success', 'Successfully Deleted Diary Entry'));
+      toast.Success('Successfully Deleted Diary Entry');
       //DeleteLog();
     } catch (error) {
-      toast(ToastError('Error', 'Could not create Diary Log, please try again later'));
+      toast.Error('Could not create Diary Log, please try again later');
     }
     setLoading(false);
     onClose();

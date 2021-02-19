@@ -1,15 +1,15 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useToast } from '@chakra-ui/react';
+
 import { FormLayoutFlex } from '../../layout/Flexes';
 import { validateInput } from '../../../util/formInputs';
 import { FormInput } from '../../common/Inputs';
 import axios from 'axios';
 import { UpdateWorkoutNoteUrl } from '../../../api/account/workoutDay';
 import { useWorkoutContext } from '../../workouts/WorkoutContext';
-import { ToastError, ToastSuccess } from '../../shared/Toasts';
 import { FormControl, FormErrorMessage } from '../../../chakra/Forms';
 import { FormButton } from '../../common/Buttons';
+import useFireToast from '../../../hooks/useFireToast';
 
 interface IProps {
   onClose: () => void;
@@ -19,15 +19,15 @@ interface IProps {
 
 const AddWorkoutNoteForm: React.FC<IProps> = ({ note, workoutDayId, onClose }) => {
   const { UpdateDayNotes } = useWorkoutContext();
-  const toast = useToast();
+  const toast = useFireToast();
 
   const onSubmit = async ({ notes }: any) => {
     try {
       await axios.put(UpdateWorkoutNoteUrl(workoutDayId, notes));
       UpdateDayNotes(notes);
-      toast(ToastSuccess('Success', 'Successfully added notes'));
+      toast.Success('Successfully added notes');
     } catch (ex) {
-      toast(ToastError('Error', 'Could not add notes to workout'));
+      toast.Error('Could not add notes to workout');
     }
     onClose();
   };

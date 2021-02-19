@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useToast } from '@chakra-ui/react';
+
 import { TextSm } from '../common/Texts';
 import moment from 'moment';
 import { formatDate } from '../../util/dateHelper';
@@ -8,9 +8,9 @@ import TTIconButton from '../common/IconButtons';
 import Axios from 'axios';
 import { DeleteLiftingStatAuditUrl } from '../../api/account/liftingStats';
 import { ILiftFeed } from 'powerbuddy-shared';
-import { ToastSuccess } from '../shared/Toasts';
 import { Box, Flex } from '../../chakra/Layout';
 import { Link } from '../../chakra/Forms';
+import useFireToast from '../../hooks/useFireToast';
 
 interface IProps {
   liftFeed: ILiftFeed[];
@@ -36,22 +36,15 @@ const LiftFeedSingle: React.FC<ILiftFeedSingleProps> = ({ liftFeed }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const { repRange, dateChanged, weight, exerciseName, exerciseId, liftingStatAuditId } = liftFeed;
 
-  const toast = useToast();
+  const toast = useFireToast();
 
   const deletePersonalBestAudit = async () => {
     setLoading(true);
     try {
       await Axios.delete(DeleteLiftingStatAuditUrl(liftingStatAuditId));
-      toast(ToastSuccess('Success', 'Successfully Deleted Personal Best'));
+      toast.Success('Successfully Deleted Personal Best');
     } catch (error) {
-      toast({
-        title: 'Error',
-        description: 'Could not create Personal Best, something has went wrong',
-        status: 'error',
-        duration: 2000,
-        isClosable: true,
-        position: 'top-right',
-      });
+      toast.Error('Could not delete Personal Best');
     }
     setLoading(false);
   };

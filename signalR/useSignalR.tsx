@@ -1,13 +1,12 @@
-import { ToastAvatar } from '../components/common/CustomToasts';
-import { useToast } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 import { MESSAGE_METHOD_ALL } from './SignalRConstants';
 import { IUserMessage } from './types';
 import * as signalR from '@microsoft/signalr';
+import useFireToast from '../hooks/useFireToast';
 
 const useSignalR = () => {
   const [connection, setConnection] = useState<signalR.HubConnection>();
-  const toast = useToast();
+  const toast = useFireToast();
 
   useEffect(() => {
     const connection = new signalR.HubConnectionBuilder().withUrl(process.env.NEXT_PUBLIC_BASE_SIGNALR).withAutomaticReconnect().build();
@@ -22,10 +21,7 @@ const useSignalR = () => {
   useEffect(() => {
     if (connection) {
       connection.on(MESSAGE_METHOD_ALL, (message: IUserMessage) => {
-        toast({
-          position: 'top-left',
-          render: () => <ToastAvatar userName={message?.userName} description={message?.body} />,
-        });
+        toast.UserMessage(message?.userName, message?.body);
       });
     }
   }, [connection]);

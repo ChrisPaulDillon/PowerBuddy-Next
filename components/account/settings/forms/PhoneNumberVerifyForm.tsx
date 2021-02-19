@@ -1,4 +1,3 @@
-import { useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import { IUser } from 'powerbuddy-shared/lib';
 import React, { useState } from 'react';
@@ -8,6 +7,7 @@ import { AcceptSmsConfirmationUrl } from '../../../../api/account/auth';
 import { SendSmsVerificationUrl } from '../../../../api/public/sms';
 import { FormControl, FormErrorMessage, FormLabel } from '../../../../chakra/Forms';
 import { Box } from '../../../../chakra/Layout';
+import useFireToast from '../../../../hooks/useFireToast';
 import { validateInput } from '../../../../util/formInputs';
 import { FormButton } from '../../../common/Buttons';
 import { TTIcon } from '../../../common/IconButtons';
@@ -15,14 +15,13 @@ import { FormInput } from '../../../common/Inputs';
 import { FormStack } from '../../../common/Stacks';
 import { TextSm } from '../../../common/Texts';
 import { FormLayoutFlex } from '../../../layout/Flexes';
-import { ToastError, ToastSuccess } from '../../../shared/Toasts';
 
 interface IProps {
   user: IUser;
 }
 
 const PhoneNumberVerifyForm: React.FC<IProps> = ({ user }) => {
-  const toast = useToast();
+  const toast = useFireToast();
 
   const [error, setError] = useState<boolean>(false);
   const [smsSent, setSmsSent] = useState<boolean>(false);
@@ -34,11 +33,11 @@ const PhoneNumberVerifyForm: React.FC<IProps> = ({ user }) => {
       try {
         const response = await axios.post(AcceptSmsConfirmationUrl(), { phoneNumber: phoneNumber as string, code: code as string });
         if (response && response.data) {
-          toast(ToastSuccess('Success', 'Phone Number Successfully Verified'));
+          toast.Success('Phone Number Successfully Verified');
           setSmsSent(false);
         }
       } catch (err) {
-        toast(ToastError('Error', 'Verification Failed, make sure you have typed the code correctly!'));
+        toast.Error('Verification Failed, make sure you have typed the code correctly!');
       }
     } else {
       // if (password1 !== password2) {
@@ -50,11 +49,11 @@ const PhoneNumberVerifyForm: React.FC<IProps> = ({ user }) => {
       try {
         const response = await axios.post(SendSmsVerificationUrl(), { phoneNumber: phoneNumber as string });
         if (response && response.data) {
-          toast(ToastSuccess('Success', 'Successfully Sent Sms, Check Your Phone'));
+          toast.Success('Successfully Sent Sms, Check Your Phone');
           setSmsSent(true);
         }
       } catch (err) {
-        toast(ToastError('Error', 'Invalid Phone Number Supplied'));
+        toast.Error('Invalid Phone Number Supplied');
       }
     }
   };
