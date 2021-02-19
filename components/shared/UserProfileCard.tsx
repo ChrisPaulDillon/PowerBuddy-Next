@@ -1,6 +1,6 @@
 import UserAvatar from '../layout/UserAvatar';
-import { Heading, Avatar, Box, Center, Image, Flex, Text, Stack, Button, useColorModeValue } from '@chakra-ui/react';
-import { IPublicUser, IUser } from 'powerbuddy-shared/lib';
+import { Heading, Box, Center, Flex, Text, Stack, Button, useColorModeValue } from '@chakra-ui/react';
+import { IPublicUser } from 'powerbuddy-shared/lib';
 import { useRouter } from 'next/router';
 import { PROFILE_URL } from '../../InternalLinks';
 
