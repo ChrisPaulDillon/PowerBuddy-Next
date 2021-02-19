@@ -60,6 +60,7 @@ const background = { light: 'gray.100', dark: 'gray.800' };
 
 const cardColor = { light: 'gray.50', dark: 'gray.700' };
 const cardHighlightColor = { light: 'gray.300', dark: 'gray.600' };
+const toastColor = { light: 'gray.300', dark: 'gray.600' };
 
 const navIconColor = { light: 'gray.600', dark: 'gray.700' };
 const bannerColor = { light: 'gray.750', dark: 'gray.50' };
@@ -92,6 +93,7 @@ const colors = {
   greenWeight,
   borderColor,
   cardColor,
+  toastColor,
   cardHighlightColor,
   selectColor,
   selectColorTemp,

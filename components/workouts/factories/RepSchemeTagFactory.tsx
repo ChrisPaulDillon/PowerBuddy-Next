@@ -69,7 +69,7 @@ const NormalRepSchemeTag = ({ setEditRepAlert, setRepsAchieved, weightLifted, no
         {noOfReps}
       </TextRep>
       <PbToolTip label="Click to set how many reps were achieved on this set">
-        <Button size="xs" rounded="50px" onClick={() => (!contentDisabled ? setRepsAchieved() : null)} colorScheme={repColor}>
+        <Button size="xs" rounded="50px" onClick={() => (!contentDisabled ? setRepsAchieved() : null)} colorScheme={repColor} bgColor={repColor}>
           <TextRep>{currentReps}</TextRep>
         </Button>
       </PbToolTip>

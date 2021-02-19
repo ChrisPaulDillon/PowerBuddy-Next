@@ -10,6 +10,7 @@ import { IWorkoutExercise, IWorkoutSet } from 'powerbuddy-shared';
 import { ToastError, ToastSuccess } from '../../shared/Toasts';
 import { FormLayoutFlex } from '../../layout/Flexes';
 import { FormLabel } from '../../../chakra/Forms';
+import { ToastCustomSuccess } from '../../common/CustomToasts';
 
 interface IProps {
   workoutExercise: IWorkoutExercise;
@@ -58,7 +59,10 @@ const QuickAddSetsForm: React.FC<IProps> = ({ workoutExercise, suggestedReps, su
     try {
       const response = await Axios.post(CreateWorkoutSetCollectionUrl(), workoutSets);
       QuickAddSetsToExercise(response.data, workoutExercise.workoutExerciseId);
-      toast(ToastSuccess('Success', 'Successfully added sets'));
+      toast({
+        position: 'top-left',
+        render: () => <ToastCustomSuccess description="Successfully added sets" />,
+      });
       onClose();
     } catch (ex) {
       toast(ToastError('Error', 'Could not add sets!'));
