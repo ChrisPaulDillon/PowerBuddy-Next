@@ -33,15 +33,15 @@ const NewRegisterForm: React.FC<IFormProps> = ({ register, errorMessage, loading
           </Stack>
           <DividerWithText mt="6">or register with</DividerWithText>
           <SimpleGrid mt="6" columns={3} spacing="3">
-            <Button color="currentColor" variant="outline">
+            <Button bg="white" variant="outline">
               <VisuallyHidden>Register with Facebook</VisuallyHidden>
               <FaFacebook />
             </Button>
-            <Button color="currentColor" variant="outline">
+            <Button bg="white" variant="outline">
               <VisuallyHidden>Register with Google</VisuallyHidden>
               <FaGoogle />
             </Button>
-            <Button color="currentColor" variant="outline">
+            <Button bg="white" variant="outline">
               <VisuallyHidden>Register with Github</VisuallyHidden>
               <FaGithub />
             </Button>

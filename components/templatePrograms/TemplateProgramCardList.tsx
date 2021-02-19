@@ -29,7 +29,7 @@ interface Props {
 }
 
 const TemplateProgramCard: React.FC<Props> = ({ template }) => (
-  <Box w="400px" bg={useColorModeValue('white', 'gray.800')} boxShadow={'2xl'} rounded={'md'} overflow={'hidden'} justifyContent="center">
+  <Box w="350px" bg={useColorModeValue('white', 'gray.800')} boxShadow={'2xl'} rounded={'md'} overflow={'hidden'} justifyContent="center">
     <Box d="flex" alignItems="baseline" p="2">
       <Badge rounded="full" colorScheme="teal">
         New

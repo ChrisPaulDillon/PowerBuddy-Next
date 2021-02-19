@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { GetLoggedInUsersProfileUrl } from '../../../api/account/user';
 import { Box } from '../../../chakra/Layout';
 import AccountSettings from '../../../components/account/settings/AccountSettings';
+import ProgressSpinner from '../../../components/common/ProgressSpinner';
 import { CenterColumnFlex } from '../../../components/layout/Flexes';
 import { PageHead, PageContent } from '../../../components/layout/Page';
 import { useAxios } from '../../../hooks/useAxios';
@@ -18,6 +19,8 @@ const Index: NextPage = () => {
   }, [user]);
 
   console.log(user);
+
+  if (loading) return <ProgressSpinner />;
 
   return (
     <Box>
