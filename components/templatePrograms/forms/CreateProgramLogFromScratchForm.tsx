@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useToast } from '@chakra-ui/react';
+
 import { FormLayoutFlex } from '../../layout/Flexes';
 import { FormButton } from '../../common/Buttons';
 import CalendarSelectFrom from './CalendarSelectForm';
@@ -13,9 +13,9 @@ import { DayValue } from 'react-modern-calendar-datepicker';
 import { useUserContext } from '../../users/UserContext';
 import { CreateWorkoutLogFromScratchUrl } from '../../../api/account/workoutLog';
 import axios from 'axios';
-import { ToastError, ToastSuccess, ToastWarning } from '../../shared/Toasts';
 import { Box } from '../../../chakra/Layout';
 import { FormControl, FormErrorMessage, FormLabel, Select } from '../../../chakra/Forms';
+import useFireToast from '../../../hooks/useFireToast';
 
 export interface IWorkoutLogInputScratch {
   noOfWeeks: number;
@@ -40,7 +40,7 @@ const CreateProgramLogFromScratchForm: React.FC<IProps> = ({ onClose, onCreateSu
   const [phase, setPhase] = useState<number>(1);
   const [customName, setCustomName] = useState<string>('Custom Template');
   const [noOfWeeks, setNoOfWeeks] = useState<number>(0);
-  const toast = useToast();
+  const toast = useFireToast();
 
   useEffect(() => {
     if (calendarDate) {
@@ -70,13 +70,13 @@ const CreateProgramLogFromScratchForm: React.FC<IProps> = ({ onClose, onCreateSu
           customName: customName,
         };
         await axios.post(CreateWorkoutLogFromScratchUrl(), workoutLogInput);
-        toast(ToastSuccess('Success', 'Diary successfully created, visit the diary section to begin tracking'));
+        toast.Success('Diary successfully created, visit the diary section to begin tracking');
         onCreateSuccessOpen();
       } catch (error) {
         if (error?.response?.status === 400) {
-          toast(ToastWarning('Warning', 'You already have a diary entry active for this time period!'));
+          toast.Warning('You already have a diary entry active for this time period!');
         } else {
-          toast(ToastError('Error', 'Could not create Diary Log, please try again later'));
+          toast.Error('Could not create Diary Log, please try again later');
         }
       }
       onClose();
@@ -85,8 +85,8 @@ const CreateProgramLogFromScratchForm: React.FC<IProps> = ({ onClose, onCreateSu
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {phase === 1 ? (
-        <Box display={phase === 1 ? 'inline' : 'none'}>
+      {phase === 1 && (
+        <Box>
           <FormControl isInvalid={errors.noOfWeeks}>
             <FormLayoutFlex>
               <FormLabel>Select Program Start Date & Number of Weeks</FormLabel>
@@ -112,15 +112,11 @@ const CreateProgramLogFromScratchForm: React.FC<IProps> = ({ onClose, onCreateSu
             // workoutDates={calendarData?.workoutDates}
           />
         </Box>
-      ) : (
-        <Box />
       )}
-      {phase === 2 ? (
-        <Box display={phase === 2 ? 'inline' : 'none'}>
+      {phase === 2 && (
+        <Box>
           <ProgramSummary setCustomName={updateCustomName} startDate={selectedDate} endDate={endDate} />
         </Box>
-      ) : (
-        <Box />
       )}
 
       <FormButton isLoading={formState.isSubmitting}>{phase < 3 ? 'Continue' : 'Complete'}</FormButton>

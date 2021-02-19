@@ -1,4 +1,4 @@
-import { Flex, Link, useToast } from '@chakra-ui/react';
+import { Flex, Link } from '@chakra-ui/react';
 import { NextPage } from 'next';
 import { IUser } from 'powerbuddy-shared/lib';
 import React, { useState } from 'react';
@@ -8,7 +8,7 @@ import { EMAIL_OR_USERNAME_IN_USE } from '../../../api/apiResponseCodes';
 import { SendEmailConfirmationRequest } from '../../../api/public/email';
 import NewRegisterForm from '../../../components/account/forms/NewRegisterForm';
 import { TextXs } from '../../../components/common/Texts';
-import { ToastSuccess } from '../../../components/shared/Toasts';
+import useFireToast from '../../../hooks/useFireToast';
 
 const Index: NextPage = () => {
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -16,7 +16,7 @@ const Index: NextPage = () => {
 
   const [signedUp, setSignedUp] = useState<boolean>(false);
 
-  const toast = useToast();
+  const toast = useFireToast();
 
   const onSubmit = async ({ email, userName, password }: any) => {
     const user: IUser = {
@@ -28,7 +28,7 @@ const Index: NextPage = () => {
 
     if (response?.data) {
       setUserId(response.data.userId);
-      toast(ToastSuccess('Success', 'Successfully Signed Up'));
+      toast.Success('Successfully Signed Up');
       setSignedUp(true);
       return;
     }
@@ -44,7 +44,7 @@ const Index: NextPage = () => {
 
   const sendEmailConfirmation = async () => {
     await SendEmailConfirmationRequest(userId);
-    toast(ToastSuccess('Success', 'Confirmation Email Sent Successfully. Please check your inbox'));
+    toast.Success('Confirmation Email Sent Successfully. Please check your inbox');
   };
 
   const { register, handleSubmit, formState } = useForm();

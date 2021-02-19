@@ -1,4 +1,4 @@
-import { Box, Flex, useDisclosure, useToast } from '@chakra-ui/react';
+import { Box, Flex, useDisclosure } from '@chakra-ui/react';
 import axios from 'axios';
 import moment from 'moment';
 import { ILiftingStat, IWorkoutDay } from 'powerbuddy-shared/lib';
@@ -11,6 +11,7 @@ import { GiRun } from 'react-icons/gi';
 import { MdWarning } from 'react-icons/md';
 import { UpdateWorkoutUrl } from '../../api/account/workoutDay';
 import { DeleteWorkoutLogUrl } from '../../api/account/workoutLog';
+import useFireToast from '../../hooks/useFireToast';
 import { WORKOUT_DIARY_URL } from '../../InternalLinks';
 import { BreadcrumbBase, IBreadcrumbInput } from '../common/Breadcrumbs';
 import TTIconButton from '../common/IconButtons';
@@ -21,7 +22,6 @@ import { HeadingMd, TextXs } from '../common/Texts';
 import { CardNoShadow } from '../layout/Card';
 import { CenterColumnFlex } from '../layout/Flexes';
 import { BadgeWorkoutName } from '../shared/Badges';
-import { ToastSuccess, ToastError } from '../shared/Toasts';
 import NotifiyPersonalBestAlert from './alerts/NotifyPersonalBestAlert';
 import AddExerciseForm from './forms/AddExerciseForm';
 import AddWorkoutNoteForm from './forms/AddWorkoutNoteForm';
@@ -49,16 +49,16 @@ const WorkoutDay: React.FC<IProps> = ({ workoutDay }) => {
   const { isOpen: isAddWorkoutNoteOpen, onOpen: onAddWorkoutNoteOpen, onClose: onAddWorkoutNoteClose } = useDisclosure();
   const { isOpen: isAddWorkoutTemplateOpen, onOpen: onAddWorkoutTemplateOpen, onClose: onAddWorkoutTemplateClose } = useDisclosure();
 
-  const toast = useToast();
+  const toast = useFireToast();
 
   const deleteLog = async () => {
     setDeleteLogLoading(true);
     try {
-      await axios.delete(DeleteWorkoutLogUrl(workoutDay.workoutLogId!));
-      toast(ToastSuccess('Success', 'Successfully deleted program log'));
+      await axios.delete(DeleteWorkoutLogUrl(workoutDay.workoutLogId));
+      toast.Success('Successfully deleted program log');
       onDeleteLogClose();
     } catch (error) {
-      toast(ToastError('Error', 'Could not delete log, please try again later'));
+      toast.Error('Could not delete log, please try again later');
     }
     setDeleteLogLoading(false);
   };
@@ -71,9 +71,9 @@ const WorkoutDay: React.FC<IProps> = ({ workoutDay }) => {
       if (response.data != null) {
         setPersonalBests(response.data);
       }
-      toast(ToastSuccess('Success', 'Diary Entry is now marked as complete'));
+      toast.Success('Diary Entry is now marked as complete');
     } catch (err) {
-      toast(ToastError('Error', 'Could not mark Diary Entry as complete'));
+      toast.Error('Could not mark Diary Entry as complete');
       workoutDay.completed = false;
     }
     setLoading(false);

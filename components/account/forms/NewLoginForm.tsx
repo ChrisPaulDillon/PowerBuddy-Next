@@ -23,21 +23,21 @@ const NewLoginForm: React.FC<IFormProps> = ({ register, errorMessage, loading })
             </FormControl>
             <PasswordField ref={register} />
             {errorMessage !== '' && <TextError textAlign="center">{errorMessage}</TextError>}
-            <Button type="submit" colorScheme="blue" size="lg" fontSize="md" isLoading={loading}>
+            <Button type="submit" bg={mode('blue.400', 'blue.400')} size="lg" fontSize="md" isLoading={loading}>
               Sign in
             </Button>
           </Stack>
           <DividerWithText mt="6">or continue with</DividerWithText>
           <SimpleGrid mt="6" columns={3} spacing="3">
-            <Button bg="white" variant="outline">
+            <Button bg={mode('white', 'gray.700')} variant="outline">
               <VisuallyHidden>Login with Facebook</VisuallyHidden>
               <FaFacebook />
             </Button>
-            <Button bg="white" variant="outline">
+            <Button bg={mode('white', 'gray.700')} variant="outline">
               <VisuallyHidden>Login with Google</VisuallyHidden>
               <FaGoogle />
             </Button>
-            <Button bg="white" variant="outline">
+            <Button bg={mode('white', 'gray.700')} variant="outline">
               <VisuallyHidden>Login with Github</VisuallyHidden>
               <FaGithub />
             </Button>

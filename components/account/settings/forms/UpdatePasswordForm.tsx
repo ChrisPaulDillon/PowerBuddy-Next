@@ -1,6 +1,4 @@
-import { useToast } from '@chakra-ui/react';
 import axios from 'axios';
-import { IUser } from 'powerbuddy-shared/lib';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { UpdatePasswordUrl } from '../../../../api/account/auth';
@@ -11,7 +9,7 @@ import { FormButton } from '../../../common/Buttons';
 import { FormInput } from '../../../common/Inputs';
 import { TextSm } from '../../../common/Texts';
 import { FormLayoutFlex } from '../../../layout/Flexes';
-import { ToastError, ToastSuccess } from '../../../shared/Toasts';
+import useFireToast from '../../../../hooks/useFireToast';
 
 interface IUpdatePasswordInput {
   oldPassword: string;
@@ -19,7 +17,7 @@ interface IUpdatePasswordInput {
 }
 
 const UpdatePasswordForm = () => {
-  const toast = useToast();
+  const toast = useFireToast();
 
   const [error, setError] = useState<boolean>(false);
 
@@ -40,16 +38,16 @@ const UpdatePasswordForm = () => {
     try {
       const response = await axios.put(UpdatePasswordUrl(), passwordInput);
       if (response && response.data) {
-        toast(ToastSuccess('Success', 'Successfully Changed Password'));
+        toast.Success('Successfully Changed Password');
       }
     } catch (err) {
       const errorCode = err?.response?.data;
       switch (errorCode?.code) {
         case INVALID_CREDENTIALS:
-          toast(ToastError('Error', 'You have incorrectly entered your current password'));
+          toast.Error('You have incorrectly entered your current password');
           break;
         default:
-          toast(ToastError('Error', 'Password Could Not Be Updated'));
+          toast.Error('Password Could Not Be Updated');
           break;
       }
     }

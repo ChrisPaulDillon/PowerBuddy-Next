@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useToast } from '@chakra-ui/react';
+
 import { useSelector } from 'react-redux';
 import { IAppState } from '../../../redux/store';
 import { TextXs } from '../../common/Texts';
@@ -11,14 +11,14 @@ import { CenterColumnFlex } from '../../layout/Flexes';
 import { CreateExerciseUrl } from '../../../api/account/exercise';
 import axios from 'axios';
 import { ICExercise, IExerciseMuscleGroup } from 'powerbuddy-shared';
-import { ToastError, ToastSuccess } from '../../shared/Toasts';
 import { Button, FormControl, FormErrorMessage, Select } from '../../../chakra/Forms';
+import useFireToast from '../../../hooks/useFireToast';
 
 interface IProps {}
 
 const CreateExercise: React.FC<IProps> = () => {
   const { exerciseTypes } = useSelector((state: IAppState) => state.state);
-  const toast = useToast();
+  const toast = useFireToast();
 
   const exerciseTypeList = exerciseTypes.map((x) => ({
     value: x.exerciseTypeId,
@@ -35,9 +35,9 @@ const CreateExercise: React.FC<IProps> = () => {
 
     try {
       await axios.post(CreateExerciseUrl(), exercise);
-      toast(ToastSuccess('Success', 'Successfully Create Exercise'));
+      toast.Success('Successfully Create Exercise');
     } catch (error) {
-      toast(ToastError('Error', 'Exercise Could Not Be Created'));
+      toast.Error('Exercise Could Not Be Created');
     }
   };
 

@@ -1,21 +1,21 @@
-import { Link, useToast } from '@chakra-ui/react';
+import { Link } from '@chakra-ui/react';
 import { NextPage } from 'next';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { SendPasswordResetEmailRequest } from '../../../api/public/email';
 import ForgotPasswordForm from '../../../components/account/forms/ForgotPasswordForm';
 import { TextXs } from '../../../components/common/Texts';
-import { ToastSuccess } from '../../../components/shared/Toasts';
+import useFireToast from '../../../hooks/useFireToast';
 
 const Index: NextPage = () => {
-  const toast = useToast();
+  const toast = useFireToast();
 
   const [pwResetSent, setPwResetSent] = useState<boolean>(false);
   const [email, setEmail] = useState<string>('');
 
   const onSubmit = async ({ email }) => {
     await SendPasswordResetEmailRequest(email);
-    toast(ToastSuccess('Success', 'If an account with the associated email exists, a reset password email has been sent'));
+    toast.Success('If an account with the associated email exists, a reset password email has been sent');
     setPwResetSent(true);
     setEmail(email);
   };

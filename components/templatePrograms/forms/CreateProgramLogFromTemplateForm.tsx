@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import { useForm } from 'react-hook-form';
 import { CountDays } from '../../util/CountDays';
-import { useToast } from '@chakra-ui/react';
 import CalendarSelectFrom from './CalendarSelectForm';
 import DayCheckboxForm from './DayCheckboxForm';
 import { FormButton } from '../../common/Buttons';
@@ -13,8 +12,8 @@ import { ITemplateProgramExtended, IWeightInput, IWorkoutLogTemplateInput } from
 import { useUserContext } from '../../users/UserContext';
 import axios from 'axios';
 import { CreateWorkoutLogFromTemplateUrl } from '../../../api/account/workoutLog';
-import { ToastError, ToastSuccess } from '../../shared/Toasts';
 import { Box } from '../../../chakra/Layout';
+import useFireToast from '../../../hooks/useFireToast';
 
 interface IProps {
   onClose: () => void;
@@ -39,7 +38,7 @@ const CreateProgramLogFromTemplateForm: React.FC<IProps> = ({ onClose, template,
   const [friChecked, setFriChecked] = useState<boolean>(false);
   const [satChecked, setSatChecked] = useState<boolean>(false);
   const [sunChecked, setSunChecked] = useState<boolean>(false);
-  const toast = useToast();
+  const toast = useFireToast();
 
   useEffect(() => {
     if (calendarDate) {
@@ -87,14 +86,7 @@ const CreateProgramLogFromTemplateForm: React.FC<IProps> = ({ onClose, template,
   const onSubmit = async () => {
     let dayCount = CountDays(monChecked, tueChecked, wedChecked, thuChecked, friChecked, satChecked, sunChecked);
     if (dayCount !== template.noOfDaysPerWeek && phase === 2) {
-      toast({
-        title: 'Warning',
-        description: `Please select ${template.noOfDaysPerWeek} Days for this Program`,
-        status: 'warning',
-        duration: 2000,
-        isClosable: true,
-        position: 'top-right',
-      });
+      toast.Warning(`Please select ${template.noOfDaysPerWeek} Days for this Program`);
     } else if (phase < 4) {
       setPhase(phase + 1);
     } else {
@@ -114,14 +106,14 @@ const CreateProgramLogFromTemplateForm: React.FC<IProps> = ({ onClose, template,
           weightInputs: curWeightInputs,
         };
         await axios.post(CreateWorkoutLogFromTemplateUrl(template?.templateProgramId), workoutLog);
-        toast(ToastSuccess('Success', 'Diary successfully created, visit the diary section to begin tracking'));
+        toast.Success('Diary successfully created, visit the diary section to begin tracking');
         onClose();
         onCreateSuccessOpen();
       } catch (error) {
         if (error?.response?.status === 400) {
-          toast(ToastError('Warning', 'You already have a diary entry active for this time period!'));
+          toast.Warning('You already have a diary entry active for this time period!');
         } else {
-          toast(ToastError('Error', 'Diary could not be created, please try again later'));
+          toast.Error('Diary could not be created, please try again later');
         }
       }
     }
