@@ -17,21 +17,13 @@ export const FormButton: React.FC<ButtonProps> = ({ children, ...rest }) => {
 };
 
 export const PrimaryButton: React.FC<ButtonProps> = ({ children, ...rest }) => {
-  return (
-    <LightMode>
-      <Button colorScheme="whatsapp" {...rest}>
-        <TextSm fontWeight="light">{children}</TextSm>
-      </Button>
-    </LightMode>
-  );
+  return <Button {...rest}>{children}</Button>;
 };
 
 export const SecondaryButton: React.FC<ButtonProps> = ({ children, ...rest }) => {
   return (
-    <LightMode>
-      <Button colorScheme="red" {...rest}>
-        <TextSm fontWeight="light">{children}</TextSm>
-      </Button>
-    </LightMode>
+    <Button colorScheme="red" {...rest}>
+      {children}
+    </Button>
   );
 };

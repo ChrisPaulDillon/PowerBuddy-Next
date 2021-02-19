@@ -32,11 +32,6 @@ export const HeadingXs: React.FC<BoxProps> = ({ ...rest }) => {
   return <Text color={theme.colors.textColor[colorMode]} fontSize={['sm', 'sm', 'sm', 'sm']} fontFamily="'Roboto', serif;" {...rest}></Text>;
 };
 
-export const TextLg: React.FC<BoxProps> = ({ ...rest }) => {
-  const { colorMode } = useColorMode();
-  return <Text color={theme.colors.textColor[colorMode]} fontSize={['1xl', '2xs', '1xl', '1xl']} fontFamily="'Roboto', serif;" {...rest}></Text>;
-};
-
 export const TextSm: React.FC<BoxProps> = ({ ...rest }) => {
   const { colorMode } = useColorMode();
   return <Text color={theme.colors.textColor[colorMode]} fontSize={['1xl', '1xs', '1xl', '1xl']} fontFamily="'Roboto', serif;" {...rest}></Text>;

@@ -15,12 +15,16 @@ const UserAvatar: React.FC<IUserAvatarProps> = ({ userName, size, ...rest }) => 
   const router = useRouter();
   return (
     <Link href={`${PROFILE_URL}/${userName}`}>
-      <PbToolTip label={userName}>
-        <Avatar size={size ?? 'md'} borderWidth={1} name={userName} {...rest} onClick={() => router.push(`${PROFILE_URL}/${userName}`)} 
+      <Avatar
+        size={size ?? 'md'}
+        borderWidth={1}
+        name={userName}
+        {...rest}
+        onClick={() => router.push(`${PROFILE_URL}/${userName}`)}
         css={{
-                border: '2px solid white',
-              }} />
-      </PbToolTip>
+          border: '2px solid white',
+        }}
+      />
     </Link>
   );
 };

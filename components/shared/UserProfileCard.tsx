@@ -1,9 +1,10 @@
 //@ts-nocheck
 import UserAvatar from '../layout/UserAvatar';
-import { Heading, Box, Center, Flex, Text, Stack, Button, useColorModeValue } from '@chakra-ui/react';
+import { Heading, Box, Center, Flex, Text, Stack, useColorModeValue } from '@chakra-ui/react';
 import { IPublicUser } from 'powerbuddy-shared/lib';
 import { useRouter } from 'next/router';
 import { PROFILE_URL } from '../../InternalLinks';
+import { Button } from '../../chakra/Forms';
 
 interface IUserProfileCardProps {
   user: IPublicUser;
@@ -48,17 +49,7 @@ const UserProfileCard: React.FC<IUserProfileCardProps> = ({ user }) => {
             </Stack>
           </Stack>
 
-          <Button
-            w={'full'}
-            mt={8}
-            bg={useColorModeValue('#151f21', 'gray.900')}
-            color={'white'}
-            rounded={'md'}
-            onClick={() => router.push(`${PROFILE_URL}/${user?.userName}`)}
-            _hover={{
-              transform: 'translateY(-2px)',
-              boxShadow: 'lg',
-            }}>
+          <Button w={'full'} mt={8} onClick={() => router.push(`${PROFILE_URL}/${user?.userName}`)}>
             View Profile
           </Button>
         </Box>

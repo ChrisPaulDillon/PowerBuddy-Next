@@ -48,17 +48,18 @@ import {
   FormErrorMessageProps,
   FormControlProps,
   AvatarProps,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import { ElementType } from 'react';
 
 export const Button: React.FC<ButtonProps> = ({ ...rest }) => {
   return (
     <ChakraButton
-      fontStyle="Roboto"
       _hover={{
         transform: 'translateY(-2px)',
         boxShadow: 'lg',
       }}
+      bg={useColorModeValue('gray.600', 'gray.900')}
       rounded={'md'}
       {...rest}
     />

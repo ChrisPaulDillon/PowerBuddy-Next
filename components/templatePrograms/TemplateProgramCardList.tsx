@@ -40,14 +40,14 @@ const TemplateProgramCard: React.FC<Props> = ({ template }) => (
 
       <Stack direction={'row'} justify={'center'} spacing={6} mt={4}>
         <Stack spacing={0} align={'center'}>
-          <Text fontWeight={600}>{template.difficulty}</Text>
+          <Text fontWeight={400}>{template.difficulty}</Text>
         </Stack>
         <Stack spacing={0} align={'center'}>
-          <Text fontWeight={600}>{template.noOfWeeks} Weeks Long</Text>
+          <Text fontWeight={400}>{template.noOfWeeks} Weeks Long</Text>
         </Stack>
       </Stack>
       <Flex pt={5} justify="center" flexDir="column" align="center">
-        <Text fontWeight={600} textAlign="center">
+        <Text fontWeight={400} textAlign="center">
           {template.noOfDaysPerWeek} Days Per Week
         </Text>
         <Box mt={5}>
@@ -57,7 +57,7 @@ const TemplateProgramCard: React.FC<Props> = ({ template }) => (
               query: `program=${encodeURIComponent(template.name.replace(/\s+/g, '-'))}`,
               ...template,
             }}>
-            <PrimaryButton>View</PrimaryButton>
+            <PrimaryButton isFullWidth>View</PrimaryButton>
           </Link>
         </Box>
       </Flex>

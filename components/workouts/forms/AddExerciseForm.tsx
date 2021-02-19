@@ -6,7 +6,7 @@ import { SelectSearchable } from '../../common/SearchSelect';
 import { FormButton } from '../../common/Buttons';
 import { IAppState } from '../../../redux/store';
 import { FormWeightInput } from '../../common/Inputs';
-import { TextRep, TextLg } from '../../common/Texts';
+import { HeadingMd, TextRep } from '../../common/Texts';
 import { FormLayoutFlex } from '../../layout/Flexes';
 import axios from 'axios';
 import { CreateWorkoutExerciseUrl } from '../../../api/account/workoutExercise';
@@ -112,10 +112,10 @@ const AddExerciseForm: React.FC<IProps> = ({ onClose, workoutDayId }) => {
         </Flex>
       </LightMode>
       <Box mt={4}>
-        <TextLg textAlign="center">
+        <HeadingMd textAlign="center">
           {sets}x{reps}x{weight}
           {weightType}
-        </TextLg>
+        </HeadingMd>
         <FormButton type="submit" isLoading={formState.isSubmitting}>
           Create
         </FormButton>
