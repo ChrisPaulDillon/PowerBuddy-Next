@@ -17,7 +17,11 @@ export const FormButton: React.FC<ButtonProps> = ({ children, ...rest }) => {
 };
 
 export const PrimaryButton: React.FC<ButtonProps> = ({ children, ...rest }) => {
-  return <Button {...rest}>{children}</Button>;
+  return (
+    <Button color="white" {...rest}>
+      {children}
+    </Button>
+  );
 };
 
 export const SecondaryButton: React.FC<ButtonProps> = ({ children, ...rest }) => {
