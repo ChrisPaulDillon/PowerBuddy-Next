@@ -85,8 +85,8 @@ const CreateProgramLogFromScratchForm: React.FC<IProps> = ({ onClose, onCreateSu
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {phase === 1 ? (
-        <Box display={phase === 1 ? 'inline' : 'none'}>
+      {phase === 1 && (
+        <Box>
           <FormControl isInvalid={errors.noOfWeeks}>
             <FormLayoutFlex>
               <FormLabel>Select Program Start Date & Number of Weeks</FormLabel>
@@ -112,15 +112,11 @@ const CreateProgramLogFromScratchForm: React.FC<IProps> = ({ onClose, onCreateSu
             // workoutDates={calendarData?.workoutDates}
           />
         </Box>
-      ) : (
-        <Box />
       )}
-      {phase === 2 ? (
-        <Box display={phase === 2 ? 'inline' : 'none'}>
+      {phase === 2 && (
+        <Box>
           <ProgramSummary setCustomName={updateCustomName} startDate={selectedDate} endDate={endDate} />
         </Box>
-      ) : (
-        <Box />
       )}
 
       <FormButton isLoading={formState.isSubmitting}>{phase < 3 ? 'Continue' : 'Complete'}</FormButton>

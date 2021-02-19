@@ -41,7 +41,7 @@ const Index: NextPage = () => {
 
   const sendEmailConfirmation = async () => {
     try {
-      await axios.post(SendEmailConfirmationUrl(userId! as string));
+      await axios.post(SendEmailConfirmationUrl(userId as string));
       toast.Success('Successfully Sent Email. Please Check Your Inbox');
     } catch (error) {}
   };
@@ -95,7 +95,7 @@ const Index: NextPage = () => {
           <PageTitle>Error! Token has expired!</PageTitle>
           <Flex>
             <TextSm px={1}>You can request</TextSm>
-            <Link onClick={async () => await sendEmailConfirmation()}>
+            <Link onClick={async () => sendEmailConfirmation()}>
               <TextSm color="blue.500">another email confirmation</TextSm>
             </Link>
           </Flex>

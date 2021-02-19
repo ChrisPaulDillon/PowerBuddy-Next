@@ -12,6 +12,7 @@ export const Facebook = ({ onClose }) => {
 
   const handleFacebookLogin = async (response): Promise<void> => {
     const { accessToken } = response;
+
     return axios
       .post(LoginWithFacebookUrl(), {
         accessToken: accessToken,
@@ -22,20 +23,10 @@ export const Facebook = ({ onClose }) => {
         SetValues(claimsValues);
         toast.Success('Successfully Signed In');
         onClose();
+      })
+      .catch((err) => {
+        toast.Error('Could not sign in using Facebook, try an alternative');
       });
-
-    //   handleLoginTokens(response.data.accessToken, response.data.refreshToken);
-
-    // } catch (err) {
-    //   toast({
-    //     title: 'Error',
-    //     description: 'Could not sign in using Facebook, try an alternative',
-    //     status: 'error',
-    //     duration: 2000,
-    //     isClosable: true,
-    //     position: 'top',
-    //   });
-    // }
   };
 
   return <FacebookLogin appId="399640227879888" fields="name,email,picture" onClick={() => {}} callback={handleFacebookLogin} icon="fa-facebook" />;
