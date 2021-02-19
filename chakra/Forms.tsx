@@ -52,7 +52,17 @@ import {
 import { ElementType } from 'react';
 
 export const Button: React.FC<ButtonProps> = ({ ...rest }) => {
-  return <ChakraButton isRound={false} fontStyle="Roboto" {...rest} />;
+  return (
+    <ChakraButton
+      fontStyle="Roboto"
+      _hover={{
+        transform: 'translateY(-2px)',
+        boxShadow: 'lg',
+      }}
+      rounded={'md'}
+      {...rest}
+    />
+  );
 };
 
 export const IconButton: React.FC<IconButtonProps & { ref?: React.Ref<HTMLButtonElement> }> = forwardRef<

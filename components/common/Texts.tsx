@@ -2,9 +2,13 @@ import React from 'react';
 import { Text, Heading, useColorMode, BoxProps } from '@chakra-ui/react';
 import theme from '../../theme';
 
+export const Banner: React.FC<BoxProps> = ({ ...rest }) => {
+  return <Text fontWeight={500} color="whatsapp.500" fontSize="4xl" {...rest}></Text>;
+};
+
 export const PageTitle: React.FC<BoxProps> = ({ ...rest }) => {
   const { colorMode } = useColorMode();
-  return <Text m={1} color={theme.colors.textColor[colorMode]} fontSize="2xl" fontFamily="'Roboto', serif;" textAlign="center" {...rest} />;
+  return <Text m={1} color={theme.colors.textColor[colorMode]} fontSize="3xl" fontWeight={500} textAlign="center" {...rest} />;
 };
 
 export const PageSubHeader: React.FC<BoxProps> = ({ ...rest }) => {
@@ -19,24 +23,8 @@ export const PageSubHeader: React.FC<BoxProps> = ({ ...rest }) => {
   );
 };
 
-export const Banner: React.FC<BoxProps> = ({ ...rest }) => {
-  const { colorMode } = useColorMode();
-  return <Text fontWeight="bold" color="whatsapp.500" fontSize="3xl" {...rest}></Text>;
-};
-
 export const HeadingMd: React.FC<BoxProps> = ({ ...rest }) => {
-  const { colorMode } = useColorMode();
-  return <Text color={theme.colors.textColor[colorMode]} fontSize={['lg', 'lg', 'xl', 'xl']} fontFamily="'Roboto', serif;" {...rest}></Text>;
-};
-
-export const HeadingMdStatic: React.FC<BoxProps> = ({ ...rest }) => {
-  const { colorMode } = useColorMode();
-  return <Text color={theme.colors.textColor[colorMode]} fontSize="xl" fontFamily="'Roboto', serif;" {...rest}></Text>;
-};
-
-export const HeadingSm: React.FC<BoxProps> = ({ ...rest }) => {
-  const { colorMode } = useColorMode();
-  return <Text color={theme.colors.textColor[colorMode]} fontSize={['sm', 'sm', 'lg', 'lg']} fontFamily="'Roboto', serif;" {...rest}></Text>;
+  return <Text fontSize={'2xl'} fontWeight={500} fontFamily={'body'} {...rest}></Text>;
 };
 
 export const HeadingXs: React.FC<BoxProps> = ({ ...rest }) => {

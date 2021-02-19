@@ -1,3 +1,4 @@
+//@ts-nocheck
 import UserAvatar from '../layout/UserAvatar';
 import { Heading, Box, Center, Flex, Text, Stack, Button, useColorModeValue } from '@chakra-ui/react';
 import { IPublicUser } from 'powerbuddy-shared/lib';
