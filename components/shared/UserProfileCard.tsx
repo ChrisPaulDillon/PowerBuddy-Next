@@ -1,37 +1,20 @@
 import UserAvatar from '../layout/UserAvatar';
-import {
-    Heading,
-    Avatar,
-    Box,
-    Center,
-    Image,
-    Flex,
-    Text,
-    Stack,
-    Button,
-    useColorModeValue,
-  } from '@chakra-ui/react';
-  
-  interface IUserProfileCardProps {
-    userName: string;
-    sportType: string;
-    gender: string;
-    liftingLevel: string;
-  }
+import { Heading, Avatar, Box, Center, Image, Flex, Text, Stack, Button, useColorModeValue } from '@chakra-ui/react';
+import { IPublicUser, IUser } from 'powerbuddy-shared/lib';
+import { useRouter } from 'next/router';
+import { PROFILE_URL } from '../../InternalLinks';
 
-const UserProfileCard: React.FC<IUserProfileCardProps> = ({userName, sportType, gender, liftingLevel}) => {
+interface IUserProfileCardProps {
+  user: IPublicUser;
+}
 
-    return (
-      <Center py={6}>
-        <Box
-          maxW={'270px'}
-          minW={'270px'}
-          w={'full'}
-          bg={useColorModeValue('white', 'gray.800')}
-          boxShadow={'2xl'}
-          rounded={'md'}
-          overflow={'hidden'}>
-          {/* <Image
+const UserProfileCard: React.FC<IUserProfileCardProps> = ({ user }) => {
+  const router = useRouter();
+
+  return (
+    <Center py={6}>
+      <Box maxW={'270px'} minW={'270px'} w={'full'} bg={useColorModeValue('white', 'gray.800')} boxShadow={'2xl'} rounded={'md'} overflow={'hidden'}>
+        {/* <Image
             h={'120px'}
             w={'full'}
             src={
@@ -39,50 +22,48 @@ const UserProfileCard: React.FC<IUserProfileCardProps> = ({userName, sportType, 
             }
             objectFit={'cover'}
           /> */}
-          <Flex justify='center' mt={6}>
-            <UserAvatar userName={userName}/>
-            </Flex>
-          <Box p={6}>
-            <Stack spacing={0} align={'center'} mb={5}>
-              <Heading fontSize={'2xl'} fontWeight={500} fontFamily={'body'}>
-                {userName}
-              </Heading>
-              {sportType && <Text color={'gray.500'}>{sportType} </Text>}
-                {gender && <Text color={'gray.500'}>{gender}</Text>}
-                {liftingLevel && <Text color={'gray.500'}>{liftingLevel + 'Lifter'}</Text>}
-            </Stack>
-  
-            <Stack direction={'row'} justify={'center'} spacing={6}>
-              <Stack spacing={0} align={'center'}>
-                <Text fontWeight={600}>23k</Text>
-                <Text fontSize={'sm'} color={'gray.500'}>
-                  Followers
-                </Text>
-              </Stack>
-              <Stack spacing={0} align={'center'}>
-                <Text fontWeight={600}>23k</Text>
-                <Text fontSize={'sm'} color={'gray.500'}>
-                  Followers
-                </Text>
-              </Stack>
-            </Stack>
-  
-            <Button
-              w={'full'}
-              mt={8}
-              bg={useColorModeValue('#151f21', 'gray.900')}
-              color={'white'}
-              rounded={'md'}
-              _hover={{
-                transform: 'translateY(-2px)',
-                boxShadow: 'lg',
-              }}>
-              Follow
-            </Button>
-          </Box>
-        </Box>
-      </Center>
-    );
-  }
+        <Flex justify="center" mt={6}>
+          <UserAvatar userName={user?.userName} />
+        </Flex>
+        <Box p={6}>
+          <Stack spacing={0} align={'center'} mb={5}>
+            <Heading fontSize={'2xl'} fontWeight={500} fontFamily={'body'}>
+              {user?.userName}
+            </Heading>
+          </Stack>
 
-  export default UserProfileCard;
+          <Stack direction={'row'} justify={'center'} spacing={6}>
+            <Stack spacing={0} align={'center'}>
+              <Text fontWeight={600}>{user?.workoutDayCount}</Text>
+              <Text fontSize={'sm'} color={'gray.500'}>
+                Days Logged
+              </Text>
+            </Stack>
+            <Stack spacing={0} align={'center'}>
+              <Text fontWeight={600}>{user?.personalBestCount}</Text>
+              <Text fontSize={'sm'} color={'gray.500'}>
+                Personal Bests
+              </Text>
+            </Stack>
+          </Stack>
+
+          <Button
+            w={'full'}
+            mt={8}
+            bg={useColorModeValue('#151f21', 'gray.900')}
+            color={'white'}
+            rounded={'md'}
+            onClick={() => router.push(`${PROFILE_URL}/${user?.userName}`)}
+            _hover={{
+              transform: 'translateY(-2px)',
+              boxShadow: 'lg',
+            }}>
+            View Profile
+          </Button>
+        </Box>
+      </Box>
+    </Center>
+  );
+};
+
+export default UserProfileCard;

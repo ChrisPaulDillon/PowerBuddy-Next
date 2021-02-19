@@ -9,10 +9,10 @@ interface IProps {
 
 const UserList: React.FC<IProps> = ({ publicUsers }) => {
   return (
-    <Flex wrap="wrap" justify='center'>
+    <Flex wrap="wrap" justify="center">
       {publicUsers.map((x, idx) => (
         <Box key={idx} p={2}>
-          <UserProfileCard userName={x.userName} sportType={x.sportType} gender={x.gender} liftingLevel={x.liftingLevel}/>
+          <UserProfileCard user={x} />
         </Box>
       ))}
     </Flex>
