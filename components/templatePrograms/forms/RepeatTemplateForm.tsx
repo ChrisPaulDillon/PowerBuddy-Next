@@ -1,12 +1,13 @@
 import { IWeightInput } from 'powerbuddy-shared';
 import React, { useState } from 'react';
 import { Select, Switch } from '../../../chakra/Forms';
-import { Box, Flex } from '../../../chakra/Layout';
+import { Box, Flex, Stack } from '../../../chakra/Layout';
+import { Text } from '../../../chakra/Typography';
 import { FormWeightInput } from '../../common/Inputs';
 import { PbStack } from '../../common/Stacks';
 import { staticNumberList } from '../../common/static';
-import { TextSm, TextXs } from '../../common/Texts';
-import { CenterColumnFlex } from '../../layout/Flexes';
+import { TextSm } from '../../common/Texts';
+import { useUserContext } from '../../users/UserContext';
 
 interface IProps {
   incrementalWeightInput: IWeightInput[];
@@ -16,30 +17,35 @@ interface IProps {
 
 const RepeatTemplateForm: React.FC<IProps> = ({ incrementalWeightInput, updateIncrementalWeightInput, updateRepeatProgramCount }) => {
   const [repeatEnabled, setRepeatEnabled] = useState<boolean>(false);
+  const { weightType } = useUserContext();
 
   return (
-    <CenterColumnFlex>
-      <Flex>
+    <Box>
+      <Flex justify="center">
         <TextSm pr="2">Repeat Program?</TextSm>
-        <Switch onChange={() => setRepeatEnabled(!repeatEnabled)} />
+        <Switch onChange={() => setRepeatEnabled(!repeatEnabled)} isDisabled />
       </Flex>
-      {repeatEnabled ? (
+      {repeatEnabled && (
         <Box>
-          <TextXs m="3">I will increase my lifts every cycle by:</TextXs>
+          <Text my={4} fontWeight={400} textAlign="center">
+            I will increase my lifts every cycle by:
+          </Text>
           {incrementalWeightInput.map((x, idx) => (
             <PbStack key={idx}>
-              <TextSm>{x.exerciseName}</TextSm>
+              <Text>{x.exerciseName}</Text>
               <FormWeightInput
                 name={x.exerciseId!.toString()}
                 defaultValue={x.weight ?? 0}
                 maxW="100px"
                 onChange={(e) => updateIncrementalWeightInput(x.exerciseId, parseInt(e))}
               />
-              kg
+              {weightType}
             </PbStack>
           ))}
-          <PbStack>
-            <TextXs mr="1">I want to repeat this program cycle</TextXs>
+          <Stack isInline justify="center" my={6}>
+            <Text mr="1" fontWeight={400}>
+              I want to repeat this program cycle
+            </Text>
             <Select
               placeholder="1"
               defaultValue={1}
@@ -53,11 +59,13 @@ const RepeatTemplateForm: React.FC<IProps> = ({ incrementalWeightInput, updateIn
                 </option>
               ))}
             </Select>
-            <TextXs ml="1">times </TextXs>
-          </PbStack>
+            <Text ml="1" fontWeight={400}>
+              times{' '}
+            </Text>
+          </Stack>
         </Box>
-      ) : null}
-    </CenterColumnFlex>
+      )}
+    </Box>
   );
 };
 

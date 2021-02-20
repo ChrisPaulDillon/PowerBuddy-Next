@@ -8,7 +8,7 @@ export const FormButton: React.FC<ButtonProps> = ({ children, ...rest }) => {
   return (
     <LightMode>
       <Box my={5}>
-        <Button colorScheme="whatsapp" type="submit" isFullWidth {...rest}>
+        <Button color="white" type="submit" isFullWidth {...rest}>
           <TextSm fontWeight="light">{children}</TextSm>
         </Button>
       </Box>
@@ -26,7 +26,7 @@ export const PrimaryButton: React.FC<ButtonProps> = ({ children, ...rest }) => {
 
 export const SecondaryButton: React.FC<ButtonProps> = ({ children, ...rest }) => {
   return (
-    <Button colorScheme="red" {...rest}>
+    <Button color="white" colorScheme="red" {...rest}>
       {children}
     </Button>
   );

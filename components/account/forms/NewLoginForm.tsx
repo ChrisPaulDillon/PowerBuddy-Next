@@ -9,6 +9,7 @@ import { TextError } from '../../common/Texts';
 import { REGISTER_URL } from '../../../InternalLinks';
 import { IFormProps } from '../../forms/Forms';
 import { FormHeader } from '../../forms/FormHeader';
+import { FormButton } from '../../common/Buttons';
 
 const NewLoginForm: React.FC<IFormProps> = ({ register, errorMessage, loading }) => {
   return (
@@ -23,9 +24,9 @@ const NewLoginForm: React.FC<IFormProps> = ({ register, errorMessage, loading })
             </FormControl>
             <PasswordField ref={register} />
             {errorMessage !== '' && <TextError textAlign="center">{errorMessage}</TextError>}
-            <Button type="submit" bg={mode('blue.400', 'blue.400')} size="lg" fontSize="md" isLoading={loading}>
+            <FormButton bg={mode('blue.400', 'blue.400')} size="lg" fontSize="md" isLoading={loading}>
               Sign in
-            </Button>
+            </FormButton>
           </Stack>
           <DividerWithText mt="6">or continue with</DividerWithText>
           <SimpleGrid mt="6" columns={3} spacing="3">

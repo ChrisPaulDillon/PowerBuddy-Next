@@ -9,6 +9,7 @@ import { TextError } from '../../common/Texts';
 import { LOGIN_URL } from '../../../InternalLinks';
 import { IFormProps } from '../../forms/Forms';
 import { FormHeader } from '../../forms/FormHeader';
+import { FormButton } from '../../common/Buttons';
 
 const NewRegisterForm: React.FC<IFormProps> = ({ register, errorMessage, loading }) => {
   return (
@@ -27,21 +28,21 @@ const NewRegisterForm: React.FC<IFormProps> = ({ register, errorMessage, loading
             </FormControl>
             <PasswordField ref={register} />
             {errorMessage !== '' && <TextError textAlign="center">{errorMessage}</TextError>}
-            <Button type="submit" colorScheme="blue" size="lg" fontSize="md" isLoading={loading}>
+            <FormButton colorScheme="blue" size="lg" fontSize="md" isLoading={loading}>
               Register
-            </Button>
+            </FormButton>
           </Stack>
           <DividerWithText mt="6">or register with</DividerWithText>
           <SimpleGrid mt="6" columns={3} spacing="3">
-            <Button bg="white" variant="outline">
+            <Button bg={mode('white', 'gray.700')} variant="outline">
               <VisuallyHidden>Register with Facebook</VisuallyHidden>
               <FaFacebook />
             </Button>
-            <Button bg="white" variant="outline">
+            <Button bg={mode('white', 'gray.700')} variant="outline">
               <VisuallyHidden>Register with Google</VisuallyHidden>
               <FaGoogle />
             </Button>
-            <Button bg="white" variant="outline">
+            <Button bg={mode('white', 'gray.700')} variant="outline">
               <VisuallyHidden>Register with Github</VisuallyHidden>
               <FaGithub />
             </Button>

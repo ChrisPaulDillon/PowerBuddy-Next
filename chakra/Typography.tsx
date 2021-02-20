@@ -4,7 +4,7 @@ import theme from '../theme';
 export const Text: React.FC<TextProps> = ({ ...rest }) => {
   const { colorMode } = useColorMode();
 
-  return <ChakraText color={theme.colors.iconColor[colorMode]} {...rest} />;
+  return <ChakraText color={theme.colors.textColor[colorMode]} {...rest} />;
 };
 
 export const Heading: React.FC<HeadingProps> = ({ ...rest }) => {

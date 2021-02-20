@@ -11,9 +11,11 @@ import RepeatTemplateForm from './RepeatTemplateForm';
 import { ITemplateProgramExtended, IWeightInput, IWorkoutLogTemplateInput } from 'powerbuddy-shared';
 import { useUserContext } from '../../users/UserContext';
 import axios from 'axios';
-import { CreateWorkoutLogFromTemplateUrl } from '../../../api/account/workoutLog';
+import { CreateWorkoutLogFromTemplateUrl, GetWorkoutLogCalendarDatesUrl } from '../../../api/account/workoutLog';
 import { Box } from '../../../chakra/Layout';
 import useFireToast from '../../../hooks/useFireToast';
+import { WORKOUT_LOG_EXISTS_ON_DATE } from '../../../api/apiResponseCodes';
+import { useAxios } from '../../../hooks/useAxios';
 
 interface IProps {
   onClose: () => void;
@@ -23,7 +25,7 @@ interface IProps {
 
 const CreateProgramLogFromTemplateForm: React.FC<IProps> = ({ onClose, template, onCreateSuccessOpen }) => {
   const { userId } = useUserContext();
-  // const { data: calendarData, loading: calendarLoading } = useAxios<IProgramLogCalendarStats>(GetAllProgramLogCalendarStatsQueryUrl());
+  const { data: calendarData } = useAxios<Date[]>(GetWorkoutLogCalendarDatesUrl());
   const [weightInput, setWeightInputs] = useState<IWeightInput[]>();
   const [curWeightInputs, setCurWeightInputs] = useState<IWeightInput[]>([]);
   const [calendarDate, setCalendarDate] = useState<DayValue>();
@@ -110,8 +112,8 @@ const CreateProgramLogFromTemplateForm: React.FC<IProps> = ({ onClose, template,
         onClose();
         onCreateSuccessOpen();
       } catch (error) {
-        if (error?.response?.status === 400) {
-          toast.Warning('You already have a diary entry active for this time period!');
+        if (error?.response?.data?.code === WORKOUT_LOG_EXISTS_ON_DATE) {
+          toast.Warning(`This new log clashes with your program ${error?.response?.data?.message}`);
         } else {
           toast.Error('Diary could not be created, please try again later');
         }
@@ -123,12 +125,7 @@ const CreateProgramLogFromTemplateForm: React.FC<IProps> = ({ onClose, template,
     <form onSubmit={handleSubmit(onSubmit)}>
       {phase === 1 && (
         <Box display={phase === 1 ? 'inline' : 'none'}>
-          <CalendarSelectFrom
-            selectedDate={selectedDate}
-            calendarDate={calendarDate}
-            setCalendarDate={setCalendarDate}
-            // workoutDates={calendarData?.workoutDates!}
-          />
+          <CalendarSelectFrom selectedDate={selectedDate} calendarDate={calendarDate} setCalendarDate={setCalendarDate} workoutDates={calendarData} />
         </Box>
       )}
       {phase === 2 && (

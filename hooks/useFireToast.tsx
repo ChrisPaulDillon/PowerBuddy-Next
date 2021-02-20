@@ -3,7 +3,7 @@ import React from 'react';
 import { ToastAvatar, ToastError, ToastSuccess, ToastWarning } from '../components/common/CustomToasts';
 import { isMobile } from 'react-device-detect';
 
-const TOAST_POSITION = isMobile ? ('bottom-left' as ToastPosition) : ('top' as ToastPosition);
+const TOAST_POSITION = isMobile ? ('bottom' as ToastPosition) : ('top' as ToastPosition);
 const DURATION = 2500 as number;
 
 const useFireToast = () => {

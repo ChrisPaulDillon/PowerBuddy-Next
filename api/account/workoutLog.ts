@@ -34,4 +34,4 @@ export const CreateWorkoutLogFromTemplateUrl = (templateWorkoutId: number) =>
 
 export const DeleteWorkoutLogUrl = (workoutLogId: number) => `${baseUrl}/${workoutLogId}`;
 
-export const GetAllWorkoutLogCalendarStatsQueryUrl = () => `${baseUrl}/Calendar`;
+export const GetWorkoutLogCalendarDatesUrl = () => `${baseUrl}/Calendar`;
