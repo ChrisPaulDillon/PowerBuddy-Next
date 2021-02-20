@@ -4,7 +4,6 @@ import { Heading, Box, Center, Flex, Text, Stack, useColorModeValue } from '@cha
 import { IPublicUser } from 'powerbuddy-shared/lib';
 import { useRouter } from 'next/router';
 import { PROFILE_URL } from '../../InternalLinks';
-import { Button } from '../../chakra/Forms';
 import { PrimaryButton } from '../common/Buttons';
 
 interface IUserProfileCardProps {

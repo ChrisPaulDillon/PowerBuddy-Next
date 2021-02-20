@@ -25,7 +25,7 @@ interface IProps {
 
 const CreateProgramLogFromTemplateForm: React.FC<IProps> = ({ onClose, template, onCreateSuccessOpen }) => {
   const { userId } = useUserContext();
-  const { data: calendarData, loading: calendarLoading } = useAxios<Date[]>(GetWorkoutLogCalendarDatesUrl());
+  const { data: calendarData } = useAxios<Date[]>(GetWorkoutLogCalendarDatesUrl());
   const [weightInput, setWeightInputs] = useState<IWeightInput[]>();
   const [curWeightInputs, setCurWeightInputs] = useState<IWeightInput[]>([]);
   const [calendarDate, setCalendarDate] = useState<DayValue>();

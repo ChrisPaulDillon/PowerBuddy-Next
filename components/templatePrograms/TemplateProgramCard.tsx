@@ -1,4 +1,4 @@
-import { Badge, useColorMode, useColorModeValue } from '@chakra-ui/react';
+import { Badge, useColorMode } from '@chakra-ui/react';
 import Link from 'next/link';
 import { ITemplateProgram } from 'powerbuddy-shared/lib';
 import React from 'react';
