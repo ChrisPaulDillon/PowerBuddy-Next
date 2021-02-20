@@ -5,6 +5,7 @@ import { IPublicUser } from 'powerbuddy-shared/lib';
 import { useRouter } from 'next/router';
 import { PROFILE_URL } from '../../InternalLinks';
 import { Button } from '../../chakra/Forms';
+import { PrimaryButton } from '../common/Buttons';
 
 interface IUserProfileCardProps {
   user: IPublicUser;
@@ -49,9 +50,9 @@ const UserProfileCard: React.FC<IUserProfileCardProps> = ({ user }) => {
             </Stack>
           </Stack>
 
-          <Button w={'full'} mt={8} onClick={() => router.push(`${PROFILE_URL}/${user?.userName}`)}>
+          <PrimaryButton w={'full'} mt={8} onClick={() => router.push(`${PROFILE_URL}/${user?.userName}`)}>
             View Profile
-          </Button>
+          </PrimaryButton>
         </Box>
       </Box>
     </Center>

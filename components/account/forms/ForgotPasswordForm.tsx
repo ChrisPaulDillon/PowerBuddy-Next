@@ -1,11 +1,12 @@
 import React from 'react';
 import { Box, Stack } from '../../../chakra/Layout';
 import { useColorModeValue as mode } from '@chakra-ui/react';
-import { Button, FormControl, FormLabel, Input } from '../../../chakra/Forms';
+import { FormControl, FormLabel, Input } from '../../../chakra/Forms';
 import { TextError } from '../../common/Texts';
 import { IFormProps } from '../../forms/Forms';
 import { FormHeader } from '../../forms/FormHeader';
 import { LOGIN_URL } from '../../../InternalLinks';
+import { FormButton } from '../../common/Buttons';
 
 const ForgotPasswordForm: React.FC<IFormProps> = ({ register, errorMessage, loading }) => {
   return (
@@ -19,9 +20,9 @@ const ForgotPasswordForm: React.FC<IFormProps> = ({ register, errorMessage, load
               <Input name="email" type="email" autoComplete="email" isRequired ref={register} />
             </FormControl>
             {errorMessage !== '' && <TextError textAlign="center">{errorMessage}</TextError>}
-            <Button type="submit" colorScheme="blue" size="lg" fontSize="md" isLoading={loading}>
+            <FormButton type="submit" colorScheme="blue" size="lg" fontSize="md" isLoading={loading}>
               Reset
-            </Button>
+            </FormButton>
           </Stack>
         </Box>
       </Box>
