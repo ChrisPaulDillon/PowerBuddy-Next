@@ -1,7 +1,7 @@
 import { Box, Flex, useDisclosure } from '@chakra-ui/react';
 import axios from 'axios';
 import moment from 'moment';
-import { ILiftingStat, IWorkoutDay } from 'powerbuddy-shared/lib';
+import { ILiftingStat, IWorkoutDay } from 'powerbuddy-shared';
 import React, { useMemo, useState } from 'react';
 import { AiOutlineMore } from 'react-icons/ai';
 import { BiDumbbell } from 'react-icons/bi';
@@ -18,9 +18,8 @@ import TTIconButton from '../common/IconButtons';
 import MenuBase, { IMenuItem } from '../common/Menus';
 import { ModalDrawerForm, PbModalDrawer } from '../common/ModalDrawers';
 import { PbStack } from '../common/Stacks';
-import { HeadingMd, TextXs } from '../common/Texts';
+import { HeadingMd } from '../common/Texts';
 import { CardNoShadow } from '../layout/Card';
-import { CenterColumnFlex } from '../layout/Flexes';
 import { BadgeWorkoutName } from '../../shared/layout/Badges';
 import NotifiyPersonalBestAlert from './alerts/NotifyPersonalBestAlert';
 import AddExerciseForm from './forms/AddExerciseForm';
@@ -29,6 +28,7 @@ import AddWorkoutTemplateForm from './forms/AddWorkoutTemplateForm';
 import { useWorkoutContext } from './WorkoutContext';
 import WorkoutExercise from './WorkoutExercise';
 import { useForm } from 'react-hook-form';
+import { Text } from '../../chakra/Typography';
 
 interface IProps {
   workoutDay: IWorkoutDay;
@@ -120,32 +120,41 @@ const WorkoutDayContainer: React.FC<IProps> = ({ workoutDay }) => {
     { href: '#', name: dateHighlighted ? 'Todays Workout' : moment(workoutDay.date).format('dddd Do MMM') },
   ];
 
-  const { register, handleSubmit, errors, formState } = useForm();
+  const { register, handleSubmit, formState } = useForm();
 
   const workoutDayBar: React.ReactNode = useMemo(
     () => (
       <Flex>
         {' '}
-        <TTIconButton
-          label="Complete Workout"
-          Icon={FcCheckmark}
-          color={workoutDay?.completed ? 'green.500' : 'gray.500'}
-          onClick={() => updateWorkoutDay()}
-          isLoading={loading}
-          isDisabled={dayEnabled || contentDisabled}
-        />
-        <TTIconButton
-          label="Add New Exercise"
-          Icon={BiDumbbell}
-          color="blue.500"
-          fontSize="25px"
-          onClick={onAddExerciseOpen}
-          isDisabled={contentDisabled}
-        />
-        <MenuBase
-          button={<TTIconButton label="Additional Options" Icon={AiOutlineMore} onClick={() => undefined} isDisabled={contentDisabled} />}
-          menuItems={menuItems}
-        />
+        <Box mx={1}>
+          <TTIconButton
+            label="Complete Workout"
+            Icon={FcCheckmark}
+            color={workoutDay?.completed ? 'green.500' : 'gray.500'}
+            fontSize="30px"
+            onClick={() => updateWorkoutDay()}
+            isLoading={loading}
+            isDisabled={dayEnabled || contentDisabled}
+          />
+        </Box>
+        <Box mx={1}>
+          <TTIconButton
+            label="Add New Exercise"
+            Icon={BiDumbbell}
+            color="gray.500"
+            fontSize="30px"
+            onClick={onAddExerciseOpen}
+            isDisabled={contentDisabled}
+          />
+        </Box>
+        <Box mx={1}>
+          <MenuBase
+            button={
+              <TTIconButton label="Additional Options" Icon={AiOutlineMore} onClick={() => undefined} isDisabled={contentDisabled} fontSize="25px" />
+            }
+            menuItems={menuItems}
+          />
+        </Box>
       </Flex>
     ),
     [contentDisabled]
@@ -154,11 +163,7 @@ const WorkoutDayContainer: React.FC<IProps> = ({ workoutDay }) => {
   return (
     <Box>
       <BreadcrumbBase values={breadcrumbInput} />
-      {workoutDay?.userName && (
-        <HeadingMd textAlign="center" mt={[4, 3, 2, 1]}>
-          {workoutDay?.userName}'s Diary
-        </HeadingMd>
-      )}
+      {workoutDay?.userName && <HeadingMd mt={[7, 7, 0, 0]}>{workoutDay?.userName}'s Diary</HeadingMd>}
       <CardNoShadow borderWidth="0.5px" minH="250px" w="100%" p="2" my="5">
         <PbStack mb={1} w="100%">
           {workoutDayBar}
@@ -166,10 +171,10 @@ const WorkoutDayContainer: React.FC<IProps> = ({ workoutDay }) => {
         </PbStack>
 
         <Box p="2">
-          {workoutDay?.workoutExercises == null ? (
-            <CenterColumnFlex mt="5">
-              <TextXs>No exercises found, click the weight icon to get started!</TextXs>
-            </CenterColumnFlex>
+          {workoutDay?.workoutExercises?.length <= 0 ? (
+            <Text textAlign="center" mt={6}>
+              No exercises found, click the weight icon to get started!
+            </Text>
           ) : (
             workoutDay?.workoutExercises.map((we, idx) => (
               <Box key={idx}>
