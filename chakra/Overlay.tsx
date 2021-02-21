@@ -76,12 +76,13 @@ export const ModalCloseButton: React.FC<CloseButtonProps> = ({ ...rest }) => {
 };
 
 interface IDrawerExtendedProps extends ModalProps {
+  placement: any;
   isOpen: boolean;
   onClose: () => void;
 }
 
-export const Drawer: React.FC<IDrawerExtendedProps> = ({ isOpen, onClose, ...rest }) => {
-  return <ChakraDrawer isOpen={isOpen} onClose={onClose} {...rest} />;
+export const Drawer: React.FC<IDrawerExtendedProps> = ({ isOpen, onClose, placement, ...rest }) => {
+  return <ChakraDrawer isOpen={isOpen} onClose={onClose} placement={placement} {...rest} />;
 };
 
 export const DrawerHeader: React.FC<ModalHeaderProps> = ({ ...rest }) => {

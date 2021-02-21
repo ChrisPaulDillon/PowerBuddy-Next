@@ -1,11 +1,10 @@
 import React from 'react';
-import { Drawer, DrawerOverlay, DrawerContent, DrawerHeader, DrawerBody, Flex } from '@chakra-ui/react';
 import { CenterColumnFlex } from '../layout/Flexes';
 import { PrimaryButton } from './Buttons';
 import { PlacementType, SizeType } from '../../types/unionTypes';
-import { DrawerCloseButton } from '@chakra-ui/react';
 import { Box } from '../../chakra/Layout';
 import { HeadingMd } from './Texts';
+import { Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay } from '../../chakra/Overlay';
 
 interface IDrawerBaseProps {
   title: string | React.ReactNode;
