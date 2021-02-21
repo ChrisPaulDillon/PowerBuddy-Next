@@ -107,8 +107,7 @@ const CreateProgramLogFromScratchForm: React.FC<IProps> = ({ onClose, onCreateSu
           </FormControl>
           <CalendarSelectFrom
             selectedDate={selectedDate}
-            calendarDate={calendarDate}
-            setCalendarDate={setCalendarDate}
+            setSelectedDate={setSelectedDate}
             // workoutDates={calendarData?.workoutDates}
           />
         </Box>

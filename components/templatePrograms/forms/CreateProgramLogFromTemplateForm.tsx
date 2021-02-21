@@ -28,7 +28,6 @@ const CreateProgramLogFromTemplateForm: React.FC<IProps> = ({ onClose, template,
   const { data: calendarData } = useAxios<Date[]>(GetWorkoutLogCalendarDatesUrl());
   const [weightInput, setWeightInputs] = useState<IWeightInput[]>();
   const [curWeightInputs, setCurWeightInputs] = useState<IWeightInput[]>([]);
-  const [calendarDate, setCalendarDate] = useState<DayValue>();
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [, setRepeatProgramCount] = useState<number>(1);
   const [incrementalWeightInput, setIncrementalWeightInput] = useState<IWeightInput[]>([]);
@@ -42,21 +41,21 @@ const CreateProgramLogFromTemplateForm: React.FC<IProps> = ({ onClose, template,
   const [sunChecked, setSunChecked] = useState<boolean>(false);
   const toast = useFireToast();
 
-  useEffect(() => {
-    if (calendarDate) {
-      const calDate = `${calendarDate.month}/${calendarDate.day}/${calendarDate.year}`;
-      const momentDate = moment(calDate).toDate();
-      setSelectedDate(momentDate);
+  // useEffect(() => {
+  //   if (calendarDate) {
+  //     const calDate = `${calendarDate.month}/${calendarDate.day}/${calendarDate.year}`;
+  //     const momentDate = moment(calDate).toDate();
+  //     setSelectedDate(momentDate);
 
-      moment(momentDate).day() === 1 ? setMonChecked(true) : setMonChecked(false);
-      moment(momentDate).day() === 2 ? setTueChecked(true) : setTueChecked(false);
-      moment(momentDate).day() === 3 ? setWedChecked(true) : setWedChecked(false);
-      moment(momentDate).day() === 4 ? setThuChecked(true) : setThuChecked(false);
-      moment(momentDate).day() === 5 ? setFriChecked(true) : setFriChecked(false);
-      moment(momentDate).day() === 6 ? setSatChecked(true) : setSatChecked(false);
-      moment(momentDate).day() === 0 ? setSunChecked(true) : setSunChecked(false);
-    }
-  }, [calendarDate]);
+  //     moment(momentDate).day() === 1 ? setMonChecked(true) : setMonChecked(false);
+  //     moment(momentDate).day() === 2 ? setTueChecked(true) : setTueChecked(false);
+  //     moment(momentDate).day() === 3 ? setWedChecked(true) : setWedChecked(false);
+  //     moment(momentDate).day() === 4 ? setThuChecked(true) : setThuChecked(false);
+  //     moment(momentDate).day() === 5 ? setFriChecked(true) : setFriChecked(false);
+  //     moment(momentDate).day() === 6 ? setSatChecked(true) : setSatChecked(false);
+  //     moment(momentDate).day() === 0 ? setSunChecked(true) : setSunChecked(false);
+  //   }
+  // }, [calendarDate]);
 
   useEffect(() => {
     weightInput && setCurWeightInputs(weightInput);
@@ -124,8 +123,8 @@ const CreateProgramLogFromTemplateForm: React.FC<IProps> = ({ onClose, template,
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {phase === 1 && (
-        <Box display={phase === 1 ? 'inline' : 'none'}>
-          <CalendarSelectFrom selectedDate={selectedDate} calendarDate={calendarDate} setCalendarDate={setCalendarDate} workoutDates={calendarData} />
+        <Box>
+          <CalendarSelectFrom selectedDate={selectedDate} setSelectedDate={setSelectedDate} workoutDates={calendarData} />
         </Box>
       )}
       {phase === 2 && (

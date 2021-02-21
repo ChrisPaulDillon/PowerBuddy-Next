@@ -35,7 +35,7 @@ const Index: NextPage = () => {
     };
     const response = await LoginUserRequest(user);
     if (response?.data) {
-      toast.Success('Successfully Signed In');
+      toast.Success('Successfully signed in');
       handleAuthenticationTokens(response.data.accessToken, response.data.refreshToken);
       const claimsValues = decodeJwtToken(response.data.accessToken);
       SetValues(claimsValues);

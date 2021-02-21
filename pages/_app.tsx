@@ -11,6 +11,8 @@ import { NextComponentType } from 'next';
 import { PageHead } from '../components/layout/Page';
 import { RefreshRequest } from '../api/account/auth';
 
+import '../components/common/ModernCalendar.css';
+
 if (process.env.NODE_ENV !== 'production') {
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 }

@@ -6,16 +6,15 @@ import ModernCalendar from '../../common/ModernCalendar';
 import { DayValue } from 'react-modern-calendar-datepicker';
 
 interface IProps {
-  selectedDate: Date | undefined;
-  calendarDate: DayValue | undefined;
-  setCalendarDate: any;
+  selectedDate: Date;
+  setSelectedDate: any;
   workoutDates?: Array<Date>;
 }
 
-const CalendarSelectFrom: React.FC<IProps> = ({ selectedDate, calendarDate, setCalendarDate, workoutDates }) => {
+const CalendarSelectFrom: React.FC<IProps> = ({ selectedDate, setSelectedDate, workoutDates }) => {
   return (
     <CenterColumnFlex>
-      <ModernCalendar calendarDate={calendarDate} setCalendarDate={setCalendarDate} workoutDates={workoutDates} />
+      <ModernCalendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} workoutDates={workoutDates} />
       <TextXs mt="2">You have selected {moment(selectedDate).format('MMM Do YY')} as your start date</TextXs>
     </CenterColumnFlex>
   );

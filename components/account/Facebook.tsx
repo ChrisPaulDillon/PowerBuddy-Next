@@ -21,7 +21,7 @@ export const Facebook = ({ onClose }) => {
         handleAuthenticationTokens(response.data.accessToken, response.data.refreshToken);
         const claimsValues = decodeJwtToken(response.data.accessToken);
         SetValues(claimsValues);
-        toast.Success('Successfully Signed In');
+        toast.Success('Successfully signed in');
         onClose();
       })
       .catch((err) => {
