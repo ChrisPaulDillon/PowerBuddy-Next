@@ -8,7 +8,6 @@ import { useForm } from 'react-hook-form';
 import { LoginUserRequest } from '../../../api/account/auth';
 import { EMAIL_NOT_CONFIRMED, INVALID_CREDENTIALS, USER_NOT_FOUND, ACCOUNT_LOCKOUT } from '../../../api/apiResponseCodes';
 import { SendEmailConfirmationUrl } from '../../../api/public/email';
-import NewLoginForm from '../../../shared/account/LoginForm';
 import { TextXs } from '../../../components/common/Texts';
 import { useUserContext } from '../../../components/users/UserContext';
 import useFireToast from '../../../hooks/useFireToast';

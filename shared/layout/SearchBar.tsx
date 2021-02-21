@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BoxProps, Input } from '@chakra-ui/react';
 
 interface ISearchBarProps extends BoxProps {

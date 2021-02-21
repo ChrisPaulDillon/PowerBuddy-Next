@@ -13,7 +13,7 @@ const WorkoutDaySummarySingle: React.FC<IWorkoutDaySummary> = ({ date, personalB
       <Box py={1}>
         <TagPersonalBest body={`${personalBestCount} PBs`} />
       </Box>
-      {workoutExerciseSummaries!.map((x, idx) => (
+      {workoutExerciseSummaries?.map((x, idx) => (
         <Flex key={idx}>
           <TextXs>{x.exerciseName}</TextXs>
           <TextXs>{x.noOfSets}</TextXs>

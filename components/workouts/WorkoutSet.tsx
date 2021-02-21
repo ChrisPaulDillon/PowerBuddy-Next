@@ -17,7 +17,7 @@ interface ISetProps {
 const WorkoutSet: React.FC<ISetProps> = memo(({ set, date, workoutSets = [], workoutDayId }) => {
   const { workoutSetId, weightLifted, noOfReps, repsCompleted, personalBest } = set;
   const [repEnabled] = useState<boolean>(moment(date).isAfter(new Date()) ? true : false);
-  const [currentReps, setCurrentReps] = useState<number>(repsCompleted ?? noOfReps!);
+  const [currentReps, setCurrentReps] = useState<number>(repsCompleted ?? noOfReps);
   const [tagType, setTagType] = useState<RepSchemeTagEnum>(RepSchemeTagEnum.None);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -32,8 +32,8 @@ const WorkoutSet: React.FC<ISetProps> = memo(({ set, date, workoutSets = [], wor
   }, [set]);
 
   const determineColor = useCallback(() => {
-    if (currentReps === noOfReps!) return 'green.300';
-    if (noOfReps! - currentReps < 3) return 'orange';
+    if (currentReps === noOfReps) return 'green.300';
+    if (noOfReps - currentReps < 3) return 'orange';
     return 'red';
   }, []);
 
@@ -43,8 +43,8 @@ const WorkoutSet: React.FC<ISetProps> = memo(({ set, date, workoutSets = [], wor
     let newRep = 0;
     if (currentReps < 1) {
       setRepColor('green.300');
-      newRep = noOfReps!;
-    } else if (noOfReps! - currentReps < 3) {
+      newRep = noOfReps;
+    } else if (noOfReps - currentReps < 3) {
       setRepColor('orange');
       newRep = currentReps - 1;
     } else {
