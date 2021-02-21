@@ -2,7 +2,7 @@ import React from 'react';
 import { CenterColumnFlex } from '../layout/Flexes';
 import { PrimaryButton } from './Buttons';
 import { PlacementType, SizeType } from '../../types/unionTypes';
-import { Box } from '../../chakra/Layout';
+import { Box, Flex } from '../../chakra/Layout';
 import { HeadingMd } from './Texts';
 import { Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay } from '../../chakra/Overlay';
 
