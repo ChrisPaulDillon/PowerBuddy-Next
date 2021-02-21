@@ -9,7 +9,7 @@ import { FaRegCommentAlt } from 'react-icons/fa';
 import { FcCheckmark } from 'react-icons/fc';
 import { GiRun } from 'react-icons/gi';
 import { MdWarning } from 'react-icons/md';
-import { UpdateWorkoutUrl } from '../../api/account/workoutDay';
+import { UpdateWorkoutNoteUrl, UpdateWorkoutUrl } from '../../api/account/workoutDay';
 import { DeleteWorkoutLogUrl } from '../../api/account/workoutLog';
 import useFireToast from '../../hooks/useFireToast';
 import { WORKOUT_DIARY_URL } from '../../InternalLinks';
@@ -28,12 +28,13 @@ import AddWorkoutNoteForm from './forms/AddWorkoutNoteForm';
 import AddWorkoutTemplateForm from './forms/AddWorkoutTemplateForm';
 import { useWorkoutContext } from './WorkoutContext';
 import WorkoutExercise from './WorkoutExercise';
+import { useForm } from 'react-hook-form';
 
 interface IProps {
   workoutDay: IWorkoutDay;
 }
 
-const WorkoutDay: React.FC<IProps> = ({ workoutDay }) => {
+const WorkoutDayContainer: React.FC<IProps> = ({ workoutDay }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [] = useState<boolean>(workoutDay?.comment != null ? true : false);
   const [dayEnabled] = useState<boolean>(moment(workoutDay?.date).isAfter(new Date()) ? true : false);
@@ -42,7 +43,7 @@ const WorkoutDay: React.FC<IProps> = ({ workoutDay }) => {
   const [personalBests, setPersonalBests] = useState<ILiftingStat[]>([]);
   const [deleteLogLoading, setDeleteLogLoading] = useState<boolean>(false);
 
-  const { contentDisabled } = useWorkoutContext();
+  const { contentDisabled, UpdateDayNotes } = useWorkoutContext();
 
   const { isOpen: isAddExerciseOpen, onOpen: onAddExerciseOpen, onClose: onAddExerciseClose } = useDisclosure();
   const { isOpen: isDeleteLogOpen, onOpen: onDeleteLogOpen, onClose: onDeleteLogClose } = useDisclosure();
@@ -67,7 +68,7 @@ const WorkoutDay: React.FC<IProps> = ({ workoutDay }) => {
     setLoading(true);
     workoutDay.completed = true;
     try {
-      const response = await axios.put(UpdateWorkoutUrl(workoutDay.workoutDayId!), workoutDay);
+      const response = await axios.put(UpdateWorkoutUrl(workoutDay?.workoutDayId), workoutDay);
       if (response.data != null) {
         setPersonalBests(response.data);
       }
@@ -77,6 +78,17 @@ const WorkoutDay: React.FC<IProps> = ({ workoutDay }) => {
       workoutDay.completed = false;
     }
     setLoading(false);
+  };
+
+  const onAddNoteSubmit = async ({ note }) => {
+    try {
+      await axios.put(UpdateWorkoutNoteUrl(workoutDay?.workoutDayId, note));
+      UpdateDayNotes(note);
+      toast.Success('Successfully added notes');
+      onAddWorkoutNoteClose();
+    } catch (ex) {
+      toast.Error('Could not add notes to workout');
+    }
   };
 
   const menuItems = useMemo(
@@ -107,6 +119,8 @@ const WorkoutDay: React.FC<IProps> = ({ workoutDay }) => {
     { href: WORKOUT_DIARY_URL, name: 'Workout Diary' },
     { href: '#', name: dateHighlighted ? 'Todays Workout' : moment(workoutDay.date).format('dddd Do MMM') },
   ];
+
+  const { register, handleSubmit, errors, formState } = useForm();
 
   const workoutDayBar: React.ReactNode = useMemo(
     () => (
@@ -188,7 +202,9 @@ const WorkoutDay: React.FC<IProps> = ({ workoutDay }) => {
       )}
       {isAddWorkoutNoteOpen && (
         <ModalDrawerForm title="Add Workout Note" isOpen={isAddWorkoutNoteOpen} onClose={onAddWorkoutNoteClose}>
-          <AddWorkoutNoteForm workoutDayId={workoutDay.workoutDayId} onClose={onAddWorkoutNoteClose} note={workoutDay.comment!} />
+          <form onSubmit={handleSubmit(onAddNoteSubmit)}>
+            <AddWorkoutNoteForm register={register} loading={formState.isSubmitting} note={workoutDay?.comment} />
+          </form>
         </ModalDrawerForm>
       )}
       {isAddWorkoutTemplateOpen && (
@@ -200,4 +216,4 @@ const WorkoutDay: React.FC<IProps> = ({ workoutDay }) => {
   );
 };
 
-export default WorkoutDay;
+export default WorkoutDayContainer;

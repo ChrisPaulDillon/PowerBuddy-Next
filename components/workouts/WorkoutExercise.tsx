@@ -6,7 +6,6 @@ import { RiAddCircleLine } from 'react-icons/ri';
 import TTIconButton from '../common/IconButtons';
 import { ModalDrawerForm } from '../common/ModalDrawers';
 import { HeadingXs } from '../common/Texts';
-import { ProgramExerciseCard } from '../layout/Card';
 import { PERSONALBESTS_URL } from '../../InternalLinks';
 import theme from '../../theme';
 import { useWorkoutContext } from './WorkoutContext';
@@ -67,7 +66,7 @@ export const WorkoutExercise: React.FC<IExerciseProps> = ({ workoutExercise, dat
   );
 
   return (
-    <ProgramExerciseCard py={2}>
+    <Box bg={theme.colors.cardColor[colorMode]} position="relative" alignContent="center" justifyContent="center" textAlign="center" w="100%" py={2}>
       <Divider />
       <Flex justify={{ lg: 'initial', md: 'left', sm: 'center' }} alignItems={{ lg: 'initial', md: 'left', sm: 'center' }} wrap="wrap">
         <Flex maxW="100vw" mb={['5', '5', '5', '5']}>
@@ -119,7 +118,7 @@ export const WorkoutExercise: React.FC<IExerciseProps> = ({ workoutExercise, dat
           <DeleteWorkoutExerciseAlert onClose={onDeleteExerciseClose} workoutExerciseId={workoutExercise?.workoutExerciseId} />
         </ModalDrawerForm>
       )}
-    </ProgramExerciseCard>
+    </Box>
   );
 };
 

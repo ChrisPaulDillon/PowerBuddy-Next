@@ -9,11 +9,12 @@ import { ModalDrawerForm } from '../common/ModalDrawers';
 import useSignalR from '../../signalR/useSignalR';
 import { Flex } from '../../chakra/Layout';
 import Footer from './Footer';
+import { RefreshRequest } from '../../api/account/auth';
 
 const Layout = ({ children }: any) => {
   const { colorMode } = useColorMode();
   const [menuOpen, setMenuOpen] = useState(false);
-  const { isAuthenticated, firstVisit } = useUserContext();
+  const { isAuthenticated, firstVisit, SetValues } = useUserContext();
 
   const { onOpen, onClose } = useDisclosure();
 
@@ -24,6 +25,15 @@ const Layout = ({ children }: any) => {
       onOpen();
     }
   }, [firstVisit]);
+
+  useEffect(() => {
+    const RefreshToken = async (): Promise<void> => {
+      const refreshToken = localStorage.getItem('refreshToken');
+      const claimsValues = await RefreshRequest(refreshToken);
+      SetValues(claimsValues);
+    };
+    RefreshToken();
+  }, []);
 
   return (
     <Flex direction="column" m="0 auto" bgColor={theme.colors.background[colorMode]} mx={2}>

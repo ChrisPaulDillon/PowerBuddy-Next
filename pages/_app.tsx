@@ -27,16 +27,6 @@ export interface ModifiedAppInitialProps<A = { [key in string]: string }> {
 export interface ExtendedAppProps<P = { [key in string]: string }, A = { [key in string]: string }> extends AppProps<P>, ModifiedAppInitialProps<A> {}
 
 const MyApp: NextComponentType<AppContext, ModifiedAppInitialProps, ExtendedAppProps> = ({ Component, pageProps, appProps }) => {
-  const { SetValues } = useUserContext();
-
-  useEffect(() => {
-    const RefreshToken = async (): Promise<void> => {
-      const refreshToken = localStorage.getItem('refreshToken');
-      await RefreshRequest(refreshToken, SetValues);
-    };
-    RefreshToken();
-  }, []);
-
   return (
     <Provider store={store}>
       <UserProvider>

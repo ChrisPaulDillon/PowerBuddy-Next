@@ -6,7 +6,7 @@ import { PageContent, PageHead } from '../../components/layout/Page';
 import { Box } from '../../chakra/Layout';
 import { GetAllPublicWorkoutIdsRequest, GetWorkoutDayByIdRequest } from '../../api/public/workoutDay';
 import { useUserContext } from '../../components/users/UserContext';
-import WorkoutDay from '../../components/workouts/WorkoutDay';
+import WorkoutDay from '../../components/workouts/WorkoutDayContainer';
 
 interface IProps {
   workoutDayData: IWorkoutDay;

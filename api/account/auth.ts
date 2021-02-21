@@ -31,16 +31,14 @@ export const AcceptSmsConfirmationUrl = () =>
 
 
 
-export const RefreshRequest = async (refreshToken: string, SetValues: (claimsValues: IClaimsValues) => void) => {
+export const RefreshRequest = async (refreshToken: string): Promise<IClaimsValues> => {
     try {
       const response = await axios.post(RefreshTokenUrl(), {refreshToken : refreshToken});
       const claimsValues = decodeJwtToken(response.data.accessToken);
       handleAuthenticationTokens(response.data.accessToken, response.data.refreshToken);
-      SetValues(claimsValues);
-      
-      return response.data;
+      return claimsValues;
     } catch (err) {
-      return err?.response?.data as IErrorResponse;
+      return err?.response?.data;
     }
   }
   
