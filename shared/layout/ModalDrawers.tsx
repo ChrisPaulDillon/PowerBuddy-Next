@@ -2,7 +2,6 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { DeleteWorkoutLogUrl } from '../../api/account/workoutLog';
 import { PbModalDrawer } from '../../components/common/ModalDrawers';
-import { useWorkoutContext } from '../../components/workouts/WorkoutContext';
 import useFireToast from '../../hooks/useFireToast';
 
 interface IModalDrawerProps {

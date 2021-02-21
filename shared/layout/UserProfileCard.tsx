@@ -1,10 +1,11 @@
 //@ts-nocheck
-import UserAvatar from '../components/layout/UserAvatar';
 import { Heading, Box, Center, Flex, Text, Stack, useColorModeValue } from '@chakra-ui/react';
 import { IPublicUser } from 'powerbuddy-shared/lib';
 import { useRouter } from 'next/router';
-import { PROFILE_URL } from '../InternalLinks';
-import { PrimaryButton } from '../components/common/Buttons';
+import React from 'react';
+import { PROFILE_URL } from '../../InternalLinks';
+import { PrimaryButton } from '../../components/common/Buttons';
+import UserAvatar from '../../components/layout/UserAvatar';
 
 interface IUserProfileCardProps {
   user: IPublicUser;
