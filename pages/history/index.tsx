@@ -6,13 +6,13 @@ import { GetAllWorkoutLogStatsUrl } from '../../api/account/workoutLog';
 import { useAxios } from '../../hooks/useAxios';
 import { IWorkoutLogStats } from 'powerbuddy-shared';
 import ProgressSpinner from '../../components/common/ProgressSpinner';
-import { TagExerciseCount, TagProgramDaysCount, TagProgramLogsCount } from '../../components/shared/Tags';
 import LogHistoryList from '../../components/logHistory/LogHistoryList';
 import { ErrorMessage } from '../../components/common/Error';
 import { PageContent, PageHead } from '../../components/layout/Page';
 import { withAuthorized } from '../../util/authMiddleware';
 import { Box, Flex } from '../../chakra/Layout';
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '../../chakra/Disclosure';
+import { TagProgramLogsCount, TagProgramDaysCount, TagExerciseCount } from '../../shared/layout/Tags';
 
 const Index: NextPage = () => {
   const { loading, data: workoutLogStats, statusCode } = useAxios<IWorkoutLogStats>(GetAllWorkoutLogStatsUrl());

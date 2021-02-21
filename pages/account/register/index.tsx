@@ -6,9 +6,10 @@ import { useForm } from 'react-hook-form';
 import { RegisterUserRequest } from '../../../api/account/auth';
 import { EMAIL_OR_USERNAME_IN_USE } from '../../../api/apiResponseCodes';
 import { SendEmailConfirmationRequest } from '../../../api/public/email';
-import NewRegisterForm from '../../../components/account/forms/NewRegisterForm';
 import { TextXs } from '../../../components/common/Texts';
 import useFireToast from '../../../hooks/useFireToast';
+import { LOGIN_URL } from '../../../InternalLinks';
+import RegisterForm from '../../../shared/account/RegisterForm';
 
 const Index: NextPage = () => {
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -63,7 +64,15 @@ const Index: NextPage = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <NewRegisterForm register={register} errorMessage={errorMessage} loading={formState.isSubmitting} />
+      <RegisterForm
+        register={register}
+        errorMessage={errorMessage}
+        loading={formState.isSubmitting}
+        heading="Register your account"
+        spanText="Already have an account?"
+        linkText="Login"
+        linkUrl={LOGIN_URL}
+      />
     </form>
   );
 };

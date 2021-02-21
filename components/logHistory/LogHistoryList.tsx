@@ -7,13 +7,13 @@ import { PbStack } from '../common/Stacks';
 import { CardSm } from '../layout/Card';
 import { CgArrowTopRight } from 'react-icons/all';
 import TTIconButton from '../common/IconButtons';
-import { TrashIconButton } from '../shared/IconButtons';
-import { DeleteLogModalDrawer } from '../shared/ModalDrawers';
-import { TagExerciseCount, TagProgramDaysCount, TagProgramWeeksCount } from '../shared/Tags';
-import { BadgeCompleted, BadgeInProgress } from '../shared/Badges';
+import { BadgeCompleted, BadgeInProgress } from '../../shared/layout/Badges';
 import { useRouter } from 'next/router';
 import { WORKOUT_DIARY_URL } from '../../InternalLinks';
 import { Box } from '../../chakra/Layout';
+import { TrashIconButton } from '../../shared/layout/IconButtons';
+import { DeleteLogModalDrawer } from '../../shared/layout/ModalDrawers';
+import { TagProgramWeeksCount, TagProgramDaysCount, TagExerciseCount } from '../../shared/layout/Tags';
 
 const LogHistoryList = ({ workoutLogStats }) => {
   if (workoutLogStats.length <= 0) return <TextSm>No individual templates found, have you created one yet?</TextSm>;

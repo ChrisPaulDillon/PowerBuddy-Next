@@ -1,11 +1,11 @@
 import React from 'react';
 import { Card } from '../layout/Card';
 import { TextSm, TextXs, HeadingMd } from '../common/Texts';
-import { TagTemplateRepScheme } from '../shared/Tags';
 import { ITemplateWeek, ITemplateDay, ITemplateRepScheme, ITemplateExercise } from 'powerbuddy-shared';
 import { Box, Flex } from '../../chakra/Layout';
 import { CenterColumnFlex } from '../layout/Flexes';
 import { Divider } from '../../chakra/DataDisplay';
+import { TagTemplateRepScheme } from '../../shared/layout/Tags';
 
 export const TemplateWeekCard: React.FC<ITemplateWeek> = ({ templateDays }) => {
   return (

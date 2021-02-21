@@ -64,7 +64,7 @@ const toastColor = { light: 'gray.300', dark: 'gray.600' };
 
 const navIconColor = { light: 'gray.600', dark: 'gray.700' };
 const bannerColor = { light: 'gray.750', dark: 'gray.50' };
-const textColor = { light: 'gray.750', dark: 'gray.50' };
+const textColor = { light: 'gray.600', dark: 'white' };
 const quoteColor = { light: 'gray.500', dark: 'gray.50' };
 const tagColor = { light: 'gray.200', dark: 'gray.600' };
 const greenWeight = { light: 'green.400', dark: 'green.200' };

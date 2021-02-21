@@ -5,10 +5,10 @@ import { GetAllActiveUserProfilesUrl, GetPublicUserProfileUrl } from '../../api/
 import { IPublicUser } from 'powerbuddy-shared';
 import { CenterColumnFlex } from '../../components/layout/Flexes';
 import UserAvatar from '../../components/layout/UserAvatar';
-import MemberCrown from '../../components/shared/MemberCrown';
 import { PageContent, PageHead } from '../../components/layout/Page';
 import axios from 'axios';
 import { Box } from '../../chakra/Layout';
+import MemberCrown from '../../components/common/MemberCrown';
 
 interface IUserProfileProps {
   publicUser: IPublicUser;

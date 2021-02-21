@@ -1,9 +1,8 @@
+import axios from 'axios';
 import React, { useState } from 'react';
-import { PbModalDrawer } from '../common/ModalDrawers';
-
-import Axios from 'axios';
 import { DeleteWorkoutLogUrl } from '../../api/account/workoutLog';
-import { useWorkoutContext } from '../workouts/WorkoutContext';
+import { PbModalDrawer } from '../../components/common/ModalDrawers';
+import { useWorkoutContext } from '../../components/workouts/WorkoutContext';
 import useFireToast from '../../hooks/useFireToast';
 
 interface IModalDrawerProps {
@@ -17,20 +16,18 @@ interface IDeleteLogModalDrawerProps extends IModalDrawerProps {
 
 export const DeleteLogModalDrawer: React.FC<IDeleteLogModalDrawerProps> = ({ isOpen, onClose, workoutLogId }) => {
   const [loading, setLoading] = useState<boolean>(false);
-  const { DeleteDay } = useWorkoutContext();
   const toast = useFireToast();
 
   const deleteLog = async () => {
     setLoading(true);
-    const response = await Axios.delete(DeleteWorkoutLogUrl(workoutLogId));
     try {
+      await axios.delete(DeleteWorkoutLogUrl(workoutLogId));
       toast.Success('Successfully Deleted Diary Entry');
-      //DeleteLog();
+      onClose();
     } catch (error) {
       toast.Error('Could not create Diary Log, please try again later');
     }
     setLoading(false);
-    onClose();
   };
 
   return (
@@ -42,6 +39,7 @@ export const DeleteLogModalDrawer: React.FC<IDeleteLogModalDrawerProps> = ({ isO
       actionColour="red"
       onClick={deleteLog}
       loading={loading}
-      body="Are you sure? This cannot be undone"></PbModalDrawer>
+      body="Are you sure? This cannot be undone"
+    />
   );
 };

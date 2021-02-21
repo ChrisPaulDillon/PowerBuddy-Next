@@ -2,8 +2,8 @@
 import React from 'react';
 import { BoxProps } from '@chakra-ui/react';
 import { FaCrown } from 'react-icons/fa';
-import { Box } from '../../chakra/Layout';
 import { Icon } from '../../chakra/Forms';
+import { Box } from '../../chakra/Layout';
 
 interface IProps extends BoxProps {
   memberStatusId: number;
@@ -18,7 +18,7 @@ const MemberCrown: React.FC<IProps> = ({ memberStatusId, ...rest }) => {
           2: <Icon as={FaCrown} color="purple.500" boxSize="25px" {...rest} />,
           3: <Icon as={FaCrown} color="blue.500" boxSize="25px" {...rest} />,
           4: <Icon as={FaCrown} color="yellow.400" boxSize="25px" {...rest} />,
-        }[memberStatusId!]
+        }[memberStatusId]
       }
     </Box>
   );
