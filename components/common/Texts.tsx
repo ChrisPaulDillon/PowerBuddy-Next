@@ -47,22 +47,11 @@ export const TextXs: React.FC<BoxProps> = ({ ...rest }) => {
 };
 
 export const TextRep: React.FC<BoxProps> = ({ ...rest }) => {
-  const { colorMode } = useColorMode();
   return <Text color={mode('gray.100', 'white')} fontSize={['xs', 'sm', 'sm', 'sm']} fontFamily="'Roboto', serif;" {...rest}></Text>;
 };
 
 export const TextError: React.FC<BoxProps> = ({ ...rest }) => {
   return <Text color="red.500" fontSize="xs" fontFamily="'Roboto', serif;" {...rest}></Text>;
-};
-
-export const TextQuote: React.FC<BoxProps> = ({ ...rest }) => {
-  const { colorMode } = useColorMode();
-  return <Text color={theme.colors.quoteColor[colorMode]} fontSize={['xs', 'sm', 'sm', 'sm']} fontFamily="Roboto" as="i" {...rest}></Text>;
-};
-
-export const TextAuthorQuote: React.FC<BoxProps> = ({ ...rest }) => {
-  const { colorMode } = useColorMode();
-  return <Text color={theme.colors.quoteColor[colorMode]} fontSize={['md', 'md', 'lg', 'lg']} fontFamily="Roboto" as="i" {...rest}></Text>;
 };
 
 export const TextNavItem: React.FC<BoxProps> = ({ ...rest }) => {
