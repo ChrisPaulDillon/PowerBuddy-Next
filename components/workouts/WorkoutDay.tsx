@@ -21,7 +21,7 @@ import { PbStack } from '../common/Stacks';
 import { HeadingMd, TextXs } from '../common/Texts';
 import { CardNoShadow } from '../layout/Card';
 import { CenterColumnFlex } from '../layout/Flexes';
-import { BadgeWorkoutName } from '../shared/Badges';
+import { BadgeWorkoutName } from '../../shared/layout/Badges';
 import NotifiyPersonalBestAlert from './alerts/NotifyPersonalBestAlert';
 import AddExerciseForm from './forms/AddExerciseForm';
 import AddWorkoutNoteForm from './forms/AddWorkoutNoteForm';

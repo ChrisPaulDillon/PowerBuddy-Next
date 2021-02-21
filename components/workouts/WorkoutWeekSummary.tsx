@@ -7,7 +7,7 @@ import { PbStack } from '../common/Stacks';
 import { HeadingMd, TextSm, TextXs } from '../common/Texts';
 import { CardSm } from '../layout/Card';
 import { CenterColumnFlex, CenterRowFlex } from '../layout/Flexes';
-import { BadgeWeekNo, BadgeWorkoutName } from '../shared/Badges';
+import { BadgeWeekNo, BadgeWorkoutName } from '../../shared/layout/Badges';
 import theme from '../../theme';
 import { TEMPLATES_URL, WORKOUT_DIARY_URL } from '../../InternalLinks';
 import router, { useRouter } from 'next/router';

@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useShuffleArray } from '../../hooks/useShuffleArray';
 import { IQuote } from 'powerbuddy-shared';
 import { IAppState } from '../../redux/store';
-import { TextQuote, TextAuthorQuote } from '../common/Texts';
+import { TextQuote, TextAuthorQuote } from './Texts';
 import { CenterColumnFlex } from '../layout/Flexes';
 import { useUserContext } from '../users/UserContext';
 

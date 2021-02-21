@@ -2,8 +2,8 @@
 import React from 'react';
 import { BoxProps } from '@chakra-ui/react';
 import { FaCrown } from 'react-icons/fa';
-import { Box } from '../../chakra/Layout';
-import { Icon } from '../../chakra/Forms';
+import { Box } from '../chakra/Layout';
+import { Icon } from '../chakra/Forms';
 
 interface IProps extends BoxProps {
   memberStatusId: number;

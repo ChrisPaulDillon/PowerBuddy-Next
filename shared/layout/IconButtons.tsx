@@ -1,6 +1,6 @@
 import React from 'react';
 import { MdDeleteForever } from 'react-icons/md';
-import TTIconButton from '../common/IconButtons';
+import TTIconButton from '../../components/common/IconButtons';
 
 interface IIconButtonProps {
   label: string;

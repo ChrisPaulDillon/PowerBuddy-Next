@@ -32,7 +32,7 @@ const WorkoutSet: React.FC<ISetProps> = memo(({ set, date, workoutSets = [], wor
   }, [set]);
 
   const determineColor = useCallback(() => {
-    if (currentReps === noOfReps!) return 'green';
+    if (currentReps === noOfReps!) return 'green.300';
     if (noOfReps! - currentReps < 3) return 'orange';
     return 'red';
   }, []);
@@ -42,7 +42,7 @@ const WorkoutSet: React.FC<ISetProps> = memo(({ set, date, workoutSets = [], wor
   const setRepsAchieved = () => {
     let newRep = 0;
     if (currentReps < 1) {
-      setRepColor('green');
+      setRepColor('green.300');
       newRep = noOfReps!;
     } else if (noOfReps! - currentReps < 3) {
       setRepColor('orange');
