@@ -1,4 +1,4 @@
-import { useColorMode, theme, Box } from '@chakra-ui/react';
+import { useColorMode, Box } from '@chakra-ui/react';
 import moment from 'moment';
 import { useRouter } from 'next/router';
 import { IWorkoutDaySummary } from 'powerbuddy-shared/lib';
@@ -12,6 +12,7 @@ import { TextSm, TextXs } from '../common/Texts';
 import { CardSm } from '../layout/Card';
 import { CenterRowFlex, CenterColumnFlex } from '../layout/Flexes';
 import WorkoutExerciseSummary from './WorkoutExerciseSummary';
+import theme from '../../theme';
 
 const WorkoutDaySummarySingle: React.FC<IWorkoutDaySummary> = ({
   workoutDayId,

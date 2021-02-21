@@ -4,6 +4,7 @@ import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOve
 import { CenterColumnFlex } from '../layout/Flexes';
 import { FormButton, PrimaryButton, SecondaryButton } from './Buttons';
 import { PbStack } from './Stacks';
+import { HeadingMd } from './Texts';
 
 interface IModalProps {
   isOpen: boolean;
@@ -18,8 +19,8 @@ export const ModalBase: React.FC<IModalProps> = ({ isOpen, onClose, title, hasCl
   <Modal onClose={onClose} isOpen={isOpen} isCentered scrollBehavior="outside" colorScheme="blue.500">
     <ModalOverlay>
       <ModalContent>
-        <ModalHeader textAlign="center" fontWeight="light">
-          {title}
+        <ModalHeader textAlign="center">
+          <HeadingMd>{title}</HeadingMd>
         </ModalHeader>
         {hasCloseButton && <ModalCloseButton />}
         <ModalBody>{children}</ModalBody>

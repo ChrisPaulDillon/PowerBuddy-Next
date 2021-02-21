@@ -18,7 +18,7 @@ export const BreadcrumbBase: React.FC<IBreadcrumbBaseProps> = ({ values, ...rest
   let lastIndex = values.length - 1;
 
   return (
-    <Breadcrumb spacing="8px" separator={<TiChevronRight color="gray.500" />} alignContent="start" px={4} pb={['6', '4', '0', '0']} {...rest}>
+    <Breadcrumb spacing="8px" separator={<TiChevronRight color="gray.500" />} alignContent="start" {...rest}>
       {values.map((val, idx) => (
         <BreadcrumbItem key={idx} isCurrentPage={idx === lastIndex ? true : false}>
           <BreadcrumbLink onClick={() => router.push(val.href)} fontWeight={idx === lastIndex ? 'bold' : 'normal'} isTruncated>

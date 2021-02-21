@@ -43,10 +43,8 @@ const TemplateProgramSingle: NextPage = ({ template }: any) => {
         keywords={`${template.name}, Workout Diary, PowerBuddy, Weightlifting App, Strong App, Intensity App, Powerlifting Weightlifting Templates, Liftvault Workout Program Spreadsheets, Powerlifting Routine, Olympic Weightlifting Template`}
       />
       <PageContent>
-        <Box>
-          <BreadcrumbBase values={breadcrumbInput} />
-        </Box>
-        <Box mt={[3, 3, 3, 3]}>
+        <BreadcrumbBase values={breadcrumbInput} />
+        <Box mt={[7, 7, 0, 0]}>
           <PageTitle>{template?.name}</PageTitle>
           <CenterColumnFlex>
             <Flex pt={2}>

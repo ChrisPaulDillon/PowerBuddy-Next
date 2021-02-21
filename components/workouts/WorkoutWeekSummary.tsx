@@ -55,7 +55,7 @@ const WorkoutWeekSummary: React.FC<IProps> = ({ weekSummary }) => {
     try {
       const result = await axios.post(CreateWorkoutDayUrl(), workoutOptions);
       if (result.data !== 0) {
-        router.push(`${WORKOUT_DIARY_URL}/${result.data.workoutDayId}`);
+        router.push(`${WORKOUT_DIARY_URL}/${result.data}`);
         toast.Success('Successfully created todays workout!');
       }
     } catch (error) {}
