@@ -1,8 +1,7 @@
 import React from 'react';
 import { IUser } from 'powerbuddy-shared';
 import { Box, Flex } from '../../chakra/Layout';
-import UserProfileCard from '../shared/UserProfileCard';
-
+import UserProfileCard from '../../shared/layout/UserProfileCard';
 interface IProps {
   publicUsers: IUser[];
 }

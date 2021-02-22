@@ -1,7 +1,7 @@
 import React from 'react';
-import { Tag, TagLabel, TagLeftIcon } from '@chakra-ui/react';
+import { Tag, TagLabel, TagLeftIcon, useColorModeValue as mode } from '@chakra-ui/react';
 import { BiDumbbell, FaTrophy, FcCalendar } from 'react-icons/all';
-import { TextSm, TextXs } from '../common/Texts';
+import { TextSm, TextXs } from '../../components/common/Texts';
 import { SizeType } from '../../types/unionTypes';
 
 interface ITagProps {
@@ -64,7 +64,9 @@ export const TagTemplateRepScheme: React.FC<ITagProps> = ({ body, size }) => (
     {' '}
     <TagLeftIcon boxSize="12px" as={BiDumbbell} />
     <TagLabel>
-      <TextSm textAlign="center">{body}</TextSm>
+      <TextSm textAlign="center" color={mode('white', 'white')}>
+        {body}
+      </TextSm>
     </TagLabel>
   </Tag>
 );

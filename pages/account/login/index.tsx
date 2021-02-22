@@ -8,12 +8,12 @@ import { useForm } from 'react-hook-form';
 import { LoginUserRequest } from '../../../api/account/auth';
 import { EMAIL_NOT_CONFIRMED, INVALID_CREDENTIALS, USER_NOT_FOUND, ACCOUNT_LOCKOUT } from '../../../api/apiResponseCodes';
 import { SendEmailConfirmationUrl } from '../../../api/public/email';
-import NewLoginForm from '../../../components/account/forms/NewLoginForm';
 import { TextXs } from '../../../components/common/Texts';
 import { useUserContext } from '../../../components/users/UserContext';
 import useFireToast from '../../../hooks/useFireToast';
-import { HOME_URL } from '../../../InternalLinks';
+import { HOME_URL, REGISTER_URL } from '../../../InternalLinks';
 import { handleAuthenticationTokens, decodeJwtToken } from '../../../util/axiosUtils';
+import LoginForm from '../../../shared/account/LoginForm';
 
 const Index: NextPage = () => {
   const router = useRouter();
@@ -85,7 +85,15 @@ const Index: NextPage = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <NewLoginForm register={register} errorMessage={errorMessage} loading={formState.isSubmitting} />
+      <LoginForm
+        register={register}
+        errorMessage={errorMessage}
+        loading={formState.isSubmitting}
+        heading="Sign into your account"
+        spanText="Don't have an account?"
+        linkText="Register"
+        linkUrl={REGISTER_URL}
+      />
     </form>
   );
 };

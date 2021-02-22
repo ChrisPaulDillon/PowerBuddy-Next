@@ -14,9 +14,7 @@ import { ICExercise, IExerciseMuscleGroup } from 'powerbuddy-shared';
 import { Button, FormControl, FormErrorMessage, Select } from '../../../chakra/Forms';
 import useFireToast from '../../../hooks/useFireToast';
 
-interface IProps {}
-
-const CreateExercise: React.FC<IProps> = () => {
+const CreateExercise = () => {
   const { exerciseTypes } = useSelector((state: IAppState) => state.state);
   const toast = useFireToast();
 

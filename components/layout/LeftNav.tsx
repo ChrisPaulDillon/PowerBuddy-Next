@@ -1,14 +1,14 @@
 import React from 'react';
 import { useColorMode } from '@chakra-ui/react';
 import { BsFillGrid3X3GapFill, BsCalendarFill } from 'react-icons/bs';
-import { RiAdminLine, FaHistory, FaUserFriends } from 'react-icons/all';
+import { FaHistory, FaUserFriends } from 'react-icons/all';
 import theme from '../../theme';
 import { PbToolTip } from '../common/ToolTips';
 import { IconType } from 'react-icons/lib';
 import { Banner } from '../common/Texts';
 import { MdMenu } from 'react-icons/md';
 import useScreenSizes from '../../hooks/useScreenSizes';
-import { ADMIN_URL, USERS_URL, LOGHISTORY_URL, TEMPLATES_URL, WORKOUT_DIARY_URL, HOME_URL } from '../../InternalLinks';
+import { USERS_URL, LOGHISTORY_URL, WORKOUT_DIARY_URL, HOME_URL } from '../../InternalLinks';
 import TTIconButton from '../common/IconButtons';
 import { MenuItem } from '../common/Menus';
 import Link from 'next/link';
@@ -155,7 +155,6 @@ interface INavItemProps {
 }
 
 export const LeftNavItem: React.FC<INavItemProps> = ({ name, Icon, link, tooltip, memberStatusId, userMemberStatusId, onClose, isOpen, idx }) => {
-  const { colorMode } = useColorMode();
   return (
     <Box key={idx}>
       {isOpen && userMemberStatusId >= memberStatusId ? (

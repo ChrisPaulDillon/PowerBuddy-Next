@@ -3,9 +3,10 @@ import { NextPage } from 'next';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { SendPasswordResetEmailRequest } from '../../../api/public/email';
-import ForgotPasswordForm from '../../../components/account/forms/ForgotPasswordForm';
+import ForgotPasswordForm from '../../../shared/account/ForgotPasswordForm';
 import { TextXs } from '../../../components/common/Texts';
 import useFireToast from '../../../hooks/useFireToast';
+import { LOGIN_URL } from '../../../InternalLinks';
 
 const Index: NextPage = () => {
   const toast = useFireToast();
@@ -34,7 +35,14 @@ const Index: NextPage = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <ForgotPasswordForm register={register} loading={formState.isSubmitting} />
+      <ForgotPasswordForm
+        register={register}
+        loading={formState.isSubmitting}
+        heading="Reset your password"
+        spanText="Already know your password?"
+        linkText="Login"
+        linkUrl={LOGIN_URL}
+      />
     </form>
   );
 };

@@ -1,15 +1,14 @@
 import { ChakraProvider } from '@chakra-ui/react';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 import configureStore from '../redux/store';
 import customTheme from '../theme';
 import * as Sentry from '@sentry/react';
 import Layout from '../components/layout/Layout';
-import UserProvider, { useUserContext } from '../components/users/UserContext';
+import UserProvider from '../components/users/UserContext';
 import { AppContext, AppProps } from 'next/app';
 import { NextComponentType } from 'next';
 import { PageHead } from '../components/layout/Page';
-import { RefreshRequest } from '../api/account/auth';
 
 import '../components/common/ModernCalendar.css';
 
@@ -29,16 +28,6 @@ export interface ModifiedAppInitialProps<A = { [key in string]: string }> {
 export interface ExtendedAppProps<P = { [key in string]: string }, A = { [key in string]: string }> extends AppProps<P>, ModifiedAppInitialProps<A> {}
 
 const MyApp: NextComponentType<AppContext, ModifiedAppInitialProps, ExtendedAppProps> = ({ Component, pageProps, appProps }) => {
-  const { SetValues } = useUserContext();
-
-  useEffect(() => {
-    const RefreshToken = async (): Promise<void> => {
-      const refreshToken = localStorage.getItem('refreshToken');
-      await RefreshRequest(refreshToken, SetValues);
-    };
-    RefreshToken();
-  }, []);
-
   return (
     <Provider store={store}>
       <UserProvider>

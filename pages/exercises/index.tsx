@@ -4,13 +4,13 @@ import React, { useState } from 'react';
 import { PageTitle } from '../../components/common/Texts';
 import ExerciseCardList from '../../components/exercises/ExerciseCardList';
 import { CenterColumnFlex } from '../../components/layout/Flexes';
-import SearchBar from '../../components/shared/SearchBar';
 import useExerciseSearch from '../../hooks/exercises/useExerciseSearch';
 import { PageContent, PageHead } from '../../components/layout/Page';
 import axios from 'axios';
 import { GetAllExercisesUrl } from '../../api/public/exercise';
 import { IExercise } from 'powerbuddy-shared/lib';
 import useLoadExercises from '../../hooks/redux/useLoadExercises';
+import SearchBar from '../../shared/layout/SearchBar';
 
 const Index: NextPage = ({ exercises }: any) => {
   useLoadExercises();

@@ -3,6 +3,7 @@ import { FaCrown, FaBan } from 'react-icons/fa';
 import { MdModeEdit } from 'react-icons/md';
 import { Button, IconButton } from '../../../chakra/Forms';
 import { Box } from '../../../chakra/Layout';
+import { Text } from '../../../chakra/Typography';
 import PbTag from '../../common/Tags';
 import { TextRep } from '../../common/Texts';
 import { PbToolTip } from '../../common/ToolTips';
@@ -58,7 +59,7 @@ const NormalRepSchemeTag = ({ setEditRepAlert, setRepsAchieved, weightLifted, no
       {!contentDisabled && (
         <IconButton as={MdModeEdit} aria-label="" size="1em" onClick={() => (!contentDisabled ? setEditRepAlert(true) : null)} color="gray" />
       )}
-      <TextRep
+      <Text
         minW={[
           '65px', // 0-30em
           '70px', // 30em-48em
@@ -67,9 +68,9 @@ const NormalRepSchemeTag = ({ setEditRepAlert, setRepsAchieved, weightLifted, no
         ]}>
         {weightLifted <= 0 ? 'BW x' : weightLifted + `${weightType} x`}
         {noOfReps}
-      </TextRep>
+      </Text>
       <PbToolTip label="Click to set how many reps were achieved on this set">
-        <Button size="xs" rounded="50px" onClick={() => (!contentDisabled ? setRepsAchieved() : null)} colorScheme={repColor} bgColor={repColor}>
+        <Button size="xs" rounded="50px" onClick={() => (!contentDisabled ? setRepsAchieved() : null)} bg={repColor}>
           <TextRep>{currentReps}</TextRep>
         </Button>
       </PbToolTip>
@@ -82,7 +83,7 @@ const PersonalBestRepSchemeTag = ({ weightLifted, noOfReps }: any) => {
 
   return (
     <PbTag rounded="full" maxH="25px">
-      <TextRep
+      <Text
         minW={[
           '65px', // 0-30em
           '70px', // 30em-48em
@@ -91,7 +92,7 @@ const PersonalBestRepSchemeTag = ({ weightLifted, noOfReps }: any) => {
         ]}>
         {weightLifted}
         {weightType} x{noOfReps}
-      </TextRep>
+      </Text>
       <PbToolTip label="New Lifetime PR Hit!">
         <IconButton icon={<FaCrown />} colorScheme="yellow" fontSize="17px" aria-label="" isRound variant="ghost" size="sm" />
       </PbToolTip>
@@ -105,7 +106,7 @@ const DisabledRepSchemeTag = ({ setEditRepAlert, weightLifted, noOfReps }: any) 
   return (
     <PbTag rounded="full" maxH="25px">
       <IconButton as={MdModeEdit} aria-label="" size="1em" onClick={() => setEditRepAlert(true)} />
-      <TextRep
+      <Text
         minW={[
           '65px', // 0-30em
           '70px', // 30em-48em
@@ -114,7 +115,7 @@ const DisabledRepSchemeTag = ({ setEditRepAlert, weightLifted, noOfReps }: any) 
         ]}>
         {weightLifted}
         {weightType} x{noOfReps}
-      </TextRep>
+      </Text>
       <PbToolTip label="Cannot mark future exercises">
         <IconButton icon={<FaBan />} fontSize="15px" aria-label="" variant="ghost" size="sm" isRound />
       </PbToolTip>

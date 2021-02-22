@@ -6,7 +6,7 @@ import { PageContent, PageHead } from '../../components/layout/Page';
 import { Box } from '../../chakra/Layout';
 import { GetAllPublicWorkoutIdsRequest, GetWorkoutDayByIdRequest } from '../../api/public/workoutDay';
 import { useUserContext } from '../../components/users/UserContext';
-import WorkoutDay from '../../components/workouts/WorkoutDay';
+import WorkoutDay from '../../components/workouts/WorkoutDayContainer';
 
 interface IProps {
   workoutDayData: IWorkoutDay;
@@ -34,7 +34,7 @@ const WorkoutDayById: NextPage<IProps> = ({ workoutDayData }) => {
   }, [workoutDayData, userId]);
 
   return (
-    <Box w="100%" mt={3}>
+    <Box>
       <PageHead
         title="Workout"
         description={`${workoutDay?.userName}'s workout diary. View ${workoutDay?.userName}'s workout for this date`}
