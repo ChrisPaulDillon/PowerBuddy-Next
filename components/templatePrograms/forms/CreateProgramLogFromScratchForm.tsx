@@ -11,11 +11,13 @@ import ProgramSummary from './ProgramSummary';
 import { useEffect } from 'react';
 import { DayValue } from 'react-modern-calendar-datepicker';
 import { useUserContext } from '../../users/UserContext';
-import { CreateWorkoutLogFromScratchUrl } from '../../../api/account/workoutLog';
+import { CreateWorkoutLogFromScratchUrl, GetWorkoutLogCalendarDatesUrl } from '../../../api/account/workoutLog';
 import axios from 'axios';
 import { Box } from '../../../chakra/Layout';
 import { FormControl, FormErrorMessage, FormLabel, Select } from '../../../chakra/Forms';
 import useFireToast from '../../../hooks/useFireToast';
+import { useAxios } from '../../../hooks/useAxios';
+import { CreateDateArrayBetweenDates } from '../../util/DateUtils';
 
 export interface IWorkoutLogInputScratch {
   noOfWeeks: number;
@@ -32,22 +34,31 @@ interface IProps {
 }
 
 const CreateProgramLogFromScratchForm: React.FC<IProps> = ({ onClose, onCreateSuccessOpen }) => {
-  // const { data: calendarData, loading: calendarLoading } = useAxios<IProgramLogCalendarStats>(GetAllProgramLogCalendarStatsQueryUrl());
+  const { data: calendarData } = useAxios<Date[]>(GetWorkoutLogCalendarDatesUrl());
   const { userId } = useUserContext();
   const [selectedDate, setSelectedDate] = useState<Date | undefined>();
-  const [calendarDate, setCalendarDate] = useState<DayValue>();
+  const [proposedWorkoutDates, setProposedWorkoutDates] = useState<Date[]>([]);
   const [endDate, setEndDate] = useState<Date>();
   const [phase, setPhase] = useState<number>(1);
   const [customName, setCustomName] = useState<string>('Custom Template');
   const [noOfWeeks, setNoOfWeeks] = useState<number>(0);
   const toast = useFireToast();
 
+  // useEffect(() => {
+  //   if (calendarDate) {
+  //     let date = `${calendarDate.month}/${calendarDate.day}/${calendarDate.year}`;
+  //     setSelectedDate(moment(date).toDate());
+  //   }
+  // }, [calendarDate]);
+
   useEffect(() => {
-    if (calendarDate) {
-      let date = `${calendarDate.month}/${calendarDate.day}/${calendarDate.year}`;
-      setSelectedDate(moment(date).toDate());
-    }
-  }, [calendarDate]);
+    const endDate = moment(selectedDate).add(noOfWeeks, 'weeks').toDate();
+    console.log(endDate);
+
+    setEndDate(endDate);
+    const proposedDates = CreateDateArrayBetweenDates(selectedDate, endDate);
+    setProposedWorkoutDates(proposedDates);
+  }, [selectedDate]);
 
   const updateCustomName = (e: { target: { value: React.SetStateAction<string> } }) => {
     if (e && e.target && e.target.value) {
@@ -59,7 +70,7 @@ const CreateProgramLogFromScratchForm: React.FC<IProps> = ({ onClose, onCreateSu
 
   const onSubmit = async () => {
     if (phase < 2) {
-      setEndDate(moment(selectedDate).add(noOfWeeks!, 'weeks').toDate());
+      setEndDate(moment(selectedDate).add(noOfWeeks, 'weeks').toDate());
       setPhase(phase + 1);
     } else {
       try {
@@ -88,14 +99,18 @@ const CreateProgramLogFromScratchForm: React.FC<IProps> = ({ onClose, onCreateSu
       {phase === 1 && (
         <Box>
           <FormControl isInvalid={errors.noOfWeeks}>
-            <FormLayoutFlex>
-              <FormLabel>Select Program Start Date & Number of Weeks</FormLabel>
+            <FormLayoutFlex pb={4} align="center">
+              <FormLabel textAlign="center" mb={3}>
+                Select Program Start Date & Number of Weeks
+              </FormLabel>
               <Select
                 placeholder="No Of Weeks..."
+                mt={4}
                 ref={register({ validate: validateInput })}
                 name="noOfWeeks"
                 size="sm"
-                onChange={(e) => setNoOfWeeks(parseInt(e.target.value))}>
+                onChange={(e) => setNoOfWeeks(parseInt(e.target.value))}
+                maxW="270px">
                 {staticNumberList.map((x, idx) => (
                   <option value={x.value} key={idx}>
                     {x.label}
@@ -108,7 +123,8 @@ const CreateProgramLogFromScratchForm: React.FC<IProps> = ({ onClose, onCreateSu
           <CalendarSelectFrom
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
-            // workoutDates={calendarData?.workoutDates}
+            workoutDates={calendarData}
+            proposedWorkoutDates={proposedWorkoutDates}
           />
         </Box>
       )}

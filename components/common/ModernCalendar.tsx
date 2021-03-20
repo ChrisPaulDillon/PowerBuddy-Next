@@ -3,12 +3,6 @@ import 'react-modern-calendar-datepicker/lib/DatePicker.css';
 import DatePicker, { Calendar, CustomDayClassNameItem, Day, DayValue } from 'react-modern-calendar-datepicker';
 import moment from 'moment';
 
-interface IProps {
-  selectedDate: Date;
-  setSelectedDate: any;
-  workoutDates: Array<Date>;
-}
-
 const ParseDateToDayValue = (date: Date): DayValue => {
   return { year: parseInt(moment(date).format('yyyy')), month: parseInt(moment(date).format('M')), day: parseInt(moment(date).format('D')) };
 };
@@ -29,15 +23,20 @@ enum DayColourEnum {
   navyBlueDay,
 }
 
-const ModernCalendar: React.FC<IProps> = ({ selectedDate, setSelectedDate, workoutDates }) => {
+interface IProps {
+  selectedDate: Date;
+  setSelectedDate: any;
+  workoutDates: Array<Date>;
+  proposedWorkoutDates: Array<Date>;
+}
+
+const ModernCalendar: React.FC<IProps> = ({ selectedDate, setSelectedDate, workoutDates, proposedWorkoutDates }) => {
   //const [selectedDay, setSelectedDay] = useState(null);
   const [calendarDate, setCalendarDate] = useState<DayValue>(ParseDateToDayValue(new Date()));
 
   const [disabledDates, setDisabledDates] = useState<Day[]>([]);
   const [colouredDates, setColouredDates] = useState<CustomDayClassNameItem[]>([]);
-
-  const test = DayColourEnum.navyBlueDay;
-  console.log(test);
+  const [proposedDates, setProposedDates] = useState<CustomDayClassNameItem[]>([]);
 
   useEffect(() => {
     if (workoutDates) {
@@ -56,6 +55,18 @@ const ModernCalendar: React.FC<IProps> = ({ selectedDate, setSelectedDate, worko
   }, [workoutDates]);
 
   useEffect(() => {
+    if (proposedWorkoutDates) {
+      setProposedDates(
+        proposedWorkoutDates.map((x) => {
+          return ParseDateToCustomDay(x, 'purpleDay');
+        })
+      );
+    }
+  });
+
+  useEffect(() => {
+    console.log('lmfao');
+
     if (calendarDate) {
       const calDate = `${calendarDate.month}/${calendarDate.day}/${calendarDate.year}`;
       const momentDate = moment(calDate).toDate();
@@ -73,11 +84,10 @@ const ModernCalendar: React.FC<IProps> = ({ selectedDate, setSelectedDate, worko
       onChange={setCalendarDate}
       disabledDays={disabledDates}
       onDisabledDayError={handleDisabledSelect}
-      // customDaysClassName={colouredDates}
       calendarClassName="ModernCalendar"
-      customDaysClassName={colouredDates}
+      customDaysClassName={[...colouredDates, ...proposedDates]}
     />
-  ); // handle errorshouldHighlightWeekends
+  );
 };
 
 export default ModernCalendar;
