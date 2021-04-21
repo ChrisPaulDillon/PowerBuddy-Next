@@ -7,7 +7,7 @@ import { decodeJwtToken, handleAuthenticationTokens } from '../../util/axiosUtil
 export interface IClaimsValues {
   userId?: string;
   userName?: string;
-  weightType?: string;
+  kgOrLbs?: string;
   firstVisit?: boolean;
   memberStatusId?: number;
 }
@@ -16,10 +16,10 @@ interface IContextOutputProps {
   userId: string;
   userName: string;
   isAuthenticated: boolean;
-  weightType: string;
+  kgOrLbs: string;
   firstVisit: boolean;
   memberStatusId: number;
-  SetValues: ({ userId, userName, weightType, firstVisit }: IClaimsValues) => void;
+  SetValues: ({ userId, userName, kgOrLbs, firstVisit }: IClaimsValues) => void;
 }
 
 const UserContext = createContext({} as IContextOutputProps);
@@ -34,7 +34,7 @@ export default function UserProvider({ children }: IContextInputProps) {
   const [userId, setUserId] = useState<string>();
   const [userName, setUserName] = useState<string>();
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [weightType, setWeightType] = useState<string>('kg');
+  const [kgOrLbs, setWeightType] = useState<string>('kg');
   const [firstVisit, setFirstVisit] = useState<boolean>(false);
   const [memberStatusId, setMemberStatusId] = useState<number>(0);
 
@@ -53,15 +53,15 @@ export default function UserProvider({ children }: IContextInputProps) {
     return await Promise.resolve();
   };
 
-  const SetValues = ({ userId, userName, weightType, firstVisit, memberStatusId }: IClaimsValues) => {
+  const SetValues = ({ userId, userName, kgOrLbs, firstVisit, memberStatusId }: IClaimsValues) => {
     if (userId) {
       setUserId(userId);
     }
     if (userName) {
       setUserName(userName);
     }
-    if (weightType) {
-      setWeightType(weightType);
+    if (kgOrLbs) {
+      setWeightType(kgOrLbs);
     }
     if (firstVisit) {
       setFirstVisit(firstVisit);
@@ -75,7 +75,7 @@ export default function UserProvider({ children }: IContextInputProps) {
   createAuthRefreshInterceptor(axios, RefreshTokenRequest);
 
   return (
-    <UserContext.Provider value={{ userId, userName, isAuthenticated, weightType, firstVisit, memberStatusId, SetValues }}>
+    <UserContext.Provider value={{ userId, userName, isAuthenticated, kgOrLbs, firstVisit, memberStatusId, SetValues }}>
       {children}
     </UserContext.Provider>
   );

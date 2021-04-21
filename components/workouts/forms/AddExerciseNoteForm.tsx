@@ -13,7 +13,6 @@ import useFireToast from '../../../hooks/useFireToast';
 interface IProps {
   onClose: () => void;
   workoutExerciseId: number;
-  workoutDayId: number;
   note: string | undefined;
 }
 

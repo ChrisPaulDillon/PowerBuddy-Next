@@ -4,7 +4,6 @@ import { IWorkoutDay, IWorkoutExercise, IWorkoutSet } from 'powerbuddy-shared';
 interface IContextOutputProps {
   workoutDay: IWorkoutDay;
   contentDisabled: boolean;
-  weightType: string;
   UpdateDayNotes: (notes: string) => void;
   DeleteDay: () => void;
   UpdateDay: (workoutDay: IWorkoutDay) => void;
@@ -28,12 +27,6 @@ interface IContextInputProps {
 }
 
 export default function WorkoutProvider({ workoutDay, setWorkoutDay, contentDisabled, children }: IContextInputProps) {
-  const [weightType, setWeightType] = useState<string>('kg');
-
-  useEffect(() => {
-    setWeightType(workoutDay?.usingMetric ? 'kg' : 'lbs');
-  }, [workoutDay]);
-
   const DeleteDay = () => {
     setWorkoutDay({} as IWorkoutDay);
   };
@@ -133,7 +126,6 @@ export default function WorkoutProvider({ workoutDay, setWorkoutDay, contentDisa
       value={{
         workoutDay,
         contentDisabled,
-        weightType,
         DeleteDay,
         UpdateDayNotes,
         UpdateDay,

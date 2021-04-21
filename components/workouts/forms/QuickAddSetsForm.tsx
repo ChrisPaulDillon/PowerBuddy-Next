@@ -9,6 +9,7 @@ import { IWorkoutExercise, IWorkoutSet } from 'powerbuddy-shared';
 import { FormLayoutFlex } from '../../layout/Flexes';
 import { FormLabel } from '../../../chakra/Forms';
 import useFireToast from '../../../hooks/useFireToast';
+import { useAppSelector } from '../../../store';
 
 interface IProps {
   workoutExercise: IWorkoutExercise;
@@ -21,7 +22,7 @@ interface IProps {
 const QuickAddSetsForm: React.FC<IProps> = ({ workoutExercise, suggestedReps, suggestedWeight, totalSets, onClose }) => {
   const toast = useFireToast();
   const { handleSubmit, formState } = useForm();
-  const { weightType } = useWorkoutContext();
+  const kgOrLbs = useAppSelector((state) => state.workout.workoutState.kgOrLbs);
 
   const [noOfSets, setNoOfSets] = useState<number>(1);
   const [noOfReps, setNoOfReps] = useState<number>(suggestedReps);
@@ -68,7 +69,7 @@ const QuickAddSetsForm: React.FC<IProps> = ({ workoutExercise, suggestedReps, su
         <FormNumberInput defaultValue={suggestedReps} onChange={(e: number) => setNoOfReps(e)} />
       </FormLayoutFlex>
       <FormLayoutFlex>
-        <FormLabel>Weight ({weightType})</FormLabel>
+        <FormLabel>Weight ({kgOrLbs})</FormLabel>
         <FormNumberInput defaultValue={suggestedWeight} onChange={(e: number) => setWeight(e)} />
       </FormLayoutFlex>
       <FormButton isLoading={formState.isSubmitting}>Add</FormButton>

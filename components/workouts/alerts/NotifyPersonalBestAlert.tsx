@@ -5,6 +5,7 @@ import { ILiftingStat } from 'powerbuddy-shared';
 import { useWorkoutContext } from '../WorkoutContext';
 import { Box } from '../../../chakra/Layout';
 import { Button, FormLabel } from '../../../chakra/Forms';
+import { useAppSelector } from '../../../store';
 
 interface IProps {
   personalBests: ILiftingStat[];
@@ -12,14 +13,14 @@ interface IProps {
 }
 
 const NotifiyPersonalBestAlert: React.FC<IProps> = ({ personalBests, setPersonalBests }) => {
-  const { weightType } = useWorkoutContext();
+  const kgOrLbs = useAppSelector((state) => state.workout.workoutState.kgOrLbs);
   return (
     <Box>
       <FormLabel mb="4">Congrats! You have just hit a personal best on the following lifts:</FormLabel>
       {personalBests.map((x, idx) => (
         <TextSm p="1" key={idx}>
           {x.exerciseName} - {x.weight}
-          {weightType} - {x.repRange} Reps
+          {kgOrLbs} - {x.repRange} Reps
         </TextSm>
       ))}
       <ITextSm mt={6}>This has been automatically been updated in Personal Bests!</ITextSm>

@@ -26,12 +26,13 @@ interface IProps {
 
 const AddExerciseForm: React.FC<IProps> = ({ onClose}) => {
   const workoutDay = useAppSelector((state) => state.workout.workoutState.workoutDay);
+  const kgOrLbs = useAppSelector((state) => state.workout.workoutState.kgOrLbs);
   const { data: exercises } = useAxios<IExercise[]>(GetAllExercisesUrl());
   const [sets, setSets] = useState<number>(1);
   const [reps, setReps] = useState<number>(1);
   const [weight, setWeight] = useState<number>(0);
   const [exerciseIdSelected, setExerciseIdSelected] = useState<number>();
-  const { CreateExercise, weightType } = useWorkoutContext();
+  const { CreateExercise } = useWorkoutContext();
   const toast = useFireToast();
 
   const exerciseList = exercises?.map((x) => ({
@@ -96,7 +97,7 @@ const AddExerciseForm: React.FC<IProps> = ({ onClose}) => {
       <FormLayoutFlex>
         <FormWeightInput
           name="weight"
-          placeholder={`Enter weight...(${weightType})`}
+          placeholder={`Enter weight...(${kgOrLbs})`}
           onChange={(e: number) => setWeight(e)}
           w="100%"
           defaultValue={0}
@@ -116,7 +117,7 @@ const AddExerciseForm: React.FC<IProps> = ({ onClose}) => {
       <Box mt={4}>
         <HeadingMd textAlign="center">
           {sets}x{reps}x{weight}
-          {weightType}
+          {kgOrLbs}
         </HeadingMd>
         <FormButton type="submit" isLoading={formState.isSubmitting}>
           Create

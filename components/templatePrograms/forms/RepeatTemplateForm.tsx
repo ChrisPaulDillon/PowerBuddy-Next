@@ -17,7 +17,7 @@ interface IProps {
 
 const RepeatTemplateForm: React.FC<IProps> = ({ incrementalWeightInput, updateIncrementalWeightInput, updateRepeatProgramCount }) => {
   const [repeatEnabled, setRepeatEnabled] = useState<boolean>(false);
-  const { weightType } = useUserContext();
+  const { kgOrLbs } = useUserContext();
 
   return (
     <Box>
@@ -39,7 +39,7 @@ const RepeatTemplateForm: React.FC<IProps> = ({ incrementalWeightInput, updateIn
                 maxW="100px"
                 onChange={(e) => updateIncrementalWeightInput(x.exerciseId, parseInt(e))}
               />
-              {weightType}
+              {kgOrLbs}
             </PbStack>
           ))}
           <Stack isInline justify="center" my={6}>

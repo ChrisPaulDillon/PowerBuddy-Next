@@ -9,7 +9,7 @@ import { useUserContext } from '../users/UserContext';
 import { Box } from '../../chakra/Layout';
 
 const PersonalBestDetailed: React.FC<IPersonalBestDetailed> = ({ exerciseName, lifeTimeTonnage, liftingStats }) => {
-  const { weightType } = useUserContext();
+  const { kgOrLbs } = useUserContext();
 
   var breadcrumbInput: IBreadcrumbInput[] = [
     { href: WORKOUT_DIARY_URL, name: 'Diary' },
@@ -23,7 +23,7 @@ const PersonalBestDetailed: React.FC<IPersonalBestDetailed> = ({ exerciseName, l
         <PageTitle>{exerciseName}</PageTitle>
         <TextSm pb={5}>
           {lifeTimeTonnage}
-          {weightType} Lifetime Tonnage{' '}
+          {kgOrLbs} Lifetime Tonnage{' '}
         </TextSm>
         <Box>
           <SimpleGrid spacing="25px" columns={2}>
@@ -39,7 +39,7 @@ const PersonalBestDetailed: React.FC<IPersonalBestDetailed> = ({ exerciseName, l
                   </TextSm>{' '}
                   <TextSm textAlign="center" minW={100}>
                     {x.weight}
-                    {weightType}
+                    {kgOrLbs}
                   </TextSm>
                 </SimpleGrid>
               </Box>

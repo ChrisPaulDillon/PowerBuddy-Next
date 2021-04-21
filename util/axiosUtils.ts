@@ -13,7 +13,7 @@ export const decodeJwtToken = (accessToken: string) => {
   const claimValues : IClaimsValues = {
     userId: UserId,
     userName: UserName,
-    weightType: MetricType,
+    kgOrLbs: MetricType,
     firstVisit: FirstVisit,
     memberStatusId: MemberStatusId
   }

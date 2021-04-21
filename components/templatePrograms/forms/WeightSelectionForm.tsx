@@ -15,7 +15,7 @@ interface IProps {
 }
 
 const WeightSelectionForm: React.FC<IProps> = ({ weightProgressionType, weightInput, updateWeightInput }) => {
-  const { weightType } = useUserContext();
+  const { kgOrLbs } = useUserContext();
 
   return (
     <CenterColumnFlex>
@@ -24,7 +24,7 @@ const WeightSelectionForm: React.FC<IProps> = ({ weightProgressionType, weightIn
           {weightInput.map((x, idx) => (
             <PbStack key={idx}>
               <TextSm>
-                {x.exerciseName} ({weightType})
+                {x.exerciseName} ({kgOrLbs})
               </TextSm>
               <FormWeightInput
                 name={x.exerciseId!.toString()}
@@ -47,7 +47,7 @@ const WeightSelectionForm: React.FC<IProps> = ({ weightProgressionType, weightIn
             {weightInput.map((x, idx) => (
               <PbStack key={idx}>
                 <TextSm>
-                  {x.exerciseName} ({weightType})
+                  {x.exerciseName} ({kgOrLbs})
                 </TextSm>
                 <FormWeightInput
                   name={x.exerciseId!.toString()}

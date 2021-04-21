@@ -4,6 +4,7 @@ import { MdModeEdit } from 'react-icons/md';
 import { Button, IconButton } from '../../../chakra/Forms';
 import { Box } from '../../../chakra/Layout';
 import { Text } from '../../../chakra/Typography';
+import { useAppSelector } from '../../../store';
 import PbTag from '../../common/Tags';
 import { TextRep } from '../../common/Texts';
 import { PbToolTip } from '../../common/ToolTips';
@@ -52,8 +53,8 @@ const RepSchemeTagFactory: React.FC<IProps> = ({ weightLifted, noOfReps, current
 };
 
 const NormalRepSchemeTag = ({ setEditRepAlert, setRepsAchieved, weightLifted, noOfReps, currentReps, repColor }: any) => {
-  const { contentDisabled, weightType } = useWorkoutContext();
-
+  const { contentDisabled } = useWorkoutContext();
+  const kgOrLbs = useAppSelector((state) => state.workout.workoutState.kgOrLbs);
   return (
     <PbTag rounded="full" maxH="25px">
       {!contentDisabled && (
@@ -66,7 +67,7 @@ const NormalRepSchemeTag = ({ setEditRepAlert, setRepsAchieved, weightLifted, no
           '80px', // 48em-62em
           '80px', // 62em+
         ]}>
-        {weightLifted <= 0 ? 'BW x' : weightLifted + `${weightType} x`}
+        {weightLifted <= 0 ? 'BW x' : weightLifted + `${kgOrLbs} x`}
         {noOfReps}
       </Text>
       <PbToolTip label="Click to set how many reps were achieved on this set">
@@ -79,8 +80,7 @@ const NormalRepSchemeTag = ({ setEditRepAlert, setRepsAchieved, weightLifted, no
 };
 
 const PersonalBestRepSchemeTag = ({ weightLifted, noOfReps }: any) => {
-  const { weightType } = useWorkoutContext();
-
+  const kgOrLbs = useAppSelector((state) => state.workout.workoutState.kgOrLbs);
   return (
     <PbTag rounded="full" maxH="25px">
       <Text
@@ -91,7 +91,7 @@ const PersonalBestRepSchemeTag = ({ weightLifted, noOfReps }: any) => {
           '80px', // 62em+
         ]}>
         {weightLifted}
-        {weightType} x{noOfReps}
+        {kgOrLbs} x{noOfReps}
       </Text>
       <PbToolTip label="New Lifetime PR Hit!">
         <IconButton icon={<FaCrown />} colorScheme="yellow" fontSize="17px" aria-label="" isRound variant="ghost" size="sm" />
@@ -101,7 +101,7 @@ const PersonalBestRepSchemeTag = ({ weightLifted, noOfReps }: any) => {
 };
 
 const DisabledRepSchemeTag = ({ setEditRepAlert, weightLifted, noOfReps }: any) => {
-  const { weightType } = useWorkoutContext();
+  const kgOrLbs = useAppSelector((state) => state.workout.workoutState.kgOrLbs);
 
   return (
     <PbTag rounded="full" maxH="25px">
@@ -114,7 +114,7 @@ const DisabledRepSchemeTag = ({ setEditRepAlert, weightLifted, noOfReps }: any) 
           '80px', // 62em+
         ]}>
         {weightLifted}
-        {weightType} x{noOfReps}
+        {kgOrLbs} x{noOfReps}
       </Text>
       <PbToolTip label="Cannot mark future exercises">
         <IconButton icon={<FaBan />} fontSize="15px" aria-label="" variant="ghost" size="sm" isRound />

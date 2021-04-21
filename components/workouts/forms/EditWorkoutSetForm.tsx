@@ -10,6 +10,7 @@ import { Box } from '../../../chakra/Layout';
 import { FormLayoutFlex } from '../../layout/Flexes';
 import { FormLabel } from '../../../chakra/Forms';
 import useFireToast from '../../../hooks/useFireToast';
+import { useAppSelector } from '../../../store';
 
 interface IProps {
   workoutDayId: number;
@@ -20,11 +21,11 @@ interface IProps {
 const EditWorkoutSetForm: React.FC<IProps> = ({ workoutDayId, workoutSet, onClose }) => {
   const { weightLifted, noOfReps } = workoutSet;
   const toast = useFireToast();
-
+  const kgOrLbs = useAppSelector((state) => state.workout.workoutState.kgOrLbs);
   const [noOfRepsUpdated, setNoOfRepsUpdated] = useState<number>(noOfReps!);
   const [weightUpdated, setWeightUpdated] = useState<number>(weightLifted!);
 
-  const { EditSet, DeleteSet, weightType } = useWorkoutContext();
+  const { EditSet, DeleteSet } = useWorkoutContext();
 
   const { handleSubmit, formState } = useForm();
 
@@ -74,7 +75,7 @@ const EditWorkoutSetForm: React.FC<IProps> = ({ workoutDayId, workoutSet, onClos
           <FormNumberInput name="reps" defaultValue={noOfReps} onChange={(e: number) => updateReps(e)} />
         </FormLayoutFlex>
         <FormLayoutFlex>
-          <FormLabel minW="100px">Weight ({weightType})</FormLabel>
+          <FormLabel minW="100px">Weight ({kgOrLbs})</FormLabel>
           <FormNumberInput name="weight" defaultValue={weightLifted} onChange={(e: number) => updateWeight(e)} />
         </FormLayoutFlex>
         <FormButton isLoading={formState.isSubmitting}>Update</FormButton>

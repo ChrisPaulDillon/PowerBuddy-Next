@@ -1,11 +1,10 @@
-import { Box, useDisclosure } from '@chakra-ui/react';
+import { Box, Stack, useDisclosure } from '@chakra-ui/react';
 import moment from 'moment';
 import { IWorkoutSet } from 'powerbuddy-shared/lib';
 import React, { memo, useState, useEffect, useCallback } from 'react';
-import { Stack } from '../../chakra/Layout';
-import { ModalDrawerForm } from '../common/ModalDrawers';
-import RepSchemeTagFactory, { RepSchemeTagEnum } from './factories/RepSchemeTagFactory';
-import EditWorkoutSetForm from './forms/EditWorkoutSetForm';
+import { ModalDrawerForm } from '../../common/ModalDrawers';
+import RepSchemeTagFactory, { RepSchemeTagEnum } from '../factories/RepSchemeTagFactory';
+import EditWorkoutSetForm from '../forms/EditWorkoutSetForm';
 
 interface ISetProps {
   set: IWorkoutSet;

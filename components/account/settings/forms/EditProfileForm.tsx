@@ -32,7 +32,7 @@ const EditProfileForm: React.FC<IProps> = ({ user }) => {
   const [bodyWeight, setBodyWeight] = useState<number>(user?.bodyWeight);
   const [usingMetric, setUsingMetric] = useState(user?.usingMetric ? '1' : '2');
 
-  const { weightType } = useUserContext();
+  const { kgOrLbs } = useUserContext();
 
   const toast = useFireToast();
 
@@ -96,7 +96,7 @@ const EditProfileForm: React.FC<IProps> = ({ user }) => {
 
       <FormControl isInvalid={errors.weight}>
         <FormLayoutFlex>
-          <FormLabel>Weight ({weightType})</FormLabel>
+          <FormLabel>Weight ({kgOrLbs})</FormLabel>
           <FormNumberInput
             name="weight"
             defaultValue={user?.bodyWeight}

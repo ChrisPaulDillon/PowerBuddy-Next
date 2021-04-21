@@ -5,24 +5,9 @@ import { useCallback } from "react";
 
 type WorkoutModalsState = {
     addExercise?: boolean;
-    kickedListModal?: boolean;
-    confirmKickModal?: boolean;
-    confirmPermKickModal?: boolean;
-    userActionsModal?: boolean;
-    contextualHelp?: boolean;
-    noRegisteredDevices?: boolean;
-    devicePermissionsError?: boolean;
-    deviceFailedError?: boolean;
-    logout?: boolean;
-    settings?: boolean;
-    // modals from the broadcaster main page
-    loginError?: boolean;
-    login?: boolean;
-    loginRedirectWC?: boolean;
-    loginPopUp?: boolean;
-    loginChangeNickname?: boolean;
-    updateApp?: boolean;
-    isVATVerified?: boolean;
+    addExerciseNote?: boolean;
+    deleteExercise?: boolean;
+    quickAddSets?: boolean;
   };
   
   const initialModalsState: WorkoutModalsState = {};
@@ -31,11 +16,13 @@ type WorkoutModalsState = {
   
 type WorkoutState = {
     workoutDay: IWorkoutDay,
+    kgOrLbs: string,
     modals: WorkoutModalsState
 }
 
 const initialState : WorkoutState = {
     workoutDay: null,
+    kgOrLbs: "kg",
     modals: initialModalsState
 }
 
@@ -57,6 +44,7 @@ const workoutStateSlice = createSlice({
         // QuickAddSetsToExercise: (state, action: PayloadAction<IWorkoutSet[], number>) : WorkoutState => ({...state}),
     
         setWorkout: (state, action: PayloadAction<IWorkoutDay> ): WorkoutState => ({...state, workoutDay: action.payload}),
+        setKgOrLbs: (state, action: PayloadAction<boolean> ): WorkoutState => ({...state, kgOrLbs: action.payload ? "kg" : "lbs"}),
       // Modals and Dialogs
       modalOnOpen: (state, action: PayloadAction<WorkoutModal>): WorkoutState => {
         return { ...state, modals: { ...state.modals, [action.payload]: true } };

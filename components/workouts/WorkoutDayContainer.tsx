@@ -18,7 +18,7 @@ import NotifiyPersonalBestAlert from './alerts/NotifyPersonalBestAlert';
 import AddWorkoutNoteForm from './forms/AddWorkoutNoteForm';
 import AddWorkoutTemplateForm from './forms/AddWorkoutTemplateForm';
 import { useWorkoutContext } from './WorkoutContext';
-import WorkoutExercise from './WorkoutExercise';
+import WorkoutExercise from './workoutExercises/WorkoutExercise';
 import { useForm } from 'react-hook-form';
 import { Text } from '../../chakra/Typography';
 import { useAppSelector } from '../../store/index';
