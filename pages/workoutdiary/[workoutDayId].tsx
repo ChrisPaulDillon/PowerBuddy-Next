@@ -7,6 +7,8 @@ import { Box } from '../../chakra/Layout';
 import { GetAllPublicWorkoutIdsRequest, GetWorkoutDayByIdRequest } from '../../api/public/workoutDay';
 import { useUserContext } from '../../components/users/UserContext';
 import WorkoutDay from '../../components/workouts/WorkoutDayContainer';
+import { useAppDispatch } from '../../store/index';
+import {setWorkout} from '../../components/workouts/store/workoutState';
 
 interface IProps {
   workoutDayData: IWorkoutDay;
@@ -14,12 +16,13 @@ interface IProps {
 
 const WorkoutDayById: NextPage<IProps> = ({ workoutDayData }) => {
   const { userId } = useUserContext();
-  const [workoutDay, setWorkoutDay] = useState<IWorkoutDay>(workoutDayData);
   const [contentDisabled, setContentDisabled] = useState<boolean>(false);
 
+  const dispatch = useAppDispatch();
+  
   useEffect(() => {
     if (workoutDayData) {
-      setWorkoutDay(workoutDayData);
+      dispatch(setWorkout(workoutDayData));
     }
   }, [workoutDayData]);
 
@@ -37,14 +40,12 @@ const WorkoutDayById: NextPage<IProps> = ({ workoutDayData }) => {
     <Box>
       <PageHead
         title="Workout"
-        description={`${workoutDay?.userName}'s workout diary. View ${workoutDay?.userName}'s workout for this date`}
-        keywords={`${workoutDay?.userName}, Workout Diary, PowerBuddy, Weightlifting App, Strong App, Intensity App, Powerlifting Weightlifting Templates, Liftvault Workout Program Spreadsheets, Powerlifting Routine, Olympic Weightlifting Template`}
+        description={`${workoutDayData?.userName}'s workout diary. View ${workoutDayData?.userName}'s workout for this date`}
+        keywords={`${workoutDayData?.userName}, Workout Diary, PowerBuddy, Weightlifting App, Strong App, Intensity App, Powerlifting Weightlifting Templates, Liftvault Workout Program Spreadsheets, Powerlifting Routine, Olympic Weightlifting Template`}
       />
-      <WorkoutProvider workoutDay={workoutDay} setWorkoutDay={setWorkoutDay} contentDisabled={contentDisabled}>
         <PageContent>
-          <WorkoutDay workoutDay={workoutDay} />
+          <WorkoutDay  />
         </PageContent>
-      </WorkoutProvider>
     </Box>
   );
 };

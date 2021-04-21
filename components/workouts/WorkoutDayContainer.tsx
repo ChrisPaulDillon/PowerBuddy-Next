@@ -1,51 +1,46 @@
-import { Box, Flex, useDisclosure } from '@chakra-ui/react';
+import { Box, useDisclosure } from '@chakra-ui/react';
 import axios from 'axios';
 import moment from 'moment';
-import { ILiftingStat, IWorkoutDay } from 'powerbuddy-shared';
-import React, { useMemo, useState } from 'react';
-import { AiOutlineMore } from 'react-icons/ai';
-import { BiDumbbell } from 'react-icons/bi';
-import { FaRegCommentAlt } from 'react-icons/fa';
-import { FcCheckmark } from 'react-icons/fc';
-import { GiRun } from 'react-icons/gi';
-import { MdWarning } from 'react-icons/md';
-import { UpdateWorkoutNoteUrl, UpdateWorkoutUrl } from '../../api/account/workoutDay';
+import { ILiftingStat } from 'powerbuddy-shared';
+import React, { useState } from 'react';
+
+import { UpdateWorkoutNoteUrl } from '../../api/account/workoutDay';
 import { DeleteWorkoutLogUrl } from '../../api/account/workoutLog';
 import useFireToast from '../../hooks/useFireToast';
 import { WORKOUT_DIARY_URL } from '../../InternalLinks';
 import { BreadcrumbBase, IBreadcrumbInput } from '../common/Breadcrumbs';
-import TTIconButton from '../common/IconButtons';
-import MenuBase, { IMenuItem } from '../common/Menus';
 import { ModalDrawerForm, PbModalDrawer } from '../common/ModalDrawers';
 import { PbStack } from '../common/Stacks';
 import { HeadingMd } from '../common/Texts';
 import { CardNoShadow } from '../layout/Card';
 import { BadgeWorkoutName } from '../../shared/layout/Badges';
 import NotifiyPersonalBestAlert from './alerts/NotifyPersonalBestAlert';
-import AddExerciseForm from './forms/AddExerciseForm';
 import AddWorkoutNoteForm from './forms/AddWorkoutNoteForm';
 import AddWorkoutTemplateForm from './forms/AddWorkoutTemplateForm';
 import { useWorkoutContext } from './WorkoutContext';
 import WorkoutExercise from './WorkoutExercise';
 import { useForm } from 'react-hook-form';
 import { Text } from '../../chakra/Typography';
+import { useAppSelector } from '../../store/index';
+import WorkoutDayBar from './WorkoutDayBar';
+import SharedDialogs from './dialogs/SharedDialogs';
 
 interface IProps {
-  workoutDay: IWorkoutDay;
+
 }
 
-const WorkoutDayContainer: React.FC<IProps> = ({ workoutDay }) => {
-  const [loading, setLoading] = useState<boolean>(false);
+const WorkoutDayContainer: React.FC<IProps> = () => {
+  const workoutDay = useAppSelector((state) => state.workout?.workoutState?.workoutDay)
+
   const [] = useState<boolean>(workoutDay?.comment != null ? true : false);
-  const [dayEnabled] = useState<boolean>(moment(workoutDay?.date).isAfter(new Date()) ? true : false);
+
   const [dateHighlighted] = useState<boolean>(moment(workoutDay?.date).isSame(new Date(), 'day') ? true : false);
-  const [noteLoading] = useState<boolean>(false);
+
   const [personalBests, setPersonalBests] = useState<ILiftingStat[]>([]);
   const [deleteLogLoading, setDeleteLogLoading] = useState<boolean>(false);
 
   const { contentDisabled, UpdateDayNotes } = useWorkoutContext();
 
-  const { isOpen: isAddExerciseOpen, onOpen: onAddExerciseOpen, onClose: onAddExerciseClose } = useDisclosure();
   const { isOpen: isDeleteLogOpen, onOpen: onDeleteLogOpen, onClose: onDeleteLogClose } = useDisclosure();
   const { isOpen: isAddWorkoutNoteOpen, onOpen: onAddWorkoutNoteOpen, onClose: onAddWorkoutNoteClose } = useDisclosure();
   const { isOpen: isAddWorkoutTemplateOpen, onOpen: onAddWorkoutTemplateOpen, onClose: onAddWorkoutTemplateClose } = useDisclosure();
@@ -64,21 +59,6 @@ const WorkoutDayContainer: React.FC<IProps> = ({ workoutDay }) => {
     setDeleteLogLoading(false);
   };
 
-  const updateWorkoutDay = async () => {
-    setLoading(true);
-    workoutDay.completed = true;
-    try {
-      const response = await axios.put(UpdateWorkoutUrl(workoutDay?.workoutDayId), workoutDay);
-      if (response.data != null) {
-        setPersonalBests(response.data);
-      }
-      toast.Success('Diary Entry is now marked as complete');
-    } catch (err) {
-      toast.Error('Could not mark Diary Entry as complete');
-      workoutDay.completed = false;
-    }
-    setLoading(false);
-  };
 
   const onAddNoteSubmit = async ({ note }) => {
     try {
@@ -91,29 +71,6 @@ const WorkoutDayContainer: React.FC<IProps> = ({ workoutDay }) => {
     }
   };
 
-  const menuItems = useMemo(
-    (): IMenuItem[] => [
-      {
-        title: 'Delete Diary Log',
-        Icon: MdWarning,
-        onClick: onDeleteLogOpen,
-        loading: deleteLogLoading,
-      },
-      {
-        title: 'Add Workout Note',
-        Icon: FaRegCommentAlt,
-        onClick: onAddWorkoutNoteOpen,
-        loading: noteLoading,
-      },
-      {
-        title: 'Create Workout Template',
-        Icon: GiRun,
-        onClick: onAddWorkoutTemplateOpen,
-        loading: noteLoading,
-      },
-    ],
-    []
-  );
 
   var breadcrumbInput: IBreadcrumbInput[] = [
     { href: WORKOUT_DIARY_URL, name: 'Workout Diary' },
@@ -122,51 +79,13 @@ const WorkoutDayContainer: React.FC<IProps> = ({ workoutDay }) => {
 
   const { register, handleSubmit, formState } = useForm();
 
-  const workoutDayBar: React.ReactNode = useMemo(
-    () => (
-      <Flex>
-        {' '}
-        <Box mx={1}>
-          <TTIconButton
-            label="Complete Workout"
-            Icon={FcCheckmark}
-            color={workoutDay?.completed ? 'green.500' : 'gray.500'}
-            fontSize="30px"
-            onClick={() => updateWorkoutDay()}
-            isLoading={loading}
-            isDisabled={dayEnabled || contentDisabled}
-          />
-        </Box>
-        <Box mx={1}>
-          <TTIconButton
-            label="Add New Exercise"
-            Icon={BiDumbbell}
-            color="gray.500"
-            fontSize="30px"
-            onClick={onAddExerciseOpen}
-            isDisabled={contentDisabled}
-          />
-        </Box>
-        <Box mx={1}>
-          <MenuBase
-            button={
-              <TTIconButton label="Additional Options" Icon={AiOutlineMore} onClick={() => undefined} isDisabled={contentDisabled} fontSize="25px" />
-            }
-            menuItems={menuItems}
-          />
-        </Box>
-      </Flex>
-    ),
-    [contentDisabled]
-  );
-
   return (
     <Box>
       <BreadcrumbBase values={breadcrumbInput} />
       {workoutDay?.userName && <HeadingMd mt={[7, 7, 0, 0]}>{workoutDay?.userName}'s Diary</HeadingMd>}
       <CardNoShadow borderWidth="0.5px" minH="250px" w="100%" p="2" my="5">
         <PbStack mb={1} w="100%">
-          {workoutDayBar}
+          <WorkoutDayBar />
           <BadgeWorkoutName body={workoutDay?.templateName} />
         </PbStack>
 
@@ -184,11 +103,7 @@ const WorkoutDayContainer: React.FC<IProps> = ({ workoutDay }) => {
           )}
         </Box>
       </CardNoShadow>
-      {isAddExerciseOpen && (
-        <ModalDrawerForm isOpen={isAddExerciseOpen} onClose={onAddExerciseClose} title="Add Exercise to Workout">
-          <AddExerciseForm onClose={onAddExerciseClose} workoutDayId={workoutDay?.workoutDayId} />
-        </ModalDrawerForm>
-      )}
+      <SharedDialogs />
       {personalBests.length > 0 && (
         <ModalDrawerForm title="Personal Best Hit! 🎉🎉" isOpen={personalBests.length > 0} onClose={() => setPersonalBests([])}>
           <NotifiyPersonalBestAlert personalBests={personalBests} setPersonalBests={setPersonalBests} />

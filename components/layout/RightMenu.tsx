@@ -34,6 +34,8 @@ export const RightNav: React.FC<IRightNavProps> = ({ userName, onClose }) => {
   const toast = useFireToast();
   const { isAuthenticated } = useUserContext();
 
+  console.log(isAuthenticated);
+  
   const { colorMode } = useColorMode();
 
   const logoutUser = async () => {

@@ -13,7 +13,7 @@ export const withAuthorized = (WrappedComponent) => {
         if (!isAuthenticated) {
           router.push(LOGIN_URL);
         }
-      }, 2000);
+      }, 5000);
     }, [isAuthenticated]);
 
     return <WrappedComponent {...props} />;

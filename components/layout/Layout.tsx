@@ -39,11 +39,11 @@ const Layout = ({ children }: any) => {
     <Flex direction="column" m="0 auto" bgColor={theme.colors.background[colorMode]} mx={2}>
       <NavBar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       <Flex flexDir="row">
-        {!firstVisit && isAuthenticated && (
+        {/* {!firstVisit && isAuthenticated && (
           <ModalDrawerForm onClose={onClose} isOpen={!firstVisit} title="Welcome To PowerBuddy! 🎉🎉">
             <FirstVisitAlert onClose={onClose} />
           </ModalDrawerForm>
-        )}
+        )} */}
         <Page>{children}</Page>
       </Flex>
       <Footer />

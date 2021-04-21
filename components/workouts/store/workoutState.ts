@@ -1,9 +1,10 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { IWorkoutDay } from 'powerbuddy-shared/lib';
-import { IWorkoutExercise, IWorkoutSet } from 'powerbuddy-shared';
+import { IWorkoutExercise, IWorkoutSet, IWorkoutDay } from 'powerbuddy-shared';
+import { useAppDispatch, useAppSelector } from "../../../store";
+import { useCallback } from "react";
 
 type WorkoutModalsState = {
-    launcherError?: string;
+    addExercise?: boolean;
     kickedListModal?: boolean;
     confirmKickModal?: boolean;
     confirmPermKickModal?: boolean;
@@ -29,10 +30,12 @@ type WorkoutModalsState = {
   export type WorkoutModal = keyof WorkoutModalsState;
   
 type WorkoutState = {
+    workoutDay: IWorkoutDay,
     modals: WorkoutModalsState
 }
 
 const initialState : WorkoutState = {
+    workoutDay: null,
     modals: initialModalsState
 }
 
@@ -49,10 +52,11 @@ const workoutStateSlice = createSlice({
         CreateExercise: (state, action: PayloadAction<IWorkoutExercise>): WorkoutState  => ({...state}),
         UpdateExerciseNotes: (state, action: PayloadAction<number, string>): WorkoutState  => ({...state}),
         DeleteExercise: (state, action: PayloadAction<number>): WorkoutState  => ({...state}),
-        EditSet: (state, action: PayloadAction<IWorkoutSet, number>) : WorkoutState => ({...state}),
-        DeleteSet: (state, action: PayloadAction<number, number>) : WorkoutState => ({...state}),
-        QuickAddSetsToExercise: (state, action: PayloadAction<IWorkoutSet[], number>) : WorkoutState => ({...state}),
+        // EditSet: (state, action: PayloadAction<IWorkoutSet, number>) : WorkoutState => ({...state}),
+        // DeleteSet: (state, action: PayloadAction<number, number>) : WorkoutState => ({...state}),
+        // QuickAddSetsToExercise: (state, action: PayloadAction<IWorkoutSet[], number>) : WorkoutState => ({...state}),
     
+        setWorkout: (state, action: PayloadAction<IWorkoutDay> ): WorkoutState => ({...state, workoutDay: action.payload}),
       // Modals and Dialogs
       modalOnOpen: (state, action: PayloadAction<WorkoutModal>): WorkoutState => {
         return { ...state, modals: { ...state.modals, [action.payload]: true } };
@@ -72,42 +76,27 @@ const workoutStateSlice = createSlice({
   
   // Reducer and Action Exports
   const { reducer, actions } = workoutStateSlice;
+
   export const {
-    addChatMessage,
-    ppmRequest,
-    ppmAccept,
-    ppmReject,
-    clearIncome,
-    openUserActions,
-    setRemoteCamUser,
-    clearRemoteCamUser,
-    remoteCamClosed,
-    setIsChatOnly,
-    setIsAudioMuted,
-    showRemoteCam,
-    hideRemoteCam,
-    toggleRemoteCam,
-    toggleIsCameraFlipped,
-    setIsCameraFlipped,
-    setActivePanel,
     modalOnOpen,
     modalOnClose,
     modalOnCloseAll,
+    setWorkout
   } = actions;
-  
-//   // Helper hooks
-//   export const useBroadcasterStateDisclosure = (name: BroadcasterModal) => {
-//     const dispatch = useAppDispatch();
-//     const value = useAppSelector((state) => state.directCamBroadcaster.broadcasterState.modals[name]);
-//     const onOpen = useCallback(() => dispatch(modalOnOpen(name)), [dispatch]);
-//     const onClose = useCallback(() => dispatch(modalOnClose(name)), [dispatch]);
-//     return {
-//       isOpen: value ? true : false,
-//       value,
-//       onOpen,
-//       onClose,
-//     };
-//   };
+
+   // Helper hooks
+  export const useWorkoutStateDisclosure = (name: WorkoutModal) => {
+    const dispatch = useAppDispatch();
+    const value = useAppSelector((state) => state.workout.workoutState.modals[name]);
+    const onOpen = useCallback(() => dispatch(modalOnOpen(name)), [dispatch]);
+    const onClose = useCallback(() => dispatch(modalOnClose(name)), [dispatch]);
+    return {
+      isOpen: value ? true : false,
+      value,
+      onOpen,
+      onClose,
+    };
+  };
   
   export default reducer;
   

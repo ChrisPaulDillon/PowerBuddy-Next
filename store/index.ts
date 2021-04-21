@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 import { persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import rootReducer from './rootReducer';
-import saga from './rootSaga';
+// import saga from './rootSaga';
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -35,8 +35,8 @@ const store = configureStore({
 
 export const persistor = persistStore(store);
 
-// run the sagas
-sagaMiddleware.run(saga);
+// // run the sagas
+// sagaMiddleware.run(saga);
 
 export type RootState = ReturnType<typeof reducer>;
 export type AppDispatch = typeof store.dispatch;

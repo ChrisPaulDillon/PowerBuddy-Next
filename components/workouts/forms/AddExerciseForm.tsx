@@ -12,19 +12,21 @@ import axios from 'axios';
 import { CreateWorkoutExerciseUrl } from '../../../api/account/workoutExercise';
 import { useWorkoutContext } from '../../workouts/WorkoutContext';
 import useLoadExercises from '../../../hooks/redux/useLoadExercises';
-import { ICreateWorkoutExercise } from 'powerbuddy-shared';
+import { ICreateWorkoutExercise, IExercise } from 'powerbuddy-shared';
 import { Box, Flex } from '../../../chakra/Layout';
 import { Button, FormControl, FormErrorMessage } from '../../../chakra/Forms';
 import useFireToast from '../../../hooks/useFireToast';
+import { useAppSelector } from '../../../store/index';
+import { GetAllExercisesUrl } from '../../../api/public/exercise';
+import { useAxios } from '../../../hooks/useAxios';
 
 interface IProps {
   onClose: () => void;
-  workoutDayId: number;
 }
 
-const AddExerciseForm: React.FC<IProps> = ({ onClose, workoutDayId }) => {
-  useLoadExercises();
-  const { exercises } = useSelector((state: IAppState) => state.state);
+const AddExerciseForm: React.FC<IProps> = ({ onClose}) => {
+  const workoutDay = useAppSelector((state) => state.workout.workoutState.workoutDay);
+  const { data: exercises } = useAxios<IExercise[]>(GetAllExercisesUrl());
   const [sets, setSets] = useState<number>(1);
   const [reps, setReps] = useState<number>(1);
   const [weight, setWeight] = useState<number>(0);
@@ -32,7 +34,7 @@ const AddExerciseForm: React.FC<IProps> = ({ onClose, workoutDayId }) => {
   const { CreateExercise, weightType } = useWorkoutContext();
   const toast = useFireToast();
 
-  const exerciseList = exercises.map((x) => ({
+  const exerciseList = exercises?.map((x) => ({
     value: x.exerciseId,
     label: x.exerciseName,
   }));
@@ -47,7 +49,7 @@ const AddExerciseForm: React.FC<IProps> = ({ onClose, workoutDayId }) => {
 
   const onSubmit = async () => {
     const workoutExercise: ICreateWorkoutExercise = {
-      workoutDayId: workoutDayId,
+      workoutDayId: workoutDay?.workoutDayId,
       exerciseId: exerciseIdSelected!,
       sets: sets,
       weight: weight,
@@ -81,7 +83,7 @@ const AddExerciseForm: React.FC<IProps> = ({ onClose, workoutDayId }) => {
       <FormControl isInvalid={errors.selectExercise}>
         <FormLayoutFlex>
           <SelectSearchable
-            options={exerciseList}
+            options={exerciseList} //exerciselist
             defaultValue={{
               value: 0,
               label: 'Select an Exercise...',

@@ -1,7 +1,6 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import React from 'react';
 import { Provider } from 'react-redux';
-import configureStore from '../redux/store';
 import customTheme from '../theme';
 import * as Sentry from '@sentry/react';
 import Layout from '../components/layout/Layout';
@@ -9,6 +8,7 @@ import UserProvider from '../components/users/UserContext';
 import { AppContext, AppProps } from 'next/app';
 import { NextComponentType } from 'next';
 import { PageHead } from '../components/layout/Page';
+import store from '../store';
 
 if (process.env.NODE_ENV !== 'production') {
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
@@ -17,7 +17,6 @@ if (process.env.NODE_ENV !== 'production') {
 Sentry.init({
   dsn: process.env.REACT_APP_SENTRY,
 });
-const store = configureStore();
 
 export interface ModifiedAppInitialProps<A = { [key in string]: string }> {
   appProps: A;
