@@ -12,12 +12,12 @@ interface IProps {
 const QuickAddSetsDialog: React.FC<IProps> = ({ workoutExercise}) => {
     const { isOpen, onClose } = useWorkoutStateDisclosure('quickAddSets');
 
-    return(<ModalForm isOpen={isOpen} onClose={onClose} title="Delete Exercise?"><QuickAddSetsForm             
+    return(<ModalForm isOpen={isOpen} onClose={onClose} title="Add Sets?"><QuickAddSetsForm             
     workoutExercise={workoutExercise}
     suggestedReps={workoutExercise?.workoutSets[0].noOfReps}
     suggestedWeight={workoutExercise?.workoutSets[0].weightLifted}
     totalSets={workoutExercise.noOfSets}
-    onClose={onClose}/></ModalForm>)
+/></ModalForm>)
 }
 
 export default QuickAddSetsDialog;

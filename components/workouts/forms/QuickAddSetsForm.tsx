@@ -10,16 +10,17 @@ import { FormLayoutFlex } from '../../layout/Flexes';
 import { FormLabel } from '../../../chakra/Forms';
 import useFireToast from '../../../hooks/useFireToast';
 import { useAppSelector } from '../../../store';
+import { useAppDispatch } from '../../../store/index';
+import { modalOnClose, quickAddSets } from '../store/workoutState';
 
 interface IProps {
   workoutExercise: IWorkoutExercise;
   suggestedReps: number;
   suggestedWeight: number;
   totalSets: number;
-  onClose: () => void;
 }
 
-const QuickAddSetsForm: React.FC<IProps> = ({ workoutExercise, suggestedReps, suggestedWeight, totalSets, onClose }) => {
+const QuickAddSetsForm: React.FC<IProps> = ({ workoutExercise, suggestedReps, suggestedWeight, totalSets }) => {
   const toast = useFireToast();
   const { handleSubmit, formState } = useForm();
   const kgOrLbs = useAppSelector((state) => state.workout.workoutState.kgOrLbs);
@@ -29,6 +30,8 @@ const QuickAddSetsForm: React.FC<IProps> = ({ workoutExercise, suggestedReps, su
   const [weight, setWeight] = useState<number>(suggestedWeight);
 
   const { QuickAddSetsToExercise } = useWorkoutContext();
+
+  const dispatch = useAppDispatch();
 
   const onSubmit = async () => {
     let newTotalSets = Number(noOfSets) + Number(totalSets);
@@ -50,9 +53,9 @@ const QuickAddSetsForm: React.FC<IProps> = ({ workoutExercise, suggestedReps, su
 
     try {
       const response = await Axios.post(CreateWorkoutSetCollectionUrl(), workoutSets);
-      QuickAddSetsToExercise(response.data, workoutExercise.workoutExerciseId);
+      dispatch(quickAddSets(response.data))
       toast.Success('Successfully added set');
-      onClose();
+      dispatch(modalOnClose('quickAddSets'))
     } catch (ex) {
       toast.Error('Could not add sets');
     }

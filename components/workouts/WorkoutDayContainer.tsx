@@ -3,7 +3,6 @@ import axios from 'axios';
 import moment from 'moment';
 import { ILiftingStat } from 'powerbuddy-shared';
 import React, { useState } from 'react';
-
 import { UpdateWorkoutNoteUrl } from '../../api/account/workoutDay';
 import { DeleteWorkoutLogUrl } from '../../api/account/workoutLog';
 import useFireToast from '../../hooks/useFireToast';
@@ -18,12 +17,11 @@ import NotifiyPersonalBestAlert from './alerts/NotifyPersonalBestAlert';
 import AddWorkoutNoteForm from './forms/AddWorkoutNoteForm';
 import AddWorkoutTemplateForm from './forms/AddWorkoutTemplateForm';
 import { useWorkoutContext } from './WorkoutContext';
-import WorkoutExercise from './workoutExercises/WorkoutExercise';
 import { useForm } from 'react-hook-form';
-import { Text } from '../../chakra/Typography';
 import { useAppSelector } from '../../store/index';
 import WorkoutDayBar from './WorkoutDayBar';
 import SharedDialogs from './dialogs/SharedDialogs';
+import WorkoutExerciseList from './workoutExercises/WorkoutExerciseList';
 
 interface IProps {
 
@@ -88,19 +86,8 @@ const WorkoutDayContainer: React.FC<IProps> = () => {
           <WorkoutDayBar />
           <BadgeWorkoutName body={workoutDay?.templateName} />
         </PbStack>
-
         <Box p="2">
-          {workoutDay?.workoutExercises?.length <= 0 ? (
-            <Text textAlign="center" mt={6}>
-              No exercises found, click the weight icon to get started!
-            </Text>
-          ) : (
-            workoutDay?.workoutExercises.map((we, idx) => (
-              <Box key={idx}>
-                <WorkoutExercise workoutExercise={we} date={workoutDay.date} />
-              </Box>
-            ))
-          )}
+          <WorkoutExerciseList />
         </Box>
       </CardNoShadow>
       <SharedDialogs />

@@ -16,17 +16,17 @@ type WorkoutModalsState = {
   
 type WorkoutState = {
     workoutDay: IWorkoutDay,
+    workoutExercises: IWorkoutExercise[],
     kgOrLbs: string,
     modals: WorkoutModalsState
 }
 
 const initialState : WorkoutState = {
     workoutDay: null,
+    workoutExercises: [],
     kgOrLbs: "kg",
     modals: initialModalsState
 }
-
-
 
 // Create the state slice
 const workoutStateSlice = createSlice({
@@ -43,8 +43,21 @@ const workoutStateSlice = createSlice({
         // DeleteSet: (state, action: PayloadAction<number, number>) : WorkoutState => ({...state}),
         // QuickAddSetsToExercise: (state, action: PayloadAction<IWorkoutSet[], number>) : WorkoutState => ({...state}),
     
-        setWorkout: (state, action: PayloadAction<IWorkoutDay> ): WorkoutState => ({...state, workoutDay: action.payload}),
+        setWorkout: (state, action: PayloadAction<IWorkoutDay> ): WorkoutState => ({...state, workoutDay: action.payload, workoutExercises: action.payload.workoutExercises}),
         setKgOrLbs: (state, action: PayloadAction<boolean> ): WorkoutState => ({...state, kgOrLbs: action.payload ? "kg" : "lbs"}),
+        quickAddSets: (state, action: PayloadAction<IWorkoutSet[]>): WorkoutState => ({...state, workoutExercises :
+          state.workoutExercises?.map((d) => {
+              if (d.workoutExerciseId === action.payload[0].workoutExerciseId) {
+                return {
+                  ...d,
+                  noOfSets: d.noOfSets + action.payload.length,
+                  workoutSets: [...d.workoutSets, ...action.payload],
+                };
+              } else {
+                return d;
+              }
+        })
+          }),
       // Modals and Dialogs
       modalOnOpen: (state, action: PayloadAction<WorkoutModal>): WorkoutState => {
         return { ...state, modals: { ...state.modals, [action.payload]: true } };
@@ -69,7 +82,8 @@ const workoutStateSlice = createSlice({
     modalOnOpen,
     modalOnClose,
     modalOnCloseAll,
-    setWorkout
+    setWorkout, 
+    quickAddSets
   } = actions;
 
    // Helper hooks
