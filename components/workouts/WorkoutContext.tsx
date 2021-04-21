@@ -10,8 +10,6 @@ interface IContextOutputProps {
   CreateExercise: (workoutExercise: IWorkoutExercise) => void;
   UpdateExerciseNotes: (workoutExerciseId, notes) => void;
   DeleteExercise: (workoutExerciseId) => void;
-  EditSet: (workoutSet: IWorkoutSet, workoutExerciseId: number) => void;
-  DeleteSet: (programLogRepSchemeId, workoutExerciseId) => void;
   QuickAddSetsToExercise: (workoutSets: IWorkoutSet[], workoutExerciseId: number) => void;
 }
 
@@ -69,39 +67,6 @@ export default function WorkoutProvider({ workoutDay, setWorkoutDay, contentDisa
     });
   };
 
-  const EditSet = (workoutSet: IWorkoutSet, workoutExerciseId: number) => {
-    setWorkoutDay({
-      ...workoutDay,
-      workoutExercises: [
-        ...workoutDay.workoutExercises!.map((e) => {
-          if (e.workoutExerciseId === workoutExerciseId) {
-            return { ...e, workoutSets: e.workoutSets?.map((r) => (r.workoutSetId === workoutSet.workoutSetId ? (r = workoutSet) : r)) };
-          } else {
-            return e;
-          }
-        }),
-      ],
-    });
-  };
-
-  const DeleteSet = (workoutSetId: number, workoutExerciseId: number) => {
-    setWorkoutDay({
-      ...workoutDay,
-      workoutExercises: [
-        ...workoutDay.workoutExercises!.map((d) => {
-          if (d.workoutExerciseId === workoutExerciseId) {
-            return {
-              ...d,
-              workoutSets: d.workoutSets?.filter((r) => r.workoutSetId !== workoutSetId),
-            };
-          } else {
-            return d;
-          }
-        }),
-      ],
-    });
-  };
-
   const QuickAddSetsToExercise = (workoutSets: IWorkoutSet[], workoutExerciseId: number) => {
     setWorkoutDay({
       ...workoutDay,
@@ -132,8 +97,6 @@ export default function WorkoutProvider({ workoutDay, setWorkoutDay, contentDisa
         CreateExercise,
         UpdateExerciseNotes,
         DeleteExercise,
-        EditSet,
-        DeleteSet,
         QuickAddSetsToExercise,
       }}>
       {children}

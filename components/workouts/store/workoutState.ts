@@ -2,12 +2,14 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IWorkoutExercise, IWorkoutSet, IWorkoutDay } from 'powerbuddy-shared';
 import { useAppDispatch, useAppSelector } from "../../../store";
 import { useCallback } from "react";
+import { IUpdateSetAction, IDeleteSetAction } from '../forms/EditWorkoutSetForm';
 
 type WorkoutModalsState = {
     addExercise?: boolean;
     addExerciseNote?: boolean;
     deleteExercise?: boolean;
     quickAddSets?: boolean;
+    updateSet?: boolean;
   };
   
   const initialModalsState: WorkoutModalsState = {};
@@ -39,10 +41,29 @@ const workoutStateSlice = createSlice({
         CreateExercise: (state, action: PayloadAction<IWorkoutExercise>): WorkoutState  => ({...state}),
         UpdateExerciseNotes: (state, action: PayloadAction<number, string>): WorkoutState  => ({...state}),
         DeleteExercise: (state, action: PayloadAction<number>): WorkoutState  => ({...state}),
-        // EditSet: (state, action: PayloadAction<IWorkoutSet, number>) : WorkoutState => ({...state}),
-        // DeleteSet: (state, action: PayloadAction<number, number>) : WorkoutState => ({...state}),
+      
+
         // QuickAddSetsToExercise: (state, action: PayloadAction<IWorkoutSet[], number>) : WorkoutState => ({...state}),
-    
+        editSet: (state, action: PayloadAction<IUpdateSetAction>) : WorkoutState => ({...state, workoutExercises: 
+          state.workoutExercises.map((e) => {
+            if (e.workoutExerciseId === action.payload.workoutExerciseId) {
+              return { ...e, workoutSets: e.workoutSets?.map((r) => (r.workoutSetId === action.payload.workoutSet.workoutSetId ? (r =  action.payload.workoutSet) : r)) };
+            } else {
+              return e;
+            }
+          }),
+        }),
+        deleteSet: (state, action: PayloadAction<IDeleteSetAction>) : WorkoutState => ({...state, workoutExercises: state?.workoutExercises.map((d) => {
+          if (d.workoutExerciseId === action.payload.workoutExerciseId) {
+            return {
+              ...d,
+              noOfSets: d.noOfSets - 1,
+              workoutSets: d.workoutSets?.filter((r) => r.workoutSetId !== action.payload.workoutSetId),
+            };
+          } else {
+            return d;
+          }
+        }),}),
         setWorkout: (state, action: PayloadAction<IWorkoutDay> ): WorkoutState => ({...state, workoutDay: action.payload, workoutExercises: action.payload.workoutExercises}),
         setKgOrLbs: (state, action: PayloadAction<boolean> ): WorkoutState => ({...state, kgOrLbs: action.payload ? "kg" : "lbs"}),
         quickAddSets: (state, action: PayloadAction<IWorkoutSet[]>): WorkoutState => ({...state, workoutExercises :
@@ -83,7 +104,9 @@ const workoutStateSlice = createSlice({
     modalOnClose,
     modalOnCloseAll,
     setWorkout, 
-    quickAddSets
+    quickAddSets,
+    editSet,
+    deleteSet
   } = actions;
 
    // Helper hooks
