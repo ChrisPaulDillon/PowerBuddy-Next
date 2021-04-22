@@ -10,6 +10,7 @@ import useSignalR from '../../signalR/useSignalR';
 import { Flex } from '../../chakra/Layout';
 import Footer from './Footer';
 import { RefreshRequest } from '../../api/account/auth';
+import Navigation from './Navigation';
 
 const Layout = ({ children }: any) => {
   const { colorMode } = useColorMode();
@@ -38,6 +39,7 @@ const Layout = ({ children }: any) => {
   return (
     <Flex direction="column" m="0 auto" bgColor={theme.colors.background[colorMode]} mx={2}>
       <NavBar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+      <Navigation />
       <Flex flexDir="row">
         {/* {!firstVisit && isAuthenticated && (
           <ModalDrawerForm onClose={onClose} isOpen={!firstVisit} title="Welcome To PowerBuddy! 🎉🎉">

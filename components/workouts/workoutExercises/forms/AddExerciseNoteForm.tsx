@@ -4,7 +4,6 @@ import { validateInput } from '../../../../util/formInputs';
 import { FormInput } from '../../../common/Inputs';
 import axios from 'axios';
 import { UpdateWorkoutExerciseNoteUrl } from '../../../../api/account/workoutExercise';
-import { useWorkoutContext } from '../../WorkoutContext';
 import { FormControl, FormErrorMessage } from '../../../../chakra/Forms';
 import { FormButton } from '../../../common/Buttons';
 import { FormLayoutFlex } from '../../../layout/Flexes';
