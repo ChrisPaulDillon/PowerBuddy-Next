@@ -3,6 +3,7 @@ import { IWorkoutExercise, IWorkoutSet, IWorkoutDay, ILiftingStat } from 'powerb
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { useCallback } from 'react';
 import { IUpdateSetAction, IDeleteSetAction } from '../workoutExercises/forms/EditWorkoutSetForm';
+import { UpdateExerciseNoteAction } from '../workoutExercises/forms/AddExerciseNoteForm';
 
 type WorkoutModalsState = {
   addExercise?: boolean;
@@ -55,8 +56,17 @@ const workoutStateSlice = createSlice({
       ...state,
       workoutExercises: state.workoutExercises.filter((x) => x.workoutExerciseId !== action.payload),
     }),
-
-    // QuickAddSetsToExercise: (state, action: PayloadAction<IWorkoutSet[], number>) : WorkoutState => ({...state}),
+    updateExerciseNote: (state, action: PayloadAction<UpdateExerciseNoteAction>): WorkoutState => ({
+      ...state,
+      workoutExercises: state.workoutExercises?.map((x) =>
+        x.workoutExerciseId === action.payload.workoutExerciseId
+          ? {
+              ...x,
+              comment: action.payload.notes,
+            }
+          : x
+      ),
+    }),
     editSet: (state, action: PayloadAction<IUpdateSetAction>): WorkoutState => ({
       ...state,
       workoutExercises: state.workoutExercises.map((e) => {
@@ -139,6 +149,7 @@ export const {
   setPersonalBests,
   updateDayNote,
   deleteExercise,
+  updateExerciseNote,
 } = actions;
 
 // Helper hooks

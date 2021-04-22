@@ -13,7 +13,7 @@ const AddExerciseNoteDialog: React.FC<IProps> = ({ workoutExerciseId, note }) =>
 
   return (
     <ModalForm isOpen={isOpen} onClose={onClose} title="Add an Exercise">
-      <AddExerciseNoteForm workoutExerciseId={workoutExerciseId} note={note} onClose={onClose} />
+      <AddExerciseNoteForm workoutExerciseId={workoutExerciseId} note={note} />
     </ModalForm>
   );
 };

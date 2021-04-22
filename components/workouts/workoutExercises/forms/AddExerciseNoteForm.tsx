@@ -9,28 +9,35 @@ import { FormControl, FormErrorMessage } from '../../../../chakra/Forms';
 import { FormButton } from '../../../common/Buttons';
 import { FormLayoutFlex } from '../../../layout/Flexes';
 import useFireToast from '../../../../hooks/useFireToast';
+import { useAppDispatch } from '../../../../store/index';
+import { modalOnClose, updateExerciseNote } from '../../store/workoutState';
+
+export interface UpdateExerciseNoteAction {
+  workoutExerciseId: number;
+  notes: string;
+}
 
 interface IProps {
-  onClose: () => void;
   workoutExerciseId: number;
   note: string | undefined;
 }
 
-const AddExerciseNoteForm: React.FC<IProps> = ({ onClose, workoutExerciseId, note }) => {
-  const { UpdateExerciseNotes } = useWorkoutContext();
+const AddExerciseNoteForm: React.FC<IProps> = ({ workoutExerciseId, note }) => {
   const toast = useFireToast();
 
   const { register, handleSubmit, errors, formState } = useForm();
 
+  const dispatch = useAppDispatch();
+
   const onSubmit = async ({ notes }: any) => {
     try {
       await axios.put(UpdateWorkoutExerciseNoteUrl(workoutExerciseId, notes));
-      UpdateExerciseNotes(workoutExerciseId, notes);
+      dispatch(updateExerciseNote({ workoutExerciseId, notes } as UpdateExerciseNoteAction));
+      dispatch(modalOnClose('addExerciseNote'));
       toast.Success('Successfully added notes');
     } catch (ex) {
       toast.Error('Could not add notes to exercise');
     }
-    onClose();
   };
 
   return (
