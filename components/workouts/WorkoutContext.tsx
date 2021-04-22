@@ -4,10 +4,8 @@ import { IWorkoutDay, IWorkoutExercise, IWorkoutSet } from 'powerbuddy-shared';
 interface IContextOutputProps {
   workoutDay: IWorkoutDay;
   contentDisabled: boolean;
-  UpdateDayNotes: (notes: string) => void;
   DeleteDay: () => void;
   UpdateDay: (workoutDay: IWorkoutDay) => void;
-  CreateExercise: (workoutExercise: IWorkoutExercise) => void;
   UpdateExerciseNotes: (workoutExerciseId, notes) => void;
   DeleteExercise: (workoutExerciseId) => void;
   QuickAddSetsToExercise: (workoutSets: IWorkoutSet[], workoutExerciseId: number) => void;
@@ -31,17 +29,6 @@ export default function WorkoutProvider({ workoutDay, setWorkoutDay, contentDisa
 
   const UpdateDay = (workoutDay: IWorkoutDay) => {
     setWorkoutDay(workoutDay);
-  };
-
-  const UpdateDayNotes = (notes: string) => {
-    setWorkoutDay({ ...workoutDay, comment: notes });
-  };
-
-  const CreateExercise = (workoutExercise: IWorkoutExercise) => {
-    setWorkoutDay({
-      ...workoutDay,
-      workoutExercises: [...workoutDay.workoutExercises!, workoutExercise],
-    });
   };
 
   const UpdateExerciseNotes = (workoutExerciseId: number, notes: string) => {
@@ -92,9 +79,7 @@ export default function WorkoutProvider({ workoutDay, setWorkoutDay, contentDisa
         workoutDay,
         contentDisabled,
         DeleteDay,
-        UpdateDayNotes,
         UpdateDay,
-        CreateExercise,
         UpdateExerciseNotes,
         DeleteExercise,
         QuickAddSetsToExercise,

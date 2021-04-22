@@ -12,14 +12,12 @@ import { FormInput } from '../../common/Inputs';
 import { TextXs } from '../../common/Texts';
 import { FormLayoutFlex } from '../../layout/Flexes';
 import { useUserContext } from '../../users/UserContext';
+import { useAppSelector } from '../../../store/index';
 
-interface IProps {
-  onClose: () => void;
-  workoutDay: IWorkoutDay;
-}
+interface IProps {}
 
-const AddWorkoutTemplateForm: React.FC<IProps> = ({ onClose, workoutDay }) => {
-  useLoadExercises();
+const AddWorkoutTemplateForm: React.FC<IProps> = () => {
+  const workoutDay = useAppSelector((state) => state.workout?.workoutState?.workoutDay);
   const toast = useFireToast();
 
   const { userId } = useUserContext();

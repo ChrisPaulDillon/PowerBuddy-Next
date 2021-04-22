@@ -16,15 +16,14 @@ import { ICreateWorkoutExercise, IExercise } from 'powerbuddy-shared';
 import { Box, Flex } from '../../../chakra/Layout';
 import { Button, FormControl, FormErrorMessage } from '../../../chakra/Forms';
 import useFireToast from '../../../hooks/useFireToast';
-import { useAppSelector } from '../../../store/index';
+import { useAppSelector, useAppDispatch } from '../../../store/index';
 import { GetAllExercisesUrl } from '../../../api/public/exercise';
 import { useAxios } from '../../../hooks/useAxios';
+import { createExercise, modalOnClose } from '../store/workoutState';
 
-interface IProps {
-  onClose: () => void;
-}
+interface IProps {}
 
-const AddExerciseForm: React.FC<IProps> = ({ onClose}) => {
+const AddExerciseForm: React.FC<IProps> = () => {
   const workoutDay = useAppSelector((state) => state.workout.workoutState.workoutDay);
   const kgOrLbs = useAppSelector((state) => state.workout.workoutState.kgOrLbs);
   const { data: exercises } = useAxios<IExercise[]>(GetAllExercisesUrl());
@@ -32,7 +31,6 @@ const AddExerciseForm: React.FC<IProps> = ({ onClose}) => {
   const [reps, setReps] = useState<number>(1);
   const [weight, setWeight] = useState<number>(0);
   const [exerciseIdSelected, setExerciseIdSelected] = useState<number>();
-  const { CreateExercise } = useWorkoutContext();
   const toast = useFireToast();
 
   const exerciseList = exercises?.map((x) => ({
@@ -45,6 +43,8 @@ const AddExerciseForm: React.FC<IProps> = ({ onClose}) => {
       setExerciseIdSelected(parseInt(e.value));
     }
   };
+
+  const dispatch = useAppDispatch();
 
   const { handleSubmit, errors, formState } = useForm();
 
@@ -59,9 +59,9 @@ const AddExerciseForm: React.FC<IProps> = ({ onClose}) => {
 
     try {
       const response = await axios.post(CreateWorkoutExerciseUrl(), workoutExercise);
-      CreateExercise(response.data);
+      dispatch(createExercise(response.data));
       toast.Success('Successfully added new exercise');
-      onClose();
+      dispatch(modalOnClose('addExercise'));
     } catch (error) {
       if (error?.response?.status === 400) {
         toast.Error('A valid exercise must be provided');

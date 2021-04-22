@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormButton } from '../../common/Buttons';
-import { FormNumberInput } from '../../common/Inputs';
-import { CreateWorkoutSetCollectionUrl } from '../../../api/account/workoutSet';
-import { useWorkoutContext } from '../../workouts/WorkoutContext';
+import { FormButton } from '../../../common/Buttons';
+import { FormNumberInput } from '../../../common/Inputs';
+import { CreateWorkoutSetCollectionUrl } from '../../../../api/account/workoutSet';
+import { useWorkoutContext } from '../../WorkoutContext';
 import Axios from 'axios';
 import { IWorkoutExercise, IWorkoutSet } from 'powerbuddy-shared';
-import { FormLayoutFlex } from '../../layout/Flexes';
-import { FormLabel } from '../../../chakra/Forms';
-import useFireToast from '../../../hooks/useFireToast';
-import { useAppSelector } from '../../../store';
-import { useAppDispatch } from '../../../store/index';
-import { modalOnClose, quickAddSets } from '../store/workoutState';
+import { FormLayoutFlex } from '../../../layout/Flexes';
+import { FormLabel } from '../../../../chakra/Forms';
+import useFireToast from '../../../../hooks/useFireToast';
+import { useAppSelector } from '../../../../store';
+import { useAppDispatch } from '../../../../store/index';
+import { modalOnClose, quickAddSets } from '../../store/workoutState';
 
 interface IProps {
   workoutExercise: IWorkoutExercise;
@@ -53,9 +53,9 @@ const QuickAddSetsForm: React.FC<IProps> = ({ workoutExercise, suggestedReps, su
 
     try {
       const response = await Axios.post(CreateWorkoutSetCollectionUrl(), workoutSets);
-      dispatch(quickAddSets(response.data))
+      dispatch(quickAddSets(response.data));
       toast.Success('Successfully added set');
-      dispatch(modalOnClose('quickAddSets'))
+      dispatch(modalOnClose('quickAddSets'));
     } catch (ex) {
       toast.Error('Could not add sets');
     }

@@ -4,16 +4,16 @@ import { IWorkoutSet } from 'powerbuddy-shared/lib';
 import React, { memo, useState, useEffect, useCallback } from 'react';
 import { ModalDrawerForm } from '../../common/ModalDrawers';
 import RepSchemeTagFactory, { RepSchemeTagEnum } from '../factories/RepSchemeTagFactory';
-import EditWorkoutSetForm from '../forms/EditWorkoutSetForm';
+import EditWorkoutSetDialog from './dialogs/EditWorkoutSetDialog';
+import EditWorkoutSetForm from './forms/EditWorkoutSetForm';
 
 interface ISetProps {
   set: IWorkoutSet;
   date: Date;
   workoutSets: IWorkoutSet[];
-  workoutDayId: number;
 }
 
-const WorkoutSet: React.FC<ISetProps> = memo(({ set, date, workoutSets = [], workoutDayId }) => {
+const WorkoutSet: React.FC<ISetProps> = memo(({ set, date, workoutSets = [] }) => {
   const { workoutSetId, weightLifted, noOfReps, repsCompleted, personalBest } = set;
   const [repEnabled] = useState<boolean>(moment(date).isAfter(new Date()) ? true : false);
   const [currentReps, setCurrentReps] = useState<number>(repsCompleted ?? noOfReps);
@@ -75,9 +75,7 @@ const WorkoutSet: React.FC<ISetProps> = memo(({ set, date, workoutSets = [], wor
           setRepsAchieved={setRepsAchieved}
         />
       </Stack>
-      <ModalDrawerForm isOpen={isOpen} onClose={onClose} title="Edit Your Set">
-        <EditWorkoutSetForm workoutDayId={workoutDayId} workoutSet={set} onClose={onClose} />
-      </ModalDrawerForm>
+      <EditWorkoutSetDialog workoutSet={set} />
     </Box>
   );
 });

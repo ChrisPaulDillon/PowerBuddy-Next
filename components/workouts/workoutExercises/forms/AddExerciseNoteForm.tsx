@@ -1,14 +1,14 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { validateInput } from '../../../util/formInputs';
-import { FormInput } from '../../common/Inputs';
+import { validateInput } from '../../../../util/formInputs';
+import { FormInput } from '../../../common/Inputs';
 import axios from 'axios';
-import { UpdateWorkoutExerciseNoteUrl } from '../../../api/account/workoutExercise';
-import { useWorkoutContext } from '../../workouts/WorkoutContext';
-import { FormControl, FormErrorMessage } from '../../../chakra/Forms';
-import { FormButton } from '../../common/Buttons';
-import { FormLayoutFlex } from '../../layout/Flexes';
-import useFireToast from '../../../hooks/useFireToast';
+import { UpdateWorkoutExerciseNoteUrl } from '../../../../api/account/workoutExercise';
+import { useWorkoutContext } from '../../WorkoutContext';
+import { FormControl, FormErrorMessage } from '../../../../chakra/Forms';
+import { FormButton } from '../../../common/Buttons';
+import { FormLayoutFlex } from '../../../layout/Flexes';
+import useFireToast from '../../../../hooks/useFireToast';
 
 interface IProps {
   onClose: () => void;

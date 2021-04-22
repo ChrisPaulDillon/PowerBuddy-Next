@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormNumberInput } from '../../common/Inputs';
-import { FormButton } from '../../common/Buttons';
+import { FormNumberInput } from '../../../common/Inputs';
+import { FormButton } from '../../../common/Buttons';
 import axios from 'axios';
-import { DeleteWorkoutSetUrl, UpdateWorkoutSetUrl } from '../../../api/account/workoutSet';
+import { DeleteWorkoutSetUrl, UpdateWorkoutSetUrl } from '../../../../api/account/workoutSet';
 import { IWorkoutSet } from 'powerbuddy-shared';
-import { Box } from '../../../chakra/Layout';
-import { FormLayoutFlex } from '../../layout/Flexes';
-import { FormLabel } from '../../../chakra/Forms';
-import useFireToast from '../../../hooks/useFireToast';
-import { useAppSelector } from '../../../store';
-import { useAppDispatch } from '../../../store/index';
-import { deleteSet, editSet, modalOnClose } from '../store/workoutState';
+import { Box } from '../../../../chakra/Layout';
+import { FormLayoutFlex } from '../../../layout/Flexes';
+import { FormLabel } from '../../../../chakra/Forms';
+import useFireToast from '../../../../hooks/useFireToast';
+import { useAppSelector } from '../../../../store';
+import { useAppDispatch } from '../../../../store/index';
+import { deleteSet, editSet, modalOnClose } from '../../store/workoutState';
 
 interface IProps {
   workoutSet: IWorkoutSet;
@@ -27,8 +27,7 @@ export interface IDeleteSetAction {
   workoutExerciseId: number;
 }
 
-
-  const EditWorkoutSetForm: React.FC<IProps> = ({ workoutSet}) => {
+const EditWorkoutSetForm: React.FC<IProps> = ({ workoutSet }) => {
   const workoutDay = useAppSelector((state) => state.workout?.workoutState?.workoutDay);
   const { weightLifted, noOfReps } = workoutSet;
   const toast = useFireToast();
@@ -41,11 +40,11 @@ export interface IDeleteSetAction {
   const dispatch = useAppDispatch();
 
   const onEditSubmit = async () => {
-    const updatedWorkoutSet = {...workoutSet, weightLifted: weightUpdated, noOfReps: noOfRepsUpdated}
+    const updatedWorkoutSet = { ...workoutSet, weightLifted: weightUpdated, noOfReps: noOfRepsUpdated };
 
     try {
       await axios.put(UpdateWorkoutSetUrl(workoutDay?.workoutDayId), updatedWorkoutSet);
-      dispatch(editSet({workoutSet: updatedWorkoutSet, workoutExerciseId: updatedWorkoutSet.workoutExerciseId} as IUpdateSetAction));
+      dispatch(editSet({ workoutSet: updatedWorkoutSet, workoutExerciseId: updatedWorkoutSet.workoutExerciseId } as IUpdateSetAction));
       toast.Success('Successfully Updated Set');
       dispatch(modalOnClose('updateSet'));
     } catch (ex) {
@@ -57,7 +56,7 @@ export interface IDeleteSetAction {
     const { workoutExerciseId, workoutSetId } = workoutSet;
     try {
       await axios.delete(DeleteWorkoutSetUrl(workoutSetId));
-      dispatch(deleteSet({workoutSetId, workoutExerciseId} as IDeleteSetAction));
+      dispatch(deleteSet({ workoutSetId, workoutExerciseId } as IDeleteSetAction));
       toast.Success('Successfully deleted set');
       dispatch(modalOnClose('updateSet'));
     } catch (ex) {
