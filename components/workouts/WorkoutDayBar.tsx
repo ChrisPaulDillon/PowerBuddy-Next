@@ -91,7 +91,10 @@ const WorkoutDayBar = () => {
         />
       </Box>
       <Box mx={1}>
-        <MenuBase button={<TTIconButton label="Additional Options" Icon={AiOutlineMore} onClick={() => undefined} fontSize="25px" />} />
+        <MenuBase
+          button={<TTIconButton label="Additional Options" Icon={AiOutlineMore} onClick={() => undefined} fontSize="25px" />}
+          menuItems={menuItems}
+        />
       </Box>
     </Flex>
   );

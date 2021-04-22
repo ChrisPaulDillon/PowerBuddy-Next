@@ -9,6 +9,8 @@ import PbTag from '../../common/Tags';
 import { TextRep } from '../../common/Texts';
 import { PbToolTip } from '../../common/ToolTips';
 import { useWorkoutContext } from '../WorkoutContext';
+import { useAppDispatch } from '../../../store/index';
+import { modalOnOpen } from '../store/workoutState';
 
 export enum RepSchemeTagEnum {
   PersonalBest,
@@ -24,20 +26,18 @@ interface IProps {
   currentReps: number;
   repColor: string;
   repTagType: RepSchemeTagEnum;
-  setEditRepAlert: any;
   setRepsAchieved: any;
 }
 
-const RepSchemeTagFactory: React.FC<IProps> = ({ weightLifted, noOfReps, currentReps, repColor, repTagType, setEditRepAlert, setRepsAchieved }) => {
+const RepSchemeTagFactory: React.FC<IProps> = ({ weightLifted, noOfReps, currentReps, repColor, repTagType, setRepsAchieved }) => {
   return (
     <Box>
       {
         {
           [RepSchemeTagEnum.PersonalBest]: <PersonalBestRepSchemeTag weightLifted={weightLifted} noOfReps={noOfReps} />,
-          [RepSchemeTagEnum.Disabled]: <DisabledRepSchemeTag setEditRepAlert={setEditRepAlert} weightLifted={weightLifted} noOfReps={noOfReps} />,
+          [RepSchemeTagEnum.Disabled]: <DisabledRepSchemeTag weightLifted={weightLifted} noOfReps={noOfReps} />,
           [RepSchemeTagEnum.Normal]: (
             <NormalRepSchemeTag
-              setEditRepAlert={setEditRepAlert}
               setRepsAchieved={setRepsAchieved}
               weightLifted={weightLifted}
               noOfReps={noOfReps}
@@ -55,10 +55,18 @@ const RepSchemeTagFactory: React.FC<IProps> = ({ weightLifted, noOfReps, current
 const NormalRepSchemeTag = ({ setEditRepAlert, setRepsAchieved, weightLifted, noOfReps, currentReps, repColor }: any) => {
   const { contentDisabled } = useWorkoutContext();
   const kgOrLbs = useAppSelector((state) => state.workout.workoutState.kgOrLbs);
+  const dispatch = useAppDispatch();
+
   return (
     <PbTag rounded="full" maxH="25px">
       {!contentDisabled && (
-        <IconButton as={MdModeEdit} aria-label="" size="1em" onClick={() => (!contentDisabled ? setEditRepAlert(true) : null)} color="gray" />
+        <IconButton
+          as={MdModeEdit}
+          aria-label=""
+          size="1em"
+          onClick={() => (!contentDisabled ? dispatch(modalOnOpen('updateSet')) : null)}
+          color="gray"
+        />
       )}
       <Text
         minW={[

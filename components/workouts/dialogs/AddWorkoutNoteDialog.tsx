@@ -1,28 +1,26 @@
 import axios from 'axios';
-import React, { useState } from 'react';
-import { DeleteWorkoutLogUrl } from '../../../api/account/workoutLog';
+import React from 'react';
 import useFireToast from '../../../hooks/useFireToast';
-import { PbModalDrawer } from '../../common/ModalDrawers';
-import { useWorkoutStateDisclosure } from '../store/workoutState';
-import { useAppSelector } from '../../../store/index';
-import { ModalForm } from '../../common/Modals';
-import AddExerciseForm from '../forms/AddExerciseForm';
+import { modalOnClose, updateDayNote, useWorkoutStateDisclosure } from '../store/workoutState';
+import { useAppSelector, useAppDispatch } from '../../../store/index';
+import { ModalForward } from '../../common/Modals';
 import AddWorkoutNoteForm from '../forms/AddWorkoutNoteForm';
 import { UpdateWorkoutNoteUrl } from '../../../api/account/workoutDay';
 import { useForm } from 'react-hook-form';
 
 const AddWorkoutNoteDialog = () => {
   const workoutDay = useAppSelector((state) => state.workout?.workoutState?.workoutDay);
-  const { isOpen, onClose } = useWorkoutStateDisclosure('deleteLog');
-  const [loading, setLoading] = useState<boolean>(false);
+  const { isOpen, onClose } = useWorkoutStateDisclosure('addWorkoutNote');
   const toast = useFireToast();
 
   const { register, handleSubmit, formState } = useForm();
+  const dispatch = useAppDispatch();
 
   const onAddNoteSubmit = async ({ note }) => {
     try {
       await axios.put(UpdateWorkoutNoteUrl(workoutDay?.workoutDayId, note));
-      //UpdateDayNotes(note);
+      dispatch(updateDayNote(note));
+      dispatch(modalOnClose('addWorkoutNote'));
       toast.Success('Successfully added notes');
       //onAddWorkoutNoteClose();
     } catch (ex) {
@@ -31,9 +29,9 @@ const AddWorkoutNoteDialog = () => {
   };
 
   return (
-    <ModalForm isOpen={isOpen} onClose={onClose} title="Add Workout Note">
+    <ModalForward isOpen={isOpen} onClose={onClose} title="Add Workout Note" onClick={() => onAddNoteSubmit} actionText="Submit">
       <AddWorkoutNoteForm note={workoutDay?.comment} register={register} loading={formState.isSubmitting} />
-    </ModalForm>
+    </ModalForward>
   );
 };
 

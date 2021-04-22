@@ -40,7 +40,10 @@ const workoutStateSlice = createSlice({
   name: 'workoutState',
   initialState,
   reducers: {
-    UpdateDayNotes: (state, action: PayloadAction<string>): WorkoutState => ({ ...state }),
+    updateDayNote: (state, action: PayloadAction<string>): WorkoutState => ({
+      ...state,
+      workoutDay: { ...state.workoutDay, comment: action.payload },
+    }),
     DeleteDay: (state): WorkoutState => ({ ...state }),
     UpdateDay: (state, action: PayloadAction<IWorkoutDay>): WorkoutState => ({ ...state }),
     createExercise: (state, action: PayloadAction<IWorkoutExercise>): WorkoutState => ({
@@ -48,7 +51,10 @@ const workoutStateSlice = createSlice({
       workoutExercises: [...state.workoutExercises, action.payload],
     }),
     UpdateExerciseNotes: (state, action: PayloadAction<number, string>): WorkoutState => ({ ...state }),
-    DeleteExercise: (state, action: PayloadAction<number>): WorkoutState => ({ ...state }),
+    deleteExercise: (state, action: PayloadAction<number>): WorkoutState => ({
+      ...state,
+      workoutExercises: state.workoutExercises.filter((x) => x.workoutExerciseId !== action.payload),
+    }),
 
     // QuickAddSetsToExercise: (state, action: PayloadAction<IWorkoutSet[], number>) : WorkoutState => ({...state}),
     editSet: (state, action: PayloadAction<IUpdateSetAction>): WorkoutState => ({
@@ -121,7 +127,19 @@ const workoutStateSlice = createSlice({
 // Reducer and Action Exports
 const { reducer, actions } = workoutStateSlice;
 
-export const { modalOnOpen, modalOnClose, modalOnCloseAll, setWorkout, quickAddSets, editSet, deleteSet, createExercise, setPersonalBests } = actions;
+export const {
+  modalOnOpen,
+  modalOnClose,
+  modalOnCloseAll,
+  setWorkout,
+  quickAddSets,
+  editSet,
+  deleteSet,
+  createExercise,
+  setPersonalBests,
+  updateDayNote,
+  deleteExercise,
+} = actions;
 
 // Helper hooks
 export const useWorkoutStateDisclosure = (name: WorkoutModal) => {

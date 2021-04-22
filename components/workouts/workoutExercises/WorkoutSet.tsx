@@ -1,11 +1,9 @@
-import { Box, Stack, useDisclosure } from '@chakra-ui/react';
+import { Box, Stack } from '@chakra-ui/react';
 import moment from 'moment';
 import { IWorkoutSet } from 'powerbuddy-shared/lib';
 import React, { memo, useState, useEffect, useCallback } from 'react';
-import { ModalDrawerForm } from '../../common/ModalDrawers';
 import RepSchemeTagFactory, { RepSchemeTagEnum } from '../factories/RepSchemeTagFactory';
 import EditWorkoutSetDialog from './dialogs/EditWorkoutSetDialog';
-import EditWorkoutSetForm from './forms/EditWorkoutSetForm';
 
 interface ISetProps {
   set: IWorkoutSet;
@@ -18,7 +16,6 @@ const WorkoutSet: React.FC<ISetProps> = memo(({ set, date, workoutSets = [] }) =
   const [repEnabled] = useState<boolean>(moment(date).isAfter(new Date()) ? true : false);
   const [currentReps, setCurrentReps] = useState<number>(repsCompleted ?? noOfReps);
   const [tagType, setTagType] = useState<RepSchemeTagEnum>(RepSchemeTagEnum.None);
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     if (personalBest) {
@@ -71,7 +68,6 @@ const WorkoutSet: React.FC<ISetProps> = memo(({ set, date, workoutSets = [] }) =
           currentReps={currentReps}
           repColor={repColor}
           repTagType={tagType}
-          setEditRepAlert={onOpen}
           setRepsAchieved={setRepsAchieved}
         />
       </Stack>

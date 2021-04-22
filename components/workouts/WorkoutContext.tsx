@@ -7,7 +7,6 @@ interface IContextOutputProps {
   DeleteDay: () => void;
   UpdateDay: (workoutDay: IWorkoutDay) => void;
   UpdateExerciseNotes: (workoutExerciseId, notes) => void;
-  DeleteExercise: (workoutExerciseId) => void;
   QuickAddSetsToExercise: (workoutSets: IWorkoutSet[], workoutExerciseId: number) => void;
 }
 
@@ -47,13 +46,6 @@ export default function WorkoutProvider({ workoutDay, setWorkoutDay, contentDisa
     });
   };
 
-  const DeleteExercise = (workoutExerciseId: number) => {
-    setWorkoutDay({
-      ...workoutDay,
-      workoutExercises: [...workoutDay.workoutExercises!.filter((x) => x.workoutExerciseId !== workoutExerciseId)],
-    });
-  };
-
   const QuickAddSetsToExercise = (workoutSets: IWorkoutSet[], workoutExerciseId: number) => {
     setWorkoutDay({
       ...workoutDay,
@@ -81,7 +73,6 @@ export default function WorkoutProvider({ workoutDay, setWorkoutDay, contentDisa
         DeleteDay,
         UpdateDay,
         UpdateExerciseNotes,
-        DeleteExercise,
         QuickAddSetsToExercise,
       }}>
       {children}
